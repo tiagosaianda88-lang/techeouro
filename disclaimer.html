@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Disclaimer — TechOuro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #080808; --surface: #111111; --border: #1f1f1f; --gold: #C9A227; --gold-dim: #7a6118; --text: #F0EDE6; --muted: #666666; --serif: 'Playfair Display', serif; --sans: 'Inter', sans-serif; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(8,8,8,.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-brand { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; color: var(--gold); line-height: 1; }
+    .nav-brand span { display: block; font-family: var(--sans); font-size: .55rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: .72rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .gold-line { height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .wrap { max-width: 800px; margin: 80px auto; padding: 0 40px; }
+    .eyebrow { font-size: .65rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    h1 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; line-height: 1; color: var(--text); margin-bottom: 48px; }
+    h1 em { font-style: italic; color: var(--gold); }
+    .box { border-left: 3px solid var(--gold); padding: 24px 32px; background: var(--surface); margin-bottom: 32px; }
+    .box h2 { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; color: var(--gold); margin-bottom: 12px; }
+    p { font-size: .9rem; line-height: 2; color: #aaa; margin-bottom: 16px; }
+    p:last-child { margin-bottom: 0; }
+    footer { border-top: 1px solid var(--border); padding: 32px 40px; max-width: 1200px; margin: 80px auto 0; display: flex; align-items: center; justify-content: space-between; }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { font-size: .65rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--gold); }
+    @media (max-width: 900px) { nav { padding: 0 20px; } .nav-links { display: none; } .wrap { padding: 0 20px; margin: 48px auto; } footer { padding: 24px 20px; flex-direction: column; gap: 16px; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-brand">Tech &amp; Ouro <span>Economia · Desporto · Emigração</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="economia.html">Economia</a></li>
+      <li><a href="desporto.html">Desporto</a></li>
+      <li><a href="emigrantes.html">Emigrantes</a></li>
+      <li><a href="mercados.html">Mercados</a></li>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="disclaimer.html" class="active">Disclaimer</a></li>
+    </ul>
+  </nav>
+  <div class="gold-line"></div>
+
+  <div class="wrap">
+    <p class="eyebrow">§ Aviso Legal</p>
+    <h1>Não sou economista.<br><em>Não aconselho nada.</em></h1>
+
+    <div class="box">
+      <h2>⚠ Aviso importante</h2>
+      <p>O TechOuro é um projeto pessoal e de hobby, criado e mantido por um emigrante lusófono por puro gosto de escrever e partilhar informação.</p>
+      <p><strong style="color: var(--text);">Não sou economista, consultor financeiro, analista de mercados, jornalista licenciado, nem qualquer tipo de profissional certificado nas áreas sobre as quais escrevo.</strong></p>
+      <p>Nada do que é publicado neste site constitui aconselhamento financeiro, recomendação de investimento, sugestão de compra ou venda de qualquer ativo, moeda, criptomoeda, ação, ou outro instrumento financeiro.</p>
+    </div>
+
+    <div class="box">
+      <h2>📖 O que é este site</h2>
+      <p>Este é um espaço de informação geral e opinião pessoal. Os artigos publicados refletem a minha leitura pessoal dos acontecimentos e não devem ser usados como base para decisões financeiras ou de investimento.</p>
+      <p>Faça sempre a sua própria pesquisa. Consulte um profissional certificado antes de tomar qualquer decisão financeira importante.</p>
+    </div>
+
+    <div class="box">
+      <h2>🌍 Para toda a comunidade lusófona</h2>
+      <p>Este site é criado com carinho para portugueses, brasileiros, cabo-verdianos, angolanos, moçambicanos e todos os lusófonos espalhados pelo mundo. O objetivo é informar e aproximar — nunca enriquecer à custa de ninguém.</p>
+    </div>
+  </div>
+
+  <div class="gold-line"></div>
+    <div class="gold-line"></div>
+  <footer style="border-top:1px solid #1f1f1f; padding:24px 40px; max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+    <span style="font-family:'Playfair Display',serif; color:#C9A227; font-size:1rem; font-weight:700;">Tech &amp; Ouro</span>
+    <span style="font-size:.65rem; color:#666; text-align:center;">Não sou economista. Nada aqui é aconselhamento financeiro. Algarve 2026.</span>
+    <a href="mailto:tiagowater@yahoo.com" style="font-size:.65rem; color:#666; text-decoration:none; letter-spacing:.08em;">tiagowater@yahoo.com</a>
+  </footer>
+</body>
+</html>
