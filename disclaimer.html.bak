@@ -30,8 +30,6 @@
     .footer-links a { font-size: .65rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
     .footer-links a:hover { color: var(--gold); }
     @media (max-width: 900px) { nav { padding: 0 20px; } .nav-links { display: none; } .wrap { padding: 0 20px; margin: 48px auto; } footer { padding: 24px 20px; flex-direction: column; gap: 16px; } }
-    .footer-fixed{position:fixed;bottom:0;right:0;z-index:50;padding:16px 20px;display:flex;align-items:center;gap:12px;background:rgba(8,8,8,.8);backdrop-filter:blur(10px);border-left:1px solid var(--border);border-top:1px solid var(--border)}
-    .footer-fixed img{height:40px;width:auto;object-fit:contain}
   </style>
 </head>
 <body>
@@ -80,10 +78,5 @@
     <span style="font-size:.65rem; color:#666; text-align:center;">Não sou economista. Nada aqui é aconselhamento financeiro. Algarve 2026.</span>
     <a href="mailto:tiagowater@yahoo.com" style="font-size:.65rem; color:#666; text-decoration:none; letter-spacing:.08em;">tiagowater@yahoo.com</a>
   </footer>
-  <!-- ══ FOOTER FIXO ══ -->
-  <div class="footer-fixed">
-    <img src="logo-lion.jpg" alt="Tech & Ouro">
-  </div>
-
 </body>
 </html>

@@ -117,8 +117,6 @@
       .art-tags { padding: 0 20px 48px; }
       footer { padding: 24px 20px; flex-direction: column; gap: 12px; }
     }
-    .footer-fixed{position:fixed;bottom:0;right:0;z-index:50;padding:16px 20px;display:flex;align-items:center;gap:12px;background:rgba(8,8,8,.8);backdrop-filter:blur(10px);border-left:1px solid var(--border);border-top:1px solid var(--border)}
-    .footer-fixed img{height:40px;width:auto;object-fit:contain}
   </style>
 </head>
 <body>
@@ -279,11 +277,6 @@
   <span class="footer-copy">&copy; 2026 Tech e Ouro</span>
   <a href="index.html" style="font-size:.65rem;color:var(--muted);text-decoration:none;letter-spacing:.08em">← Voltar ao início</a>
 </footer>
-
-  <!-- ══ FOOTER FIXO ══ -->
-  <div class="footer-fixed">
-    <img src="logo-lion.jpg" alt="Tech & Ouro">
-  </div>
 
 </body>
 </html>

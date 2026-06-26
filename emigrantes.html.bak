@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mercados — TechOuro</title>
+  <title>Emigrantes — TechOuro</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -41,8 +41,6 @@
     .footer-links a { font-size: .65rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
     .footer-links a:hover { color: var(--gold); }
     @media (max-width: 900px) { nav { padding: 0 20px; } .nav-links { display: none; } .page-header { padding: 40px 20px; } .grid { grid-template-columns: 1fr; margin: 24px 20px; } footer { padding: 24px 20px; flex-direction: column; gap: 16px; } .disclaimer { padding: 16px 20px; } }
-    .footer-fixed{position:fixed;bottom:0;right:0;z-index:50;padding:16px 20px;display:flex;align-items:center;gap:12px;background:rgba(8,8,8,.8);backdrop-filter:blur(10px);border-left:1px solid var(--border);border-top:1px solid var(--border)}
-    .footer-fixed img{height:40px;width:auto;object-fit:contain}
   </style>
 </head>
 <body>
@@ -53,8 +51,8 @@
     <ul class="nav-links">
       <li><a href="economia.html">Economia</a></li>
       <li><a href="desporto.html">Desporto</a></li>
-      <li><a href="emigrantes.html">Emigrantes</a></li>
-      <li><a href="mercados.html" class="active">Mercados</a></li>
+      <li><a href="emigrantes.html" class="active">Emigrantes</a></li>
+      <li><a href="mercados.html">Mercados</a></li>
       <li><a href="sobre.html">Sobre</a></li>
       <li><a href="disclaimer.html">Disclaimer</a></li>
     </ul>
@@ -63,44 +61,44 @@
 
   <div class="page-header">
     <p class="eyebrow">§ Secção</p>
-    <h1 class="page-title">Mercados <em>Globais</em></h1>
+    <h1 class="page-title">A nossa <em>comunidade</em></h1>
   </div>
 
   <div class="grid">
     <article class="card">
-      <div class="card-top"><span class="tag">Ouro</span></div>
-      <h2 class="card-title">O ouro em 2026: metal dourado como hedge em tempos de inflação</h2>
-      <p class="card-excerpt">O preço do ouro atingiu máximos históricos. O que está a impulsionar a procura e o que isso significa para quem poupa em euros.</p>
-      <div class="card-footer"><span class="date">21 Jun 2026</span><span class="arrow">→</span></div>
+      <div class="card-top"><span class="tag">Portugal</span></div>
+      <h2 class="card-title">Portugal entre os 10 países mais atractivos para trabalhar na Europa</h2>
+      <p class="card-excerpt">Dados recentes mostram que Portugal sobe no ranking de destinos para expatriados. O que mudou e o que ainda falta melhorar.</p>
+      <div class="card-footer"><span class="date">20 Jun 2026</span><span class="arrow">→</span></div>
     </article>
     <article class="card">
-      <div class="card-top"><span class="tag">Bolsa</span></div>
-      <h2 class="card-title">S&amp;P 500 em máximos: bull market ou armadilha para investidores?</h2>
-      <p class="card-excerpt">Os índices americanos continuam a subir. Analisamos os fundamentos e os riscos que os titulares de notícias não mostram.</p>
-      <div class="card-footer"><span class="date">19 Jun 2026</span><span class="arrow">→</span></div>
+      <div class="card-top"><span class="tag">Brasil</span></div>
+      <h2 class="card-title">Brasileiros em Portugal: direitos, deveres e como regularizar a situação</h2>
+      <p class="card-excerpt">Com milhares de brasileiros a viver em Portugal, o guia essencial sobre vistos, autorizações de residência e acesso ao trabalho.</p>
+      <div class="card-footer"><span class="date">18 Jun 2026</span><span class="arrow">→</span></div>
     </article>
     <article class="card">
-      <div class="card-top"><span class="tag">Crypto</span></div>
-      <h2 class="card-title">Bitcoin acima dos $70K: o que mudou desde o halving de 2024</h2>
-      <p class="card-excerpt">Dois anos após o halving, o Bitcoin consolida numa nova fase. O que os dados on-chain dizem sobre o momento atual do mercado.</p>
-      <div class="card-footer"><span class="date">17 Jun 2026</span><span class="arrow">→</span></div>
+      <div class="card-top"><span class="tag">Reino Unido</span></div>
+      <h2 class="card-title">Portugueses no Reino Unido pós-Brexit: o que mudou na prática</h2>
+      <p class="card-excerpt">Cinco anos depois do Brexit, a vida dos portugueses em Inglaterra mudou. Documentação, saúde, trabalho — o que precisa de saber.</p>
+      <div class="card-footer"><span class="date">15 Jun 2026</span><span class="arrow">→</span></div>
     </article>
     <article class="card">
-      <div class="card-top"><span class="tag">Fed</span></div>
-      <h2 class="card-title">Taxas de juro nos EUA: o que a Fed decide e porque é que isso nos afecta</h2>
-      <p class="card-excerpt">As decisões da Reserva Federal americana têm impacto directo no crédito, nas bolsas e no câmbio do euro. O guia simples para perceber porquê.</p>
-      <div class="card-footer"><span class="date">14 Jun 2026</span><span class="arrow">→</span></div>
+      <div class="card-top"><span class="tag">Cabo Verde</span></div>
+      <h2 class="card-title">A diáspora cabo-verdiana: a maior comunidade lusófona do mundo per capita</h2>
+      <p class="card-excerpt">Mais cabo-verdianos vivem fora do país do que dentro. A história de uma emigração que construiu nações e manteve culturas vivas.</p>
+      <div class="card-footer"><span class="date">12 Jun 2026</span><span class="arrow">→</span></div>
     </article>
     <article class="card">
-      <div class="card-top"><span class="tag">Europa</span></div>
-      <h2 class="card-title">BCE e inflação: a zona euro em 2026 — onde estamos e para onde vamos</h2>
-      <p class="card-excerpt">A inflação europeia estabilizou mas os riscos persistem. Uma leitura do contexto macroeconómico para quem vive e trabalha na Europa.</p>
-      <div class="card-footer"><span class="date">11 Jun 2026</span><span class="arrow">→</span></div>
+      <div class="card-top"><span class="tag">Angola</span></div>
+      <h2 class="card-title">Angolanos na Europa: os desafios e as oportunidades de uma nova geração</h2>
+      <p class="card-excerpt">Uma geração jovem e qualificada que escolheu a Europa. As histórias de sucesso e os obstáculos que ainda persistem.</p>
+      <div class="card-footer"><span class="date">10 Jun 2026</span><span class="arrow">→</span></div>
     </article>
     <article class="card">
-      <div class="card-top"><span class="tag">Petróleo</span></div>
-      <h2 class="card-title">Preço do petróleo e o impacto nos combustíveis em Portugal e no Brasil</h2>
-      <p class="card-excerpt">A OPEP, o conflito no Médio Oriente e a transição energética. Três forças que determinam o que pagamos na bomba de gasolina.</p>
+      <div class="card-top"><span class="tag">Moçambique</span></div>
+      <h2 class="card-title">Moçambicanos no mundo: ligações que a distância não quebra</h2>
+      <p class="card-excerpt">A comunidade moçambicana espalhada pelo mundo mantém laços fortes com o país natal. Cultura, remessas e identidade lusófona.</p>
       <div class="card-footer"><span class="date">8 Jun 2026</span><span class="arrow">→</span></div>
     </article>
   </div>
@@ -112,10 +110,5 @@
     <span style="font-size:.65rem; color:#666; text-align:center;">Não sou economista. Nada aqui é aconselhamento financeiro. Algarve 2026.</span>
     <a href="mailto:tiagowater@yahoo.com" style="font-size:.65rem; color:#666; text-decoration:none; letter-spacing:.08em;">tiagowater@yahoo.com</a>
   </footer>
-  <!-- ══ FOOTER FIXO ══ -->
-  <div class="footer-fixed">
-    <img src="logo-lion.jpg" alt="Tech & Ouro">
-  </div>
-
 </body>
 </html>

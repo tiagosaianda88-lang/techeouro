@@ -127,8 +127,6 @@
       .country-header { flex-wrap: wrap; }
       .country-sub { margin-left: 0; }
     }
-    .footer-fixed{position:fixed;bottom:0;right:0;z-index:50;padding:16px 20px;display:flex;align-items:center;gap:12px;background:rgba(8,8,8,.8);backdrop-filter:blur(10px);border-left:1px solid var(--border);border-top:1px solid var(--border)}
-    .footer-fixed img{height:40px;width:auto;object-fit:contain}
   </style>
 </head>
 <body>
@@ -488,11 +486,6 @@ const observer = new IntersectionObserver(entries => {
 }, { rootMargin: '-40% 0px -55% 0px' });
 sections.forEach(s => observer.observe(s));
 </script>
-
-  <!-- ══ FOOTER FIXO ══ -->
-  <div class="footer-fixed">
-    <img src="logo-lion.jpg" alt="Tech & Ouro">
-  </div>
 
 </body>
 </html>
