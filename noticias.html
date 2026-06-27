@@ -40,7 +40,7 @@
     .lang-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 6px 12px; font-size: .75rem; cursor: pointer; transition: all .2s; }
     .lang-btn.active { background: var(--gold); color: #000; border-color: var(--gold); }
     footer { border-top: 1px solid var(--border); padding: 32px 40px; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-    .footer-fixed{position:fixed;bottom:0;left:0;z-index:50;padding:16px 20px;display:flex;align-items:center;gap:12px;background:rgba(8,8,8,.8);border-right:1px solid var(--border);border-top:1px solid var(--border)}
+    .footer-fixed{position:fixed;bottom:0;right:0;z-index:50;padding:16px 20px;display:flex;align-items:center;gap:12px;background:rgba(8,8,8,.8);border-right:1px solid var(--border);border-top:1px solid var(--border)}
     .footer-fixed img{height:40px;width:auto;object-fit:contain}
   </style>
 </head>
@@ -152,5 +152,10 @@
       views[index].classList.add('active');
     }
   </script>
+<!-- ══ FOOTER FIXO ══ -->
+<div style="position:fixed;bottom:0;right:0;z-index:999;padding:6px 8px;background:rgba(8,8,8,.85);backdrop-filter:blur(10px);border-left:1px solid #1e1d1a;border-top:1px solid #1e1d1a">
+  <img src="logo-lion.jpg" alt="Tech & Ouro" style="width:70px;height:70px;border-radius:50%;object-fit:cover;border:1px solid #7A6115;display:block">
+</div>
+
 </body>
 </html>

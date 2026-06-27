@@ -42,7 +42,7 @@
     .footer-links a { font-size: .65rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
     .footer-links a:hover { color: var(--gold); }
     @media (max-width: 900px) { nav { padding: 0 20px; } .nav-links { display: none; } .page-header { padding: 40px 20px; } .grid { grid-template-columns: 1fr; margin: 24px 20px; } footer { padding: 24px 20px; flex-direction: column; gap: 16px; } .disclaimer { padding: 16px 20px; } }
-    .footer-fixed{position:fixed;bottom:0;left:0;z-index:50;padding:16px 20px;display:flex;align-items:center;gap:12px;background:rgba(8,8,8,.8);backdrop-filter:blur(10px);border-right:1px solid var(--border);border-top:1px solid var(--border)}
+    .footer-fixed{position:fixed;bottom:0;right:0;z-index:50;padding:16px 20px;display:flex;align-items:center;gap:12px;background:rgba(8,8,8,.8);backdrop-filter:blur(10px);border-right:1px solid var(--border);border-top:1px solid var(--border)}
     .footer-fixed img{height:40px;width:auto;object-fit:contain}
   </style>
 </head>
@@ -114,9 +114,9 @@
     <a href="mailto:tiagowater@yahoo.com" style="font-size:.65rem; color:#666; text-decoration:none; letter-spacing:.08em;">tiagowater@yahoo.com</a>
   </footer>
   <!-- ══ FOOTER FIXO ══ -->
-  <div class="footer-fixed">
-    <img src="logo-lion.jpg" alt="Tech & Ouro">
-  </div>
+<div style="position:fixed;bottom:0;right:0;z-index:999;padding:6px 8px;background:rgba(8,8,8,.85);backdrop-filter:blur(10px);border-left:1px solid #1e1d1a;border-top:1px solid #1e1d1a">
+  <img src="logo-lion.jpg" alt="Tech & Ouro" style="width:70px;height:70px;border-radius:50%;object-fit:cover;border:1px solid #7A6115;display:block">
+</div>
 
 </body>
 </html>
