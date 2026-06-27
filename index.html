@@ -790,5 +790,34 @@
   <img src="Rich Gold Lion Logo with Elegant Typography.jpg" alt="TECHEOURO.NET" style="width:70px;height:70px;border-radius:50%;object-fit:cover;border:1px solid #7A6115;display:block">
 </div>
 
+<script>
+const NEWSAPI_KEY='723a7b6d49c6426a91c9c3c6aaa075a20';
+async function loadNews(){
+  try{
+    const res=await fetch(`https://newsapi.org/v2/everything?q=economy+OR+finance&sortBy=publishedAt&language=en&pageSize=6&apiKey=${NEWSAPI_KEY}`);
+    const data=await res.json();
+    if(data.articles){
+      const grid=document.querySelector('.news-grid');
+      if(grid){
+        grid.innerHTML='';
+        data.articles.slice(0,6).forEach((art,i)=>{
+          const date=new Date(art.publishedAt).toLocaleDateString('pt-PT');
+          const cat=art.source.name;
+          grid.innerHTML+=`<article class="card">
+            <div class="card-top"><span class="tag">${cat}</span><span class="card-num">${String(i+1).padStart(2,'0')}</span></div>
+            <h2 class="card-title">${art.title}</h2>
+            <p class="card-excerpt">${art.description||art.title}</p>
+            <p class="card-excerpt" style="color:#7A6115;font-size:10px;margin-top:6px;font-style:italic">${art.description?'Latest from '+cat:''}</p>
+            <div class="card-footer"><span class="date">${date}</span><span class="card-arrow">→</span></div>
+          </article>`;
+        });
+      }
+    }
+  }catch(e){console.log('News load error:',e);}
+}
+loadNews();
+setInterval(loadNews,3600000);
+</script>
+
 </body>
 </html>
