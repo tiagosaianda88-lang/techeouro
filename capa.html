@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech & Ouro · A Gazeta do Ouro</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#080808;color:#e8e0cc;font-family:'Georgia',serif;}
+:root{--gold:#C9A227;}
+.logo-bolinha{position:fixed;top:8px;left:8px;width:35px;height:35px;border-radius:50%;border:1.5px solid var(--gold);z-index:9999;object-fit:cover;}
+.logo-bottom{position:fixed;bottom:8px;right:12px;height:195px;width:195px;z-index:9999;object-fit:contain;}
+.ticker{background:#0a0a0a;border-bottom:1px solid #1a1506;padding:5px 16px;display:flex;gap:20px;overflow-x:auto;white-space:nowrap;}
+.ticker span{font-size:11px;color:#777;}
+.up{color:#4caf7d;}.dn{color:#e05252;}
+nav{background:#0d0d0d;padding:10px 24px 10px 52px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #1a1506;gap:16px;}
+nav a{font-size:10px;letter-spacing:1.5px;color:var(--gold);font-weight:700;text-decoration:none;}
+nav a:hover{opacity:0.7;}
+.hero{text-align:center;padding:22px 20px 12px;}
+.hero-logo{display:block;margin:0 auto 14px;height:190px;width:auto;}
+.hero-eyebrow{font-size:9px;letter-spacing:3px;color:var(--gold);margin-bottom:8px;}
+.hero h1{font-size:22px;color:#f0e6c8;margin:0 0 6px;font-weight:700;line-height:1.3;}
+.hero h1 span{color:var(--gold);}
+.hero-sub{font-size:12px;color:#888;margin:4px 0;}
+.hero-date{font-size:10px;color:#555;letter-spacing:1px;margin-top:4px;}
+.section-label{font-size:10px;letter-spacing:2px;color:var(--gold);padding:10px 16px 8px;}
+.cards-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 16px 16px;}
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 16px 20px;}
+.card{background:#111;border:1px solid #1e1e1e;border-radius:8px;padding:18px;cursor:pointer;transition:border-color 0.2s;}
+.card:hover{border-color:var(--gold);}
+.card-sm{background:#111;border:1px solid #1e1e1e;border-radius:8px;padding:16px;cursor:pointer;transition:border-color 0.2s;}
+.card-sm:hover{border-color:var(--gold);}
+.card-cat{font-size:9px;color:var(--gold);letter-spacing:1.5px;margin-bottom:8px;}
+.card-title{font-size:15px;color:#e8e0cc;font-weight:700;line-height:1.4;margin-bottom:10px;}
+.card-desc{font-size:11px;color:#666;line-height:1.5;margin-bottom:10px;}
+.card-meta{font-size:10px;color:#555;}
+.card-sm-cat{font-size:9px;color:var(--gold);margin-bottom:6px;}
+.card-sm-title{font-size:13px;color:#e8e0cc;font-weight:600;line-height:1.4;margin-bottom:6px;}
+footer{background:#0a0a0a;border-top:1px solid #1a1506;padding:12px 24px;text-align:center;}
+.footer-logo{color:var(--gold);font-size:12px;margin-bottom:2px;}
+.footer-copy{color:#555;font-size:10px;margin-bottom:2px;}
+.footer-links{font-size:9px;color:#444;}
+.disclaimer{font-size:9px;color:#333;padding:8px 24px;text-align:center;border-top:1px solid #111;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">MARKETS</a>
+  <a href="ouro.html">GOLD</a>
+  <a href="bitcoin.html">BITCOIN</a>
+  <a href="tech.html">TECH</a>
+  <a href="geopolitica.html">GEOPOLITICS</a>
+  <a href="paises.html">COUNTRIES</a>
+  <a href="terminal.html">TERMINAL</a>
+</nav>
+
+<div class="ticker">
+  <span>XAU/USD <b class="up">$3 327</b> +0.62%</span>
+  <span>BTC <b class="up">$107 280</b> +1.2%</span>
+  <span>EUR/USD <b class="dn">1.1342</b> -0.3%</span>
+  <span>PSI 20 <b class="up">6 841</b> +0.4%</span>
+  <span>Prata <b class="up">$37.18</b> +0.8%</span>
+  <span>WTI <b class="dn">$77.20</b> -0.5%</span>
+  <span>BRK.B <b class="up">$518.40</b> +0.3%</span>
+</div>
+
+<div class="hero">
+  <p class="hero-eyebrow">THE GOLD GAZETTE · TECH & GOLD</p>
+  <h1>Markets, <span>Gold</span> & Technology<br>in Portuguese & English</h1>
+  <p class="hero-sub">Daily analysis of macro, gold, Bitcoin and geopolitics for Iberian and international investors.</p>
+  <p class="hero-date">FRI, 27 JUNE 2026 · PORTUGAL, ALGARVE</p>
+</div>
+
+<p class="section-label">TODAY'S HIGHLIGHTS</p>
+<div class="cards-2">
+  <div class="card">
+    <p class="card-cat">GOLD · MACRO</p>
+    <h2 class="card-title">Gold consolidates above $3,300 as dollar retreats on inflation data</h2>
+    <p class="card-desc">Precious metal holds strength zone after Fed signals caution. Analysts eyeing $3,350 as next key technical level.</p>
+    <p class="card-meta">25 JUN 2026 · 5 MIN READ</p>
+  </div>
+  <div class="card">
+    <p class="card-cat">BITCOIN</p>
+    <h2 class="card-title">BTC surpasses $107K with record institutional inflows in spot ETFs</h2>
+    <p class="card-desc">Spot ETFs accumulate $2.1B over 5 consecutive sessions of net inflows. BlackRock leads with $980M weekly inflows.</p>
+    <p class="card-meta">25 JUN 2026 · 3 MIN READ</p>
+  </div>
+  <div class="card">
+    <p class="card-cat">GEOPOLITICS</p>
+    <h2 class="card-title">US and Iran seal accord on Strait of Hormuz</h2>
+    <p class="card-desc">Oil pulls back 3% with partial reopening of maritime routes. Negotiations mediated by Qatar in Doha.</p>
+    <p class="card-meta">24 JUN 2026 · 4 MIN READ</p>
+  </div>
+  <div class="card">
+    <p class="card-cat">TECH</p>
+    <h2 class="card-title">xAI/Musk faces DOJ pressure over unlicensed turbines in Memphis</h2>
+    <p class="card-desc">57 turbines installed without environmental permit. DOJ invokes national security. NAACP demands immediate shutdown.</p>
+    <p class="card-meta">23 JUN 2026 · 4 MIN READ</p>
+  </div>
+</div>
+
+<p class="section-label">MORE STORIES</p>
+<div class="cards-3">
+  <div class="card-sm">
+    <p class="card-sm-cat">MARKETS</p>
+    <h2 class="card-sm-title">Ibovespa hits historic milestone of 200,000 points</h2>
+    <p class="card-meta">24 JUN 2026</p>
+  </div>
+  <div class="card-sm">
+    <p class="card-sm-cat">CHINA</p>
+    <h2 class="card-sm-title">Companionship Economy: ¥50B market benefits Meituan and Douyin</h2>
+    <p class="card-meta">23 JUN 2026</p>
+  </div>
+  <div class="card-sm">
+    <p class="card-sm-cat">BANKING</p>
+    <h2 class="card-sm-title">BES victims die awaiting justice — 150 deceased clients</h2>
+    <p class="card-meta">26 JUN 2026</p>
+  </div>
+  <div class="card-sm">
+    <p class="card-sm-cat">APPLE</p>
+    <h2 class="card-sm-title">Siri via Google Cloud + Nvidia B200 — iOS 27 in September 2026</h2>
+    <p class="card-meta">25 JUN 2026</p>
+  </div>
+  <div class="card-sm">
+    <p class="card-sm-cat">ANTHROPIC</p>
+    <h2 class="card-sm-title">Anthropic at G-7 Évian — Amodei and Hassabis defend AI regulation</h2>
+    <p class="card-meta">22 JUN 2026</p>
+  </div>
+  <div class="card-sm">
+    <p class="card-sm-cat">BERKSHIRE</p>
+    <h2 class="card-sm-title">Abel takes helm of Berkshire — post-Buffett era begins with $189B cash</h2>
+    <p class="card-meta">21 JUN 2026</p>
+  </div>
+</div>
+
+<footer>
+  <p class="footer-logo">Tech & Gold · The Gold Gazette</p>
+  <p class="footer-copy">© 2026 techgold.io · PORTUGAL, Algarve, Portugal</p>
+  <p class="footer-links">Markets · Gold · Bitcoin · Tech · Geopolitics</p>
+</footer>
+<div class="disclaimer">This site is for informational purposes only. It does not constitute financial advice. Invest responsibly.</div>
+
+</body>
+</html>

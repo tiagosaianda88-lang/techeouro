@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emigrantes — TechOuro</title>
+  <meta name="description" content="Informação essencial para portugueses no EUA, Canadá, Reino Unido, Irlanda e Suíça. Vistos, impostos, trabalho, habitação e comunidade.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #080808;
+      --surface:  #111111;
+      --border:   #1f1f1f;
+      --gold:     #C9A227;
+      --gold-dim: #7a6118;
+      --text:     #F0EDE6;
+      --muted:    #666666;
+      --serif:    'Playfair Display', serif;
+      --sans:     'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,8,8,.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+    .nav-cta {
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 9px 20px;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 72px 40px 56px;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-eyebrow {
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .page-title {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      font-weight: 900;
+      line-height: .95;
+      letter-spacing: -.02em;
+    }
+
+    .page-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .page-lead {
+      font-size: .95rem;
+      line-height: 1.8;
+      color: #aaa;
+      margin-top: 24px;
+      max-width: 600px;
+    }
+
+    /* COUNTRY TABS */
+    .country-tabs {
+      position: sticky;
+      top: 64px;
+      z-index: 90;
+      background: rgba(8,8,8,.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .country-tabs::-webkit-scrollbar { display: none; }
+
+    .tabs-inner {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 18px 24px;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    .tab-flag { font-size: 1rem; }
+
+    /* COUNTRY SECTIONS */
+    .country-section {
+      display: none;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 64px 40px;
+    }
+    .country-section.active { display: block; }
+
+    /* COUNTRY HEADER */
+    .country-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      margin-bottom: 64px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .country-flag-big {
+      font-size: 4rem;
+      margin-bottom: 16px;
+    }
+
+    .country-name {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .country-subtitle {
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .country-intro {
+      font-size: .9rem;
+      line-height: 1.85;
+      color: #aaa;
+    }
+
+    .country-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .stat-box {
+      background: var(--surface);
+      padding: 28px 24px;
+    }
+
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* TOPIC GRID */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .section-head h2 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .section-head::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-bottom: 64px;
+    }
+
+    .topic-card {
+      background: var(--bg);
+      padding: 32px 28px;
+      transition: background .25s;
+      cursor: pointer;
+    }
+    .topic-card:hover { background: var(--surface); }
+
+    .topic-icon {
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+
+    .topic-tag {
+      font-size: .6rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold-dim);
+      padding: 4px 10px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+
+    .topic-title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 12px;
+      transition: color .2s;
+    }
+    .topic-card:hover .topic-title { color: var(--gold); }
+
+    .topic-text {
+      font-size: .8rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .topic-text-en {
+      font-size: .7rem;
+      line-height: 1.7;
+      color: var(--gold-dim);
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    /* USEFUL LINKS */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-bottom: 64px;
+    }
+
+    .link-card {
+      background: var(--bg);
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: background .25s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .link-card:hover { background: var(--surface); }
+
+    .link-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .link-label {
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      color: var(--muted);
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      font-size: .6rem;
+    }
+
+    .link-title {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--text);
+      transition: color .2s;
+    }
+    .link-card:hover .link-title { color: var(--gold); }
+
+    .link-arrow {
+      margin-left: auto;
+      color: var(--gold-dim);
+      font-size: .85rem;
+      transition: transform .2s;
+    }
+    .link-card:hover .link-arrow { transform: translateX(3px); color: var(--gold); }
+
+    /* ALERT BOX */
+    .alert-box {
+      border: 1px solid var(--gold-dim);
+      padding: 24px 28px;
+      margin-bottom: 48px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .alert-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+
+    .alert-text {
+      font-size: .82rem;
+      line-height: 1.75;
+      color: #aaa;
+    }
+
+    .alert-text strong { color: var(--gold); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links, .nav-cta { display: none; }
+      .page-hero { padding: 48px 20px 40px; }
+      .tabs-inner { padding: 0 20px; }
+      .country-section { padding: 40px 20px; }
+      .country-header { grid-template-columns: 1fr; gap: 40px; }
+      .topic-grid { grid-template-columns: 1fr; }
+      .links-grid { grid-template-columns: 1fr; }
+      .country-stats { grid-template-columns: 1fr 1fr; }
+      footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo-lion.jpg" alt="Tech & Ouro" style="height:70px;width:auto;object-fit:contain">
+  </a>
+  <ul class="nav-links">
+    <li><a href="economia.html">Economia<br><span style="font-size:8px;color:#7A6115;font-weight:400;letter-spacing:.05em">Economy</span></a></li>
+    <li><a href="desporto.html">Desporto<br><span style="font-size:8px;color:#7A6115;font-weight:400;letter-spacing:.05em">Sports</span></a></li>
+    <li><a href="emigrantes.html" class="active">Emigrantes<br><span style="font-size:8px;color:#7A6115;font-weight:400;letter-spacing:.05em">Emigrants</span></a></li>
+    <li><a href="mercados.html">Mercados<br><span style="font-size:8px;color:#7A6115;font-weight:400;letter-spacing:.05em">Markets</span></a></li>
+    <li><a href="sobre.html">Sobre<br><span style="font-size:8px;color:#7A6115;font-weight:400;letter-spacing:.05em">About</span></a></li>
+  </ul>
+  <a href="mailto:tiagosaianda88@gmail.com" class="nav-cta">Contacto →</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <p class="page-eyebrow">§ Emigrantes — Portugueses no Mundo</p>
+  <h1 class="page-title">
+    Portugueses<br>
+    <em>no mundo.</em>
+  </h1>
+  <p class="page-lead">
+    Informação essencial para a diáspora lusófona nos cinco países com maior comunidade portuguesa. Vistos, impostos, trabalho, habitação e muito mais.
+    <br><span style="color:#7A6115;font-size:.8rem;font-style:italic">Essential info for the Portuguese diaspora across five key destinations. Visas, taxes, jobs, housing and more.</span>
+  </p>
+</div>
+
+<!-- COUNTRY TABS -->
+<div class="country-tabs">
+  <div class="tabs-inner">
+    <button class="tab-btn active" onclick="switchTab('usa')">
+      <span class="tab-flag">🇺🇸</span> EUA <span style="display:none">USA</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('canada')">
+      <span class="tab-flag">🇨🇦</span> Canadá
+    </button>
+    <button class="tab-btn" onclick="switchTab('uk')">
+      <span class="tab-flag">🇬🇧</span> Reino Unido
+    </button>
+    <button class="tab-btn" onclick="switchTab('irlanda')">
+      <span class="tab-flag">🇮🇪</span> Irlanda
+    </button>
+    <button class="tab-btn" onclick="switchTab('suica')">
+      <span class="tab-flag">🇨🇭</span> Suíça
+    </button>
+  </div>
+</div>
+
+<!-- ═══ EUA ═══ -->
+<section class="country-section active" id="sec-usa">
+  <div class="country-header">
+    <div>
+      <div class="country-flag-big">🇺🇸</div>
+      <p class="country-subtitle">Estados Unidos da América</p>
+      <h2 class="country-name">EUA</h2>
+      <p class="country-intro">
+        Com mais de 1,5 milhões de luso-americanos, os EUA são o maior destino da diáspora portuguesa fora da Europa. Massachusetts, Nova Jersey e Califórnia concentram a maior parte da comunidade. O sonho americano continua — mas requer preparação.
+        <br><br><span style="color:#7A6115;font-size:.8rem;font-style:italic">With over 1.5 million Luso-Americans, the US remains the largest Portuguese diaspora outside Europe. Massachusetts, New Jersey and California lead. The American Dream still works — but it takes preparation.</span>
+      </p>
+    </div>
+    <div class="country-stats">
+      <div class="stat-box">
+        <div class="stat-num">1.5M+</div>
+        <div class="stat-label">Luso-americanos</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">$78K</div>
+        <div class="stat-label">Salário médio anual</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">#1</div>
+        <div class="stat-label">New Bedford — cidade + portuguesa do mundo</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">H-1B</div>
+        <div class="stat-label">Visto mais comum para qualificados</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-box">
+    <span class="alert-icon">⚠️</span>
+    <p class="alert-text"><strong>Atenção 2026:</strong> As regras de imigração nos EUA estão a mudar rapidamente. Consulte sempre um advogado de imigração certificado antes de tomar decisões. Este conteúdo é informativo, não é aconselhamento jurídico.</p>
+  </div>
+
+  <div class="section-head"><h2>Vistos &amp; Imigração</h2></div>
+  <div class="topic-grid">
+    <div class="topic-card">
+      <div class="topic-icon">🛂</div>
+      <span class="topic-tag">Visto de Trabalho</span>
+      <h3 class="topic-title">H-1B: o visto para trabalhadores qualificados</h3>
+      <p class="topic-text">Para trabalhar nos EUA com um empregador americano precisas de patrocínio. O H-1B é o mais comum para áreas de tecnologia, engenharia e saúde. O sorteio anual abre em Março.</p>
+      <p class="topic-text-en">To work in the US you need employer sponsorship. H-1B is the most common visa for tech, engineering and healthcare. The annual lottery opens in March.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🟩</div>
+      <span class="topic-tag">Green Card</span>
+      <h3 class="topic-title">Residência permanente: os caminhos possíveis</h3>
+      <p class="topic-text">Green card por emprego (EB-1 a EB-3), por família, por investimento (EB-5 a partir de $800K) ou pelo Diversity Visa Lottery. Portugal participa na lotaria DV.</p>
+      <p class="topic-text-en">Green card via employment (EB-1 to EB-3), family, investment (EB-5 from $800K) or the Diversity Visa Lottery — Portugal participates.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🎓</div>
+      <span class="topic-tag">Estudantes</span>
+      <h3 class="topic-title">Visto F-1 e OPT: estudar e trabalhar nos EUA</h3>
+      <p class="topic-text">O visto F-1 permite estudar e trabalhar part-time. Após a licenciatura, o OPT dá 12 meses (3 anos para STEM) para trabalhar sem H-1B.</p>
+      <p class="topic-text-en">F-1 visa allows study and part-time work. After graduation, OPT gives 12 months (3 years for STEM) to work without an H-1B.</p>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Impostos &amp; Finanças</h2></div>
+  <div class="topic-grid">
+    <div class="topic-card">
+      <div class="topic-icon">💰</div>
+      <span class="topic-tag">Impostos</span>
+      <h3 class="topic-title">IRS americano: o que os portugueses precisam de saber</h3>
+      <p class="topic-text">Os EUA tributam rendimento mundial. Se tens green card ou visto de trabalho, tens de declarar tudo — mesmo rendimentos em Portugal. Prazo: 15 de Abril.</p>
+      <p class="topic-text-en">The US taxes worldwide income. Green card holders and work visa holders must declare all income — including from Portugal. Deadline: April 15.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🏦</div>
+      <span class="topic-tag">Banca</span>
+      <h3 class="topic-title">Abrir conta bancária nos EUA sem SSN</h3>
+      <p class="topic-text">Chime, Revolut USA e alguns credit unions aceitam passaporte. Depois de ter o SSN, Schwab e Chase são os mais usados pela comunidade portuguesa.</p>
+      <p class="topic-text-en">Chime, Revolut USA and some credit unions accept a passport. Once you have an SSN, Schwab and Chase are popular among the Portuguese community.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">📋</div>
+      <span class="topic-tag">Dupla Tributação</span>
+      <h3 class="topic-title">Acordo Portugal–EUA: evitar pagar impostos duas vezes</h3>
+      <p class="topic-text">Portugal e os EUA têm convenção de dupla tributação. Em geral, pagas impostos no país onde ganhas o dinheiro e usas crédito fiscal no outro.</p>
+      <p class="topic-text-en">Portugal and the US have a tax treaty. Generally you pay taxes where you earn the income and claim a credit in the other country.</p>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Links Úteis</h2></div>
+  <div class="links-grid">
+    <a href="https://travel.state.gov/content/travel/en/us-visas.html" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🏛️</span>
+      <div>
+        <div class="link-label">Governo EUA</div>
+        <div class="link-title">Vistos dos EUA — travel.state.gov</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.irs.gov/individuals/international-taxpayers" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">📊</span>
+      <div>
+        <div class="link-label">Finanças</div>
+        <div class="link-title">IRS — International Taxpayers</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.uscis.gov" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🛂</span>
+      <div>
+        <div class="link-label">Imigração</div>
+        <div class="link-title">USCIS — Serviços de Cidadania e Imigração</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.portugal.gov.pt/pt/gc24/governo/ministerios/mne/entidades/2023/embaixada-de-portugal-nos-estados-unidos-da-america" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🇵🇹</span>
+      <div>
+        <div class="link-label">Consulado</div>
+        <div class="link-title">Embaixada de Portugal em Washington</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ═══ CANADÁ ═══ -->
+<section class="country-section" id="sec-canada">
+  <div class="country-header">
+    <div>
+      <div class="country-flag-big">🇨🇦</div>
+      <p class="country-subtitle">Canadá</p>
+      <h2 class="country-name">Canadá</h2>
+      <p class="country-intro">
+        O Canadá tem uma das políticas de imigração mais abertas do mundo e uma das maiores comunidades portuguesas fora de Portugal — cerca de 500 mil pessoas, concentradas em Toronto e Montreal. O Express Entry é hoje o caminho mais rápido para a residência permanente.
+        <br><br><span style="color:#7A6115;font-size:.8rem;font-style:italic">Canada has one of the world's most welcoming immigration policies and ~500,000 Portuguese-Canadians. Express Entry is the fastest path to permanent residence.</span>
+      </p>
+    </div>
+    <div class="country-stats">
+      <div class="stat-box">
+        <div class="stat-num">500K</div>
+        <div class="stat-label">Luso-canadianos</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">CAD 60K</div>
+        <div class="stat-label">Salário médio anual</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">Toronto</div>
+        <div class="stat-label">Maior comunidade portuguesa</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">6–12m</div>
+        <div class="stat-label">Tempo médio Express Entry</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Vistos &amp; Imigração</h2></div>
+  <div class="topic-grid">
+    <div class="topic-card">
+      <div class="topic-icon">⚡</div>
+      <span class="topic-tag">Residência</span>
+      <h3 class="topic-title">Express Entry: o sistema de pontos canadiano</h3>
+      <p class="topic-text">O Express Entry selecciona candidatos por pontos (CRS score). Inglês, experiência de trabalho, educação e idade são os factores principais. Convites saem regularmente.</p>
+      <p class="topic-text-en">Express Entry selects candidates by points (CRS score). English, work experience, education and age are key. Invitations to apply are issued regularly.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🏔️</div>
+      <span class="topic-tag">Províncias</span>
+      <h3 class="topic-title">PNP: programas provinciais para imigrar mais rápido</h3>
+      <p class="topic-text">Cada província tem o seu programa. Ontário, British Columbia e Alberta são os mais competitivos. Um nomination provincial dá 600 pontos extra no Express Entry.</p>
+      <p class="topic-text-en">Each province has its own program. Ontario, BC and Alberta are most competitive. A provincial nomination adds 600 points to Express Entry — nearly guaranteeing an ITA.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🎒</div>
+      <span class="topic-tag">Working Holiday</span>
+      <h3 class="topic-title">IEC: trabalhar no Canadá até 2 anos</h3>
+      <p class="topic-text">O International Experience Canada (IEC) permite a portugueses entre 18–35 anos trabalhar no Canadá até 24 meses. Uma boa forma de testar antes de imigrar definitivamente.</p>
+      <p class="topic-text-en">IEC lets Portuguese aged 18–35 work in Canada for up to 24 months. A great way to test the country before committing to full immigration.</p>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Impostos &amp; Finanças</h2></div>
+  <div class="topic-grid">
+    <div class="topic-card">
+      <div class="topic-icon">💰</div>
+      <span class="topic-tag">Impostos</span>
+      <h3 class="topic-title">Impostos no Canadá: federal + provincial</h3>
+      <p class="topic-text">O Canadá tem imposto federal (15%–33%) mais imposto provincial. Ontário tem taxas entre 5,05%–13,16%. O ano fiscal coincide com o calendário e a declaração é em Abril.</p>
+      <p class="topic-text-en">Canada has federal tax (15%–33%) plus provincial tax. Ontario rates range from 5.05% to 13.16%. Tax year matches calendar year and returns are due in April.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🏠</div>
+      <span class="topic-tag">Habitação</span>
+      <h3 class="topic-title">Mercado imobiliário: Toronto vs cidades alternativas</h3>
+      <p class="topic-text">Toronto e Vancouver estão entre as cidades menos acessíveis do mundo. Calgary, Ottawa e Halifax oferecem melhor custo-benefício e crescem rapidamente em população portuguesa.</p>
+      <p class="topic-text-en">Toronto and Vancouver are among the least affordable cities globally. Calgary, Ottawa and Halifax offer better value and have growing Portuguese communities.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🏥</div>
+      <span class="topic-tag">Saúde</span>
+      <h3 class="topic-title">Sistema de saúde público: o que cobre e o que não cobre</h3>
+      <p class="topic-text">O sistema de saúde canadiano cobre consultas e hospitalização mas não medicamentos, dentista ou óculos. Seguro complementar privado é muito comum entre os residentes.</p>
+      <p class="topic-text-en">Canada's public health covers doctor visits and hospital care but not prescriptions, dental or vision. Private supplemental insurance is very common.</p>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Links Úteis</h2></div>
+  <div class="links-grid">
+    <a href="https://www.canada.ca/en/immigration-refugees-citizenship.html" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🍁</span>
+      <div>
+        <div class="link-label">Imigração</div>
+        <div class="link-title">IRCC — Imigração e Cidadania do Canadá</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.canada.ca/en/revenue-agency.html" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">📊</span>
+      <div>
+        <div class="link-label">Finanças</div>
+        <div class="link-title">CRA — Canada Revenue Agency</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.cic.gc.ca/english/immigrate/express/express-entry.asp" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">⚡</span>
+      <div>
+        <div class="link-label">Residência</div>
+        <div class="link-title">Express Entry — Portal Oficial</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.embassyofportugal.ca" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🇵🇹</span>
+      <div>
+        <div class="link-label">Consulado</div>
+        <div class="link-title">Embaixada de Portugal em Ottawa</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ═══ UK ═══ -->
+<section class="country-section" id="sec-uk">
+  <div class="country-header">
+    <div>
+      <div class="country-flag-big">🇬🇧</div>
+      <p class="country-subtitle">Reino Unido</p>
+      <h2 class="country-name">Reino Unido</h2>
+      <p class="country-intro">
+        Pós-Brexit, trabalhar no Reino Unido exige visto. Mas o sistema de pontos britânico é transparente e acessível para quem tem qualificações. Londres continua a ser um dos maiores centros financeiros do mundo, com oportunidades excepcionais para portugueses na área da tecnologia e finanças.
+        <br><br><span style="color:#7A6115;font-size:.8rem;font-style:italic">Post-Brexit, working in the UK requires a visa. But the points-based system is transparent and accessible for qualified workers. London remains a global hub for tech and finance.</span>
+      </p>
+    </div>
+    <div class="country-stats">
+      <div class="stat-box">
+        <div class="stat-num">300K+</div>
+        <div class="stat-label">Portugueses no UK</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">£35K</div>
+        <div class="stat-label">Salário mínimo para Skilled Worker</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">Londres</div>
+        <div class="stat-label">Maior comunidade portuguesa</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">5 anos</div>
+        <div class="stat-label">Para ILR (residência permanente)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Vistos &amp; Imigração</h2></div>
+  <div class="topic-grid">
+    <div class="topic-card">
+      <div class="topic-icon">💼</div>
+      <span class="topic-tag">Trabalho</span>
+      <h3 class="topic-title">Skilled Worker Visa: o principal caminho pós-Brexit</h3>
+      <p class="topic-text">Precisas de uma oferta de emprego de um empregador aprovado, salário mínimo de £35K (ou limiar da profissão) e proficiência em inglês. O empregador paga a taxa de patrocínio.</p>
+      <p class="topic-text-en">You need a job offer from a licensed sponsor, £35K minimum salary (or role threshold) and English proficiency. The employer pays the sponsorship fee.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🎓</div>
+      <span class="topic-tag">Pós-estudos</span>
+      <h3 class="topic-title">Graduate Route: 2 anos para encontrar trabalho após a universidade</h3>
+      <p class="topic-text">Quem se licencia numa universidade britânica tem 2 anos (3 para doutoramento) para trabalhar livremente no UK sem patrocinador. Uma vantagem enorme.</p>
+      <p class="topic-text-en">UK university graduates get 2 years (3 for PhD) to work freely in the UK without a sponsor — a huge advantage for recent graduates.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🏡</div>
+      <span class="topic-tag">ILR</span>
+      <h3 class="topic-title">ILR: residência permanente após 5 anos</h3>
+      <p class="topic-text">Após 5 anos de visto de trabalho contínuo podes pedir o Indefinite Leave to Remain (ILR). Um ano depois, podes candidatar-te à naturalização britânica.</p>
+      <p class="topic-text-en">After 5 years of continuous work visa, you can apply for Indefinite Leave to Remain (ILR). One year later, British citizenship is possible.</p>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Impostos &amp; Finanças</h2></div>
+  <div class="topic-grid">
+    <div class="topic-card">
+      <div class="topic-icon">💰</div>
+      <span class="topic-tag">Impostos</span>
+      <h3 class="topic-title">HMRC: como funciona o imposto sobre o rendimento no UK</h3>
+      <p class="topic-text">Personal allowance de £12.570 isento. Depois: 20% até £50.270, 40% até £125.140, 45% acima. O NI (National Insurance) é separado — 8% até £50.270.</p>
+      <p class="topic-text-en">£12,570 personal allowance tax-free. Then: 20% up to £50,270, 40% to £125,140, 45% above. National Insurance is separate — 8% up to £50,270.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🏠</div>
+      <span class="topic-tag">Habitação</span>
+      <h3 class="topic-title">Arrendar em Londres: o que esperar em 2026</h3>
+      <p class="topic-text">Londres tem rendas entre £1.500–£2.500/mês para T1. Zonas como East London, Walthamstow e Lewisham são populares na comunidade portuguesa por serem mais acessíveis.</p>
+      <p class="topic-text-en">London rents range £1,500–£2,500/month for a 1-bed. East London, Walthamstow and Lewisham are popular with the Portuguese community for affordability.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🏥</div>
+      <span class="topic-tag">NHS</span>
+      <h3 class="topic-title">NHS: acesso gratuito à saúde para quem paga IHS</h3>
+      <p class="topic-text">Com visto de trabalho, pagas o IHS (£1.035/ano) que dá acesso completo ao NHS. Médico de família, urgências e especialistas — tudo incluído sem copagamento.</p>
+      <p class="topic-text-en">Work visa holders pay the IHS surcharge (£1,035/year) for full NHS access — GP, A&E and specialists all covered with no copay.</p>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Links Úteis</h2></div>
+  <div class="links-grid">
+    <a href="https://www.gov.uk/skilled-worker-visa" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🏛️</span>
+      <div>
+        <div class="link-label">Imigração</div>
+        <div class="link-title">Skilled Worker Visa — GOV.UK</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.gov.uk/income-tax-rates" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">📊</span>
+      <div>
+        <div class="link-label">Finanças</div>
+        <div class="link-title">Income Tax Rates — HMRC</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.nhs.uk" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🏥</span>
+      <div>
+        <div class="link-label">Saúde</div>
+        <div class="link-title">NHS — National Health Service</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.embaixadaportugal.org.uk" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🇵🇹</span>
+      <div>
+        <div class="link-label">Consulado</div>
+        <div class="link-title">Embaixada de Portugal em Londres</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ═══ IRLANDA ═══ -->
+<section class="country-section" id="sec-irlanda">
+  <div class="country-header">
+    <div>
+      <div class="country-flag-big">🇮🇪</div>
+      <p class="country-subtitle">Irlanda</p>
+      <h2 class="country-name">Irlanda</h2>
+      <p class="country-intro">
+        A Irlanda é membro da União Europeia, o que torna a vida muito mais simples para portugueses — livre circulação, sem vistos, acesso imediato ao mercado de trabalho. Dublin tornou-se um hub tecnológico europeu com Google, Meta, Apple e Microsoft instalados. Os salários são altos, mas o custo de vida também.
+        <br><br><span style="color:#7A6115;font-size:.8rem;font-style:italic">Ireland is an EU member — free movement, no visas, immediate work access for Portuguese. Dublin is Europe's tech hub with Google, Meta, Apple and Microsoft headquartered here. High salaries, high cost of living.</span>
+      </p>
+    </div>
+    <div class="country-stats">
+      <div class="stat-box">
+        <div class="stat-num">140K+</div>
+        <div class="stat-label">Portugueses na Irlanda</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">€50K</div>
+        <div class="stat-label">Salário médio em Dublin (Tech)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">Dublin</div>
+        <div class="stat-label">Hub europeu de tecnologia</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">0 vistos</div>
+        <div class="stat-label">Livre circulação UE</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Trabalho &amp; Vida</h2></div>
+  <div class="topic-grid">
+    <div class="topic-card">
+      <div class="topic-icon">🚀</div>
+      <span class="topic-tag">Emprego</span>
+      <h3 class="topic-title">Tech em Dublin: onde estão as melhores oportunidades</h3>
+      <p class="topic-text">Google, Meta, LinkedIn, Airbnb, Stripe e Salesforce têm headquarters europeias em Dublin. As áreas mais procuradas: engenharia de software, data, customer success e marketing digital.</p>
+      <p class="topic-text-en">Google, Meta, LinkedIn, Airbnb, Stripe and Salesforce have European HQs in Dublin. Most in-demand: software engineering, data, customer success and digital marketing.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🏠</div>
+      <span class="topic-tag">Habitação</span>
+      <h3 class="topic-title">A crise habitacional em Dublin: como navegar o mercado</h3>
+      <p class="topic-text">Dublin tem crise de habitação severa. T1 custa €1.800–€2.500/mês. Muitos portugueses optam por Cork, Galway ou Limerick, com custos 30–40% mais baixos e crescimento tecnológico próprio.</p>
+      <p class="topic-text-en">Dublin has a severe housing crisis. 1-bed averages €1,800–€2,500/month. Many Portuguese opt for Cork, Galway or Limerick — 30–40% cheaper with growing tech scenes.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">📝</div>
+      <span class="topic-tag">Burocracia</span>
+      <h3 class="topic-title">PPS Number: o primeiro passo para viver na Irlanda</h3>
+      <p class="topic-text">O PPS Number (Personal Public Service) é o equivalente ao NIF português. Precisas dele para trabalhar, aceder ao NHS irlandês, abrir conta bancária e receber subsídios.</p>
+      <p class="topic-text-en">The PPS Number is like Portugal's NIF. You need it to work, access Irish healthcare, open a bank account and receive any state benefits.</p>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Impostos &amp; Finanças</h2></div>
+  <div class="topic-grid">
+    <div class="topic-card">
+      <div class="topic-icon">💰</div>
+      <span class="topic-tag">Impostos</span>
+      <h3 class="topic-title">Income Tax na Irlanda: 20% e 40% mais USC e PRSI</h3>
+      <p class="topic-text">20% até €42.000, 40% acima. Mais Universal Social Charge (USC) e PRSI. Efectivamente, quem ganha €60K paga cerca de 35–38% de impostos totais — alto, mas os salários compensam.</p>
+      <p class="topic-text-en">20% up to €42,000, 40% above. Plus USC and PRSI contributions. Effective rate on €60K salary is ~35–38% — high, but compensated by high salaries.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🏦</div>
+      <span class="topic-tag">Banca</span>
+      <h3 class="topic-title">Abrir conta bancária na Irlanda sem endereço</h3>
+      <p class="topic-text">Revolut e N26 são a solução para os primeiros meses. Depois podes abrir no AIB ou Bank of Ireland com PPS number e comprovativo de morada. Processo simples.</p>
+      <p class="topic-text-en">Revolut and N26 work for the first few months. Then open at AIB or Bank of Ireland with your PPS number and proof of address. Simple process.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🚗</div>
+      <span class="topic-tag">Vida Prática</span>
+      <h3 class="topic-title">Carta de condução portuguesa na Irlanda: o que saber</h3>
+      <p class="topic-text">Podes usar a carta portuguesa por 12 meses. Depois tens de converter para a licença irlandesa — processo sem exame teórico para licenças UE, apenas taxa e formulário.</p>
+      <p class="topic-text-en">Portuguese licence valid for 12 months. Then convert to Irish — no theory test for EU licences, just a fee and a form.</p>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Links Úteis</h2></div>
+  <div class="links-grid">
+    <a href="https://www.citizensinformation.ie" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🏛️</span>
+      <div>
+        <div class="link-label">Informação</div>
+        <div class="link-title">Citizens Information — Guia Essencial</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.revenue.ie" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">📊</span>
+      <div>
+        <div class="link-label">Finanças</div>
+        <div class="link-title">Revenue — Autoridade Fiscal Irlandesa</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.hse.ie" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🏥</span>
+      <div>
+        <div class="link-label">Saúde</div>
+        <div class="link-title">HSE — Health Service Executive</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://dublin.embaixadaportugal.mne.gov.pt" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🇵🇹</span>
+      <div>
+        <div class="link-label">Consulado</div>
+        <div class="link-title">Consulado de Portugal em Dublin</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ═══ SUÍÇA ═══ -->
+<section class="country-section" id="sec-suica">
+  <div class="country-header">
+    <div>
+      <div class="country-flag-big">🇨🇭</div>
+      <p class="country-subtitle">Suíça</p>
+      <h2 class="country-name">Suíça</h2>
+      <p class="country-intro">
+        A Suíça tem a maior comunidade portuguesa da Europa fora de Portugal — mais de 260 mil portugueses. Genebra, Zurique, Basileia e Berna concentram a maioria. Os salários são os mais altos da Europa, mas o custo de vida acompanha. Como membro do acordo Schengen mas fora da UE, a livre circulação aplica-se com regras próprias.
+        <br><br><span style="color:#7A6115;font-size:.8rem;font-style:italic">Switzerland has Europe's largest Portuguese community outside Portugal — over 260,000. Salaries are Europe's highest but so is the cost of living. Free movement applies under bilateral agreements with the EU.</span>
+      </p>
+    </div>
+    <div class="country-stats">
+      <div class="stat-box">
+        <div class="stat-num">260K+</div>
+        <div class="stat-label">Portugueses na Suíça</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">CHF 85K</div>
+        <div class="stat-label">Salário médio anual</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">Genebra</div>
+        <div class="stat-label">Maior concentração portuguesa</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">3 línguas</div>
+        <div class="stat-num" style="font-size:1rem">DE · FR · IT</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Trabalho &amp; Imigração</h2></div>
+  <div class="topic-grid">
+    <div class="topic-card">
+      <div class="topic-icon">🪪</div>
+      <span class="topic-tag">Permissão</span>
+      <h3 class="topic-title">Permissão B e C: como funciona a residência na Suíça</h3>
+      <p class="topic-text">Como cidadão UE, podes entrar livremente. A Permissão B (residência temporária, 5 anos) é dada ao contratar. A Permissão C (permanente) vem após 5–10 anos consoante a região.</p>
+      <p class="topic-text-en">As an EU citizen you enter freely. Permit B (temporary, 5 years) is granted on employment. Permit C (permanent) comes after 5–10 years depending on the canton.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🏗️</div>
+      <span class="topic-tag">Sectores</span>
+      <h3 class="topic-title">Onde trabalham os portugueses na Suíça</h3>
+      <p class="topic-text">Construção, hotelaria, limpeza e restauração são os sectores mais comuns. Mas cresce o número de portugueses em tecnologia (Zurique), banca (Genebra) e saúde (todo o país).</p>
+      <p class="topic-text-en">Construction, hospitality, cleaning and catering are the most common sectors. But Portuguese in tech (Zurich), banking (Geneva) and healthcare are growing fast.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🗣️</div>
+      <span class="topic-tag">Línguas</span>
+      <h3 class="topic-title">Alemão, Francês ou Italiano: qual região escolher?</h3>
+      <p class="topic-text">Zurique (alemão) é o hub financeiro e tecnológico. Genebra e Lausanne (francês) têm a maior comunidade portuguesa e muitas organizações internacionais. Ticino (italiano) é mais acessível.</p>
+      <p class="topic-text-en">Zurich (German) is the financial and tech hub. Geneva and Lausanne (French) have the largest Portuguese community and many international organisations. Ticino (Italian) is more affordable.</p>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Impostos &amp; Finanças</h2></div>
+  <div class="topic-grid">
+    <div class="topic-card">
+      <div class="topic-icon">💰</div>
+      <span class="topic-tag">Impostos</span>
+      <h3 class="topic-title">Impostos na Suíça: federal + cantonal = surpresa agradável</h3>
+      <p class="topic-text">A taxa efectiva para um salário de CHF 80K em Zurique é de cerca de 20–24%. Muito menos que Portugal ou França. O sistema é cantonal — Zoug e Schwyz são os cantões com impostos mais baixos.</p>
+      <p class="topic-text-en">Effective rate on CHF 80K salary in Zurich is ~20–24% — much lower than Portugal or France. Tax varies by canton — Zug and Schwyz have the lowest rates.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">💊</div>
+      <span class="topic-tag">Saúde</span>
+      <h3 class="topic-title">Seguro de saúde obrigatório: o que cobre e quanto custa</h3>
+      <p class="topic-text">O seguro básico (LaMal/KVG) é obrigatório e custa CHF 350–600/mês por adulto. Cobre consultas, hospital e urgências. O Estado subsidia para baixos rendimentos.</p>
+      <p class="topic-text-en">Basic health insurance (LaMal/KVG) is mandatory and costs CHF 350–600/month per adult. Covers consultations, hospital and emergencies. State subsidies for lower incomes.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🏦</div>
+      <span class="topic-tag">Pensão</span>
+      <h3 class="topic-title">Pilar 2: o dinheiro da reforma que podes levar quando sais</h3>
+      <p class="topic-text">A Suíça tem 3 pilares de reforma. O Pilar 2 é obrigatório e acumula-se com o trabalho. Se saíres da Suíça definitivamente, podes resgatar o capital — uma vantagem enorme para emigrantes temporários.</p>
+      <p class="topic-text-en">Switzerland has 3 pension pillars. Pillar 2 is mandatory and employer-linked. If you leave Switzerland permanently, you can withdraw the capital — a major advantage for temporary emigrants.</p>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Links Úteis</h2></div>
+  <div class="links-grid">
+    <a href="https://www.sem.admin.ch/sem/fr/home/themen/aufenthalt/eu_efta.html" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🏛️</span>
+      <div>
+        <div class="link-label">Imigração</div>
+        <div class="link-title">SEM — Secretaria de Estado para a Migração</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.admin.ch/gov/fr/accueil/taxes.html" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">📊</span>
+      <div>
+        <div class="link-label">Finanças</div>
+        <div class="link-title">Admin.ch — Impostos na Suíça</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.priminfo.admin.ch" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">💊</span>
+      <div>
+        <div class="link-label">Saúde</div>
+        <div class="link-title">Priminfo — Seguros de Saúde Suíços</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://berna.embaixadaportugal.mne.gov.pt" target="_blank" rel="noopener" class="link-card">
+      <span class="link-icon">🇵🇹</span>
+      <div>
+        <div class="link-label">Consulado</div>
+        <div class="link-title">Embaixada de Portugal em Berna</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div style="height:1px;background:linear-gradient(90deg,transparent,#C9A227,transparent);"></div>
+<footer>
+  <span style="font-family:'Playfair Display',serif; color:#C9A227; font-size:1rem; font-weight:700;">Tech &amp; Ouro</span>
+  <span style="font-size:.65rem; color:#666; text-align:center;">Não sou advogado nem economista. Nada aqui é aconselhamento jurídico ou financeiro. Algarve 2026.</span>
+  <a href="mailto:tiagowater@yahoo.com" style="font-size:.65rem; color:#666; text-decoration:none;">tiagowater@yahoo.com</a>
+</footer>
+
+<!-- FIXED LOGO -->
+<div style="position:fixed;bottom:0;right:0;z-index:999;padding:6px 8px;background:rgba(8,8,8,.85);backdrop-filter:blur(10px);border-left:1px solid #1e1d1a;border-top:1px solid #1e1d1a">
+  <a href="index.html">
+    <img src="Rich Gold Lion Logo with Elegant Typography.jpg" alt="TECHEOURO.NET" style="width:70px;height:70px;border-radius:50%;object-fit:cover;border:1px solid #7A6115;display:block">
+  </a>
+</div>
+
+<script>
+function switchTab(country) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.country-section').forEach(s => s.classList.remove('active'));
+
+  event.currentTarget.classList.add('active');
+  document.getElementById('sec-' + country).classList.add('active');
+
+  window.scrollTo({ top: document.querySelector('.country-tabs').offsetTop - 64, behavior: 'smooth' });
+}
+
+// activate from URL hash
+const hash = location.hash.replace('#','');
+if (['usa','canada','uk','irlanda','suica'].includes(hash)) {
+  document.querySelector(`[onclick="switchTab('${hash}')"]`)?.click();
+}
+</script>
+
+</body>
+</html>
