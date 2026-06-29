@@ -1,184 +1,94 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Notícias — A Gazeta do Ouro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg: #080808; --surface: #111111; --border: #1f1f1f; --gold: #C9A227; --gold-dim: #7a6118; --text: #F0EDE6; --muted: #666666; --serif: 'Playfair Display', serif; --sans: 'Inter', sans-serif; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--sans); }
-    nav { position: sticky; top: 0; z-index: 100; background: rgba(8,8,8,.95); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 56px; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-brand { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; color: var(--gold); }
-    .nav-links { display: flex; gap: 28px; list-style: none; }
-    .nav-links a { font-size: .72rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
-    .page-header { padding: 60px 40px 40px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--border); }
-    .page-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; line-height: .95; color: var(--text); }
-    .page-title em { font-style: italic; color: var(--gold); }
-    .news-card { background: var(--surface); border: 1px solid var(--border); padding: 32px; margin-bottom: 24px; max-width: 1000px; margin-left: auto; margin-right: auto; }
-    .news-card .meta { display: flex; justify-content: space-between; margin-bottom: 16px; font-size: .75rem; color: var(--muted); }
-    .news-card .cat { color: var(--gold); font-weight: 600; }
-    .news-card h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
-    .news-card .sub { font-size: .95rem; color: var(--muted); margin-bottom: 20px; }
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
-    .stat { text-align: center; }
-    .stat .n { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; color: var(--gold); }
-    .stat .l { font-size: .7rem; color: var(--muted); margin-top: 6px; }
-    .gold-stat { background: rgba(201,162,39,.08); border-left: 3px solid var(--gold); padding: 16px; margin: 20px 0; }
-    .gold-stat .gn { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; color: var(--gold); }
-    .news-card p { line-height: 1.8; margin-bottom: 16px; }
-    .news-card strong { color: var(--gold); }
-    .news-card ul { margin-left: 20px; color: var(--muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 16px; }
-    .news-card blockquote { border-left: 3px solid var(--gold); padding-left: 16px; margin: 20px 0; font-style: italic; color: var(--muted); }
-    .v { display: none; }
-    .v.active { display: block; }
-    .lang-toggle { display: flex; gap: 8px; margin-bottom: 20px; }
-    .lang-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 6px 12px; font-size: .75rem; cursor: pointer; transition: all .2s; }
-    .lang-btn.active { background: var(--gold); color: #000; border-color: var(--gold); }
-    footer { border-top: 1px solid var(--border); padding: 32px 40px; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-    .footer-fixed{position:fixed;bottom:0;right:0;z-index:50;padding:16px 20px;display:flex;align-items:center;gap:12px;background:rgba(8,8,8,.8);border-right:1px solid var(--border);border-top:1px solid var(--border)}
-    .footer-fixed img{height:40px;width:auto;object-fit:contain}
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notícias ao Vivo — Tech &amp; Ouro</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Sticky Glass Header -->
   <nav>
     <a href="index.html" class="nav-logo">
-      <img src="logo-lion.jpg" alt="TECHEOURO.NET" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid #C9A227;flex-shrink:0"><div class="nav-brand">TECHEOURO.NET</div>
+      <img src="logo-lion.jpg" class="nav-logo-img" alt="Tech & Ouro Logo">
+      <div class="nav-brand">
+        Tech &amp; Ouro
+        <span>A Gazeta do Ouro</span>
+      </div>
     </a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="noticias.html" class="active">Notícias<br><span style="font-size:8px;color:#7A6115;font-weight:400">News</span></a></li>
-      <li><a href="mercados.html">Mercados<br><span style="font-size:8px;color:#7A6115;font-weight:400">Markets</span></a></li>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="mercados.html">Mercados</a></li>
+      <li><a href="economia.html">Economia</a></li>
+      <li><a href="desporto.html">Desporto</a></li>
+      <li><a href="paises.html">Países</a></li>
+      <li><a href="noticias.html" class="active">Notícias ao Vivo</a></li>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="terminal.html" style="color: var(--gold); font-weight: bold; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 4px;">Terminal ⚡</a></li>
     </ul>
+    <div class="lang-toggle-nav">
+      <button id="lang-btn-pt" class="lang-btn active" onclick="setLanguage('pt')">PT</button>
+      <button id="lang-btn-en" class="lang-btn" onclick="setLanguage('en')">EN</button>
+    </div>
+    <a href="sobre.html#contacto" class="nav-cta">Contacto</a>
   </nav>
 
-  <div class="page-header">
+  <!-- Page Header -->
+  <header class="page-header">
+    <p style="font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; font-weight: 600;">§ Atualizações Contínuas</p>
     <h1 class="page-title">Notícias <em>ao Vivo</em></h1>
-  </div>
+  </header>
 
-  <main style="max-width: 1000px; margin: 0 auto; padding: 40px 20px;">
+  <main style="max-width: 1000px; margin: 40px auto; padding: 0 40px;">
 
-    <article class="news-card">
-      <div class="meta">
-        <span class="cat">Banca · Canadá</span>
-        <span>26 Jun 2026</span>
-      </div>
-      <div class="lang-toggle">
-        <button class="lang-btn active" onclick="toggleLang(this)">PT</button>
-        <button class="lang-btn" onclick="toggleLang(this)">EN</button>
-      </div>
-      <div class="v active">
-        <h2>RBC Multado em C$4,25 Milhões por 23 Anos de Extratos Incorretos</h2>
-        <p class="sub">Falha na transferência de créditos afectou 227.947 contas.</p>
-        <div class="stats">
-          <div class="stat"><div class="n">C$4,25M</div><div class="l">Multa</div></div>
-          <div class="stat"><div class="n">227.947</div><div class="l">Contas</div></div>
-          <div class="stat"><div class="n">23 anos</div><div class="l">Período</div></div>
-        </div>
-        <p>O Royal Bank of Canada foi multado por falhar na transferência de créditos de cartões desativados para novas contas entre <strong>2001 e 2024</strong>.</p>
-        <p class="source">Fonte: CBC News · 26 Jun 2026</p>
-      </div>
-      <div class="v">
-        <h2>RBC Fined C$4.25 Million for 23 Years of Incorrect Card Statements</h2>
-        <p class="sub">Failure to transfer credits affected 227,947 accounts.</p>
-        <div class="stats">
-          <div class="stat"><div class="n">C$4.25M</div><div class="l">Fine</div></div>
-          <div class="stat"><div class="n">227,947</div><div class="l">Accounts</div></div>
-          <div class="stat"><div class="n">23 years</div><div class="l">Period</div></div>
-        </div>
-        <p>The Royal Bank of Canada has been fined for failing to transfer credits from deactivated accounts to customers' new ones between <strong>2001 and 2024</strong>.</p>
-        <p class="source">Source: CBC News · 26 Jun 2026</p>
-      </div>
-    </article>
-
-    <article class="news-card">
-      <div class="meta">
-        <span class="cat">Tecnologia · Semicondutores</span>
-        <span>27 Jun 2026</span>
-      </div>
-      <div class="lang-toggle">
-        <button class="lang-btn active" onclick="toggleLang(this)">PT</button>
-        <button class="lang-btn" onclick="toggleLang(this)">EN</button>
-      </div>
-      <div class="v active">
-        <h2>A Escassez de Memória que Está a Encarecer Tudo</h2>
-        <p class="sub">Micron bate recordes históricos. Apple cai 6%.</p>
-        <div class="stats">
-          <div class="stat"><div class="n">$41,5B</div><div class="l">Receita Micron</div></div>
-          <div class="stat"><div class="n">85%</div><div class="l">Margem bruta</div></div>
-          <div class="stat"><div class="n">+20%</div><div class="l">Preços</div></div>
-        </div>
-        <p>Micron atingiu <strong>$41,5 mil milhões</strong> em receita (+346% anual). A escassez de chips de memória para IA está a encarecer tudo.</p>
-        <p class="source">Fonte: Bloomberg · 27 Jun 2026</p>
-      </div>
-      <div class="v">
-        <h2>The Memory Shortage Making Everything More Expensive</h2>
-        <p class="sub">Micron breaks records. Apple falls 6%.</p>
-        <div class="stats">
-          <div class="stat"><div class="n">$41.5B</div><div class="l">Micron revenue</div></div>
-          <div class="stat"><div class="n">85%</div><div class="l">Gross margin</div></div>
-          <div class="stat"><div class="n">+20%</div><div class="l">Prices</div></div>
-        </div>
-        <p>Micron reached <strong>$41.5 billion</strong> in revenue (+346% year-on-year). Memory chip shortage for AI is raising prices everywhere.</p>
-        <p class="source">Source: Bloomberg · 27 Jun 2026</p>
-      </div>
-    </article>
+    <!-- AI_NEWS_START -->
+    <!-- AI WILL INJECT ARTICLES HERE -->
+    <!-- AI_NEWS_END -->
 
   </main>
 
+  <!-- Footer -->
   <footer>
-    <span>© 2026 A Gazeta do Ouro</span>
+    <div class="footer-content">
+      <div class="footer-brand">Tech &amp; Ouro</div>
+      <div class="footer-desc">Análise de mercados globais, economia local e notícias de desporto para investidores e comunidades lusófonas no estrangeiro.</div>
+      <div class="footer-links-grid">
+        <a href="index.html">Início</a>
+        <a href="mercados.html">Mercados</a>
+        <a href="economia.html">Economia</a>
+        <a href="desporto.html">Desporto</a>
+        <a href="paises.html">Países</a>
+        <a href="noticias.html">Notícias</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 techeouro.net · Algarve, Portugal.</span>
+      <span>Contacto: <a href="mailto:tiagowater@yahoo.com">tiagowater@yahoo.com</a></span>
+    </div>
   </footer>
 
-  <div class="footer-fixed">
-    <img src="Rich Gold Lion Logo with Elegant Typography.jpg" alt="Tech & Ouro">
-  </div>
+  <!-- Persistent Corner Floating Badge -->
+  <a href="sobre.html" class="footer-fixed-badge">
+    <img src="logo-lion.jpg" alt="Tech & Ouro Icon">
+  </a>
 
+  <!-- Interactivity Script for Toggle -->
   <script>
-    function toggleLang(btn) {
+    function toggleLang(btn, targetIndex) {
       const parent = btn.parentElement;
-      const views = parent.parentElement.querySelectorAll('.v');
+      const card = parent.parentElement;
+      const views = card.querySelectorAll('.v');
       const buttons = parent.querySelectorAll('.lang-btn');
-      const index = Array.from(buttons).indexOf(btn);
       
       buttons.forEach(b => b.classList.remove('active'));
       views.forEach(v => v.classList.remove('active'));
       
       btn.classList.add('active');
-      views[index].classList.add('active');
+      views[targetIndex].classList.add('active');
     }
   </script>
-<script>
-const NEWSAPI_KEY='723a7b6d49c6426a91c9c3c6aaa075a20';
-async function loadNews(){
-  try{
-    const res=await fetch(`https://newsapi.org/v2/everything?q=news&sortBy=publishedAt&language=en&pageSize=2&apiKey=${NEWSAPI_KEY}`);
-    const data=await res.json();
-    if(data.articles){
-      const main=document.querySelector('main');
-      if(main){
-        const cards=main.querySelectorAll('.news-card');
-        data.articles.slice(0,2).forEach((art,i)=>{
-          if(cards[i]){
-            cards[i].querySelector('h2').textContent=art.title;
-            cards[i].querySelector('.sub').textContent=art.description||'';
-          }
-        });
-      }
-    }
-  }catch(e){console.log('News load error:',e);}
-}
-loadNews();
-setInterval(loadNews,3600000);
-</script>
-<!-- ══ FOOTER FIXO ══ -->
-<div style="position:fixed;bottom:0;right:0;z-index:999;padding:6px 8px;background:rgba(8,8,8,.85);backdrop-filter:blur(10px);border-left:1px solid #1e1d1a;border-top:1px solid #1e1d1a">
-  <img src="Rich Gold Lion Logo with Elegant Typography.jpg" alt="Tech & Ouro" style="width:70px;height:70px;border-radius:50%;object-fit:cover;border:1px solid #7A6115;display:block">
-</div>
 
+  <script src="script.js"></script>
 </body>
 </html>

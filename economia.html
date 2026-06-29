@@ -1,181 +1,153 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Economia — TechOuro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg: #080808; --surface: #111111; --border: #1f1f1f; --gold: #C9A227; --gold-dim: #7a6118; --text: #F0EDE6; --muted: #666666; --serif: 'Playfair Display', serif; --sans: 'Inter', sans-serif; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
-    nav { position: sticky; top: 0; z-index: 100; background: rgba(8,8,8,.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 56px; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-brand { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; color: var(--gold); line-height: 1; }
-    .nav-brand span { display: block; font-family: var(--sans); font-size: .55rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
-    .nav-links { display: flex; gap: 28px; list-style: none; }
-    .nav-links a { font-size: .72rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
-    .gold-line { height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0; }
-    .page-header { padding: 60px 40px 40px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--border); }
-    .eyebrow { font-size: .65rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
-    .page-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; line-height: .95; color: var(--text); }
-    .page-title em { font-style: italic; color: var(--gold); }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); max-width: 1200px; margin: 48px auto; }
-    .card { background: var(--bg); padding: 32px 28px; cursor: pointer; transition: background .25s; display: flex; flex-direction: column; }
-    .card:hover { background: var(--surface); }
-    .tag { font-size: .6rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold-dim); padding: 4px 10px; display: inline-block; margin-bottom: 14px; }
-    .card-num { font-size: .6rem; font-weight: 600; letter-spacing: .16em; color: var(--gold-dim); }
-    .card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-    .card-title { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; line-height: 1.2; color: var(--text); margin-bottom: 12px; transition: color .2s; }
-    .card:hover .card-title { color: var(--gold); }
-    .card-excerpt { font-size: .8rem; line-height: 1.8; color: var(--muted); flex: 1; }
-    .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
-    .date { font-size: .65rem; color: var(--muted); }
-    .arrow { font-size: .75rem; color: var(--gold-dim); transition: color .2s, transform .2s; }
-    .card:hover .arrow { color: var(--gold); transform: translateX(3px); }
-    .disclaimer { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--gold-dim); padding: 16px 40px; text-align: center; font-size: .7rem; color: var(--muted); line-height: 1.6; max-width: 100%; }
-    .disclaimer strong { color: var(--gold); }
-    footer { border-top: 1px solid var(--border); padding: 32px 40px; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-    .footer-links { display: flex; gap: 24px; list-style: none; }
-    .footer-links a { font-size: .65rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
-    .footer-links a:hover { color: var(--gold); }
-    @media (max-width: 900px) { nav { padding: 0 20px; } .nav-links { display: none; } .page-header { padding: 40px 20px; } .grid { grid-template-columns: 1fr; margin: 24px 20px; } footer { padding: 24px 20px; flex-direction: column; gap: 16px; } .disclaimer { padding: 16px 20px; } }
-    .footer-fixed{position:fixed;bottom:0;right:0;z-index:50;padding:16px 20px;display:flex;align-items:center;gap:12px;background:rgba(8,8,8,.8);backdrop-filter:blur(10px);border-right:1px solid var(--border);border-top:1px solid var(--border)}
-    .footer-fixed img{height:40px;width:auto;object-fit:contain}
-    .lang-toggle{display:flex;gap:6px;margin-bottom:12px;margin-top:8px;}
-    .lang-btn{background:transparent;border:1px solid var(--gold-dim);color:var(--muted);padding:3px 8px;font-size:.65rem;cursor:pointer;transition:all .2s;border-radius:2px;}
-    .lang-btn.active{background:var(--gold);color:#000;border-color:var(--gold);font-weight:600;}
-    .card-content{display:none;}
-    .card-content.active{display:block;}
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Economia &amp; Finanças — Tech &amp; Ouro</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Sticky Glass Header -->
   <nav>
     <a href="index.html" class="nav-logo">
-      <img src="logo-lion.jpg" alt="TECHEOURO.NET" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid #C9A227;flex-shrink:0"><div class="nav-brand">TECHEOURO.NET <span>Finances · Sports · World</span></div>
+      <img src="logo-lion.jpg" class="nav-logo-img" alt="Tech & Ouro Logo">
+      <div class="nav-brand">
+        Tech &amp; Ouro
+        <span>A Gazeta do Ouro</span>
+      </div>
     </a>
     <ul class="nav-links">
+      <li><a href="index.html">Início</a></li>
+      <li><a href="mercados.html">Mercados</a></li>
       <li><a href="economia.html" class="active">Economia</a></li>
       <li><a href="desporto.html">Desporto</a></li>
-      <li><a href="emigrantes.html">Emigrantes</a></li>
-      <li><a href="mercados.html">Mercados</a></li>
+      <li><a href="paises.html">Países</a></li>
+      <li><a href="noticias.html">Notícias ao Vivo</a></li>
       <li><a href="sobre.html">Sobre</a></li>
-      <li><a href="disclaimer.html">Disclaimer</a></li>
+      <li><a href="terminal.html" style="color: var(--gold); font-weight: bold; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 4px;">Terminal ⚡</a></li>
     </ul>
+    <div class="lang-toggle-nav">
+      <button id="lang-btn-pt" class="lang-btn active" onclick="setLanguage('pt')">PT</button>
+      <button id="lang-btn-en" class="lang-btn" onclick="setLanguage('en')">EN</button>
+    </div>
+    <a href="sobre.html#contacto" class="nav-cta">Contacto</a>
   </nav>
-  <div class="gold-line"></div>
 
-  <div class="page-header">
-    <p class="eyebrow">§ Secção</p>
+  <!-- Page Header -->
+  <header class="page-header">
+    <p style="font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; font-weight: 600;">§ Secção</p>
     <h1 class="page-title">Economia &amp; <em>Finanças</em></h1>
+  </header>
+
+  <!-- Articles Grid -->
+  <section class="cards-3" style="margin-top: 40px;">
+    <div class="card" onclick="window.location.href='artigo-2.html'">
+      <div>
+        <p class="card-cat">Emigrantes</p>
+        <h2 class="card-title">Custo de vida na Europa: onde vale a pena emigrar em 2026</h2>
+        <p class="card-desc">Alemanha, Holanda, Suíça ou Irlanda? Comparamos salários médios, taxas de impostos locais e qualidade de vida para os cidadãos lusófonos que procuram novos desafios fora do país.</p>
+      </div>
+      <div class="card-meta">
+        <span>20 JUN 2026</span>
+        <span>LER ARTIGO →</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location.href='#'">
+      <div>
+        <p class="card-cat">Finanças Pessoais</p>
+        <h2 class="card-title">Como enviar dinheiro para Portugal sem perder na conversão cambial</h2>
+        <p class="card-desc">Wise, Revolut ou transferência bancária internacional? O guia completo de remessas e conversões sem taxas ocultas para maximizar as suas poupanças.</p>
+      </div>
+      <div class="card-meta">
+        <span>18 JUN 2026</span>
+        <span>LER ARTIGO →</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location.href='#'">
+      <div>
+        <p class="card-cat">Câmbios</p>
+        <h2 class="card-title">Euro fraco ou forte: o impacto real no seu salário no estrangeiro</h2>
+        <p class="card-desc">Ganhar em moedas estrangeiras (como a Libra ou Dólar) e ter despesas ou família em Portugal tem vantagens, mas também riscos de inflação cambial que importa monitorizar.</p>
+      </div>
+      <div class="card-meta">
+        <span>17 JUN 2026</span>
+        <span>LER ARTIGO →</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location.href='#'">
+      <div>
+        <p class="card-cat">Impostos</p>
+        <h2 class="card-title">IRS de emigrante: o que tem de declarar em Portugal</h2>
+        <p class="card-desc">Evite a dupla tributação e multas desnecessárias. Saiba o que muda no reporte de rendimentos obtidos no estrangeiro conforme o seu estatuto de residência fiscal.</p>
+      </div>
+      <div class="card-meta">
+        <span>15 JUN 2026</span>
+        <span>LER ARTIGO →</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location.href='#'">
+      <div>
+        <p class="card-cat">Imobiliário</p>
+        <h2 class="card-title">Comprar casa em Portugal a partir do estrangeiro: o guia prático</h2>
+        <p class="card-desc">Da documentação básica necessária, pedidos de crédito à habitação para não residentes, até à outorga de procuração pública. Tudo o que precisa de saber passo a passo.</p>
+      </div>
+      <div class="card-meta">
+        <span>12 JUN 2026</span>
+        <span>LER ARTIGO →</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location.href='#'">
+      <div>
+        <p class="card-cat">Reforma</p>
+        <h2 class="card-title">Pensão de emigrante: como funciona a unificação de descontos</h2>
+        <p class="card-desc">Os anos que trabalhou no estrangeiro acumulam para a reforma portuguesa? Explicamos o funcionamento do regulamento comunitário de coordenação dos sistemas de segurança social.</p>
+      </div>
+      <div class="card-meta">
+        <span>10 JUN 2026</span>
+        <span>LER ARTIGO →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer Container -->
+  <div class="content-wrap">
+    <div class="warning-box">
+      <h2>Aviso Legal (Disclaimer)</h2>
+      <p>Não sou economista. O conteúdo deste site é partilhado por puro interesse de partilha e opinião pessoal. Nenhuma análise deve ser interpretada como aconselhamento financeiro. Invista e decida por sua conta e risco.</p>
+    </div>
   </div>
 
-  <div class="grid">
-    <article class="card">
-      <div class="card-top"><span class="tag">Emigrantes</span></div>
-      <h2 class="card-title">Custo de vida na Europa: onde vale a pena emigrar em 2026</h2>
-      <p class="card-excerpt">Alemanha, Holanda, Suíça ou Irlanda? Comparamos salários, impostos e qualidade de vida para lusófonos que querem mudar de país.</p>
-      <p class="card-excerpt" style="color:#7A6115;font-size:10px;margin-top:6px;font-style:italic">Germany, Netherlands, Switzerland or Ireland? We compare salaries, taxes and quality of life for Portuguese speakers looking to move.</p>
-      <div class="card-footer"><span class="date">20 Jun 2026</span><span class="arrow">→</span></div>
-    </article>
-    <article class="card">
-      <div class="card-top"><span class="tag">Finanças</span></div>
-      <h2 class="card-title">Como enviar dinheiro para Portugal sem perder na conversão</h2>
-      <p class="card-excerpt">Wise, Revolut ou transferência bancária? O guia completo para emigrantes que querem poupar nas remessas mensais.</p>
-      <p class="card-excerpt" style="color:#7A6115;font-size:10px;margin-top:6px;font-style:italic">Wise, Revolut or bank transfer? The complete guide for emigrants who want to save on monthly remittances to Portugal.</p>
-      <div class="card-footer"><span class="date">18 Jun 2026</span><span class="arrow">→</span></div>
-    </article>
-    <article class="card">
-      <div class="card-top"><span class="tag">Câmbios</span></div>
-      <h2 class="card-title">Euro fraco ou forte: o que isso significa para o seu salário no estrangeiro</h2>
-      <p class="card-excerpt">Ganhar em libras ou dólares e ter família em Portugal tem vantagens — mas também riscos cambiais que muitos ignoram.</p>
-      <p class="card-excerpt" style="color:#7A6115;font-size:10px;margin-top:6px;font-style:italic">Earning in pounds or dollars with family in Portugal has benefits — but currency risks many people overlook.</p>
-      <div class="card-footer"><span class="date">17 Jun 2026</span><span class="arrow">→</span></div>
-    </article>
-    <article class="card">
-      <div class="card-top"><span class="tag">Impostos</span></div>
-      <h2 class="card-title">IRS de emigrante: o que tem de declarar e o que pode deduzir</h2>
-      <p class="card-excerpt">Muitos portugueses no estrangeiro pagam impostos a mais por desconhecimento. O que muda consoante o país de residência.</p>
-      <p class="card-excerpt" style="color:#7A6115;font-size:10px;margin-top:6px;font-style:italic">Many Portuguese abroad overpay taxes due to lack of information. What changes depending on your country of residence.</p>
-      <div class="card-footer"><span class="date">15 Jun 2026</span><span class="arrow">→</span></div>
-    </article>
-    <article class="card">
-      <div class="card-top"><span class="tag">Imobiliário</span></div>
-      <h2 class="card-title">Comprar casa em Portugal a partir do estrangeiro: o guia passo a passo</h2>
-      <p class="card-excerpt">Financiamento, procuração, IMT e escritura. Tudo o que precisa de saber para comprar sem estar presente.</p>
-      <p class="card-excerpt" style="color:#7A6115;font-size:10px;margin-top:6px;font-style:italic">Financing, power of attorney, taxes and deeds. Everything you need to know to buy property in Portugal from abroad.</p>
-      <div class="card-footer"><span class="date">12 Jun 2026</span><span class="arrow">→</span></div>
-    </article>
-    <article class="card">
-      <div class="card-top"><span class="tag">Reforma</span></div>
-      <h2 class="card-title">Pensão de emigrante: como funciona e quanto vai receber</h2>
-      <p class="card-excerpt">Anos de descontos em vários países podem ser somados para a reforma. Como pedir a pensão europeia de forma correcta.</p>
-      <p class="card-excerpt" style="color:#7A6115;font-size:10px;margin-top:6px;font-style:italic">Years of contributions across multiple countries can be combined for retirement. How to correctly claim your European pension.</p>
-      <div class="card-footer"><span class="date">10 Jun 2026</span><span class="arrow">→</span></div>
-    </article>
-  </div>
-
-    <div class="gold-line"></div>
-    <div class="gold-line"></div>
-  <footer style="border-top:1px solid #1f1f1f; padding:24px 40px; max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
-    <span style="font-family:'Playfair Display',serif; color:#C9A227; font-size:1rem; font-weight:700;">Tech &amp; Ouro</span>
-<script>async function loadRSSFeeds(){
-  try{
-    const feeds=['https://feeds.rss.go.sapo.pt/economia.xml','https://feeds.rss.go.sapo.pt/negocios.xml'];
-    for(const feed of feeds){
-      const res=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feed));
-      const data=await res.json();
-      if(data.items){
-        const grid=document.querySelector('.grid');
-        if(grid){
-          const cards=grid.querySelectorAll('.card');
-          data.items.slice(0,6).forEach((item,i)=>{
-            if(cards[i]){
-              cards[i].querySelector('.card-title').textContent=item.title;
-              cards[i].querySelector('.card-excerpt').textContent=item.description?.replace(/<[^>]*>/g,'').substring(0,100)||item.title;
-            }
-          });
-        }
-        break;
-      }
-    }
-  }catch(e){}
-}
-loadRSSFeeds();
-setInterval(loadRSSFeeds,3600000);
-document.querySelectorAll('.grid .card').forEach((card,i)=>{
-  const title=card.querySelector('.card-title');
-  const excerpt=card.querySelector('.card-excerpt:not([style*="color"])');
-  const excerptEn=card.querySelector('.card-excerpt[style*="color"]');
-  if(title && excerpt && excerptEn){
-    const toggle=document.createElement('div');
-    toggle.className='lang-toggle';
-    toggle.innerHTML='<button class="lang-btn active" onclick="toggleCardLang(this)">PT</button><button class="lang-btn" onclick="toggleCardLang(this)">EN</button>';
-    card.insertBefore(toggle, excerpt);
-    excerpt.className='card-content active';
-    excerptEn.className='card-content';
-  }
-});
-function toggleCardLang(btn){
-  const toggle=btn.parentElement;
-  const card=toggle.closest('.card');
-  const contents=card.querySelectorAll('.card-content');
-  const btns=toggle.querySelectorAll('.lang-btn');
-  const idx=Array.from(btns).indexOf(btn);
-  btns.forEach(b=>b.classList.remove('active'));
-  contents.forEach(c=>c.classList.remove('active'));
-  btn.classList.add('active');
-  contents[idx].classList.add('active');
-}
-const NEWSAPI_KEY='723a7b6d49c6426a91c9c3c6aaa075a20';async function loadNews(){try{const res=await fetch(`https://newsapi.org/v2/everything?q=economy+business+finance&sortBy=publishedAt&language=en&pageSize=6&apiKey=${NEWSAPI_KEY}`);const data=await res.json();if(data.articles){const grid=document.querySelector('.grid');if(grid){const cards=grid.querySelectorAll('.card');data.articles.slice(0,6).forEach((art,i)=>{if(cards[i]){cards[i].querySelector('.card-title').textContent=art.title;cards[i].querySelector('.card-excerpt').textContent=art.description||art.title;}});}}}catch(e){}}loadNews();setInterval(loadNews,3600000);</script>
-    <a href="mailto:tiagowater@yahoo.com" style="font-size:.65rem; color:#666; text-decoration:none; letter-spacing:.08em;">tiagowater@yahoo.com</a>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">Tech &amp; Ouro</div>
+      <div class="footer-desc">Análise de mercados globais, economia local e notícias de desporto para investidores e comunidades lusófonas no estrangeiro.</div>
+      <div class="footer-links-grid">
+        <a href="index.html">Início</a>
+        <a href="mercados.html">Mercados</a>
+        <a href="economia.html">Economia</a>
+        <a href="desporto.html">Desporto</a>
+        <a href="paises.html">Países</a>
+        <a href="noticias.html">Notícias</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 techeouro.net · Algarve, Portugal.</span>
+      <span>Contacto: <a href="mailto:tiagowater@yahoo.com">tiagowater@yahoo.com</a></span>
+    </div>
   </footer>
-  <!-- ══ FOOTER FIXO ══ -->
-<div style="position:fixed;bottom:0;right:0;z-index:999;padding:6px 8px;background:rgba(8,8,8,.85);backdrop-filter:blur(10px);border-left:1px solid #1e1d1a;border-top:1px solid #1e1d1a">
-  <img src="Rich Gold Lion Logo with Elegant Typography.jpg" alt="Tech & Ouro" style="width:70px;height:70px;border-radius:50%;object-fit:cover;border:1px solid #7A6115;display:block">
-</div>
 
+  <!-- Persistent Corner Floating Badge -->
+  <a href="sobre.html" class="footer-fixed-badge">
+    <img src="logo-lion.jpg" alt="Tech & Ouro Icon">
+  </a>
+
+  <script src="script.js"></script>
 </body>
 </html>

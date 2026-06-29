@@ -1,149 +1,245 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tech & Ouro · A Gazeta do Ouro</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:#080808;color:#e8e0cc;font-family:'Georgia',serif;}
-:root{--gold:#C9A227;}
-.logo-bolinha{position:fixed;top:8px;left:8px;width:35px;height:35px;border-radius:50%;border:1.5px solid var(--gold);z-index:9999;object-fit:cover;}
-.logo-bottom{position:fixed;bottom:8px;right:12px;height:195px;width:195px;z-index:9999;object-fit:contain;}
-.ticker{background:#0a0a0a;border-bottom:1px solid #1a1506;padding:5px 16px;display:flex;gap:20px;overflow-x:auto;white-space:nowrap;}
-.ticker span{font-size:11px;color:#777;}
-.up{color:#4caf7d;}.dn{color:#e05252;}
-nav{background:#0d0d0d;padding:10px 24px 10px 52px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #1a1506;gap:16px;}
-nav a{font-size:10px;letter-spacing:1.5px;color:var(--gold);font-weight:700;text-decoration:none;}
-nav a:hover{opacity:0.7;}
-.hero{text-align:center;padding:22px 20px 12px;}
-.hero-logo{display:block;margin:0 auto 14px;height:190px;width:auto;}
-.hero-eyebrow{font-size:9px;letter-spacing:3px;color:var(--gold);margin-bottom:8px;}
-.hero h1{font-size:22px;color:#f0e6c8;margin:0 0 6px;font-weight:700;line-height:1.3;}
-.hero h1 span{color:var(--gold);}
-.hero-sub{font-size:12px;color:#888;margin:4px 0;}
-.hero-date{font-size:10px;color:#555;letter-spacing:1px;margin-top:4px;}
-.section-label{font-size:10px;letter-spacing:2px;color:var(--gold);padding:10px 16px 8px;}
-.cards-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 16px 16px;}
-.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 16px 20px;}
-.card{background:#111;border:1px solid #1e1e1e;border-radius:8px;padding:18px;cursor:pointer;transition:border-color 0.2s;}
-.card:hover{border-color:var(--gold);}
-.card-sm{background:#111;border:1px solid #1e1e1e;border-radius:8px;padding:16px;cursor:pointer;transition:border-color 0.2s;}
-.card-sm:hover{border-color:var(--gold);}
-.card-cat{font-size:9px;color:var(--gold);letter-spacing:1.5px;margin-bottom:8px;}
-.card-title{font-size:15px;color:#e8e0cc;font-weight:700;line-height:1.4;margin-bottom:10px;}
-.card-desc{font-size:11px;color:#666;line-height:1.5;margin-bottom:10px;}
-.card-meta{font-size:10px;color:#555;}
-.card-sm-cat{font-size:9px;color:var(--gold);margin-bottom:6px;}
-.card-sm-title{font-size:13px;color:#e8e0cc;font-weight:600;line-height:1.4;margin-bottom:6px;}
-footer{background:#0a0a0a;border-top:1px solid #1a1506;padding:12px 24px;text-align:center;}
-.footer-logo{color:var(--gold);font-size:12px;margin-bottom:2px;}
-.footer-copy{color:#555;font-size:10px;margin-bottom:2px;}
-.footer-links{font-size:9px;color:#444;}
-.disclaimer{font-size:9px;color:#333;padding:8px 24px;text-align:center;border-top:1px solid #111;}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech & Ouro · A Gazeta do Ouro</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<img src="qwpKu63sRnQdc-j.png" class="logo-bolinha" alt="TechOuro">
-<img src="Rich Gold Lion Logo with Elegant Typography.jpg" class="logo-bottom" alt="Tech E Ouro">
+  <!-- Sticky Glass Header -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="logo-lion.jpg" class="nav-logo-img" alt="Tech & Ouro Logo">
+      <div class="nav-brand">
+        Tech &amp; Ouro
+        <span>A Gazeta do Ouro</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Início</a></li>
+      <li><a href="mercados.html">Mercados</a></li>
+      <li><a href="economia.html">Economia</a></li>
+      <li><a href="desporto.html">Desporto</a></li>
+      <li><a href="paises.html">Países</a></li>
+      <li><a href="noticias.html">Notícias ao Vivo</a></li>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="terminal.html" style="color: var(--gold); font-weight: bold; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 4px;">Terminal ⚡</a></li>
+    </ul>
+    <div class="lang-toggle-nav">
+      <button id="lang-btn-pt" class="lang-btn active" onclick="setLanguage('pt')">PT</button>
+      <button id="lang-btn-en" class="lang-btn" onclick="setLanguage('en')">EN</button>
+    </div>
+    <a href="sobre.html#contacto" class="nav-cta">Contacto</a>
+  </nav>
 
-<nav>
-  <a href="index.html">MERCADOS</a>
-  <a href="ouro.html">OURO</a>
-  <a href="bitcoin.html">BITCOIN</a>
-  <a href="tech.html">TECH</a>
-  <a href="geopolitica.html">GEOPOLÍTICA</a>
-  <a href="paises.html">PAÍSES</a>
-  <a href="terminal.html">TERMINAL</a>
-</nav>
+  <!-- Live Financial Ticker -->
+  <div class="ticker-container">
+    <div class="ticker-track">
+      <div class="ticker-item">XAU/USD (Ouro) <span class="up">$3 327.40 (+0.62%)</span></div>
+      <div class="ticker-item">BTC/USD <span class="up">$107 280.00 (+1.20%)</span></div>
+      <div class="ticker-item">EUR/USD <span class="dn">1.1342 (-0.30%)</span></div>
+      <div class="ticker-item">PSI 20 <span class="up">6 841.20 (+0.40%)</span></div>
+      <div class="ticker-item">Prata <span class="up">$37.18 (+0.80%)</span></div>
+      <div class="ticker-item">WTI Brent <span class="dn">$77.20 (-0.50%)</span></div>
+      <div class="ticker-item">BRK.B <span class="up">$518.40 (+0.30%)</span></div>
+      <!-- Duplicate for infinite scrolling -->
+      <div class="ticker-item">XAU/USD (Ouro) <span class="up">$3 327.40 (+0.62%)</span></div>
+      <div class="ticker-item">BTC/USD <span class="up">$107 280.00 (+1.20%)</span></div>
+      <div class="ticker-item">EUR/USD <span class="dn">1.1342 (-0.30%)</span></div>
+      <div class="ticker-item">PSI 20 <span class="up">6 841.20 (+0.40%)</span></div>
+      <div class="ticker-item">Prata <span class="up">$37.18 (+0.80%)</span></div>
+      <div class="ticker-item">WTI Brent <span class="dn">$77.20 (-0.50%)</span></div>
+      <div class="ticker-item">BRK.B <span class="up">$518.40 (+0.30%)</span></div>
+    </div>
+  </div>
 
-<div class="ticker">
-  <span>XAU/USD <b class="up">$3 327</b> +0.62%</span>
-  <span>BTC <b class="up">$107 280</b> +1.2%</span>
-  <span>EUR/USD <b class="dn">1.1342</b> -0.3%</span>
-  <span>PSI 20 <b class="up">6 841</b> +0.4%</span>
-  <span>Prata <b class="up">$37.18</b> +0.8%</span>
-  <span>WTI <b class="dn">$77.20</b> -0.5%</span>
-  <span>BRK.B <b class="up">$518.40</b> +0.3%</span>
-</div>
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-glow-bg"></div>
+    <div class="hero-brand-container">
+      <img src="logo-lion.jpg" class="hero-brand-logo" alt="Tech & Ouro Logo">
+    </div>
+    <p class="hero-eyebrow">
+      <span lang="pt">A Gazeta do Ouro · The Gold Gazette</span>
+      <span lang="en">The Gold Gazette · Financial Daily</span>
+    </p>
+    <h1>
+      <span lang="pt">Mercados, <span>Ouro</span> &amp; Tecnologia</span>
+      <span lang="en">Markets, <span>Gold</span> &amp; Technology</span>
+    </h1>
+    <p class="hero-sub">
+      <span lang="pt">Análise independente de macroeconomia, geopolítica, metais preciosos e ativos digitais para a comunidade ibérica e global.</span>
+      <span lang="en">Independent analysis of macroeconomics, geopolitics, precious metals, and digital assets for the Iberian and global community.</span>
+    </p>
+    <p class="hero-date">
+      <span lang="pt">Segunda-feira, 29 de Junho de 2026 · Algarve, Portugal</span>
+      <span lang="en">Monday, June 29, 2026 · Algarve, Portugal</span>
+    </p>
+  </header>
 
-<div class="hero">
-  <img src="Rich Gold Lion Logo with Elegant Typography.jpg" class="hero-logo" alt="Tech E Ouro">
-  <p class="hero-eyebrow">A GAZETA DO OURO · THE GOLD GAZETTE</p>
-  <h1>Mercados, <span>Ouro</span> & Tecnologia<br>em Português e Inglês</h1>
-  <p class="hero-sub">Análise diária de macro, ouro, Bitcoin e geopolítica para investidores ibéricos e internacionais.</p>
-  <p class="hero-date">SEX, 27 DE JUNHO DE 2026 · PORTUGAL, ALGARVE</p>
-</div>
+  <div class="gold-line"></div>
 
-<p class="section-label">DESTAQUES DE HOJE</p>
-<div class="cards-2">
-  <div class="card">
-    <p class="card-cat">OURO · MACRO</p>
-    <h2 class="card-title">Ouro consolida acima dos $3 300 enquanto dólar recua com dados de inflação</h2>
-    <p class="card-desc">O metal precioso mantém-se em zona de força após Fed sinalizar cautela. Analistas apontam $3 350 como próximo nível técnico relevante.</p>
-    <p class="card-meta">25 JUN 2026 · 5 MIN LEITURA</p>
-  </div>
-  <div class="card">
-    <p class="card-cat">BITCOIN</p>
-    <h2 class="card-title">BTC supera $107K com influxo institucional recorde em ETFs spot</h2>
-    <p class="card-desc">ETFs spot acumulam $2.1B em 5 sessões consecutivas de entradas líquidas. BlackRock lidera com $980M em entradas semanais.</p>
-    <p class="card-meta">25 JUN 2026 · 3 MIN LEITURA</p>
-  </div>
-  <div class="card">
-    <p class="card-cat">GEOPOLÍTICA</p>
-    <h2 class="card-title">EUA e Irão fecham acordo no Estreito de Ormuz</h2>
-    <p class="card-desc">Petróleo recua 3% com reabertura parcial de rotas marítimas. Negociações mediadas pelo Qatar em Doha.</p>
-    <p class="card-meta">24 JUN 2026 · 4 MIN LEITURA</p>
-  </div>
-  <div class="card">
-    <p class="card-cat">TECH</p>
-    <h2 class="card-title">xAI/Musk sob pressão do DOJ por turbinas não licenciadas em Memphis</h2>
-    <p class="card-desc">57 turbinas instaladas sem licença ambiental. DOJ invoca segurança nacional. NAACP exige encerramento imediato.</p>
-    <p class="card-meta">23 JUN 2026 · 4 MIN LEITURA</p>
-  </div>
-</div>
+  <!-- Today's Highlights Grid -->
+  <p class="section-label">Destaques de Hoje</p>
+  <section class="cards-2">
+    <div class="card" onclick="window.location.href='ouro.html'">
+      <div>
+        <p class="card-cat">Ouro · Macro</p>
+        <h2 class="card-title">Ouro consolida acima dos $3 300 enquanto dólar recua com dados de inflação</h2>
+        <p class="card-desc">O metal precioso mantém-se em zona de força histórica após a Reserva Federal sinalizar uma postura de cautela. Analistas apontam os $3 350 como próximo grande nível de resistência técnica.</p>
+      </div>
+      <div class="card-meta">
+        <span>25 JUN 2026</span>
+        <span>5 MIN LEITURA · VER ANÁLISE →</span>
+      </div>
+    </div>
 
-<p class="section-label">MAIS ARTIGOS</p>
-<div class="cards-3">
-  <div class="card-sm">
-    <p class="card-sm-cat">MERCADOS</p>
-    <h2 class="card-sm-title">Ibovespa atinge marco histórico dos 200 000 pontos</h2>
-    <p class="card-meta">24 JUN 2026</p>
-  </div>
-  <div class="card-sm">
-    <p class="card-sm-cat">CHINA</p>
-    <h2 class="card-sm-title">Economia de Companhia: mercado de ¥50B beneficia Meituan e Douyin</h2>
-    <p class="card-meta">23 JUN 2026</p>
-  </div>
-  <div class="card-sm">
-    <p class="card-sm-cat">BES</p>
-    <h2 class="card-sm-title">Vítimas do BES morrem à espera de justiça — 150 clientes falecidos</h2>
-    <p class="card-meta">26 JUN 2026</p>
-  </div>
-  <div class="card-sm">
-    <p class="card-sm-cat">APPLE</p>
-    <h2 class="card-sm-title">Siri via Google Cloud + Nvidia B200 — iOS 27 em Setembro 2026</h2>
-    <p class="card-meta">25 JUN 2026</p>
-  </div>
-  <div class="card-sm">
-    <p class="card-sm-cat">ANTHROPIC</p>
-    <h2 class="card-sm-title">Anthropic no G-7 Évian — Amodei e Hassabis defendem regulação IA</h2>
-    <p class="card-meta">22 JUN 2026</p>
-  </div>
-  <div class="card-sm">
-    <p class="card-sm-cat">BERKSHIRE</p>
-    <h2 class="card-sm-title">Abel assume Berkshire — era pós-Buffett começa com $189B em cash</h2>
-    <p class="card-meta">21 JUN 2026</p>
-  </div>
-</div>
+    <div class="card" onclick="window.location.href='bitcoin.html'">
+      <div>
+        <p class="card-cat">Bitcoin</p>
+        <h2 class="card-title">BTC supera $107K com influxo institucional recorde em ETFs spot</h2>
+        <p class="card-desc">Os ETFs de Bitcoin spot acumularam mais de $2.1 mil milhões de dólares em 5 sessões consecutivas de entradas líquidas. A BlackRock lidera a corrida com entradas acumuladas de $980M.</p>
+      </div>
+      <div class="card-meta">
+        <span>25 JUN 2026</span>
+        <span>3 MIN LEITURA · VER ANÁLISE →</span>
+      </div>
+    </div>
 
-<footer>
-  <p class="footer-logo">Tech & Ouro · A Gazeta do Ouro</p>
-  <p class="footer-copy">© 2026 techeouro.net · PORTUGAL, Algarve, Portugal</p>
-  <p class="footer-links">Mercados · Ouro · Bitcoin · Tech · Geopolítica</p>
-</footer>
-<div class="disclaimer">Este site tem carácter informativo. Não constitui aconselhamento financeiro. Invista com responsabilidade.</div>
+    <div class="card" onclick="window.location.href='geopolitica.html'">
+      <div>
+        <p class="card-cat">Geopolítica</p>
+        <h2 class="card-title">EUA e Irão fecham acordo no Estreito de Ormuz</h2>
+        <p class="card-desc">O preço do barril de petróleo recua cerca de 3% no mercado internacional com a reabertura parcial das principais rotas de transporte marítimo. Negociações mediadas pelo Qatar.</p>
+      </div>
+      <div class="card-meta">
+        <span>24 JUN 2026</span>
+        <span>4 MIN LEITURA · VER ANÁLISE →</span>
+      </div>
+    </div>
 
+    <div class="card" onclick="window.location.href='tech.html'">
+      <div>
+        <p class="card-cat">Tech · Regulação</p>
+        <h2 class="card-title">xAI/Musk sob pressão do DOJ por turbinas não licenciadas em Memphis</h2>
+        <p class="card-desc">Mais de 50 turbinas elétricas a gás foram instaladas nas imediações do supercomputador sem as devidas licenças ambientais. O Departamento de Justiça alega riscos à segurança nacional.</p>
+      </div>
+      <div class="card-meta">
+        <span>23 JUN 2026</span>
+        <span>4 MIN LEITURA · VER ANÁLISE →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- More Articles Grid -->
+  <p class="section-label">Artigos de Fundo &amp; Análise</p>
+  <section class="cards-3">
+    <div class="card-sm" onclick="window.location.href='mercados.html'">
+      <p class="card-sm-cat">Mercados</p>
+      <h2 class="card-sm-title">Ibovespa atinge marco histórico dos 200 000 pontos em rali</h2>
+      <div class="card-meta">
+        <span>24 Jun 2026</span>
+        <span>→</span>
+      </div>
+    </div>
+
+    <div class="card-sm" onclick="window.location.href='economia.html'">
+      <p class="card-sm-cat">China · Economia</p>
+      <h2 class="card-sm-title">Economia de Companhia: mercado de ¥50B beneficia gigantes Meituan e Douyin</h2>
+      <div class="card-meta">
+        <span>23 Jun 2026</span>
+        <span>→</span>
+      </div>
+    </div>
+
+    <div class="card-sm" onclick="window.location.href='economia.html'">
+      <p class="card-sm-cat">Banca · Portugal</p>
+      <h2 class="card-sm-title">Vítimas do BES morrem à espera de justiça — 150 clientes já falecidos</h2>
+      <div class="card-meta">
+        <span>26 Jun 2026</span>
+        <span>→</span>
+      </div>
+    </div>
+
+    <div class="card-sm" onclick="window.location.href='tech.html'">
+      <p class="card-sm-cat">Apple · Inteligência Artificial</p>
+      <h2 class="card-sm-title">Siri via Google Cloud + Nvidia B200 — O novo iOS 27 em Setembro 2026</h2>
+      <div class="card-meta">
+        <span>25 Jun 2026</span>
+        <span>→</span>
+      </div>
+    </div>
+
+    <div class="card-sm" onclick="window.location.href='tech.html'">
+      <p class="card-sm-cat">Anthropic · Regulação</p>
+      <h2 class="card-sm-title">Anthropic no G-7 Évian — Amodei e Hassabis defendem regulação de modelos avançados</h2>
+      <div class="card-meta">
+        <span>22 Jun 2026</span>
+        <span>→</span>
+      </div>
+    </div>
+
+    <div class="card-sm" onclick="window.location.href='mercados.html'">
+      <p class="card-sm-cat">Berkshire Hathaway</p>
+      <h2 class="card-sm-title">Abel assume Berkshire — a era pós-Buffett começa com recorde de $189B em caixa</h2>
+      <div class="card-meta">
+        <span>21 Jun 2026</span>
+        <span>→</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Manifesto / Founder Section -->
+  <section class="manifesto-section">
+    <div class="manifesto-inner">
+      <div class="manifesto-quote">
+        Feito por um emigrante,<br><em>para todos nós.</em>
+      </div>
+      <div class="manifesto-text">
+        <p>O <strong>Tech &amp; Ouro</strong> nasceu de uma simples necessidade: ter um espaço em português e em inglês onde a comunidade lusófona espalhada pelo mundo pudesse encontrar informação clara sobre mercados, economia e desporto, sem truques nem publicidade.</p>
+        <p>Não sou jornalista certificado nem gestor de fundos. Sou um emigrante que trabalha com as mãos, que aprendeu a ler as dinâmicas do mundo ao seu redor e decidiu criar este diário de bordo com o auxílio da tecnologia. Seja muito bem-vindo.</p>
+        <p style="margin-top: 24px;">
+          <a href="sobre.html" class="btn-outline">Saber mais sobre o projecto →</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer bar at the bottom -->
+  <div class="content-wrap" style="margin-bottom: 20px;">
+    <div class="warning-box">
+      <h2>Aviso Legal (Disclaimer)</h2>
+      <p>Este site tem caráter puramente informativo e reflete opiniões pessoais. Não constitui qualquer tipo de aconselhamento financeiro, fiscal, de investimento ou de trading. Os mercados financeiros acarretam riscos elevados. Invista apenas o capital que pode dar-se ao luxo de perder.</p>
+    </div>
+  </div>
+
+  <!-- Premium Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">Tech &amp; Ouro</div>
+      <div class="footer-desc">Análise de mercados globais, economia local e notícias de desporto para investidores e comunidades lusófonas no estrangeiro.</div>
+      <div class="footer-links-grid">
+        <a href="index.html">Início</a>
+        <a href="mercados.html">Mercados</a>
+        <a href="economia.html">Economia</a>
+        <a href="desporto.html">Desporto</a>
+        <a href="paises.html">Países</a>
+        <a href="noticias.html">Notícias</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 techeouro.net · Todos os direitos reservados. Algarve, Portugal.</span>
+      <span>Contacto: <a href="mailto:tiagowater@yahoo.com">tiagowater@yahoo.com</a></span>
+    </div>
+  </footer>
+
+  <!-- Persistent Corner Floating Badge -->
+  <a href="sobre.html" class="footer-fixed-badge" title="Sobre o Criador">
+    <img src="logo-lion.jpg" alt="Tech & Ouro Icon">
+  </a>
+
+  <script src="script.js"></script>
 </body>
 </html>

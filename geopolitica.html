@@ -1,42 +1,127 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tech & Ouro · Em Manutenção</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:#080808;color:#e8e0cc;font-family:'Georgia',serif;display:flex;flex-direction:column;min-height:100vh;}
-:root{--gold:#C9A227;}
-.logo-bolinha{position:fixed;top:8px;left:8px;width:35px;height:35px;border-radius:50%;border:1.5px solid var(--gold);z-index:9999;object-fit:cover;}
-.logo-bottom{position:fixed;bottom:8px;right:12px;height:195px;width:195px;z-index:9999;object-fit:contain;}
-nav{background:#0d0d0d;padding:10px 24px 10px 52px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #1a1506;gap:16px;}
-nav a{font-size:10px;letter-spacing:1.5px;color:var(--gold);font-weight:700;text-decoration:none;}
-nav a:hover{opacity:0.7;}
-.center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;}
-.center img{height:120px;width:auto;margin-bottom:24px;opacity:0.8;}
-.label{font-size:10px;letter-spacing:3px;color:var(--gold);margin-bottom:12px;}
-h1{font-size:28px;color:#f0e6c8;margin-bottom:10px;}
-p{font-size:13px;color:#555;max-width:300px;}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geopolítica — Tech &amp; Ouro</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<img src="qwpKu63sRnQdc-j.png" class="logo-bolinha" alt="TechOuro">
-<img src="Rich Gold Lion Logo with Elegant Typography.jpg" class="logo-bottom" alt="Tech E Ouro">
-<nav>
-  <a href="index.html">MERCADOS</a>
-  <a href="ouro.html">OURO</a>
-  <a href="bitcoin.html">BITCOIN</a>
-  <a href="tech.html">TECH</a>
-  <a href="geopolitica.html">GEOPOLÍTICA</a>
-  <a href="paises.html">PAÍSES</a>
-  <a href="terminal.html">TERMINAL</a>
-</nav>
-<div class="center">
-  <img src="Rich Gold Lion Logo with Elegant Typography.jpg" alt="Tech E Ouro">
-  <p class="label">EM BREVE</p>
-  <h1>Página em Manutenção</h1>
-  <p>Estamos a preparar conteúdo de qualidade. Volta em breve!</p>
-</div>
+
+  <!-- Sticky Glass Header -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="logo-lion.jpg" class="nav-logo-img" alt="Tech & Ouro Logo">
+      <div class="nav-brand">
+        Tech &amp; Ouro
+        <span>A Gazeta do Ouro</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Início</a></li>
+      <li><a href="mercados.html" class="active">Mercados</a></li>
+      <li><a href="economia.html">Economia</a></li>
+      <li><a href="desporto.html">Desporto</a></li>
+      <li><a href="paises.html">Países</a></li>
+      <li><a href="noticias.html">Notícias ao Vivo</a></li>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="terminal.html" style="color: var(--gold); font-weight: bold; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 4px;">Terminal ⚡</a></li>
+    </ul>
+    <div class="lang-toggle-nav">
+      <button id="lang-btn-pt" class="lang-btn active" onclick="setLanguage('pt')">PT</button>
+      <button id="lang-btn-en" class="lang-btn" onclick="setLanguage('en')">EN</button>
+    </div>
+    <a href="sobre.html#contacto" class="nav-cta">Contacto</a>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <p style="font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; font-weight: 600;">§ Análise Global</p>
+    <h1 class="page-title">Geopolítica &amp; <em>Risco</em></h1>
+  </header>
+
+  <!-- Briefing Dashboard Section -->
+  <main class="content-wrap" style="max-width: 1000px; margin: 40px auto; padding: 0 40px;">
+    
+    <h2>Monitor de Riscos Globais · Junho 2026</h2>
+    <p style="margin-top: 12px; margin-bottom: 30px; color: var(--text-secondary); line-height: 1.7;">Acompanhamento sistemático dos pontos de fricção e conflito que impactam diretamente o comércio de mercadorias, cadeias de abastecimento e mercados cambiais globais.</p>
+
+    <!-- Geopolitics Grid -->
+    <div class="geopolitics-grid">
+      
+      <!-- Box 1 -->
+      <div class="geo-map-box">
+        <span class="geo-threat-level moderate">Moderado</span>
+        <div>
+          <h3 class="geo-title">Estreito de Ormuz</h3>
+          <p class="geo-summary">Negociações mediadas pelo Qatar em Doha resultaram num acordo de trânsito parcial. Petróleo Brent recuou 3% com o desanuviamento.</p>
+        </div>
+        <div class="geo-location">Médio Oriente · Rotas Petrolíferas</div>
+      </div>
+
+      <!-- Box 2 -->
+      <div class="geo-map-box">
+        <span class="geo-threat-level high">Elevado</span>
+        <div>
+          <h3 class="geo-title">Semicondutores em Taiwan</h3>
+          <p class="geo-summary">Novas restrições à exportação de materiais de terras raras da China aumentam o stress fabril. TSMC opera com limites máximos de stock preventivo.</p>
+        </div>
+        <div class="geo-location">Ásia-Pacífico · Cadeias Globais</div>
+      </div>
+
+      <!-- Box 3 -->
+      <div class="geo-map-box">
+        <span class="geo-threat-level high">Elevado</span>
+        <div>
+          <h3 class="geo-title">Canal do Suez &amp; Mar Vermelho</h3>
+          <p class="geo-summary">Instabilidade militar mantém o desvio de navios cargueiros pela rota do Cabo da Boa Esperança (+14 dias de navegação). Custos de frete (SCFI) sobem 18%.</p>
+        </div>
+        <div class="geo-location">Nordeste Africano · Comércio Marítimo</div>
+      </div>
+
+      <!-- Box 4 -->
+      <div class="geo-map-box">
+        <span class="geo-threat-level moderate">Moderado</span>
+        <div>
+          <h3 class="geo-title font-serif">Regulação Tecnológica Transatlântica</h3>
+          <p class="geo-summary">Divergências acentuadas entre a regulação de IA da Comissão Europeia e o modelo de incentivo executivo americano. Risco de fratura de conformidade.</p>
+        </div>
+        <div class="geo-location">EUA &amp; União Europeia · Protecionismo</div>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>Implicações de Portfólio</h2>
+    <p style="margin-top: 16px; line-height: 1.8; color: var(--text-secondary);">Num ecossistema multipolar, o risco geopolítico deixou de ser um evento atípico (cauda longa) para passar a ser uma variável operacional persistente. A reorganização de cadeias de valor regionais ("nearshoring") está a penalizar economias abertas tradicionais e a beneficiar localizações satélites na América Latina (ex: México e Brasil) e Europa de Leste.</p>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">Tech &amp; Ouro</div>
+      <div class="footer-desc">Análise de mercados globais, economia local e notícias de desporto para investidores e comunidades lusófonas no estrangeiro.</div>
+      <div class="footer-links-grid">
+        <a href="index.html">Início</a>
+        <a href="mercados.html">Mercados</a>
+        <a href="economia.html">Economia</a>
+        <a href="desporto.html">Desporto</a>
+        <a href="paises.html">Países</a>
+        <a href="noticias.html">Notícias</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 techeouro.net · Algarve, Portugal.</span>
+      <span>Contacto: <a href="mailto:tiagowater@yahoo.com">tiagowater@yahoo.com</a></span>
+    </div>
+  </footer>
+
+  <!-- Persistent Corner Floating Badge -->
+  <a href="sobre.html" class="footer-fixed-badge">
+    <img src="logo-lion.jpg" alt="Tech & Ouro Icon">
+  </a>
+
+  <script src="script.js"></script>
 </body>
 </html>

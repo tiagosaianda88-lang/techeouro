@@ -1,42 +1,142 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tech & Ouro · Em Manutenção</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:#080808;color:#e8e0cc;font-family:'Georgia',serif;display:flex;flex-direction:column;min-height:100vh;}
-:root{--gold:#C9A227;}
-.logo-bolinha{position:fixed;top:8px;left:8px;width:35px;height:35px;border-radius:50%;border:1.5px solid var(--gold);z-index:9999;object-fit:cover;}
-.logo-bottom{position:fixed;bottom:8px;right:12px;height:195px;width:195px;z-index:9999;object-fit:contain;}
-nav{background:#0d0d0d;padding:10px 24px 10px 52px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #1a1506;gap:16px;}
-nav a{font-size:10px;letter-spacing:1.5px;color:var(--gold);font-weight:700;text-decoration:none;}
-nav a:hover{opacity:0.7;}
-.center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;}
-.center img{height:120px;width:auto;margin-bottom:24px;opacity:0.8;}
-.label{font-size:10px;letter-spacing:3px;color:var(--gold);margin-bottom:12px;}
-h1{font-size:28px;color:#f0e6c8;margin-bottom:10px;}
-p{font-size:13px;color:#555;max-width:300px;}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ouro Analytics — Tech &amp; Ouro</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<img src="qwpKu63sRnQdc-j.png" class="logo-bolinha" alt="TechOuro">
-<img src="Rich Gold Lion Logo with Elegant Typography.jpg" class="logo-bottom" alt="Tech E Ouro">
-<nav>
-  <a href="index.html">MERCADOS</a>
-  <a href="ouro.html">OURO</a>
-  <a href="bitcoin.html">BITCOIN</a>
-  <a href="tech.html">TECH</a>
-  <a href="geopolitica.html">GEOPOLÍTICA</a>
-  <a href="paises.html">PAÍSES</a>
-  <a href="terminal.html">TERMINAL</a>
-</nav>
-<div class="center">
-  <img src="Rich Gold Lion Logo with Elegant Typography.jpg" alt="Tech E Ouro">
-  <p class="label">EM BREVE</p>
-  <h1>Página em Manutenção</h1>
-  <p>Estamos a preparar conteúdo de qualidade. Volta em breve!</p>
-</div>
+
+  <!-- Sticky Glass Header -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="logo-lion.jpg" class="nav-logo-img" alt="Tech & Ouro Logo">
+      <div class="nav-brand">
+        Tech &amp; Ouro
+        <span>A Gazeta do Ouro</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Início</a></li>
+      <li><a href="mercados.html" class="active">Mercados</a></li>
+      <li><a href="economia.html">Economia</a></li>
+      <li><a href="desporto.html">Desporto</a></li>
+      <li><a href="paises.html">Países</a></li>
+      <li><a href="noticias.html">Notícias ao Vivo</a></li>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="terminal.html" style="color: var(--gold); font-weight: bold; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 4px;">Terminal ⚡</a></li>
+    </ul>
+    <div class="lang-toggle-nav">
+      <button id="lang-btn-pt" class="lang-btn active" onclick="setLanguage('pt')">PT</button>
+      <button id="lang-btn-en" class="lang-btn" onclick="setLanguage('en')">EN</button>
+    </div>
+    <a href="sobre.html#contacto" class="nav-cta">Contacto</a>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <p style="font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; font-weight: 600;">§ Metais Preciosos</p>
+    <h1 class="page-title">Ouro <em>Focus</em></h1>
+  </header>
+
+  <!-- Interactive Chart Section -->
+  <main class="content-wrap" style="max-width: 1000px; margin: 40px auto; padding: 0 40px;">
+    
+    <div class="interactive-chart-container">
+      <div class="chart-header">
+        <div>
+          <p class="chart-title-sub">Preço Spot · XAU/USD (Onça troy)</p>
+          <div class="chart-price">
+            $3,327.40
+            <span>▲ +0.62% (24h)</span>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <p style="font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Máximo de Sempre</p>
+          <p style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--gold); font-weight: bold;">$3,365.10</p>
+        </div>
+      </div>
+
+      <!-- CSS Interactive Chart Bars -->
+      <div class="chart-visual-wrapper">
+        <div class="chart-bar-css" style="height: 45%;" data-value="$2680"></div>
+        <div class="chart-bar-css" style="height: 52%;" data-value="$2810"></div>
+        <div class="chart-bar-css" style="height: 58%;" data-value="$2950"></div>
+        <div class="chart-bar-css" style="height: 72%;" data-value="$3100"></div>
+        <div class="chart-bar-css" style="height: 80%;" data-value="$3220"></div>
+        <div class="chart-bar-css" style="height: 94%;" data-value="$3300"></div>
+        <div class="chart-bar-css" style="height: 97%;" data-value="$3327"></div>
+      </div>
+      
+      <div class="chart-timeline">
+        <span>Dez 25</span>
+        <span>Jan 26</span>
+        <span>Fev 26</span>
+        <span>Mar 26</span>
+        <span>Abr 26</span>
+        <span>Mai 26</span>
+        <span>Jun 26</span>
+      </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stat-row" style="margin-top: 32px; margin-bottom: 40px;">
+      <div class="stat">
+        <div class="stat-label">Reservas Globais Est.</div>
+        <div class="stat-value">209k Ton.</div>
+        <div class="stat-chg">Extraído na História</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Onça Troy em Gramas</div>
+        <div class="stat-value">31.103 g</div>
+        <div class="stat-chg">Padrão de Pesagem</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Procura de Bancos Centrais</div>
+        <div class="stat-value">+1,100 T</div>
+        <div class="stat-chg up">Acumulado Anual</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Rendimento YTD</div>
+        <div class="stat-value">+24.8%</div>
+        <div class="stat-chg up">Performance Forte</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>A Força do Metal Físico</h2>
+    <p style="margin-top: 16px; line-height: 1.8; color: var(--text-secondary);">O ouro consolida-se como o derradeiro refúgio de valor a longo prazo em 2026. Perante políticas monetárias de expansão de liquidez, desvalorizações cambiais estruturais do dólar e crescentes tensões geopolíticas no Leste Europeu e Médio Oriente, os bancos centrais mundiais têm acelerado as compras físicas de barras de ouro para as suas reservas soberanas.</p>
+    
+    <p style="line-height: 1.8; color: var(--text-secondary);">O ouro spot estabilizou confortavelmente acima da barreira de suporte técnico dos $3,300, validando o momento de forte acumulação por parte de fundos institucionais e aversão ao risco global. Do ponto de vista técnico, a manutenção deste suporte abre caminho à consolidação rumo aos $3,500 até ao final do ano fiscal.</p>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">Tech &amp; Ouro</div>
+      <div class="footer-desc">Análise de mercados globais, economia local e notícias de desporto para investidores e comunidades lusófonas no estrangeiro.</div>
+      <div class="footer-links-grid">
+        <a href="index.html">Início</a>
+        <a href="mercados.html">Mercados</a>
+        <a href="economia.html">Economia</a>
+        <a href="desporto.html">Desporto</a>
+        <a href="paises.html">Países</a>
+        <a href="noticias.html">Notícias</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 techeouro.net · Algarve, Portugal.</span>
+      <span>Contacto: <a href="mailto:tiagowater@yahoo.com">tiagowater@yahoo.com</a></span>
+    </div>
+  </footer>
+
+  <!-- Persistent Corner Floating Badge -->
+  <a href="sobre.html" class="footer-fixed-badge">
+    <img src="logo-lion.jpg" alt="Tech & Ouro Icon">
+  </a>
+
+  <script src="script.js"></script>
 </body>
 </html>
