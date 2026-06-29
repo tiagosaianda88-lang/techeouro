@@ -1,849 +1,245 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TechOuro</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:       #080808;
-      --surface:  #111111;
-      --border:   #1f1f1f;
-      --gold:     #C9A227;
-      --gold-dim: #7a6118;
-      --text:     #F0EDE6;
-      --muted:    #666666;
-      --serif:    'Playfair Display', serif;
-      --sans:     'Inter', sans-serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(8,8,8,.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      height: 64px;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-
-    .nav-logo svg { width: 36px; height: 36px; }
-
-    .nav-brand {
-      font-family: var(--serif);
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: .04em;
-      color: var(--gold);
-      line-height: 1;
-    }
-
-    .nav-brand span {
-      display: block;
-      font-family: var(--sans);
-      font-size: .55rem;
-      font-weight: 500;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: .72rem;
-      font-weight: 500;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--gold); }
-
-    .nav-cta {
-      font-size: .68rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--bg);
-      background: var(--gold);
-      padding: 9px 20px;
-      text-decoration: none;
-      transition: opacity .2s;
-    }
-    .nav-cta:hover { opacity: .85; }
-
-    /* ── HERO ── */
-    .hero {
-      padding: 80px 40px 64px;
-      max-width: 1200px;
-      margin: 0 auto;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .hero-eyebrow {
-      font-size: .65rem;
-      font-weight: 600;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 48px;
-      align-items: start;
-    }
-
-    .hero-headline {
-      font-family: var(--serif);
-      font-size: clamp(2.8rem, 6vw, 5.5rem);
-      font-weight: 900;
-      line-height: .95;
-      letter-spacing: -.02em;
-      color: var(--text);
-    }
-
-    .hero-headline em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .hero-meta {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-top: 32px;
-    }
-
-    .tag {
-      font-size: .6rem;
-      font-weight: 600;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--gold);
-      border: 1px solid var(--gold-dim);
-      padding: 4px 10px;
-    }
-
-    .date {
-      font-size: .7rem;
-      color: var(--muted);
-      letter-spacing: .06em;
-    }
-
-    .hero-lead {
-      font-size: 1rem;
-      line-height: 1.75;
-      color: #aaaaaa;
-      margin-top: 20px;
-      max-width: 540px;
-    }
-
-    .hero-read {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 32px;
-      font-size: .7rem;
-      font-weight: 600;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      text-decoration: none;
-    }
-    .hero-read::after {
-      content: '→';
-      transition: transform .2s;
-    }
-    .hero-read:hover::after { transform: translateX(4px); }
-
-    .hero-sidebar {
-      border-left: 1px solid var(--border);
-      padding-left: 48px;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .sidebar-item {
-      padding: 24px 0;
-      border-bottom: 1px solid var(--border);
-      cursor: pointer;
-    }
-    .sidebar-item:first-child { padding-top: 0; }
-    .sidebar-item:last-child { border-bottom: none; }
-
-    .sidebar-item .tag { margin-bottom: 10px; }
-
-    .sidebar-title {
-      font-family: var(--serif);
-      font-size: 1.05rem;
-      font-weight: 700;
-      line-height: 1.25;
-      color: var(--text);
-      transition: color .2s;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .sidebar-item:hover .sidebar-title { color: var(--gold); }
-
-    .sidebar-date {
-      font-size: .65rem;
-      color: var(--muted);
-      margin-top: 8px;
-      letter-spacing: .06em;
-    }
-
-    /* ── SECTION HEADER ── */
-    .section-head {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 40px;
-    }
-
-    .section-head h2 {
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .section-head::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* ── NEWS GRID ── */
-    .news {
-      padding: 64px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-    }
-
-    .card {
-      background: var(--bg);
-      padding: 32px 28px;
-      cursor: pointer;
-      transition: background .25s;
-      display: flex;
-      flex-direction: column;
-    }
-    .card:hover { background: var(--surface); }
-
-    .card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-
-    .card-num {
-      font-size: .6rem;
-      font-weight: 600;
-      letter-spacing: .16em;
-      color: var(--gold-dim);
-    }
-
-    .card-title {
-      font-family: var(--serif);
-      font-size: 1.25rem;
-      font-weight: 700;
-      line-height: 1.2;
-      color: var(--text);
-      margin-bottom: 14px;
-      transition: color .2s;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .card:hover .card-title { color: var(--gold); }
-
-    .card-excerpt {
-      font-size: .8rem;
-      line-height: 1.8;
-      color: var(--muted);
-      flex: 1;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-    }
-
-    .card-footer .date { font-size: .65rem; }
-
-    .card-arrow {
-      font-size: .75rem;
-      color: var(--gold-dim);
-      transition: color .2s, transform .2s;
-    }
-    .card:hover .card-arrow { color: var(--gold); transform: translateX(3px); }
-
-    /* ── FEATURED STRIP ── */
-    .featured {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 0 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .featured-inner {
-      display: grid;
-      grid-template-columns: 1fr 1px 1fr 1px 1fr;
-      gap: 0;
-    }
-
-    .featured-divider { background: var(--border); }
-
-    .featured-item {
-      padding: 40px 32px;
-      cursor: pointer;
-      transition: background .25s;
-    }
-    .featured-item:first-child { padding-left: 0; }
-    .featured-item:last-child  { padding-right: 0; }
-    .featured-item:hover { background: var(--surface); }
-
-    .featured-num {
-      font-size: 3rem;
-      font-family: var(--serif);
-      font-weight: 900;
-      color: var(--border);
-      line-height: 1;
-      margin-bottom: 16px;
-    }
-
-    .featured-title {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      font-weight: 700;
-      line-height: 1.25;
-      color: var(--text);
-      margin-bottom: 10px;
-      transition: color .2s;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .featured-item:hover .featured-title { color: var(--gold); }
-
-    .featured-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    /* ── MANIFESTO ── */
-    .manifesto {
-      padding: 80px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      border-top: 1px solid var(--border);
-    }
-
-    .manifesto-left { position: relative; }
-
-    .manifesto-left::before {
-      content: '"';
-      font-family: var(--serif);
-      font-size: 12rem;
-      font-weight: 900;
-      color: var(--gold);
-      opacity: .08;
-      position: absolute;
-      top: -40px;
-      left: -20px;
-      line-height: 1;
-      pointer-events: none;
-    }
-
-    .manifesto-quote {
-      font-family: var(--serif);
-      font-size: clamp(1.6rem, 3vw, 2.8rem);
-      font-weight: 700;
-      line-height: 1.2;
-      color: var(--text);
-      position: relative;
-    }
-
-    .manifesto-quote em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .manifesto-right p {
-      font-size: .88rem;
-      line-height: 2;
-      color: var(--muted);
-    }
-
-    .manifesto-right p + p { margin-top: 20px; }
-
-    .manifesto-right .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 36px;
-      font-size: .68rem;
-      font-weight: 600;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--gold);
-      border: 1px solid var(--gold-dim);
-      padding: 13px 28px;
-      text-decoration: none;
-      transition: background .25s, color .25s;
-    }
-    .manifesto-right .btn:hover {
-      background: var(--gold);
-      color: var(--bg);
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .footer-logo svg { width: 28px; height: 28px; opacity: .6; }
-
-    .footer-name {
-      font-family: var(--serif);
-      font-size: .85rem;
-      font-weight: 700;
-      color: var(--muted);
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-
-    .footer-links a {
-      font-size: .65rem;
-      font-weight: 500;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color .2s;
-    }
-    .footer-links a:hover { color: var(--gold); }
-
-    .footer-copy {
-      font-size: .65rem;
-      letter-spacing: .08em;
-      color: var(--muted);
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 0 24px; }
-      .nav-links, .nav-cta { display: none; }
-
-      .hero { padding: 48px 24px 40px; }
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-      .hero-sidebar { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 32px; }
-
-      .news { padding: 48px 24px; }
-      .news-grid { grid-template-columns: 1fr; }
-
-      .featured { padding: 0 24px; }
-      .featured-inner { grid-template-columns: 1fr; }
-      .featured-divider { display: none; }
-      .featured-item { padding: 28px 0; border-bottom: 1px solid var(--border); }
-      .featured-item:first-child { padding-left: 0; }
-      .featured-item:last-child { border-bottom: none; }
-
-      .manifesto { padding: 48px 24px; grid-template-columns: 1fr; gap: 40px; }
-
-      footer { padding: 32px 24px; flex-direction: column; gap: 20px; text-align: center; }
-      .footer-links { flex-wrap: wrap; justify-content: center; }
-    }
-
-    /* ── REDUCED MOTION ── */
-    @media (prefers-reduced-motion: reduce) {
-      .ticker-track { animation: none; }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech & Ouro · A Gazeta do Ouro</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- Sticky Glass Header -->
   <nav>
-    <a href="/" class="nav-logo">
-      <!-- Lion SVG -->
-      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="50" fill="#C9A227" opacity=".08"/>
-        <!-- mane -->
-        <ellipse cx="50" cy="46" rx="28" ry="26" fill="#C9A227" opacity=".25"/>
-        <ellipse cx="50" cy="44" rx="22" ry="20" fill="#C9A227" opacity=".35"/>
-        <!-- face -->
-        <ellipse cx="50" cy="50" rx="17" ry="15" fill="#C9A227"/>
-        <!-- ears -->
-        <polygon points="34,32 29,20 40,30" fill="#C9A227"/>
-        <polygon points="66,32 71,20 60,30" fill="#C9A227"/>
-        <polygon points="35,30 31,22 40,29" fill="#8a6b1a"/>
-        <polygon points="65,30 69,22 60,29" fill="#8a6b1a"/>
-        <!-- eyes -->
-        <ellipse cx="43" cy="46" rx="4" ry="3.5" fill="#3a2800"/>
-        <ellipse cx="57" cy="46" rx="4" ry="3.5" fill="#3a2800"/>
-        <circle cx="43" cy="46" r="1.5" fill="#1a1200"/>
-        <circle cx="57" cy="46" r="1.5" fill="#1a1200"/>
-        <circle cx="44" cy="45" r=".8" fill="white" opacity=".6"/>
-        <circle cx="58" cy="45" r=".8" fill="white" opacity=".6"/>
-        <!-- nose -->
-        <path d="M47 52 Q50 54 53 52 Q51 57 50 57 Q49 57 47 52Z" fill="#8a6b1a"/>
-        <!-- mouth -->
-        <path d="M44 58 Q50 62 56 58" stroke="#8a6b1a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <!-- whisker dots -->
-        <circle cx="38" cy="53" r="1" fill="#8a6b1a" opacity=".5"/>
-        <circle cx="38" cy="56" r="1" fill="#8a6b1a" opacity=".5"/>
-        <circle cx="62" cy="53" r="1" fill="#8a6b1a" opacity=".5"/>
-        <circle cx="62" cy="56" r="1" fill="#8a6b1a" opacity=".5"/>
-        <!-- chin -->
-        <ellipse cx="50" cy="62" rx="8" ry="5" fill="#e0b84a" opacity=".4"/>
-      </svg>
+    <a href="index.html" class="nav-logo">
+      <img src="logo-lion.jpg" class="nav-logo-img" alt="Tech & Ouro Logo">
       <div class="nav-brand">
-        TechOuro
-        <span>Economia · Desporto · Mercados</span>
+        Tech &amp; Ouro
+        <span>A Gazeta do Ouro</span>
       </div>
     </a>
     <ul class="nav-links">
-      <li><a href="#analise">Economia</a></li>
-      <li><a href="#desporto">Desporto</a></li>
-      <li><a href="#mercados">Mercados</a></li>
-      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="index.html" class="active">Início</a></li>
+      <li><a href="mercados.html">Mercados</a></li>
+      <li><a href="economia.html">Economia</a></li>
+      <li><a href="desporto.html">Desporto</a></li>
+      <li><a href="paises.html">Países</a></li>
+      <li><a href="noticias.html">Notícias ao Vivo</a></li>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="terminal.html" style="color: var(--gold); font-weight: bold; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 4px;">Terminal ⚡</a></li>
     </ul>
-    <a href="mailto:tiagosaianda88@gmail.com" class="nav-cta">Subscrever →</a>
+    <div class="lang-toggle-nav">
+      <button id="lang-btn-pt" class="lang-btn active" onclick="setLanguage('pt')">PT</button>
+      <button id="lang-btn-en" class="lang-btn" onclick="setLanguage('en')">EN</button>
+    </div>
+    <a href="sobre.html#contacto" class="nav-cta">Contacto</a>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero" id="analise">
-    <p class="hero-eyebrow">§ Destaque — 23 Jun 2026</p>
-    <div class="hero-grid">
+  <!-- Live Financial Ticker -->
+  <div class="ticker-container">
+    <div class="ticker-track">
+      <div class="ticker-item">XAU/USD (Ouro) <span class="up">$3 327.40 (+0.62%)</span></div>
+      <div class="ticker-item">BTC/USD <span class="up">$107 280.00 (+1.20%)</span></div>
+      <div class="ticker-item">EUR/USD <span class="dn">1.1342 (-0.30%)</span></div>
+      <div class="ticker-item">PSI 20 <span class="up">6 841.20 (+0.40%)</span></div>
+      <div class="ticker-item">Prata <span class="up">$37.18 (+0.80%)</span></div>
+      <div class="ticker-item">WTI Brent <span class="dn">$77.20 (-0.50%)</span></div>
+      <div class="ticker-item">BRK.B <span class="up">$518.40 (+0.30%)</span></div>
+      <!-- Duplicate for infinite scrolling -->
+      <div class="ticker-item">XAU/USD (Ouro) <span class="up">$3 327.40 (+0.62%)</span></div>
+      <div class="ticker-item">BTC/USD <span class="up">$107 280.00 (+1.20%)</span></div>
+      <div class="ticker-item">EUR/USD <span class="dn">1.1342 (-0.30%)</span></div>
+      <div class="ticker-item">PSI 20 <span class="up">6 841.20 (+0.40%)</span></div>
+      <div class="ticker-item">Prata <span class="up">$37.18 (+0.80%)</span></div>
+      <div class="ticker-item">WTI Brent <span class="dn">$77.20 (-0.50%)</span></div>
+      <div class="ticker-item">BRK.B <span class="up">$518.40 (+0.30%)</span></div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-glow-bg"></div>
+    <div class="hero-brand-container">
+      <img src="logo-lion.jpg" class="hero-brand-logo" alt="Tech & Ouro Logo">
+    </div>
+    <p class="hero-eyebrow">
+      <span lang="pt">A Gazeta do Ouro · The Gold Gazette</span>
+      <span lang="en">The Gold Gazette · Financial Daily</span>
+    </p>
+    <h1>
+      <span lang="pt">Mercados, <span>Ouro</span> &amp; Tecnologia</span>
+      <span lang="en">Markets, <span>Gold</span> &amp; Technology</span>
+    </h1>
+    <p class="hero-sub">
+      <span lang="pt">Análise independente de macroeconomia, geopolítica, metais preciosos e ativos digitais para a comunidade ibérica e global.</span>
+      <span lang="en">Independent analysis of macroeconomics, geopolitics, precious metals, and digital assets for the Iberian and global community.</span>
+    </p>
+    <p class="hero-date">
+      <span lang="pt">Segunda-feira, 29 de Junho de 2026 · Algarve, Portugal</span>
+      <span lang="en">Monday, June 29, 2026 · Algarve, Portugal</span>
+    </p>
+  </header>
+
+  <div class="gold-line"></div>
+
+  <!-- Today's Highlights Grid -->
+  <p class="section-label">Destaques de Hoje</p>
+  <section class="cards-2">
+    <div class="card" onclick="window.location.href='ouro.html'">
       <div>
-        <h1 class="hero-headline">
-          A voz dos<br>
-          portugueses<br>
-          <em>no mundo.</em>
-        </h1>
-        <div class="hero-meta">
-          <span class="tag">Economia</span>
-          <span class="date">23 Jun 2026 · 5 min</span>
-        </div>
-        <p class="hero-lead">
-          Informação sobre economia, mercados e desporto para a comunidade lusófona. Análise independente, sem publicidade, em português e inglês.
+        <p class="card-cat">Ouro · Macro</p>
+        <h2 class="card-title">Ouro consolida acima dos $3 300 enquanto dólar recua com dados de inflação</h2>
+        <p class="card-desc">O metal precioso mantém-se em zona de força histórica após a Reserva Federal sinalizar uma postura de cautela. Analistas apontam os $3 350 como próximo grande nível de resistência técnica.</p>
+      </div>
+      <div class="card-meta">
+        <span>25 JUN 2026</span>
+        <span>5 MIN LEITURA · VER ANÁLISE →</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location.href='bitcoin.html'">
+      <div>
+        <p class="card-cat">Bitcoin</p>
+        <h2 class="card-title">BTC supera $107K com influxo institucional recorde em ETFs spot</h2>
+        <p class="card-desc">Os ETFs de Bitcoin spot acumularam mais de $2.1 mil milhões de dólares em 5 sessões consecutivas de entradas líquidas. A BlackRock lidera a corrida com entradas acumuladas de $980M.</p>
+      </div>
+      <div class="card-meta">
+        <span>25 JUN 2026</span>
+        <span>3 MIN LEITURA · VER ANÁLISE →</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location.href='geopolitica.html'">
+      <div>
+        <p class="card-cat">Geopolítica</p>
+        <h2 class="card-title">EUA e Irão fecham acordo no Estreito de Ormuz</h2>
+        <p class="card-desc">O preço do barril de petróleo recua cerca de 3% no mercado internacional com a reabertura parcial das principais rotas de transporte marítimo. Negociações mediadas pelo Qatar.</p>
+      </div>
+      <div class="card-meta">
+        <span>24 JUN 2026</span>
+        <span>4 MIN LEITURA · VER ANÁLISE →</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location.href='tech.html'">
+      <div>
+        <p class="card-cat">Tech · Regulação</p>
+        <h2 class="card-title">xAI/Musk sob pressão do DOJ por turbinas não licenciadas em Memphis</h2>
+        <p class="card-desc">Mais de 50 turbinas elétricas a gás foram instaladas nas imediações do supercomputador sem as devidas licenças ambientais. O Departamento de Justiça alega riscos à segurança nacional.</p>
+      </div>
+      <div class="card-meta">
+        <span>23 JUN 2026</span>
+        <span>4 MIN LEITURA · VER ANÁLISE →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- More Articles Grid -->
+  <p class="section-label">Artigos de Fundo &amp; Análise</p>
+  <section class="cards-3">
+    <div class="card-sm" onclick="window.location.href='mercados.html'">
+      <p class="card-sm-cat">Mercados</p>
+      <h2 class="card-sm-title">Ibovespa atinge marco histórico dos 200 000 pontos em rali</h2>
+      <div class="card-meta">
+        <span>24 Jun 2026</span>
+        <span>→</span>
+      </div>
+    </div>
+
+    <div class="card-sm" onclick="window.location.href='economia.html'">
+      <p class="card-sm-cat">China · Economia</p>
+      <h2 class="card-sm-title">Economia de Companhia: mercado de ¥50B beneficia gigantes Meituan e Douyin</h2>
+      <div class="card-meta">
+        <span>23 Jun 2026</span>
+        <span>→</span>
+      </div>
+    </div>
+
+    <div class="card-sm" onclick="window.location.href='economia.html'">
+      <p class="card-sm-cat">Banca · Portugal</p>
+      <h2 class="card-sm-title">Vítimas do BES morrem à espera de justiça — 150 clientes já falecidos</h2>
+      <div class="card-meta">
+        <span>26 Jun 2026</span>
+        <span>→</span>
+      </div>
+    </div>
+
+    <div class="card-sm" onclick="window.location.href='tech.html'">
+      <p class="card-sm-cat">Apple · Inteligência Artificial</p>
+      <h2 class="card-sm-title">Siri via Google Cloud + Nvidia B200 — O novo iOS 27 em Setembro 2026</h2>
+      <div class="card-meta">
+        <span>25 Jun 2026</span>
+        <span>→</span>
+      </div>
+    </div>
+
+    <div class="card-sm" onclick="window.location.href='tech.html'">
+      <p class="card-sm-cat">Anthropic · Regulação</p>
+      <h2 class="card-sm-title">Anthropic no G-7 Évian — Amodei e Hassabis defendem regulação de modelos avançados</h2>
+      <div class="card-meta">
+        <span>22 Jun 2026</span>
+        <span>→</span>
+      </div>
+    </div>
+
+    <div class="card-sm" onclick="window.location.href='mercados.html'">
+      <p class="card-sm-cat">Berkshire Hathaway</p>
+      <h2 class="card-sm-title">Abel assume Berkshire — a era pós-Buffett começa com recorde de $189B em caixa</h2>
+      <div class="card-meta">
+        <span>21 Jun 2026</span>
+        <span>→</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Manifesto / Founder Section -->
+  <section class="manifesto-section">
+    <div class="manifesto-inner">
+      <div class="manifesto-quote">
+        Feito por um emigrante,<br><em>para todos nós.</em>
+      </div>
+      <div class="manifesto-text">
+        <p>O <strong>Tech &amp; Ouro</strong> nasceu de uma simples necessidade: ter um espaço em português e em inglês onde a comunidade lusófona espalhada pelo mundo pudesse encontrar informação clara sobre mercados, economia e desporto, sem truques nem publicidade.</p>
+        <p>Não sou jornalista certificado nem gestor de fundos. Sou um emigrante que trabalha com as mãos, que aprendeu a ler as dinâmicas do mundo ao seu redor e decidiu criar este diário de bordo com o auxílio da tecnologia. Seja muito bem-vindo.</p>
+        <p style="margin-top: 24px;">
+          <a href="sobre.html" class="btn-outline">Saber mais sobre o projecto →</a>
         </p>
-        <a href="#analise" class="hero-read">Ver as últimas notícias</a>
       </div>
-      <aside class="hero-sidebar">
-        <div class="sidebar-item">
-          <span class="tag">Economia</span>
-          <h3 class="sidebar-title">Euro sobe face ao dólar após dados de inflação na zona euro</h3>
-          <p class="sidebar-date">22 Jun 2026 · 4 min</p>
-        </div>
-        <div class="sidebar-item">
-          <span class="tag">Desporto</span>
-          <h3 class="sidebar-title">Sporting e Benfica na corrida aos quartos da Champions 2026</h3>
-          <p class="sidebar-date">21 Jun 2026 · 3 min</p>
-        </div>
-        <div class="sidebar-item">
-          <span class="tag">Emigração</span>
-          <h3 class="sidebar-title">Portugal entre os 10 países mais atractivos para trabalhar na Europa</h3>
-          <p class="sidebar-date">20 Jun 2026 · 5 min</p>
-        </div>
-      </aside>
     </div>
   </section>
 
-  <!-- NEWS GRID - ECONOMIA -->
-  <section class="news" id="analise">
-    <div class="section-head">
-      <h2>Economia &amp; Mercados</h2>
+  <!-- Disclaimer bar at the bottom -->
+  <div class="content-wrap" style="margin-bottom: 20px;">
+    <div class="warning-box">
+      <h2>Aviso Legal (Disclaimer)</h2>
+      <p>Este site tem caráter puramente informativo e reflete opiniões pessoais. Não constitui qualquer tipo de aconselhamento financeiro, fiscal, de investimento ou de trading. Os mercados financeiros acarretam riscos elevados. Invista apenas o capital que pode dar-se ao luxo de perder.</p>
     </div>
-    <div class="news-grid">
+  </div>
 
-      <article class="card">
-        <div class="card-top">
-          <span class="tag">Economia</span>
-          <span class="card-num">01</span>
-        </div>
-        <h2 class="card-title">Inflação em Portugal desce para 2,1% em Junho de 2026</h2>
-        <p class="card-excerpt">O índice de preços ao consumidor recuou pelo terceiro mês consecutivo, impulsionado pela queda nos preços da energia e dos bens alimentares.</p>
-        <div class="card-footer">
-          <span class="date">20 Jun 2026</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-top">
-          <span class="tag">Finanças Pessoais</span>
-          <span class="card-num">02</span>
-        </div>
-        <h2 class="card-title">Euribor a 12 meses: o que esperar até ao fim de 2026</h2>
-        <p class="card-excerpt">O BCE sinalizou mais dois cortes de taxas este ano. Como isso afecta a prestação da casa e os depósitos a prazo dos portugueses.</p>
-        <div class="card-footer">
-          <span class="date">18 Jun 2026</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-top">
-          <span class="tag">Mercados</span>
-          <span class="card-num">03</span>
-        </div>
-        <h2 class="card-title">Euro sobe face ao dólar: o que muda para quem investe nos EUA</h2>
-        <p class="card-excerpt">A valorização do euro em 2026 tem impacto directo nos retornos de ETFs e acções americanas. Estratégias para gerir o risco cambial.</p>
-        <div class="card-footer">
-          <span class="date">17 Jun 2026</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-top">
-          <span class="tag">Impostos</span>
-          <span class="card-num">04</span>
-        </div>
-        <h2 class="card-title">IRS 2026: as principais alterações que precisa de conhecer</h2>
-        <p class="card-excerpt">Novos escalões, deduções actualizadas e mudanças nas mais-valias. O resumo completo do que mudou na entrega do IRS este ano.</p>
-        <div class="card-footer">
-          <span class="date">15 Jun 2026</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-top">
-          <span class="tag">Investimento</span>
-          <span class="card-num">05</span>
-        </div>
-        <h2 class="card-title">Imobiliário em Portugal: os mercados onde ainda vale a pena comprar</h2>
-        <p class="card-excerpt">Lisboa e Porto estão caras, mas há concelhos com yields atractivos e potencial de valorização. A análise mercado a mercado para 2026.</p>
-        <div class="card-footer">
-          <span class="date">12 Jun 2026</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-top">
-          <span class="tag">Reforma</span>
-          <span class="card-num">06</span>
-        </div>
-        <h2 class="card-title">Pensão pública vs PPR: o que rende mais até à reforma</h2>
-        <p class="card-excerpt">Com a Segurança Social sob pressão, cada vez mais portugueses combinam a pensão pública com planos complementares. Os números reais.</p>
-        <div class="card-footer">
-          <span class="date">10 Jun 2026</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- NEWS GRID - DESPORTO -->
-  <section class="news" id="desporto">
-    <div class="section-head">
-      <h2>Desporto</h2>
-    </div>
-    <div class="news-grid">
-
-      <article class="card">
-        <div class="card-top">
-          <span class="tag">Futebol</span>
-          <span class="card-num">01</span>
-        </div>
-        <h2 class="card-title">Cristiano Ronaldo: o legado que vai além dos golos</h2>
-        <p class="card-excerpt">Com mais de 900 golos na carreira, CR7 continua a ser o símbolo maior do futebol português no mundo. O que o torna único para além das estatísticas.</p>
-        <div class="card-footer">
-          <span class="date">22 Jun 2026</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-top">
-          <span class="tag">Champions</span>
-          <span class="card-num">02</span>
-        </div>
-        <h2 class="card-title">Benfica e Sporting na Champions: análise às chances de chegar longe</h2>
-        <p class="card-excerpt">Dois clubes portugueses na fase de grupos. Os plantéis, os adversários e o que é preciso para chegar aos quartos-de-final em 2026.</p>
-        <div class="card-footer">
-          <span class="date">19 Jun 2026</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-top">
-          <span class="tag">Seleção</span>
-          <span class="card-num">03</span>
-        </div>
-        <h2 class="card-title">Portugal no Mundial 2026: o grupo, os favoritos e a esperança de ir longe</h2>
-        <p class="card-excerpt">O sorteio colocou Portugal num grupo difícil. Análise ao plantel, ao estilo de jogo de Roberto Martínez e às probabilidades de chegar à final.</p>
-        <div class="card-footer">
-          <span class="date">16 Jun 2026</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- FEATURED STRIP -->
-  <section class="featured" id="mercados">
-    <div class="section-head" style="padding-top:64px;">
-      <h2>Em Foco</h2>
-    </div>
-    <div class="featured-inner" style="padding-bottom:64px;">
-
-      <div class="featured-item">
-        <div class="featured-num">07</div>
-        <span class="tag">Ouro</span>
-        <h3 class="featured-title">O metal dourado como hedge em tempos de inflação estrutural</h3>
-        <div class="featured-meta">
-          <span class="date">8 Jun 2026</span>
-        </div>
-      </div>
-
-      <div class="featured-divider"></div>
-
-      <div class="featured-item">
-        <div class="featured-num">08</div>
-        <span class="tag">Startups</span>
-        <h3 class="featured-title">Onde está o dinheiro de venture capital em Portugal e na Europa</h3>
-        <div class="featured-meta">
-          <span class="date">5 Jun 2026</span>
-        </div>
-      </div>
-
-      <div class="featured-divider"></div>
-
-      <div class="featured-item">
-        <div class="featured-num">09</div>
-        <span class="tag">Automação</span>
-        <h3 class="featured-title">O emprego que a IA vai mesmo substituir — e o que isso significa para quem investe agora</h3>
-        <div class="featured-meta">
-          <span class="date">3 Jun 2026</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- MANIFESTO -->
-  <section class="manifesto" id="sobre">
-    <div class="manifesto-left">
-      <blockquote class="manifesto-quote">
-        Economia<br>
-        e desporto,<br>
-        <em>em português.</em>
-      </blockquote>
-    </div>
-    <div class="manifesto-right">
-      <p>TechOuro é um projecto independente de informação económica, financeira e desportiva para a comunidade lusófona — portugueses, brasileiros, cabo-verdianos, angolanos e moçambicanos.</p>
-      <p>Sem publicidade, sem agenda. Só análise útil e directa.</p>
-      <a href="mailto:tiagosaianda88@gmail.com" class="btn">Entrar em contacto →</a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
+  <!-- Premium Footer -->
   <footer>
-    <div class="footer-logo">
-      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="50" cy="44" rx="22" ry="20" fill="#C9A227" opacity=".4"/>
-        <ellipse cx="50" cy="50" rx="17" ry="15" fill="#C9A227" opacity=".6"/>
-      </svg>
-      <span class="footer-name">TechOuro</span>
+    <div class="footer-content">
+      <div class="footer-brand">Tech &amp; Ouro</div>
+      <div class="footer-desc">Análise de mercados globais, economia local e notícias de desporto para investidores e comunidades lusófonas no estrangeiro.</div>
+      <div class="footer-links-grid">
+        <a href="index.html">Início</a>
+        <a href="mercados.html">Mercados</a>
+        <a href="economia.html">Economia</a>
+        <a href="desporto.html">Desporto</a>
+        <a href="paises.html">Países</a>
+        <a href="noticias.html">Notícias</a>
+      </div>
     </div>
-    <ul class="footer-links">
-      <li><a href="#analise">Economia</a></li>
-      <li><a href="#desporto">Desporto</a></li>
-      <li><a href="#mercados">Mercados</a></li>
-      <li><a href="mailto:tiagosaianda88@gmail.com">Contacto</a></li>
-    </ul>
-    <p class="footer-copy">&copy; 2026 TechOuro</p>
+    <div class="footer-bottom">
+      <span>© 2026 techeouro.net · Todos os direitos reservados. Algarve, Portugal.</span>
+      <span>Contacto: <a href="mailto:tiagowater@yahoo.com">tiagowater@yahoo.com</a></span>
+    </div>
   </footer>
 
+  <!-- Persistent Corner Floating Badge -->
+  <a href="sobre.html" class="footer-fixed-badge" title="Sobre o Criador">
+    <img src="logo-lion.jpg" alt="Tech & Ouro Icon">
+  </a>
+
+  <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Economia &amp; Finanças — Tech &amp; Ouro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sticky Glass Header -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="logo-lion.jpg" class="nav-logo-img" alt="Tech & Ouro Logo">
+      <div class="nav-brand">
+        Tech &amp; Ouro
+        <span>A Gazeta do Ouro</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Início</a></li>
+      <li><a href="mercados.html">Mercados</a></li>
+      <li><a href="economia.html" class="active">Economia</a></li>
+      <li><a href="desporto.html">Desporto</a></li>
+      <li><a href="paises.html">Países</a></li>
+      <li><a href="noticias.html">Notícias ao Vivo</a></li>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="terminal.html" style="color: var(--gold); font-weight: bold; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 4px;">Terminal ⚡</a></li>
+    </ul>
+    <div class="lang-toggle-nav">
+      <button id="lang-btn-pt" class="lang-btn active" onclick="setLanguage('pt')">PT</button>
+      <button id="lang-btn-en" class="lang-btn" onclick="setLanguage('en')">EN</button>
+    </div>
+    <a href="sobre.html#contacto" class="nav-cta">Contacto</a>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <p style="font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; font-weight: 600;">§ Secção</p>
+    <h1 class="page-title">Economia &amp; <em>Finanças</em></h1>
+  </header>
+
+  <!-- Articles Grid -->
+  <section class="cards-3" style="margin-top: 40px;">
+    <div class="card" onclick="window.location.href='artigo-2.html'">
+      <div>
+        <p class="card-cat">Emigrantes</p>
+        <h2 class="card-title">Custo de vida na Europa: onde vale a pena emigrar em 2026</h2>
+        <p class="card-desc">Alemanha, Holanda, Suíça ou Irlanda? Comparamos salários médios, taxas de impostos locais e qualidade de vida para os cidadãos lusófonos que procuram novos desafios fora do país.</p>
+      </div>
+      <div class="card-meta">
+        <span>20 JUN 2026</span>
+        <span>LER ARTIGO →</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location.href='#'">
+      <div>
+        <p class="card-cat">Finanças Pessoais</p>
+        <h2 class="card-title">Como enviar dinheiro para Portugal sem perder na conversão cambial</h2>
+        <p class="card-desc">Wise, Revolut ou transferência bancária internacional? O guia completo de remessas e conversões sem taxas ocultas para maximizar as suas poupanças.</p>
+      </div>
+      <div class="card-meta">
+        <span>18 JUN 2026</span>
+        <span>LER ARTIGO →</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location.href='#'">
+      <div>
+        <p class="card-cat">Câmbios</p>
+        <h2 class="card-title">Euro fraco ou forte: o impacto real no seu salário no estrangeiro</h2>
+        <p class="card-desc">Ganhar em moedas estrangeiras (como a Libra ou Dólar) e ter despesas ou família em Portugal tem vantagens, mas também riscos de inflação cambial que importa monitorizar.</p>
+      </div>
+      <div class="card-meta">
+        <span>17 JUN 2026</span>
+        <span>LER ARTIGO →</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location.href='#'">
+      <div>
+        <p class="card-cat">Impostos</p>
+        <h2 class="card-title">IRS de emigrante: o que tem de declarar em Portugal</h2>
+        <p class="card-desc">Evite a dupla tributação e multas desnecessárias. Saiba o que muda no reporte de rendimentos obtidos no estrangeiro conforme o seu estatuto de residência fiscal.</p>
+      </div>
+      <div class="card-meta">
+        <span>15 JUN 2026</span>
+        <span>LER ARTIGO →</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location.href='#'">
+      <div>
+        <p class="card-cat">Imobiliário</p>
+        <h2 class="card-title">Comprar casa em Portugal a partir do estrangeiro: o guia prático</h2>
+        <p class="card-desc">Da documentação básica necessária, pedidos de crédito à habitação para não residentes, até à outorga de procuração pública. Tudo o que precisa de saber passo a passo.</p>
+      </div>
+      <div class="card-meta">
+        <span>12 JUN 2026</span>
+        <span>LER ARTIGO →</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location.href='#'">
+      <div>
+        <p class="card-cat">Reforma</p>
+        <h2 class="card-title">Pensão de emigrante: como funciona a unificação de descontos</h2>
+        <p class="card-desc">Os anos que trabalhou no estrangeiro acumulam para a reforma portuguesa? Explicamos o funcionamento do regulamento comunitário de coordenação dos sistemas de segurança social.</p>
+      </div>
+      <div class="card-meta">
+        <span>10 JUN 2026</span>
+        <span>LER ARTIGO →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer Container -->
+  <div class="content-wrap">
+    <div class="warning-box">
+      <h2>Aviso Legal (Disclaimer)</h2>
+      <p>Não sou economista. O conteúdo deste site é partilhado por puro interesse de partilha e opinião pessoal. Nenhuma análise deve ser interpretada como aconselhamento financeiro. Invista e decida por sua conta e risco.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">Tech &amp; Ouro</div>
+      <div class="footer-desc">Análise de mercados globais, economia local e notícias de desporto para investidores e comunidades lusófonas no estrangeiro.</div>
+      <div class="footer-links-grid">
+        <a href="index.html">Início</a>
+        <a href="mercados.html">Mercados</a>
+        <a href="economia.html">Economia</a>
+        <a href="desporto.html">Desporto</a>
+        <a href="paises.html">Países</a>
+        <a href="noticias.html">Notícias</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 techeouro.net · Algarve, Portugal.</span>
+      <span>Contacto: <a href="mailto:tiagowater@yahoo.com">tiagowater@yahoo.com</a></span>
+    </div>
+  </footer>
+
+  <!-- Persistent Corner Floating Badge -->
+  <a href="sobre.html" class="footer-fixed-badge">
+    <img src="logo-lion.jpg" alt="Tech & Ouro Icon">
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
