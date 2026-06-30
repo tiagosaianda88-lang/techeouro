@@ -14,17 +14,45 @@ RSS_FEEDS = [
 # Path is relative to the root of the repository
 HTML_FILE = "noticias.html"
 
+def get_existing_links():
+    """Lê o ficheiro noticias.html e extrai os links das notícias já publicadas (Cache)."""
+    if not os.path.exists(HTML_FILE):
+        return set()
+    
+    print(f"Reading existing links from {HTML_FILE} for caching...")
+    try:
+        with open(HTML_FILE, "r", encoding="utf-8") as f:
+            content = f.read()
+        
+        # Procura por todos os links originais dentro do bloco de notícias da IA
+        links = set(re.findall(r'href="([^"]+)"', content))
+        print(f"Found {len(links)} existing links in cache.")
+        return links
+    except Exception as e:
+        print(f"Error reading cache: {e}")
+        return set()
+
 def fetch_news():
     print("Fetching news from RSS feeds...")
+    existing_links = get_existing_links()
     articles = []
+    skipped_count = 0
+    
     for feed_url in RSS_FEEDS:
         feed = feedparser.parse(feed_url)
-        for entry in feed.entries[:5]: # Get top 5 from each feed
+        for entry in feed.entries[:8]: # Puxa até 8 de cada para compensar os repetidos filtrados
+            link = entry.get("link", "").strip()
+            
+            # Se o link já existir no noticias.html, ignora para poupar a API
+            if link in existing_links:
+                skipped_count += 1
+                continue
+                
             title = entry.get("title", "")
             summary = entry.get("summary", "")
-            link = entry.get("link", "")
             articles.append(f"Title: {title}\nSummary: {summary}\nLink: {link}\n---")
     
+    print(f"Filtered out {skipped_count} duplicate articles already present in HTML.")
     return "\n".join(articles)
 
 def generate_ai_news(news_text):
@@ -53,7 +81,7 @@ def generate_ai_news(news_text):
             <p class="card-desc">
                 <span lang="pt">A short, engaging 2-sentence summary in Portuguese.</span>
                 <span lang="en">A short, engaging 2-sentence summary in English.</span>
-            </p>
+            </h2>
         </div>
         <div class="card-meta">
             <span>
@@ -89,13 +117,13 @@ def update_html_file(new_html):
             content = f.read()
             
         # We look for the special marker in the HTML
-        pattern = r"(<!-- AI_NEWS_START -->)(.*?)(<!-- AI_NEWS_END -->)"
+        pattern = r"()(.*?)()"
         
         if not re.search(pattern, content, re.DOTALL):
-            print("Could not find the <!-- AI_NEWS_START --> marker in the HTML file!")
+            print("Could not find the marker in the HTML file!")
             return
             
-        updated_content = re.sub(pattern, rf"\1\n{new_html}\n\3", content, flags=re.DOTALL)
+        updated_content = re.sub(pattern, rf"\1\n{new_html}\n{3}", content, flags=re.DOTALL)
         
         with open(HTML_FILE, "w", encoding="utf-8") as f:
             f.write(updated_content)
@@ -108,8 +136,8 @@ def update_html_file(new_html):
 if __name__ == "__main__":
     try:
         raw_news = fetch_news()
-        if not raw_news:
-            print("No news found from feeds.")
+        if not raw_news.strip():
+            print("No new articles found. Everything is already up to date in the HTML file. Skipping AI call.")
             exit()
             
         ai_html = generate_ai_news(raw_news)
