@@ -39,16 +39,33 @@ def generate_ai_news(news_text):
     You are an expert financial and tech news editor for a premium Portuguese/English news site called 'Tech & Ouro'.
     Read the following recent news articles and pick the 5 most important and impactful ones for our readers (investors, tech enthusiasts).
     
-    For each of the 5 chosen articles, generate the following HTML snippet:
+    For each of the 5 chosen articles, generate the following HTML snippet (make sure the category, title, description, and source link are fully translated into both Portuguese and English using span tags with lang="pt" and lang="en" attributes):
     <div class="card">
         <div>
-            <p class="card-cat">Categoria (e.g. Ouro, Bitcoin, Tech, Macro)</p>
-            <h2 class="card-title">A catchy Portuguese title here</h2>
-            <p class="card-desc">A short, engaging 2-sentence summary in Portuguese.</p>
+            <p class="card-cat">
+                <span lang="pt">Categoria em Português</span>
+                <span lang="en">Category in English</span>
+            </p>
+            <h2 class="card-title">
+                <span lang="pt">A catchy Portuguese title here</span>
+                <span lang="en">A catchy English title here</span>
+            </h2>
+            <p class="card-desc">
+                <span lang="pt">A short, engaging 2-sentence summary in Portuguese.</span>
+                <span lang="en">A short, engaging 2-sentence summary in English.</span>
+            </p>
         </div>
         <div class="card-meta">
-            <span>HOJE</span>
-            <span><a href="LINK_HERE" target="_blank" style="color: inherit; text-decoration: none;">LER FONTE ORIGINAL →</a></span>
+            <span>
+                <span lang="pt">HOJE</span>
+                <span lang="en">TODAY</span>
+            </span>
+            <span>
+                <a href="LINK_HERE" target="_blank" style="color: inherit; text-decoration: none;">
+                    <span lang="pt">LER FONTE ORIGINAL →</span>
+                    <span lang="en">READ ORIGINAL SOURCE →</span>
+                </a>
+            </span>
         </div>
     </div>
     

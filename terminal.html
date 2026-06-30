@@ -24,20 +24,20 @@
       </div>
     </a>
     <ul class="nav-links">
-      <li><a href="index.html">Início</a></li>
-      <li><a href="mercados.html">Mercados</a></li>
-      <li><a href="economia.html">Economia</a></li>
-      <li><a href="desporto.html">Desporto</a></li>
-      <li><a href="paises.html">Países</a></li>
-      <li><a href="noticias.html">Notícias ao Vivo</a></li>
-      <li><a href="sobre.html">Sobre</a></li>
-      <li><a href="terminal.html" class="active" style="color: var(--gold); font-weight: bold; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 4px;">Terminal ⚡</a></li>
+      <li><a href="index.html"><span lang="pt">Início</span><span lang="en">Home</span></a></li>
+      <li><a href="mercados.html"><span lang="pt">Mercados</span><span lang="en">Markets</span></a></li>
+      <li><a href="economia.html"><span lang="pt">Economia</span><span lang="en">Economy</span></a></li>
+      <li><a href="desporto.html"><span lang="pt">Desporto</span><span lang="en">Sports</span></a></li>
+      <li><a href="paises.html"><span lang="pt">Países</span><span lang="en">Countries</span></a></li>
+      <li><a href="noticias.html"><span lang="pt">Notícias ao Vivo</span><span lang="en">Live News</span></a></li>
+      <li><a href="sobre.html"><span lang="pt">Sobre</span><span lang="en">About</span></a></li>
+      <li><a href="terminal.html" class="active" style="color: var(--gold); font-weight: bold; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 4px;"><span lang="pt">Terminal ⚡</span><span lang="en">Terminal ⚡</span></a></li>
     </ul>
     <div class="lang-toggle-nav">
       <button id="lang-btn-pt" class="lang-btn active" onclick="setLanguage('pt')">PT</button>
       <button id="lang-btn-en" class="lang-btn" onclick="setLanguage('en')">EN</button>
     </div>
-    <a href="sobre.html#contacto" class="nav-cta">Contacto</a>
+    <a href="sobre.html#contacto" class="nav-cta"><span lang="pt">Contacto</span><span lang="en">Contact</span></a>
   </nav>
 
   <main style="max-width: 1400px; margin: 30px auto; padding: 0 20px;">
@@ -248,16 +248,11 @@
     var root=document.getElementById('term');
     var CLS={'Ações Global':'#00ff8c','Ações Value':'#aa88ff','Commodities':'#ff8c38','Cripto':'#f7931a','Obrigações':'#38b6ff','Liquidez':'#8a9e8a'};
     var DEFAULT=[
-     {sym:'VWCE.DE',name:'Vanguard All-World',cls:'Ações Global',shares:216,avg:108.50,price:131.94,chg:2.1,ytd:14.2},
-     {sym:'VDMX.AS',name:'VanEck Dev Markets',cls:'Ações Global',shares:400,avg:35.80,price:41.25,chg:1.4,ytd:9.7},
-     {sym:'BRK-B',name:'Berkshire Hathaway',cls:'Ações Value',shares:25,avg:478.00,price:540.00,chg:-0.3,ytd:11.8},
-     {sym:'CEBS',name:'iShares Copper Mining',cls:'Commodities',shares:513,avg:11.40,price:14.62,chg:3.8,ytd:22.4},
-     {sym:'IBTE.DE',name:'iShares Bitcoin ETF',cls:'Cripto',shares:54,avg:62.00,price:97.22,chg:5.2,ytd:38.1},
-     {sym:'DWS-HC',name:'DWS High Conviction',cls:'Ações Value',shares:150,avg:21.30,price:25.00,chg:0.8,ytd:6.3}
+     {sym:'GOOG',name:'Alphabet Inc. (Google)',cls:'Ações Global',shares:150,avg:152.40,price:180.20,chg:1.1,ytd:18.5}
     ];
     var H;
-    try{var s=localStorage.getItem('pf_v4');H=s?JSON.parse(s):JSON.parse(JSON.stringify(DEFAULT));}catch(e){H=JSON.parse(JSON.stringify(DEFAULT));}
-    function persist(){try{localStorage.setItem('pf_v4',JSON.stringify(H));}catch(e){}}
+    try{var s=localStorage.getItem('pf_v5');H=s?JSON.parse(s):JSON.parse(JSON.stringify(DEFAULT));}catch(e){H=JSON.parse(JSON.stringify(DEFAULT));}
+    function persist(){try{localStorage.setItem('pf_v5',JSON.stringify(H));}catch(e){}}
     function color(h){return CLS[h.cls]||'#8a9e8a';}
     function val(h){return h.shares*h.price;}
     function cost(h){return h.shares*h.avg;}
@@ -449,19 +444,28 @@
   <footer>
     <div class="footer-content">
       <div class="footer-brand">Tech &amp; Ouro</div>
-      <div class="footer-desc">Análise de mercados globais, economia local e notícias de desporto para investidores e comunidades lusófonas no estrangeiro.</div>
+      <div class="footer-desc">
+        <span lang="pt">Análise de mercados globais, economia local e notícias de desporto para investidores e comunidades de emigrantes no estrangeiro.</span>
+        <span lang="en">Analysis of global markets, local economy, and sports news for investors and emigrant communities abroad.</span>
+      </div>
       <div class="footer-links-grid">
-        <a href="index.html">Início</a>
-        <a href="mercados.html">Mercados</a>
-        <a href="economia.html">Economia</a>
-        <a href="desporto.html">Desporto</a>
-        <a href="paises.html">Países</a>
-        <a href="noticias.html">Notícias</a>
+        <a href="index.html"><span lang="pt">Início</span><span lang="en">Home</span></a>
+        <a href="mercados.html"><span lang="pt">Mercados</span><span lang="en">Markets</span></a>
+        <a href="economia.html"><span lang="pt">Economia</span><span lang="en">Economy</span></a>
+        <a href="desporto.html"><span lang="pt">Desporto</span><span lang="en">Sports</span></a>
+        <a href="paises.html"><span lang="pt">Países</span><span lang="en">Countries</span></a>
+        <a href="noticias.html"><span lang="pt">Notícias</span><span lang="en">News</span></a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 techeouro.net · Todos os direitos reservados. Algarve, Portugal.</span>
-      <span>Contacto: <a href="mailto:tiagowater@yahoo.com">tiagowater@yahoo.com</a></span>
+      <span>
+        <span lang="pt">© 2026 techeouro.net · Todos os direitos reservados. Algarve, Portugal.</span>
+        <span lang="en">© 2026 techeouro.net · All rights reserved. Algarve, Portugal.</span>
+      </span>
+      <span>
+        <span lang="pt">Contacto: <a href="mailto:tiagowater@yahoo.com">tiagowater@yahoo.com</a></span>
+        <span lang="en">Contact: <a href="mailto:tiagowater@yahoo.com">tiagowater@yahoo.com</a></span>
+      </span>
     </div>
   </footer>
 
