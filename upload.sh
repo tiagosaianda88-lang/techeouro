@@ -16,3 +16,11 @@ git push origin main
 echo "----------------------------------------"
 echo "Upload concluido com sucesso no GitHub!"
 echo "----------------------------------------"
+
+echo "A iniciar o deploy para o Netlify..."
+npx netlify deploy --prod
+
+echo "----------------------------------------"
+echo "Site atualizado com sucesso no Netlify!"
+echo "URL: https://techeouro.netlify.app"
+echo "----------------------------------------"
