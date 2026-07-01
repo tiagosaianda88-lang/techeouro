@@ -248,11 +248,16 @@
     var root=document.getElementById('term');
     var CLS={'Ações Global':'#00ff8c','Ações Value':'#aa88ff','Commodities':'#ff8c38','Cripto':'#f7931a','Obrigações':'#38b6ff','Liquidez':'#8a9e8a'};
     var DEFAULT=[
-     {sym:'GOOG',name:'Alphabet Inc. (Google)',cls:'Ações Global',shares:150,avg:152.40,price:180.20,chg:1.1,ytd:18.5}
+     {sym:'VWCE.DE',name:'Vanguard All-World',cls:'Ações Global',shares:216,avg:108.50,price:131.94,chg:2.1,ytd:14.2},
+     {sym:'VDMX.AS',name:'VanEck Dev Markets',cls:'Ações Global',shares:400,avg:35.80,price:41.25,chg:1.4,ytd:9.7},
+     {sym:'BRK-B',name:'Berkshire Hathaway',cls:'Ações Value',shares:25,avg:478.00,price:540.00,chg:-0.3,ytd:11.8},
+     {sym:'CEBS',name:'iShares Copper Mining',cls:'Commodities',shares:513,avg:11.40,price:14.62,chg:3.8,ytd:22.4},
+     {sym:'IBTE.DE',name:'iShares Bitcoin ETF',cls:'Cripto',shares:54,avg:62.00,price:97.22,chg:5.2,ytd:38.1},
+     {sym:'DWS-HC',name:'DWS High Conviction',cls:'Ações Value',shares:150,avg:21.30,price:25.00,chg:0.8,ytd:6.3}
     ];
     var H;
-    try{var s=localStorage.getItem('pf_v5');H=s?JSON.parse(s):JSON.parse(JSON.stringify(DEFAULT));}catch(e){H=JSON.parse(JSON.stringify(DEFAULT));}
-    function persist(){try{localStorage.setItem('pf_v5',JSON.stringify(H));}catch(e){}}
+    try{var s=localStorage.getItem('pf_v4');H=s?JSON.parse(s):JSON.parse(JSON.stringify(DEFAULT));}catch(e){H=JSON.parse(JSON.stringify(DEFAULT));}
+    function persist(){try{localStorage.setItem('pf_v4',JSON.stringify(H));}catch(e){}}
     function color(h){return CLS[h.cls]||'#8a9e8a';}
     function val(h){return h.shares*h.price;}
     function cost(h){return h.shares*h.avg;}
@@ -445,8 +450,8 @@
     <div class="footer-content">
       <div class="footer-brand">Tech &amp; Ouro</div>
       <div class="footer-desc">
-        <span lang="pt">Análise de mercados globais, economia local e notícias de desporto para investidores e comunidades de emigrantes no estrangeiro.</span>
-        <span lang="en">Analysis of global markets, local economy, and sports news for investors and emigrant communities abroad.</span>
+        <span lang="pt">Análise de mercados globais, economia local e notícias de desporto para investidores, portugueses e toda a comunidade lusófona.</span>
+        <span lang="en">Analysis of global markets, local economy, and sports news for investors and Portuguese people, and the entire Lusophone community.</span>
       </div>
       <div class="footer-links-grid">
         <a href="index.html"><span lang="pt">Início</span><span lang="en">Home</span></a>
@@ -459,8 +464,8 @@
     </div>
     <div class="footer-bottom">
       <span>
-        <span lang="pt">© 2026 techeouro.net · Todos os direitos reservados. Algarve, Portugal.</span>
-        <span lang="en">© 2026 techeouro.net · All rights reserved. Algarve, Portugal.</span>
+        <span lang="pt">© 2026 techeouro.com · Todos os direitos reservados. Algarve, Portugal.</span>
+        <span lang="en">© 2026 techeouro.com · All rights reserved. Algarve, Portugal.</span>
       </span>
       <span>
         <span lang="pt">Contacto: <a href="mailto:tiagowater@yahoo.com">tiagowater@yahoo.com</a></span>
