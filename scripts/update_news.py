@@ -65,7 +65,7 @@ def generate_ai_news(news_text):
     
     prompt = f"""
     You are an expert financial and tech news editor for a premium Portuguese/English news site called 'Tech & Ouro'.
-    Read the following recent news articles and pick the 5 most important and impactful ones for our readers (investors, tech enthusiasts).
+    Read the following recent news articles and pick the 6 to 8 most important and impactful ones for our readers (investors, tech enthusiasts).
     
     For each of the 5 chosen articles, generate the following HTML snippet (make sure the category, title, description, and source link are fully translated into both Portuguese and English using span tags with lang="pt" and lang="en" attributes):
     <div class="card">
@@ -97,7 +97,7 @@ def generate_ai_news(news_text):
         </div>
     </div>
     
-    Return ONLY the HTML code for the 5 articles. Do not wrap it in markdown code blocks.
+    Return ONLY the HTML code for the 6 to 8 articles. Do not wrap it in markdown code blocks.
     
     Here are the raw articles:
     {news_text}
@@ -117,13 +117,13 @@ def update_html_file(new_html):
             content = f.read()
             
         # We look for the special marker in the HTML
-        pattern = r"()(.*?)()"
+        pattern = r"(<!-- AI_NEWS_START -->)(.*?)(<!-- AI_NEWS_END -->)"
         
         if not re.search(pattern, content, re.DOTALL):
             print("Could not find the marker in the HTML file!")
             return
             
-        updated_content = re.sub(pattern, rf"\1\n{new_html}\n{3}", content, flags=re.DOTALL)
+        updated_content = re.sub(pattern, r"\1\n" + new_html + r"\n\3", content, flags=re.DOTALL)
         
         with open(HTML_FILE, "w", encoding="utf-8") as f:
             f.write(updated_content)

@@ -1077,11 +1077,13 @@ footer {
   justify-content: center;
   box-shadow: var(--shadow-md);
   transition: var(--transition);
+  width: 6cm !important;
+  height: 6cm !important;
 }
 
 .footer-fixed-badge img {
-  height: 38px;
-  width: 38px;
+  height: 100% !important;
+  width: 100% !important;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -1369,4 +1371,74 @@ body.lang-en [lang="pt"] {
 .lang-toggle-nav .lang-btn.active {
   color: var(--gold);
   background: rgba(212, 175, 55, 0.1);
+}
+
+/* Ad Banner & Propulsion Styles appended */
+@keyframes lion-propulsion {
+  0% {
+    transform: translateY(0) scale(1);
+    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.2));
+  }
+  50% {
+    transform: translateY(-8px) scale(1.03);
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.2));
+  }
+}
+
+.lion-propulsion-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+  animation: lion-propulsion 4s ease-in-out infinite;
+}
+
+.lion-propulsion-container svg {
+  width: 100px;
+  height: 100px;
+}
+
+/* Ad Banner Styles */
+.ad-banner {
+  background: var(--surface);
+  border: 1px dashed var(--gold-alpha-heavy);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  margin: 30px auto;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ad-banner::before {
+  content: 'AD';
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  font-weight: bold;
+}
+
+.ad-banner-title {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 4px;
+}
+
+.ad-banner-subtitle {
+  font-size: 0.65rem;
+  color: var(--muted);
 }
