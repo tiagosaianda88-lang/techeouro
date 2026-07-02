@@ -51,10 +51,12 @@ def extract_text_from_pdf(pdf_path, max_pages=5):
         return ""
 
 def fetch_news():
-    # 1. Check for manual news drafts or PDF files in the conteudos/ directory (e.g., pasted from Telegram)
-    print("Checking for manual news drafts/PDFs in conteudos/...")
+    # 1. Check for manual news drafts, PDF files, or screenshots in the conteudos/ directory
+    print("Checking for manual news drafts/PDFs/Images in conteudos/...")
     manual_articles = []
+    images_parts = []
     conteudos_dir = "conteudos"
+    
     if os.path.exists(conteudos_dir):
         for filename in sorted(os.listdir(conteudos_dir)):
             filepath = os.path.join(conteudos_dir, filename)
@@ -63,6 +65,7 @@ def fetch_news():
                 pdf_text = extract_text_from_pdf(filepath, max_pages=5)
                 if pdf_text:
                     manual_articles.append(f"Source PDF File: {filename}\nContent:\n{pdf_text}\n---")
+            # Support Text files
             elif filename.endswith(".txt"):
                 try:
                     with open(filepath, "r", encoding="utf-8") as f:
@@ -72,13 +75,25 @@ def fetch_news():
                         manual_articles.append(f"Source Text File: {filename}\nContent:\n{content}\n---")
                 except Exception as e:
                     print(f"Error reading local file {filename}: {e}")
+            # Support Image files (screenshots!)
+            elif filename.lower().endswith((".png", ".jpg", ".jpeg")):
+                try:
+                    from google.genai import types
+                    mime_type = "image/png" if filename.lower().endswith(".png") else "image/jpeg"
+                    with open(filepath, "rb") as f:
+                        img_data = f.read()
+                    part = types.Part.from_bytes(data=img_data, mime_type=mime_type)
+                    images_parts.append(part)
+                    print(f"Loaded screenshot image: {filename}")
+                except Exception as e:
+                    print(f"Error loading image {filename}: {e}")
                     
-    if manual_articles:
-        print(f"Found {len(manual_articles)} manual news/PDF files. Using them as source.")
-        return "\n".join(manual_articles)
+    if manual_articles or images_parts:
+        print(f"Found {len(manual_articles)} manual news/PDF files and {len(images_parts)} screenshot images. Using them as source.")
+        return "\n".join(manual_articles), images_parts
         
     # 2. Fallback to premium RSS feeds if no manual content is found
-    print("No manual drafts found. Fetching fresh news from RSS feeds...")
+    print("No manual drafts/images found. Fetching fresh news from RSS feeds...")
     articles = []
     for feed_url in RSS_FEEDS:
         feed = feedparser.parse(feed_url)
@@ -87,10 +102,10 @@ def fetch_news():
             summary = entry.get("summary", "")
             articles.append(f"Title: {title}\nSummary: {summary}\n---")
     
-    return "\n".join(articles)
+    return "\n".join(articles), []
 
-def generate_ai_news(news_text):
-    print("Sending news to Gemini AI for analysis...")
+def generate_ai_news(news_text, images_parts):
+    print("Sending news and images to Gemini AI for analysis...")
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         raise ValueError("GEMINI_API_KEY environment variable not set!")
@@ -99,7 +114,9 @@ def generate_ai_news(news_text):
     
     prompt = f"""
     You are an expert financial and tech news editor for a premium Portuguese/English news site called 'Tech & Ouro'.
-    Read the following recent news articles and select the 6 to 8 most important and impactful ones for our readers (investors, tech enthusiasts).
+    Read the following recent news articles and screenshots (if any) and select the 6 to 8 most important and impactful ones for our readers (investors, tech enthusiasts).
+    
+    If there are attached images/screenshots, read their text content and extract the news from them as well.
     
     For each of the selected articles, generate the following HTML snippet (make sure the category, title, description, and internal link are fully translated into both Portuguese and English using span tags with lang="pt" and lang="en" attributes):
     <div class="card">
@@ -144,13 +161,17 @@ def generate_ai_news(news_text):
     
     Return ONLY the HTML code for the 6 to 8 articles. Do not wrap it in markdown code blocks.
     
-    Here is the raw articles:
+    Here is the raw text articles:
     {news_text}
     """
     
+    contents = [prompt]
+    for part in images_parts:
+        contents.append(part)
+        
     response = client.models.generate_content(
         model='gemini-2.5-flash',
-        contents=prompt,
+        contents=contents,
     )
     
     return response.text.strip()
@@ -180,12 +201,12 @@ def update_html_file(new_html):
 
 if __name__ == "__main__":
     try:
-        raw_news = fetch_news()
-        if not raw_news.strip():
-            print("No new articles found.")
+        raw_news, images_parts = fetch_news()
+        if not raw_news.strip() and not images_parts:
+            print("No new articles or screenshots found.")
             exit()
             
-        ai_html = generate_ai_news(raw_news)
+        ai_html = generate_ai_news(raw_news, images_parts)
         update_html_file(ai_html)
     except Exception as e:
         print(f"Failed to update news: {e}")
