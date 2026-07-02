@@ -1,0 +1,67 @@
+# =================================================================
+# Tech & Ouro - Robots Protection Protocol
+# =================================================================
+
+# 1. Block AI Scrapers & Data Crawlers (Protects original content from LLMs)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Anthropic-AI
+Disallow: /
+
+User-agent: Cohere-AI
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: diffbot
+Disallow: /
+
+User-agent: BytesSpider
+Disallow: /
+
+# 2. Block general bad bots and scrapers
+User-agent: Rogerbot
+Disallow: /
+
+User-agent: Dotbot
+Disallow: /
+
+User-agent: Megaindex
+Disallow: /
+
+# 3. Allow standard search engines (Google Search & Bing Search)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Note: To block absolutely ALL bots (including Google Search), uncomment the two lines below:
+# User-agent: *
+# Disallow: /
