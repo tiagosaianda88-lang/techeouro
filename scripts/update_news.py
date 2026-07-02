@@ -4,10 +4,13 @@ import feedparser
 from google import genai
 
 # List your RSS feeds here for Tech & Ouro (Markets, Crypto, Tech/Business)
+# Using highly reliable Google News RSS queries to get fresh news from the best global sources
 RSS_FEEDS = [
     "https://feeds.a.dj.com/rss/RSSMarketsMain.xml", # WSJ Markets
-    "https://www.coindesk.com/arc/outboundfeeds/rss/", # CoinDesk
-    "https://feeds.bbci.co.uk/news/business/rss.xml" # BBC Business
+    "https://feeds.a.dj.com/rss/RSSWorldNews.xml", # WSJ World News
+    "https://news.google.com/rss/search?q=when:24h+source:reuters&hl=en-US&gl=US&ceid=US:en", # Reuters Global
+    "https://news.google.com/rss/search?q=when:24h+source:bloomberg&hl=en-US&gl=US&ceid=US:en", # Bloomberg Markets
+    "https://news.google.com/rss/search?q=when:24h+source:financial+times&hl=en-US&gl=US&ceid=US:en" # Financial Times
 ]
 
 # The file we are going to update
