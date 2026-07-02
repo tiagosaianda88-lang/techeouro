@@ -1,0 +1,6 @@
+=== disclaimer.html (Aviso Legal) ===
+
+[AVISO LEGAL - TEXTO (PT)]
+Nenhuma análise, gráfico ou artigo disponibilizado neste portal constitui conselho de investimento ou recomendação financeira profissional. Faça a sua própria due diligence antes de qualquer tomada de decisão.
+[AVISO LEGAL - TEXTO (EN)]
+No analysis, chart, or article provided on this portal constitutes investment advice or professional financial recommendation. Do your own due diligence before making any decision.

@@ -1,0 +1,33 @@
+=== artigo-2.html (Euribor) ===
+
+[TITULO ARTIGO (PT)]
+Euribor a 12 meses: o que esperar até ao fim de 2026
+[TITULO ARTIGO (EN)]
+12-month Euribor: what to expect by the end of 2026
+
+[CONTEUDO TEXTO (PT)]
+Insere o corpo do teu artigo detalhado sobre a Euribor aqui...
+[CONTEUDO TEXTO (EN)]
+Insert the body of your detailed article about Euribor here...<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumo WSJ</title>
+</head>
+<body>
+
+    <!-- SECÇÃO: ECONOMIA & POLÍTICA -->
+    <div class="seccao">
+        <h2>Economia e Política / Economy & Politics</h2>
+        
+        <div class="pt">
+            <p><strong>[PT]</strong> O Supremo Tribunal dos EUA, com maioria conservadora, validou decisões intercalares que permitem a aplicação imediata de políticas de imigração, deportações e suspensão de apoios, expandindo a autoridade do executivo sobre agências de decisão política. Em paralelo, o rendimento pessoal bruto registou um crescimento acentuado ao longo do último ano, enquanto o Qatar reforça a sua influência diplomática e comercial através de novos acordos de aviação estratégica.</p>
+        </div>
+        
+        <div class="en">
+            <p><strong>[EN]</strong> The US Supreme Court's conservative majority upheld short-form, interim rulings allowing immediate enforcement of immigration policies, deportations, and funding withholding, broader executive control over policymaking agencies. Concurrently, personal income levels experienced sharp growth over the past year, while Qatar expands its diplomatic and trade leverage via newly deployed strategic aviation assets.</p>
+        </div>
+    </div>
+
+</body>
+</html>

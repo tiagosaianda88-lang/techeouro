@@ -1,0 +1,29 @@
+=== index.html (Início) ===
+
+[HERO - TITULO (PT)]
+Tech & Ouro · A Gazeta do Ouro
+
+[HERO - TITULO (EN)]
+Tech & Gold · The Gold Gazette
+
+[HERO - SUBTITULO (PT)]
+Onde a tecnologia e a análise de metais preciosos se encontram.
+
+[HERO - SUBTITULO (EN)]
+Where technology and precious metals analysis meet.
+
+[LION SLOGAN (PT)]
+Um projeto feito para levar a história a todas as partes do mundo.
+
+[LION SLOGAN (EN)]
+A project made to bring history to all parts of the world.
+
+[ARTIGO GEOPOLÍTICA - RESUMO (PT)]
+O impacto das tensões globais e o seu reflexo nos mercados...
+[ARTIGO GEOPOLÍTICA - RESUMO (EN)]
+The impact of global tensions and their reflection on markets...
+
+[ARTIGO TECH 1 - RESUMO (PT)]
+Como a Inteligência Artificial e a automação estão a redefinir investimentos...
+[ARTIGO TECH 1 - RESUMO (EN)]
+How Artificial Intelligence and automation are redefining investments...

@@ -1,0 +1,75 @@
+=== desporto.html (Desporto) ===
+Card1
+<!DOCTYPE html> 
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumo: Desporto</title>
+</head>
+<body>
+
+    <!-- SECÇÃO: DESPORTO -->
+    <div class="seccao">
+        <h2>Desporto / Sports</h2>
+        
+        <div class="pt">
+            <p><strong>[PT]</strong> A seleção de futebol dos EUA consegue uma vitória heróica reduzida a 10 elementos para manter vivo o sonho no torneio mundial. No ténis, Serena Williams sofre uma derrota surpreendente num jogo renhido e caótico no torneio de Wimbledon, marcando a atualidade desportiva internacional.</p>
+        </div>
+        
+        <div class="en">
+            <p><strong>[EN]</strong> The USA soccer team secures a heroic victory with 10 men to keep their world cup dream alive. In tennis, Serena Williams suffers a stunning defeat in a rollercoaster match at Wimbledon, highlighting the international sporting headlines.</p>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+Card2
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumo: Desporto</title>
+</head>
+<body>
+
+    <!-- SECÇÃO: DESPORTO -->
+    <div class="seccao">
+        <h2>Desporto / Sports</h2>
+        
+        <div class="pt">
+            <p><strong>[PT]</strong> Esta página foca-se exclusivamente na revisão trimestral de mercados financeiros e publicidade institucional do setor de saúde, não contendo atualizações ou notícias do panorama desportivo.</p>
+        </div>
+        
+        <div class="en">
+            <p><strong>[EN]</strong> This page focuses entirely on the quarterly financial markets review and institutional healthcare advertising, containing no sports news or athletic updates.</p>
+        </div>
+    </div>
+
+</body>
+</html>
+
+Card 3<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumo: Desporto</title>
+</head>
+<body>
+
+    <div class="seccao">
+        <h2>Desporto / Sports</h2>
+        
+        <div class="pt">
+            <p><strong>[PT]</strong> Não há atualizações desportivas nesta página do jornal. O conteúdo foca-se exclusivamente na análise financeira trimestral de mercados, fundos de investimento e anúncios corporativos.</p>
+        </div>
+        
+        <div class="en">
+            <p><strong>[EN]</strong> No sports updates available on this page. The layout focus is dedicated entirely to quarterly financial market reviews, investment funds, and corporate analysis.</p>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+=== tech.html (Tecnologia) ===
+
+[TITULO ARTIGO (PT)]
+A era da Inteligência Artificial em 2026
+[TITULO ARTIGO (EN)]
+The era of Artificial Intelligence in 2026
+
+[CONTEUDO TEXTO (PT)]
+Insere o corpo do teu artigo sobre inteligência artificial aqui...
+[CONTEUDO TEXTO (EN)]
+Insert the body of your article about artificial intelligence here...
