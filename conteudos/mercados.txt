@@ -13,11 +13,11 @@
         <h2>Mercados / Markets</h2>
         
         <div class="pt">
-            <p><strong>[PT]</strong> As ações ligadas ao ciclo económico registam uma valorização generalizada no mercado acionista dos EUA, impulsionadas pela resiliência dos lucros corporativos, apesar de o índice S&P 500 ter fechado com uma ligeira queda de 0,2% antes do relatório de emprego. Em paralelo, a angariação de fundos nos mercados globais de capitais atingiu o nível mais elevado desde 2021, sinalizando um forte retorno da confiança dos investidores nas estreias acionistas.</p>
+            <p><strong>[PT]</strong> As ações cíclicas ligadas à economia registam forte atração, com os investidores a direcionarem capital para o hardware de inteligência artificial (liderado pela Nvidia) em detrimento de ações de software tradicionais. Adicionalmente, as ações de pequena capitalização (Russell 2000) registam um retorno robusto de quase 24%, marcando a maior superação face ao S&P 500 desde 2001, enquanto ações de valor (value) continuam a bater o crescimento (growth) num ambiente de inflação elevada.</p>
         </div>
         
         <div class="en">
-            <p><strong>[EN]</strong> Economy-linked cyclical stocks receive a broad lift in the US stock market, driven by resilient corporate earnings, despite the S&P 500 index closing 0.2% lower ahead of the jobs report. Meanwhile, global equity capital market fundraising reached its highest level since 2021, signaling a strong return in investor confidence in stock market listings.</p>
+            <p><strong>[EN]</strong> Cyclical stocks tied to the economy see strong traction, with investors shifting capital toward artificial intelligence hardware (led by Nvidia) over traditional software stocks. Additionally, small-cap stocks (Russell 2000) show a robust return of nearly 24%, marking their strongest outperformance against the S&P 500 since 2001, while value stocks continue to beat growth in a high-inflation environment.</p>
         </div>
     </div>
 

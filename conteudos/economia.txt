@@ -124,3 +124,28 @@ Card 3
 
 </body>
 </html>
+
+Card 4
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumo: Economia</title>
+</head>
+<body>
+
+    <!-- SECÇÃO: ECONOMIA -->
+    <div class="seccao">
+        <h2>Economia / Economy</h2>
+        
+        <div class="pt">
+            <p><strong>[PT]</strong> O rendimento dos títulos do Tesouro dos EUA a 10 anos recuou para 4,36%, reagindo de forma positiva aos comentários de Kevin Warsh sobre a inflação de 4,1% nos EUA. O mercado de obrigações demonstra confiança na economia real, e os analistas aconselham os investidores a focarem-se nos dados económicos concretos em vez de tentar adivinhar as decisões de taxas da Fed.</p>
+        </div>
+        
+        <div class="en">
+            <p><strong>[EN]</strong> The yield on 10-year US Treasury notes declined to 4.36%, reacting positively to Kevin Warsh's comments regarding the 4.1% US inflation rate. The bond market shows confidence in the real economy, and analysts advise investors to focus on actual economic data rather than guessing the Fed's interest rate moves.</p>
+        </div>
+    </div>
+
+</body>
+</html>
