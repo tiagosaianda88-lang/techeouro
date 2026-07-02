@@ -3,7 +3,7 @@ import re
 import feedparser
 from google import genai
 
-# List your RSS feeds here. You can add as many as you want!
+# List your RSS feeds here for Tech & Ouro (Markets, Crypto, Tech/Business)
 RSS_FEEDS = [
     "https://feeds.a.dj.com/rss/RSSMarketsMain.xml", # WSJ Markets
     "https://www.coindesk.com/arc/outboundfeeds/rss/", # CoinDesk
@@ -11,7 +11,6 @@ RSS_FEEDS = [
 ]
 
 # The file we are going to update
-# Path is relative to the root of the repository
 HTML_FILE = "noticias.html"
 
 def get_existing_links():
@@ -19,40 +18,28 @@ def get_existing_links():
     if not os.path.exists(HTML_FILE):
         return set()
     
-    print(f"Reading existing links from {HTML_FILE} for caching...")
     try:
         with open(HTML_FILE, "r", encoding="utf-8") as f:
             content = f.read()
         
-        # Procura por todos os links originais dentro do bloco de notícias da IA
-        links = set(re.findall(r'href="([^"]+)"', content))
-        print(f"Found {len(links)} existing links in cache.")
-        return links
+        # Procura por todos os títulos ou descrições para evitar duplicados
+        titles = set(re.findall(r'<h2 class="card-title">.*?<span lang="pt">(.*?)</span>', content, re.DOTALL))
+        return titles
     except Exception as e:
         print(f"Error reading cache: {e}")
         return set()
 
 def fetch_news():
-    print("Fetching news from RSS feeds...")
-    existing_links = get_existing_links()
+    print("Fetching fresh news from RSS feeds...")
     articles = []
-    skipped_count = 0
     
     for feed_url in RSS_FEEDS:
         feed = feedparser.parse(feed_url)
-        for entry in feed.entries[:8]: # Puxa até 8 de cada para compensar os repetidos filtrados
-            link = entry.get("link", "").strip()
-            
-            # Se o link já existir no noticias.html, ignora para poupar a API
-            if link in existing_links:
-                skipped_count += 1
-                continue
-                
+        for entry in feed.entries[:8]: # Puxa os 8 mais recentes de cada feed
             title = entry.get("title", "")
             summary = entry.get("summary", "")
-            articles.append(f"Title: {title}\nSummary: {summary}\nLink: {link}\n---")
+            articles.append(f"Title: {title}\nSummary: {summary}\n---")
     
-    print(f"Filtered out {skipped_count} duplicate articles already present in HTML.")
     return "\n".join(articles)
 
 def generate_ai_news(news_text):
@@ -65,9 +52,9 @@ def generate_ai_news(news_text):
     
     prompt = f"""
     You are an expert financial and tech news editor for a premium Portuguese/English news site called 'Tech & Ouro'.
-    Read the following recent news articles and pick the 6 to 8 most important and impactful ones for our readers (investors, tech enthusiasts).
+    Read the following recent news articles and select the 6 to 8 most important and impactful ones for our readers (investors, tech enthusiasts).
     
-    For each of the 5 chosen articles, generate the following HTML snippet (make sure the category, title, description, and source link are fully translated into both Portuguese and English using span tags with lang="pt" and lang="en" attributes):
+    For each of the selected articles, generate the following HTML snippet (make sure the category, title, description, and internal link are fully translated into both Portuguese and English using span tags with lang="pt" and lang="en" attributes):
     <div class="card">
         <div>
             <p class="card-cat">
@@ -81,7 +68,7 @@ def generate_ai_news(news_text):
             <p class="card-desc">
                 <span lang="pt">A short, engaging 2-sentence summary in Portuguese.</span>
                 <span lang="en">A short, engaging 2-sentence summary in English.</span>
-            </h2>
+            </p>
         </div>
         <div class="card-meta">
             <span>
@@ -89,17 +76,28 @@ def generate_ai_news(news_text):
                 <span lang="en">TODAY</span>
             </span>
             <span>
-                <a href="LINK_HERE" target="_blank" style="color: inherit; text-decoration: none;">
-                    <span lang="pt">LER FONTE ORIGINAL →</span>
-                    <span lang="en">READ ORIGINAL SOURCE →</span>
+                <a href="INTERNAL_LINK" style="color: inherit; text-decoration: none;">
+                    <span lang="pt">VER ANÁLISE →</span>
+                    <span lang="en">VIEW ANALYSIS →</span>
                 </a>
             </span>
         </div>
     </div>
     
+    CRITICAL INSTRUCTION FOR INTERNAL_LINK:
+    Do NOT link to external websites. The 'INTERNAL_LINK' must be exactly one of the following local files based on the category of the news:
+    - 'economia.html' (if category is Economia/Economy)
+    - 'mercados.html' (if category is Mercados/Markets)
+    - 'ouro.html' (if category is Ouro/Gold)
+    - 'ouro.html#bitcoin' (if category is Bitcoin/Crypto)
+    - 'desporto.html' (if category is Desporto/Sports)
+    - 'tech.html' (if category is Tech/Tecnologia)
+    - 'geopolitica.html' (if category is Geopolítica/Geopolitics)
+    - 'index.html' (if general or no other category fits)
+    
     Return ONLY the HTML code for the 6 to 8 articles. Do not wrap it in markdown code blocks.
     
-    Here are the raw articles:
+    Here is the raw articles:
     {news_text}
     """
     
@@ -137,7 +135,7 @@ if __name__ == "__main__":
     try:
         raw_news = fetch_news()
         if not raw_news.strip():
-            print("No new articles found. Everything is already up to date in the HTML file. Skipping AI call.")
+            print("No new articles found.")
             exit()
             
         ai_html = generate_ai_news(raw_news)
