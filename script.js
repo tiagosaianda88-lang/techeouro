@@ -16,8 +16,31 @@ function setLanguage(lang) {
   localStorage.setItem('site-lang', lang);
 }
 
+// Automatically update the hero date to today's date in PT/EN
+function updateHeroDate() {
+  const dateElement = document.querySelector('.hero-date');
+  if (!dateElement) return;
+
+  const now = new Date();
+  
+  // Format in Portuguese (e.g. Quinta-feira, 2 de Julho de 2026)
+  const optionsPt = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+  let datePt = now.toLocaleDateString('pt-PT', optionsPt);
+  datePt = datePt.charAt(0).toUpperCase() + datePt.slice(1);
+  
+  // Format in English (e.g. Thursday, July 2, 2026)
+  const optionsEn = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+  const dateEn = now.toLocaleDateString('en-US', optionsEn);
+  
+  dateElement.innerHTML = `
+    <span lang="pt">${datePt} · Algarve, Portugal</span>
+    <span lang="en">${dateEn} · Algarve, Portugal</span>
+  `;
+}
+
 // Automatically load the user's preferred language when the page loads
 document.addEventListener('DOMContentLoaded', () => {
   const savedLang = localStorage.getItem('site-lang') || 'pt';
   setLanguage(savedLang);
+  updateHeroDate();
 });

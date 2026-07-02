@@ -15,16 +15,16 @@ RSS_FEEDS = [
     "https://news.google.com/rss/search?q=when:24h+source:financial+times&hl=en-US&gl=US&ceid=US:en" # Financial Times
 ]
 
-# The file we are going to update
-HTML_FILE = "noticias.html"
+# The files we are going to update
+HTML_FILES = ["noticias.html", "index.html"]
 
 def get_existing_links():
     """Lê o ficheiro noticias.html e extrai os links das notícias já publicadas (Cache)."""
-    if not os.path.exists(HTML_FILE):
+    if not os.path.exists(HTML_FILES[0]):
         return set()
     
     try:
-        with open(HTML_FILE, "r", encoding="utf-8") as f:
+        with open(HTML_FILES[0], "r", encoding="utf-8") as f:
             content = f.read()
         
         # Procura por todos os títulos ou descrições para evitar duplicados
@@ -179,28 +179,33 @@ def generate_ai_news(news_text, images_parts):
     
     return response.text.strip()
 
-def update_html_file(new_html):
-    print(f"Updating {HTML_FILE}...")
-    try:
-        with open(HTML_FILE, "r", encoding="utf-8") as f:
-            content = f.read()
+def update_html_files(new_html):
+    for html_file in HTML_FILES:
+        print(f"Updating {html_file}...")
+        try:
+            if not os.path.exists(html_file):
+                print(f"File {html_file} not found!")
+                continue
+                
+            with open(html_file, "r", encoding="utf-8") as f:
+                content = f.read()
+                
+            # We look for the special marker in the HTML
+            pattern = r"(<!-- AI_NEWS_START -->)(.*?)(<!-- AI_NEWS_END -->)"
             
-        # We look for the special marker in the HTML
-        pattern = r"(<!-- AI_NEWS_START -->)(.*?)(<!-- AI_NEWS_END -->)"
-        
-        if not re.search(pattern, content, re.DOTALL):
-            print("Could not find the marker in the HTML file!")
-            return
+            if not re.search(pattern, content, re.DOTALL):
+                print(f"Could not find the marker in the HTML file {html_file}!")
+                continue
+                
+            updated_content = re.sub(pattern, r"\1\n" + new_html + r"\n\3", content, flags=re.DOTALL)
             
-        updated_content = re.sub(pattern, r"\1\n" + new_html + r"\n\3", content, flags=re.DOTALL)
-        
-        with open(HTML_FILE, "w", encoding="utf-8") as f:
-            f.write(updated_content)
+            with open(html_file, "w", encoding="utf-8") as f:
+                f.write(updated_content)
+                
+            print(f"Successfully updated {html_file}!")
             
-        print("Successfully updated the news!")
-        
-    except Exception as e:
-        print(f"Error updating file: {e}")
+        except Exception as e:
+            print(f"Error updating file {html_file}: {e}")
 
 if __name__ == "__main__":
     try:
@@ -210,6 +215,6 @@ if __name__ == "__main__":
             exit()
             
         ai_html = generate_ai_news(raw_news, images_parts)
-        update_html_file(ai_html)
+        update_html_files(ai_html)
     except Exception as e:
         print(f"Failed to update news: {e}")
