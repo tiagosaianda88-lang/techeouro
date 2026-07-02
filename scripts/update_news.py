@@ -33,9 +33,30 @@ def get_existing_links():
         return set()
 
 def fetch_news():
-    print("Fetching fresh news from RSS feeds...")
+    # 1. Check for manual news drafts in the conteudos/ directory (e.g., pasted from Telegram)
+    print("Checking for manual news drafts in conteudos/...")
+    manual_articles = []
+    conteudos_dir = "conteudos"
+    if os.path.exists(conteudos_dir):
+        for filename in sorted(os.listdir(conteudos_dir)):
+            if filename.endswith(".txt"):
+                filepath = os.path.join(conteudos_dir, filename)
+                try:
+                    with open(filepath, "r", encoding="utf-8") as f:
+                        content = f.read().strip()
+                    # Skip files that only contain template/placeholder text or are too short
+                    if content and "Insere" not in content and "Insert" not in content and len(content) > 50:
+                        manual_articles.append(f"Source File: {filename}\nContent:\n{content}\n---")
+                except Exception as e:
+                    print(f"Error reading local file {filename}: {e}")
+                    
+    if manual_articles:
+        print(f"Found {len(manual_articles)} manual news draft files. Using them as source.")
+        return "\n".join(manual_articles)
+        
+    # 2. Fallback to premium RSS feeds if no manual content is found
+    print("No manual drafts found. Fetching fresh news from RSS feeds...")
     articles = []
-    
     for feed_url in RSS_FEEDS:
         feed = feedparser.parse(feed_url)
         for entry in feed.entries[:8]: # Puxa os 8 mais recentes de cada feed
