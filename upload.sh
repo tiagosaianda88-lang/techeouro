@@ -1,18 +1,31 @@
 #!/bin/bash
-# Script para fazer upload rápido das alterações para o GitHub
+set -e
+
+# Script para fazer upload rapido das alteracoes para o GitHub
 
 echo "A iniciar o upload para o GitHub..."
 
-# Adicionar todos os ficheiros modificados
-git add .
-
-# Fazer o commit (usa a mensagem passada como argumento ou uma padrão)
+BRANCH="$(git branch --show-current)"
+REMOTE="${GIT_REMOTE:-origin}"
 COMMIT_MSG="${1:-Atualizacao automatica}"
+
+if [ -z "$BRANCH" ]; then
+  echo "Nao foi possivel detectar o branch atual."
+  exit 1
+fi
+
+# Adicionar apenas ficheiros relevantes, respeitando o .gitignore.
+git add -A
+
+if git diff --cached --quiet; then
+  echo "Nao ha alteracoes para enviar."
+  exit 0
+fi
+
 git commit -m "$COMMIT_MSG"
 
-# Enviar para o GitHub
-git push origin main
-
+# Enviar para o GitHub sem depender de um branch escrito a mao.
+git push "$REMOTE" "$BRANCH"
 
 echo "----------------------------------------"
 echo "Upload concluido com sucesso no GitHub!"
