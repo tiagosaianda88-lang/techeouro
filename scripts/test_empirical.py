@@ -21,7 +21,9 @@ class StructuralHTMLParser(HTMLParser):
         self.in_card = False
 
     def handle_starttag(self, tag, attrs):
-        self.tags_stack.append(tag)
+        void_tags = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'}
+        if tag not in void_tags:
+            self.tags_stack.append(tag)
         attrs_dict = dict(attrs)
         
         if tag == 'div' and attrs_dict.get('class') == 'card':

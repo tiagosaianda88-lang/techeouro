@@ -265,13 +265,13 @@ class PublisherAgent:
         esc = {key: html.escape(value, quote=True) for key, value in article.items()}
         link = ALLOWED_LINKS[article["category"]]
         category_pt, category_en = CATEGORY_LABELS[article["category"]]
-        return f'''<div class="card">
+        return f'''<div class="card" onclick="window.location.href='{link}'">
   <div>
     <p class="card-cat"><span lang="pt">{category_pt}</span><span lang="en">{category_en}</span></p>
     <h2 class="card-title"><span lang="pt">{esc["title_pt"]}</span><span lang="en">{esc["title_en"]}</span></h2>
     <p class="card-desc"><span lang="pt">{esc["summary_pt"]}</span><span lang="en">{esc["summary_en"]}</span></p>
   </div>
-  <div class="card-meta">
+  <div class="card-meta" onclick="event.stopPropagation();">
     <span><span lang="pt">HOJE</span><span lang="en">TODAY</span></span>
     <span><span lang="pt">Fonte: </span><span lang="en">Source: </span><a href="{esc["url"]}" target="_blank" rel="noopener noreferrer" style="color: #d4af37; text-decoration: underline;">{esc["source"]}</a></span>
     <span><a href="{link}" style="color: inherit; text-decoration: none;"><span lang="pt">VER ANÁLISE →</span><span lang="en">VIEW ANALYSIS →</span></a></span>
