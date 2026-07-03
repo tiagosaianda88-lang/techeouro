@@ -1,0 +1,151 @@
+=== economia.html (Economia) ===
+
+[CARD 1 - 
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumo: Economia</title>
+</head>
+<body>
+
+    <!-- SECÇÃO: ECONOMIA -->
+    <div class="seccao">
+        <h2>Economia / Economy</h2>
+        
+        <div class="pt">
+            <p><strong>[PT]</strong> A McKinsey & Company avança com uma reestruturação profunda no seu conselho executivo, enquanto as ações da AOL registam forte valorização na estreia no mercado regulado. O consórcio Kroger avança na aquisição da gigante Albertsons por 24,6 mil milhões de dólares, enfrentando forte oposição regulatória. Adicionalmente, a General Mills planeia expandir o seu portfólio de produtos, a FedEx prepara-se para resolver um litígio com o Departamento de Justiça (DOJ) e o CEO da Honeywell declarou que a inteligência artificial ainda não está pronta para os cockpits.</p>
+        </div>
+        
+        <div class="en">
+            <p><strong>[EN]</strong> McKinsey & Company executes a major board shakeup, while AOL shares soar during their market debut. Kroger moves forward with its 24.6 billion dollar acquisition of grocery giant Albertsons, amid intense regulatory scrutiny. Additionally, General Mills plans to expand its product portfolio, FedEx prepares to settle a DOJ probe, and Honeywell's CEO stated that artificial intelligence is not yet ready for cockpit integration.</p>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+Card 2 
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumo: Economia</title>
+</head>
+<body>
+
+    <!-- SECÇÃO: ECONOMIA -->
+    <div class="seccao">
+        <h2>Economia / Economy</h2>
+        
+        <div class="pt">
+            <p><strong>[PT]</strong> A Paramount Pictures avança com concessões estratégicas para obter a aprovação da União Europeia no seu negócio com a Warner Deal. No setor industrial e farmacêutico, a Ipsen fechou um acordo para adquirir a Memo Therapeutics expandindo as suas operações, enquanto a Inflexion vendeu a Avantus à Arcline.</p>
+        </div>
+        
+        <div class="en">
+            <p><strong>[EN]</strong> Paramount offers strategic concessions to win a European Union nod for its Warner Deal. In the industrial and pharmaceutical sectors, Ipsen agrees to buy Memo Therapeutics to expand its expansion spree, while Inflexion sells Avantus to Arcline.</p>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumo: Economia</title>
+</head>
+<body>
+
+    <!-- SECÇÃO: ECONOMIA -->
+    <div class="seccao">
+        <h2>Economia / Economy</h2>
+        
+        <div class="pt">
+            <p><strong>[PT]</strong> Os mercados acionistas mantêm-se resilientes e os lucros das grandes empresas continuam sólidos, apesar das pressões macroeconómicas e da postura vigilante da Reserva Federal (Fed). À medida que a Fed tenta comunicar uma estratégia mais cautelosa quanto ao corte de taxas de juro, os investidores aumentam a atenção aos dados económicos reais para antecipar os próximos passos do mercado de capitais.</p>
+        </div>
+        
+        <div class="en">
+            <p><strong>[EN]</strong> Equity bull markets remain strong and corporate profits stay resilient despite ongoing macroeconomic pressures and the Federal Reserve's vigilant stance. As the Fed tries to signal a more cautious approach regarding rate cuts, investors are listening harder to raw economic data to gauge the next steps in capital markets.</p>
+        </div>
+    </div>
+
+</body>
+</html>
+
+Card2<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumo: Economia</title>
+</head>
+<body>
+
+    <div class="seccao">
+        <h2>Economia / Economy</h2>
+        
+        <div class="pt">
+            <p><strong>[PT]</strong> As ações ligadas ao ciclo económico registam uma subida generalizada à boleia dos lucros corporativos resilientes. Em paralelo, os inventários de petróleo bruto nos EUA sofrem uma queda consecutiva pela décima semana, enquanto pequenas empresas de motores começam a aderir à febre da inteligência artificial para otimização industrial.</p>
+        </div>
+        
+        <div class="en">
+            <p><strong>[EN]</strong> Economy-linked cyclical stocks get a broad lift driven by resilient corporate profits. Meanwhile, US crude oil inventories decline for a 10th consecutive week, as small-engine manufacturers join the artificial intelligence frenzy for industrial optimization.</p>
+        </div>
+    </div>
+
+</body>
+</html>
+
+Card 3
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumo: Economia</title>
+</head>
+<body>
+
+    <!-- SECÇÃO: ECONOMIA -->
+    <div class="seccao">
+        <h2>Economia / Economy</h2>
+        
+        <div class="pt">
+            <p><strong>[PT]</strong> Os inventários de petróleo bruto nos Estados Unidos registaram uma queda consecutiva pela décima semana, refletindo um aperto na oferta global de energia e mantendo a pressão sobre os preços dos combustíveis e a inflação nas principais economias ocidentais.</p>
+        </div>
+        
+        <div class="en">
+            <p><strong>[EN]</strong> Crude oil inventories in the United States declined for the tenth consecutive week, reflecting a tightening of the global energy supply and maintaining pressure on fuel prices and inflation across major Western economies.</p>
+        </div>
+    </div>
+
+</body>
+</html>
+
+Card 4
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumo: Economia</title>
+</head>
+<body>
+
+    <!-- SECÇÃO: ECONOMIA -->
+    <div class="seccao">
+        <h2>Economia / Economy</h2>
+        
+        <div class="pt">
+            <p><strong>[PT]</strong> O rendimento dos títulos do Tesouro dos EUA a 10 anos recuou para 4,36%, reagindo de forma positiva aos comentários de Kevin Warsh sobre a inflação de 4,1% nos EUA. O mercado de obrigações demonstra confiança na economia real, e os analistas aconselham os investidores a focarem-se nos dados económicos concretos em vez de tentar adivinhar as decisões de taxas da Fed.</p>
+        </div>
+        
+        <div class="en">
+            <p><strong>[EN]</strong> The yield on 10-year US Treasury notes declined to 4.36%, reacting positively to Kevin Warsh's comments regarding the 4.1% US inflation rate. The bond market shows confidence in the real economy, and analysts advise investors to focus on actual economic data rather than guessing the Fed's interest rate moves.</p>
+        </div>
+    </div>
+
+</body>
+</html>

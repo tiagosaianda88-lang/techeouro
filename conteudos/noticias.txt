@@ -1,0 +1,101 @@
+=== noticias.html (Notícias ao Vivo) ===
+
+[NOTICIA EXTRA TITULO (PT)]
+Insere um título de notícia manual se quiseres...
+[NOTICIA EXTRA TITULO (EN)]
+Insert a manual news title if you want...<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Notícias: Economia, Mercado e Desporto</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #1a1a1a; color: #f4f4f4; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .seccao { background: #2a2a2a; padding: 20px; margin-bottom: 20px; border-radius: 6px; border-left: 5px solid #00a8ff; }
+        h2 { margin-top: 0; color: #00a8ff; text-transform: uppercase; font-size: 1.4rem; }
+        .bloco-lingua { margin-top: 15px; padding: 10px; background: #222; border-radius: 4px; }
+        .tag { font-weight: bold; color: #ffbb00; display: block; margin-bottom: 5px; }
+        p { margin: 0; line-height: 1.5; color: #dddddd; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- [SÍTIO DA NOTÍCIA: ECONOMIA] -->
+        <div class="seccao">
+            <h2>Economia / Economy</h2>
+            
+
+
+
+            <div class="bloco-lingua">
+                <span class="tag">[PT]</span>
+                <p>A Reserva Federal mantém a vigilância sobre os índices de inflação subjacente, sinalizando que a flexibilização quantitativa só avançará quando houver evidências claras de convergência sustentável para a meta de 2%, impactando o custo do crédito global.</p>
+            </div>
+            
+            <div class="bloco-lingua">
+                <span class="tag">[EN]</span>
+                <p>The Federal Reserve maintains vigilance over core inflation metrics, signaling that quantitative easing will only proceed upon clear evidence of a sustainable convergence toward the 2% target, impacting global borrowing costs.</p>
+            </div>
+        </div>
+
+        <!-- [SÍTIO DA NOTÍCIA: MERCADO] -->
+        <div class="seccao">
+            <h2>Mercado / Market</h2>
+            
+            <div class="bloco-lingua">
+                <span class="tag">[PT]</span>
+                <p>Os mercados acionistas enfrentam volatilidade devido à rotação de capital para obrigações soberanas de curto prazo. O setor tecnológico lidera as correções técnicas, enquanto as commodities agrícolas registam pressão de alta nos contratos de futuros.</p>
+            </div>
+            
+            <div class="bloco-lingua">
+                <span class="tag">[EN]</span>
+                <p>Equity markets face volatility due to capital rotation into short-term sovereign bonds. The tech sector leads technical corrections, while agricultural commodities experience upward pressure in futures contracts.</p>
+            </div>
+        </div>
+
+        <!-- [SÍTIO DA NOTÍCIA: DESPORTO] -->
+        <div class="seccao">
+            <h2>Desporto / Sports</h2>
+            
+            <div class="bloco-lingua">
+                <span class="tag">[PT]</span>
+                <p>Os clubes europeus reajustam as suas estratégias de mercado face às novas restrições de liquidez da UEFA. A prioridade foca-se na contenção salarial e na reestruturação de contratos de direitos de transmissão internacional para garantir sustentabilidade.</p>
+            </div>
+            
+            <div class="bloco-lingua">
+                <span class="tag">[EN]</span>
+                <p>European clubs are readjusting their market strategies in light of UEFA's new liquidity constraints. Priority shifts toward wage containment and the restructuring of international broadcasting rights contracts to ensure sustainability.</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumo: Cultura e Opinião</title>
+</head>
+<body>
+
+    <!-- SECÇÃO: CULTURA & OPINIÃO --> card 2
+    <div class="seccao">
+        <h2>Cultura e Opinião / Arts & Opinion</h2>
+        
+        <div class="pt">
+            <p><strong>[PT]</strong> Uma análise retrospetiva através de fotografias históricas examina a evolução da identidade nacional e o impacto da inteligência artificial na perceção pública e na criação artística contemporânea. Em paralelo, debate-se a visão dos fundadores e as fraturas nas narrativas da herança cultural americana.</p>
+        </div>
+        
+        <div class="en">
+            <p><strong>[EN]</strong> A retrospective analysis through historic photography examines the evolution of national identity and the impact of artificial intelligence on public perception and contemporary artistic creation. In parallel, debates center on the founders' vision and fractures within the narratives of American cultural heritage.</p>
+        </div>
+    </div>
+
+</body>
+</html>

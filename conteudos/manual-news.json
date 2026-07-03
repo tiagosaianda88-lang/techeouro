@@ -11,7 +11,7 @@
     },
     {
       "category": "economy",
-      "source": "conteudos/economia.txt",
+      "source": "economia.txt",
       "url": "conteudos/economia.txt",
       "title_pt": "Mercado de trabalho dos EUA abranda em junho",
       "title_en": "US labor market slows down in June",
@@ -20,7 +20,7 @@
     },
     {
       "category": "markets",
-      "source": "conteudos/mercados.txt",
+      "source": "mercados.txt",
       "url": "conteudos/mercados.txt",
       "title_pt": "Setor de materiais surge como refúgio contra volatilidade tecnológica",
       "title_en": "Materials sector emerges as hedge against tech volatility",
@@ -29,7 +29,7 @@
     },
     {
       "category": "crypto",
-      "source": "conteudos/ouro.txt",
+      "source": "ouro.txt",
       "url": "conteudos/ouro.txt",
       "title_pt": "Declaração de receitas de Trump gera debate sobre criptoativos",
       "title_en": "Trump's revenue disclosure sparks crypto asset debate",
@@ -38,7 +38,7 @@
     },
     {
       "category": "tech",
-      "source": "conteudos/tech.txt",
+      "source": "tech.txt",
       "url": "conteudos/tech.txt",
       "title_pt": "Anthropic restaura modelo Fable 5 globalmente",
       "title_en": "Anthropic restores Fable 5 model globally",
@@ -47,7 +47,7 @@
     },
     {
       "category": "sports",
-      "source": "conteudos/desporto.txt",
+      "source": "desporto.txt",
       "url": "conteudos/desporto.txt",
       "title_pt": "Portugal vence jogo histórico e segue em frente no Mundial",
       "title_en": "Portugal wins historic match and advances in the World Cup",

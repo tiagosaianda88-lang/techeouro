@@ -333,8 +333,7 @@ def run(dry_run=False):
                 raise e
 
     known_sources = {item.source for item in selected}
-    extended_sources = known_sources | {art.get("source", "") for art in payload.get("articles", [])}
-    articles = VerifierAgent().verify(payload, extended_sources)
+    articles = VerifierAgent().verify(payload, known_sources)
     publisher = PublisherAgent()
     publisher.publish(publisher.render(articles), dry_run=dry_run)
 
