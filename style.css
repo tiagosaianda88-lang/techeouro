@@ -21,6 +21,7 @@
   --gold-alpha-heavy: rgba(212, 175, 55, 0.2);
   
   --text: #F5F2EB;
+  --text-primary: var(--text);
   --text-secondary: #A09E98;
   --muted: #62605C;
   
@@ -1581,7 +1582,7 @@ body.lang-en [lang="pt"] {
   .mobile-menu-btn .bar {
     height: 2px;
     width: 100%;
-    background-color: var(--text-primary);
+    background-color: var(--gold);
     transition: all 0.3s ease;
   }
   
