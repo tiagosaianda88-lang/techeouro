@@ -26,6 +26,7 @@ RSS_FEEDS = [
     ("GoldSeek", "https://news.goldseek.com/newsRSS.xml"),
     ("BBC Sport", "http://feeds.bbci.co.uk/sport/rss.xml"),
     ("Google Sports", "https://news.google.com/rss/search?q=when:3d+sports+sports&hl=en-US&gl=US&ceid=US:en"),
+    ("Google Wall Street", "https://news.google.com/rss/search?q=when:3d+wall+street&hl=en-US&gl=US&ceid=US:en"),
 ]
 
 HTML_FILES = (Path("noticias.html"), Path("index.html"))
