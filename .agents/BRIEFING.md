@@ -15,7 +15,7 @@ Coordinate the news aggregation and verification pipeline on the Tech & Ouro web
 - Bilingual site constraint (PT/EN toggle, scripts, terminal widget) must be respected
 
 ## User Context
-- **Last user request**: Automatically retrieve, select, verify, and publish news articles using RSS feeds from Expresso, DN, MarketWatch, and Barron's.
+- **Last user request**: Automatically retrieve, select, verify, and publish news articles using RSS feeds from Expresso, DN, MarketWatch, Barron's, and the new Google Wall Street search RSS feed.
 - **Pending clarifications**: none
 - **Delivered results**: none
 

@@ -13,11 +13,11 @@ Card1
         <h2>Desporto / Sports</h2>
         
         <div class="pt">
-            <p><strong>[PT]</strong> A seleção de futebol dos EUA consegue uma vitória heróica reduzida a 10 elementos para manter vivo o sonho no torneio mundial. No ténis, Serena Williams sofre uma derrota surpreendente num jogo renhido e caótico no torneio de Wimbledon, marcando a atualidade desportiva internacional.</p>
+            <p><strong>[PT]</strong> A seleção de futebol de Portugal garante uma vitória heróica e histórica no torneio mundial, com uma exibição unida e decisiva que qualificou a equipa lusa para a fase seguinte. A comemoração contagiou todos os adeptos portugueses de norte a sul.</p>
         </div>
         
         <div class="en">
-            <p><strong>[EN]</strong> The USA soccer team secures a heroic victory with 10 men to keep their world cup dream alive. In tennis, Serena Williams suffers a stunning defeat in a rollercoaster match at Wimbledon, highlighting the international sporting headlines.</p>
+            <p><strong>[EN]</strong> The Portugal national soccer team secures a heroic and historic victory in the world tournament, with a united and decisive performance qualifying the Portuguese squad for the next stage. Celebrations spread among all Portuguese fans.</p>
         </div>
     </div>
 
