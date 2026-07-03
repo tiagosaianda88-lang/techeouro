@@ -13,20 +13,11 @@ from google import genai
 
 
 RSS_FEEDS = [
-    ("WSJ Markets", "https://feeds.a.dj.com/rss/RSSMarketsMain.xml"),
-    ("WSJ World", "https://feeds.a.dj.com/rss/RSSWorldNews.xml"),
+    ("Expresso", "https://news.google.com/rss/search?q=when:3d+site:expresso.pt&hl=pt-PT&gl=PT&ceid=PT:pt"),
+    ("Diário de Notícias", "https://news.google.com/rss/search?q=when:3d+site:dn.pt&hl=pt-PT&gl=PT&ceid=PT:pt"),
+    ("Google Wall Street", "https://news.google.com/rss/search?q=when:3d+wall+street&hl=en-US&gl=US&ceid=US:en"),
     ("MarketWatch", "https://news.google.com/rss/search?q=when:3d+source:marketwatch&hl=en-US&gl=US&ceid=US:en"),
     ("Barron's", "https://news.google.com/rss/search?q=when:3d+source:barrons&hl=en-US&gl=US&ceid=US:en"),
-    ("Reuters", "https://news.google.com/rss/search?q=when:3d+source:reuters&hl=en-US&gl=US&ceid=US:en"),
-    ("Bloomberg", "https://news.google.com/rss/search?q=when:3d+source:bloomberg&hl=en-US&gl=US&ceid=US:en"),
-    ("Financial Times", "https://news.google.com/rss/search?q=when:3d+source:financial+times&hl=en-US&gl=US&ceid=US:en"),
-    ("InfoMoney", "https://www.infomoney.com.br/feed/"),
-    ("BBC News", "http://feeds.bbci.co.uk/news/world/rss.xml"),
-    ("CoinDesk", "https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=xml"),
-    ("GoldSeek", "https://news.goldseek.com/newsRSS.xml"),
-    ("BBC Sport", "http://feeds.bbci.co.uk/sport/rss.xml"),
-    ("Google Sports", "https://news.google.com/rss/search?q=when:3d+sports+sports&hl=en-US&gl=US&ceid=US:en"),
-    ("Google Wall Street", "https://news.google.com/rss/search?q=when:3d+wall+street&hl=en-US&gl=US&ceid=US:en"),
 ]
 
 HTML_FILES = (Path("noticias.html"), Path("index.html"))
@@ -88,17 +79,17 @@ class CollectorAgent:
             if suffix == ".pdf":
                 text = self._extract_pdf(path)
                 if text:
-                    items.append(NewsItem(path.name, path.name, text[:12000]))
+                    items.append(NewsItem(path.name, path.name, text[:12000], url=f"conteudos/{path.name}"))
             elif suffix == ".txt":
                 text = path.read_text(encoding="utf-8").strip()
                 if self._use_manual_text(text):
-                    items.append(NewsItem(path.name, path.name, text[:12000]))
+                    items.append(NewsItem(path.name, path.name, text[:12000], url=f"conteudos/{path.name}"))
             elif suffix in {".png", ".jpg", ".jpeg"}:
                 image = self._load_image(path)
                 if image is not None:
                     images.append(image)
                     items.append(
-                        NewsItem(path.name, path.name, "Attached screenshot for visual extraction")
+                        NewsItem(path.name, path.name, "Attached screenshot for visual extraction", url=f"conteudos/{path.name}")
                     )
 
         return items, images
@@ -202,8 +193,9 @@ Rules:
 - category must be exactly one of: {', '.join(CATEGORY_LABELS)}.
 - source must name one supplied source.
 - Return JSON only, with an object containing an `articles` array.
-- Each article must contain: category, source, title_pt, title_en,
+- Each article must contain: category, source, url, title_pt, title_en,
   summary_pt, summary_en.
+- You must return the exact `url` of the selected article from the source material. Do not invent or modify the URL.
 
 Source material:
 {source_json}
@@ -218,7 +210,7 @@ Source material:
 
 
 class VerifierAgent:
-    REQUIRED = ("category", "source", "title_pt", "title_en", "summary_pt", "summary_en")
+    REQUIRED = ("category", "source", "url", "title_pt", "title_en", "summary_pt", "summary_en")
 
     def verify(self, payload, known_sources):
         articles = payload.get("articles") if isinstance(payload, dict) else None
@@ -281,6 +273,7 @@ class PublisherAgent:
   </div>
   <div class="card-meta">
     <span><span lang="pt">HOJE</span><span lang="en">TODAY</span></span>
+    <span><span lang="pt">Fonte: </span><span lang="en">Source: </span><a href="{esc["url"]}" target="_blank" rel="noopener noreferrer" style="color: #d4af37; text-decoration: underline;">{esc["source"]}</a></span>
     <span><a href="{link}" style="color: inherit; text-decoration: none;"><span lang="pt">VER ANÁLISE →</span><span lang="en">VIEW ANALYSIS →</span></a></span>
   </div>
 </div>'''

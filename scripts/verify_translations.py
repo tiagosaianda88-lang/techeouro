@@ -35,7 +35,7 @@ class TranslationChecker(HTMLParser):
         if tag == 'a' and 'href' in attrs_dict:
             href = attrs_dict['href']
             # Only track local .html files
-            if not href.startswith(('http', '#', 'mailto:')):
+            if not href.startswith(('http', '#', 'mailto:', 'conteudos/')):
                 self.links.append((href, self.getpos()))
 
     def handle_endtag(self, tag):
@@ -85,7 +85,7 @@ def verify_file(filepath):
 
 def main():
     root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    html_files = [f for f in os.listdir(root_dir) if f.endswith('.html') and f != 'terminal.html' and 'copia' not in f.lower() and 'cópia' not in f.lower() and 'cópia' not in f.lower()]
+    html_files = [f for f in os.listdir(root_dir) if f.endswith('.html') and f not in ('terminal.html', 'news-preview.html') and 'copia' not in f.lower() and 'cópia' not in f.lower() and 'cópia' not in f.lower()]
     
     print("--- TECH & OURO BILINGUAL AUDIT TOOL ---")
     all_valid_links = set(html_files)

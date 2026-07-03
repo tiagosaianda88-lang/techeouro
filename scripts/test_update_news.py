@@ -14,6 +14,7 @@ def valid_payload():
             {
                 "category": category,
                 "source": "Reuters",
+                "url": "https://example.com",
                 "title_pt": f"Titulo {category}",
                 "title_en": f"Title {category}",
                 "summary_pt": f"Resumo verificado sobre {category}.",

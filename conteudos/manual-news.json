@@ -3,6 +3,7 @@
     {
       "category": "geopolitics",
       "source": "diario de noticias.txt",
+      "url": "conteudos/diario de noticias.txt",
       "title_pt": "EUA celebram 250 anos de independência sob divisão",
       "title_en": "US celebrates 250 years of independence amid division",
       "summary_pt": "Sob a presidência de Donald Trump, as comemorações evidenciam um país cindido e uma economia onde os ganhos de Wall Street não chegam ao cidadão comum.",
@@ -11,6 +12,7 @@
     {
       "category": "economy",
       "source": "conteudos/economia.txt",
+      "url": "conteudos/economia.txt",
       "title_pt": "Mercado de trabalho dos EUA abranda em junho",
       "title_en": "US labor market slows down in June",
       "summary_pt": "A criação de emprego nos EUA caiu para 57.000 em junho, abaixo dos 113.000 previstos, reforçando as apostas de cortes de juros pela Fed.",
@@ -19,6 +21,7 @@
     {
       "category": "markets",
       "source": "conteudos/mercados.txt",
+      "url": "conteudos/mercados.txt",
       "title_pt": "Setor de materiais surge como refúgio contra volatilidade tecnológica",
       "title_en": "Materials sector emerges as hedge against tech volatility",
       "summary_pt": "Analistas sugerem rotação para fundos de materiais como o ETF XLB, que negoceia com desconto de 19% em relação ao S&P 500.",
@@ -27,6 +30,7 @@
     {
       "category": "crypto",
       "source": "conteudos/ouro.txt",
+      "url": "conteudos/ouro.txt",
       "title_pt": "Declaração de receitas de Trump gera debate sobre criptoativos",
       "title_en": "Trump's revenue disclosure sparks crypto asset debate",
       "summary_pt": "A declaração anual revelou mais de 1,4 mil milhões de dólares em ganhos de cripto, enquanto a memecoin TRUMP perdeu 95% do seu valor.",
@@ -35,6 +39,7 @@
     {
       "category": "tech",
       "source": "conteudos/tech.txt",
+      "url": "conteudos/tech.txt",
       "title_pt": "Anthropic restaura modelo Fable 5 globalmente",
       "title_en": "Anthropic restores Fable 5 model globally",
       "summary_pt": "O modelo foi restabelecido a 1 de julho com novos filtros de segurança, após suspensão por controlos de exportação dos EUA.",
@@ -43,6 +48,7 @@
     {
       "category": "sports",
       "source": "conteudos/desporto.txt",
+      "url": "conteudos/desporto.txt",
       "title_pt": "Portugal vence jogo histórico e segue em frente no Mundial",
       "title_en": "Portugal wins historic match and advances in the World Cup",
       "summary_pt": "A equipa portuguesa garantiu uma vitória heróica de apuramento que contagiou de orgulho todos os adeptos portugueses.",

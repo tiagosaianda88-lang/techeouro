@@ -10,8 +10,8 @@
 ## Milestones
 | # | Name | Scope | Dependencies | Status |
 |---|------|-------|-------------|--------|
-| 1 | Exploration & Analysis | Investigate existing code, test environment, and feed behavior | none | IN_PROGRESS |
-| 2 | Pipeline Implementation | Configure feeds (Expresso, DN, MarketWatch, Barron's), extract source URLs, update renderer, update unit tests, and run update | M1 | PLANNED |
+| 1 | Exploration & Analysis | Investigate existing code, test environment, and feed behavior | none | DONE |
+| 2 | Pipeline Implementation | Configure feeds (Expresso, DN, MarketWatch, Barron's), extract source URLs, update renderer, update unit tests, and run update | M1 | IN_PROGRESS |
 | 3 | Verification & Auditing | Run unit tests, verify translations and layout, audit integrity | M2 | PLANNED |
 
 ## Interface Contracts
