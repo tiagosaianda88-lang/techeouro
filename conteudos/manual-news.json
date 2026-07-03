@@ -1,52 +1,52 @@
 {
   "articles": [
     {
+      "category": "geopolitics",
+      "source": "diario de noticias.txt",
+      "title_pt": "EUA celebram 250 anos de independência sob divisão",
+      "title_en": "US celebrates 250 years of independence amid division",
+      "summary_pt": "Sob a presidência de Donald Trump, as comemorações evidenciam um país cindido e uma economia onde os ganhos de Wall Street não chegam ao cidadão comum.",
+      "summary_en": "Under Donald Trump's presidency, the celebrations highlight a divided nation and an economy where Wall Street gains do not reach the common citizen."
+    },
+    {
       "category": "economy",
       "source": "conteudos/economia.txt",
-      "title_pt": "Reestruturações e aquisições movimentam grandes empresas",
-      "title_en": "Restructurings and acquisitions reshape major companies",
-      "summary_pt": "A McKinsey avança com mudanças no conselho executivo, enquanto Kroger procura concluir a aquisição da Albertsons sob forte escrutínio regulatório.",
-      "summary_en": "McKinsey is moving ahead with executive board changes, while Kroger seeks to complete its Albertsons acquisition under intense regulatory scrutiny."
+      "title_pt": "Mercado de trabalho dos EUA abranda em junho",
+      "title_en": "US labor market slows down in June",
+      "summary_pt": "A criação de emprego nos EUA caiu para 57.000 em junho, abaixo dos 113.000 previstos, reforçando as apostas de cortes de juros pela Fed.",
+      "summary_en": "US job growth fell to 57,000 in June, well below the predicted 113,000, boosting bets for Federal Reserve rate cuts."
     },
     {
       "category": "markets",
       "source": "conteudos/mercados.txt",
-      "title_pt": "Capital roda para hardware de IA e ações de pequena capitalização",
-      "title_en": "Capital rotates into AI hardware and small-cap stocks",
-      "summary_pt": "Investidores direcionam capital para hardware de inteligência artificial, enquanto o Russell 2000 regista forte desempenho relativo face ao S&P 500.",
-      "summary_en": "Investors are directing capital toward artificial intelligence hardware, while the Russell 2000 records strong relative performance against the S&P 500."
+      "title_pt": "Setor de materiais surge como refúgio contra volatilidade tecnológica",
+      "title_en": "Materials sector emerges as hedge against tech volatility",
+      "summary_pt": "Analistas sugerem rotação para fundos de materiais como o ETF XLB, que negoceia com desconto de 19% em relação ao S&P 500.",
+      "summary_en": "Analysts suggest rotating into materials funds like the XLB ETF, which trades at a 19% discount compared to the S&P 500."
     },
     {
       "category": "crypto",
       "source": "conteudos/ouro.txt",
-      "title_pt": "Binance enfrenta novos bloqueios regulatórios na União Europeia",
-      "title_en": "Binance faces fresh regulatory blocks in the European Union",
-      "summary_pt": "As novas restrições aumentam as preocupações sobre conformidade legal e liquidez das operações de ativos digitais no espaço europeu.",
-      "summary_en": "The new restrictions raise concerns about legal compliance and the liquidity of digital asset operations across Europe."
+      "title_pt": "Declaração de receitas de Trump gera debate sobre criptoativos",
+      "title_en": "Trump's revenue disclosure sparks crypto asset debate",
+      "summary_pt": "A declaração anual revelou mais de 1,4 mil milhões de dólares em ganhos de cripto, enquanto a memecoin TRUMP perdeu 95% do seu valor.",
+      "summary_en": "The annual disclosure revealed over $1.4 billion in crypto earnings, while the TRUMP memecoin has lost 95% of its value."
+    },
+    {
+      "category": "tech",
+      "source": "conteudos/tech.txt",
+      "title_pt": "Anthropic restaura modelo Fable 5 globalmente",
+      "title_en": "Anthropic restores Fable 5 model globally",
+      "summary_pt": "O modelo foi restabelecido a 1 de julho com novos filtros de segurança, após suspensão por controlos de exportação dos EUA.",
+      "summary_en": "The model was reinstated on July 1 with new safety filters, following a suspension due to US export controls."
     },
     {
       "category": "sports",
       "source": "conteudos/desporto.txt",
-      "title_pt": "EUA vencem com dez jogadores e mantêm vivo o sonho no torneio",
-      "title_en": "USA win with ten players to keep tournament dream alive",
-      "summary_pt": "A seleção norte-americana conquistou uma vitória difícil reduzida a dez elementos, enquanto Wimbledon voltou a produzir um encontro surpreendente.",
-      "summary_en": "The US national team secured a difficult victory with ten players, while Wimbledon produced another surprising match."
-    },
-    {
-      "category": "economy",
-      "source": "conteudos/economia.txt",
-      "title_pt": "Fed mantém cautela enquanto investidores observam os dados económicos",
-      "title_en": "Fed stays cautious as investors watch economic data",
-      "summary_pt": "A resiliência dos lucros empresariais contrasta com a postura vigilante da Reserva Federal sobre possíveis cortes nas taxas de juro.",
-      "summary_en": "Resilient corporate earnings contrast with the Federal Reserve's cautious stance on potential interest-rate cuts."
-    },
-    {
-      "category": "economy",
-      "source": "conteudos/economia.txt",
-      "title_pt": "Inventários de petróleo dos EUA caem pela décima semana",
-      "title_en": "US crude inventories fall for a tenth consecutive week",
-      "summary_pt": "A queda consecutiva dos inventários sinaliza maior aperto na oferta energética e mantém a atenção sobre combustíveis e inflação.",
-      "summary_en": "The consecutive inventory decline signals tighter energy supply and keeps attention focused on fuel prices and inflation."
+      "title_pt": "Djokovic e Gauff avançam para a terceira ronda em Wimbledon",
+      "title_en": "Djokovic and Gauff advance to Wimbledon third round",
+      "summary_pt": "Novak Djokovic enfrenta Arthur Rinderknech e Coco Gauff joga contra Claire Liu no quinto dia do prestigiado torneio.",
+      "summary_en": "Novak Djokovic faces Arthur Rinderknech and Coco Gauff plays Claire Liu on the fifth day of the prestigious tournament."
     }
   ]
 }
