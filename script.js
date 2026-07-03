@@ -44,3 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
   setLanguage(savedLang);
   updateHeroDate();
 });
+
+// Toggle Mobile Menu for responsive navigation
+function toggleMobileMenu() {
+  const navLinks = document.querySelector('.nav-links');
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  if (navLinks) navLinks.classList.toggle('active');
+  if (menuBtn) menuBtn.classList.toggle('active');
+}
+
