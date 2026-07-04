@@ -70,6 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
   setLanguage(savedLang);
   updateHeroDate();
   updateDynamicDates();
+  updateHeaderPrices();
+  setInterval(updateHeaderPrices, 90000);
 });
 
 // Toggle Mobile Menu for responsive navigation
@@ -205,5 +207,50 @@ function closeArticleModal() {
     modal.style.pointerEvents = 'none';
   }
 }
+
+// Dynamic Header Ticker Price Updater (BTC & EUR/USD)
+function updateHeaderPrices() {
+  // Update EUR/USD from Frankfurter API
+  fetch('https://api.frankfurter.app/latest?from=EUR&to=USD')
+    .then(r => r.json())
+    .then(d => {
+      if (d.rates && d.rates.USD) {
+        const rate = d.rates.USD.toFixed(4);
+        const tickerItems = document.querySelectorAll('.ticker-item');
+        tickerItems.forEach(item => {
+          if (item.innerHTML.includes('EUR/USD')) {
+            item.innerHTML = `EUR/USD <span class="dn">${rate}</span>`;
+          }
+        });
+      }
+    }).catch(() => {});
+
+  // Update BTC/USD from CoinGecko
+  fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true')
+    .then(r => r.json())
+    .then(d => {
+      if (d.bitcoin) {
+        const price = Math.round(d.bitcoin.usd).toLocaleString('en-US');
+        const chg = d.bitcoin.usd_24h_change.toFixed(2);
+        const sign = chg >= 0 ? '+' : '';
+        const cls = chg >= 0 ? 'up' : 'dn';
+        
+        // Update top tickers
+        const tickerItems = document.querySelectorAll('.ticker-item');
+        tickerItems.forEach(item => {
+          if (item.innerHTML.includes('BTC/USD')) {
+            item.innerHTML = `BTC/USD <span class="${cls}">$${price} (${sign}${chg}%)</span>`;
+          }
+        });
+        
+        // Update prices inside ouro.html page if present
+        const btcPagePrice = document.querySelector('.btc-spot-price');
+        if (btcPagePrice) {
+          btcPagePrice.innerHTML = `$${price} <span style="font-size: 0.9rem; margin-left: 10px; color: ${chg >= 0 ? 'var(--up-color, #00ff8c)' : 'var(--down-color, #ff4466)'};">${sign}${chg}% (24h)</span>`;
+        }
+      }
+    }).catch(() => {});
+}
+
 
 
