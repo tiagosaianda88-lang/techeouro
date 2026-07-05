@@ -391,8 +391,8 @@ class PublisherAgent:
         return f'''<div class="card" onclick="openArticle(this)" data-body-pt="{esc_body_pt}" data-body-en="{esc_body_en}">
   <div>
     <p class="card-cat"><span lang="pt">{category_pt}</span><span lang="en">{category_en}</span></p>
-    <h2 class="card-title"><span lang="pt">{esc["title_pt"]}</span><span lang="en">{esc["title_en"]}</span></h2>
-    <p class="card-desc"><span lang="pt">{esc["summary_pt"]}</span><span lang="en">{esc["summary_en"]}</span></p>
+    <div class="card-title"><span lang="pt">{esc["title_pt"]}</span><span lang="en">{esc["title_en"]}</span></div>
+    <div class="card-desc"><span lang="pt">{esc["summary_pt"]}</span><span lang="en">{esc["summary_en"]}</span></div>
   </div>
   <div class="card-meta" onclick="event.stopPropagation();">
     <span>{date_html}</span>
