@@ -90,13 +90,23 @@
     "date": "2026-07-05"
   },
   {
-    "category": "sports",
+    "category": "markets",
     "source": "Expresso",
     "url": "https://expresso.pt",
-    "title_pt": "Portugal avança nos preparativos para a fase final do torneio europeu",
-    "title_en": "Portugal advances in preparations for the European tournament finals",
-    "summary_pt": "A comissão técnica nacional confirmou a convocatória final e o plano de treinos focado na coesão tática para o confronto inaugural.",
-    "summary_en": "The national coaching staff confirmed the final call-up list and training schedule focused on tactical cohesion for the opening match.",
+    "title_pt": "Bolsas europeias fecham em alta com perspetivas de juros baixos",
+    "title_en": "European markets close higher on low interest rate prospects",
+    "summary_pt": "Os principais índices europeus registaram ganhos consistentes apoiados por sinais de inflação moderada na Zona Euro.",
+    "summary_en": "Key European indices posted consistent gains supported by moderate inflation signs in the Eurozone.",
+    "date": "2026-07-05"
+  },
+  {
+    "category": "gold",
+    "source": "Kitco Gold",
+    "url": "https://www.kitco.com",
+    "title_pt": "Ouro mantém cotação recorde perante incerteza geopolítica global",
+    "title_en": "Gold maintains record price amid global geopolitical uncertainty",
+    "summary_pt": "A cotação do ouro físico permanece próxima dos máximos históricos devido à procura contínua por ativos tangíveis.",
+    "summary_en": "Physical gold prices remain near all-time highs due to continuous demand for tangible assets.",
     "date": "2026-07-05"
   }
 ]

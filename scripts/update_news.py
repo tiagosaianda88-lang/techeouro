@@ -222,7 +222,7 @@ class EditorAgent:
     def edit(self, items, images):
         source_json = json.dumps([asdict(item) for item in items], ensure_ascii=False)
         prompt = f"""
-You are the bilingual editor of Tech & Ouro. Select 6 factual, important
+You are the bilingual editor of Tech & Ouro. Select 8 factual, important
 stories for investors and technology readers from the supplied material.
 
 Rules:
@@ -254,8 +254,8 @@ class VerifierAgent:
 
     def verify(self, payload, known_sources):
         articles = payload.get("articles") if isinstance(payload, dict) else None
-        if not isinstance(articles, list) or len(articles) != 6:
-            raise ValueError("Verifier: expected 6 articles")
+        if not isinstance(articles, list) or len(articles) != 8:
+            raise ValueError("Verifier: expected 8 articles")
 
         verified = []
         titles = set()
@@ -322,7 +322,7 @@ class PublisherAgent:
         sorted_articles = sorted(archive_articles, key=lambda x: x.get("date", ""), reverse=True)
 
         pages_categories = {
-            Path("index.html"): None,  # limit to 6
+            Path("index.html"): None,  # limit to 8
             Path("noticias.html"): None,  # all active
             Path("economia.html"): ["economy"],
             Path("desporto.html"): ["sports"],
@@ -341,7 +341,7 @@ class PublisherAgent:
             if categories is None:
                 filtered = sorted_articles
                 if path.name == "index.html":
-                    filtered = sorted_articles[:6]
+                    filtered = sorted_articles[:8]
             else:
                 filtered = [a for a in sorted_articles if a.get("category") in categories]
 
@@ -353,7 +353,7 @@ class PublisherAgent:
                 print(f"Publisher: skipping {path} due to error: {e}")
 
         if dry_run:
-            index_filtered = sorted_articles[:6]
+            index_filtered = sorted_articles[:8]
             rendered_html = self.render(index_filtered)
             Path("news-preview.html").write_text(rendered_html, encoding="utf-8")
             print("Publisher: dry run written to news-preview.html; site HTML untouched.")

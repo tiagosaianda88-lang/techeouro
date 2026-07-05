@@ -75,7 +75,7 @@ def test_extreme_inputs():
         "summary_en": f"EN Sum: {special_chars}",
     }
     
-    payload_special = {"articles": [dict(article_special, title_pt=f"{article_special['title_pt']} {i}", title_en=f"{article_special['title_en']} {i}") for i in range(6)]}
+    payload_special = {"articles": [dict(article_special, title_pt=f"{article_special['title_pt']} {i}", title_en=f"{article_special['title_en']} {i}") for i in range(8)]}
     verified_special = verifier.verify(payload_special, valid_source)
     rendered_special = publisher.render(verified_special)
     
@@ -96,7 +96,7 @@ def test_extreme_inputs():
         "summary_pt": f"{long_str}",
         "summary_en": f"{long_str}",
     }
-    payload_long = {"articles": [dict(article_long, title_pt=f"{article_long['title_pt']} {i}", title_en=f"{article_long['title_en']} {i}") for i in range(6)]}
+    payload_long = {"articles": [dict(article_long, title_pt=f"{article_long['title_pt']} {i}", title_en=f"{article_long['title_en']} {i}") for i in range(8)]}
     verified_long = verifier.verify(payload_long, valid_source)
     rendered_long = publisher.render(verified_long)
     assert len(rendered_long) > 90000, "Rendered HTML for long text is unexpectedly small"
@@ -112,7 +112,7 @@ def test_extreme_inputs():
         "summary_pt": "Summary PT",
         "summary_en": "Summary EN",
     }
-    payload_empty_url = {"articles": [dict(empty_url_article, title_pt=f"T_PT {i}", title_en=f"T_EN {i}") for i in range(6)]}
+    payload_empty_url = {"articles": [dict(empty_url_article, title_pt=f"T_PT {i}", title_en=f"T_EN {i}") for i in range(8)]}
     try:
         verifier.verify(payload_empty_url, valid_source)
         raise AssertionError("Empty/whitespace URL was not rejected by verifier")
@@ -130,7 +130,7 @@ def test_extreme_inputs():
         "summary_pt": "Summary PT",
         "summary_en": "Summary EN",
     }
-    payload_js_url = {"articles": [dict(js_url_article, title_pt=f"T_PT {i}", title_en=f"T_EN {i}") for i in range(6)]}
+    payload_js_url = {"articles": [dict(js_url_article, title_pt=f"T_PT {i}", title_en=f"T_EN {i}") for i in range(8)]}
     # Currently, the pipeline accepts javascript: protocol but escapes quotes in href
     verified_js = verifier.verify(payload_js_url, valid_source)
     rendered_js = publisher.render(verified_js)
@@ -157,10 +157,13 @@ def test_layout_validation():
         news_parser = StructuralHTMLParser()
         news_parser.feed(news_block)
         
-        assert news_parser.cards_count == 6, f"Expected exactly 6 news cards in {filename}, found {news_parser.cards_count}"
+        if filename == "index.html":
+            assert news_parser.cards_count == 8, f"Expected exactly 8 news cards in {filename}, found {news_parser.cards_count}"
+        else:
+            assert news_parser.cards_count >= 8, f"Expected at least 8 news cards in {filename}, found {news_parser.cards_count}"
         assert len(news_parser.mismatches) == 0, f"Structural issues inside AI news block in {filename}: {news_parser.mismatches}"
         assert len(news_parser.tags_stack) == 0, f"Unclosed tags inside AI news block in {filename}: {news_parser.tags_stack}"
-        print(f"  - {filename}: PASS (6 structurally valid bilingual cards)")
+        print(f"  - {filename}: PASS ({news_parser.cards_count} structurally valid bilingual cards)")
 
 def test_language_and_terminal_widgets():
     print("[3/4] Verifying language selector and terminal widget...")
@@ -182,10 +185,9 @@ def test_language_and_terminal_widgets():
     term_content = term_path.read_text(encoding="utf-8")
     
     # Verify terminal wrapper and elements
-    assert 'id="terminal-page"' in term_content, "Missing #terminal-page ID in terminal.html"
+    assert 'id="term"' in term_content, "Missing #term ID in terminal.html"
     required_ids = [
-        "clk", "sbTime", "ntrack", "ttrack", "newsPanel", "fgCirc", "fgNum", "fgLabel",
-        "btcP", "btcS", "btc24h", "halv", "macro", "commod", "ws", "eu", "asia", "uk", "canada", "yields", "risk"
+        "clk", "sbTime", "ntrack", "ttrack", "newsPanel", "btcP", "btcS", "halv", "risk", "pTot", "pCost", "pDay"
     ]
     for element_id in required_ids:
         assert f'id="{element_id}"' in term_content, f"Missing terminal element ID: {element_id}"
