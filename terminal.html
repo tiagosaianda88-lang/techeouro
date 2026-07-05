@@ -332,10 +332,10 @@
   function cost(h){return h.shares*h.avg;}
   function tot(){return H.reduce(function(s,h){return s+val(h);},0);}
   function tc(){return H.reduce(function(s,h){return s+cost(h);},0);}
-  function f0(n){return Math.round(n).toLocaleString('pt-PT');}
-  function f2(n){return n.toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function f0(n){if(n===undefined||n===null||isNaN(n))return '0';return Math.round(n).toLocaleString('pt-PT');}
+  function f2(n){if(n===undefined||n===null||isNaN(n))return '0,00';return n.toLocaleString('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2});}
   function sgn(n){return (n>=0?'+':'−')+'€'+f0(Math.abs(n));}
-  function pc(n){return (n>=0?'+':'')+n.toFixed(1)+'%';}
+  function pc(n){if(n===undefined||n===null||isNaN(n))return '+0.0%';return (n>=0?'+':'')+n.toFixed(1)+'%';}
 
   function clock(){var d=new Date();var t=d.toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit',second:'2-digit'});root.querySelector('#clk').textContent=t;root.querySelector('#sbTime').textContent=d.toLocaleDateString('pt-PT',{weekday:'short',day:'2-digit',month:'short'})+'  '+t;}
   setInterval(clock,1000);clock();
@@ -344,29 +344,29 @@
    var T=tot(),C=tc();
    root.querySelector('#pTot').textContent=f0(T);
    root.querySelector('#pCost').textContent='€'+f0(C);
-   var ytdW=H.reduce(function(s,h){return s+h.ytd*(val(h)/T);},0);
+   var ytdW=T?H.reduce(function(s,h){return s+h.ytd*(val(h)/T);},0):0;
    root.querySelector('#pYtd').textContent=pc(ytdW);
    var dayE=H.reduce(function(s,h){return s+val(h)*(h.chg/100);},0);
-   root.querySelector('#pDay').innerHTML='<span class="'+(dayE>=0?'pos':'neg')+'">'+sgn(dayE)+' ('+pc(dayE/T*100)+')</span>';
+   root.querySelector('#pDay').innerHTML='<span class="'+(dayE>=0?'pos':'neg')+'">'+sgn(dayE)+' ('+pc(T?dayE/T*100:0)+')</span>';
    var pl=T-C,plP=C?pl/C*100:0;
    root.querySelector('#pPL').innerHTML='<span class="'+(pl>=0?'pos':'neg')+'">'+sgn(pl)+' ('+pc(plP)+')</span>';
    root.querySelector('#pUpd').textContent=new Date().toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'});
 
    var al=root.querySelector('#alloc');al.innerHTML='';
    H.slice().sort(function(a,b){return val(b)-val(a);}).forEach(function(h){
-    var v=val(h),p=Math.round(v/T*100),pl=v-cost(h),plP=cost(h)?pl/cost(h)*100:0;
+    var v=val(h),p=T?Math.round(v/T*100):0,pl=v-cost(h),plP=cost(h)?pl/cost(h)*100:0;
     al.innerHTML+='<div class="arow"><div class="asy">'+h.sym+'</div><div class="abg"><div class="abar" style="width:'+p+'%;background:'+color(h)+'"></div></div><div class="apc" style="color:'+color(h)+'">'+p+'%</div><div class="avl">€'+f0(v)+'</div><div class="ash">'+h.shares+' <span lang="pt">un</span><span lang="en">units</span></div><div class="apl '+(pl>=0?'pos':'neg')+'">'+pc(plP)+'</div></div>';
    });
    root.querySelector('#sbSym').textContent=H.map(function(h){return h.sym;}).join(' · ');
 
    var btc=H.filter(function(h){return h.cls==='Cripto';}).reduce(function(s,h){return s+val(h);},0);
    root.querySelector('#btcPos').textContent='€'+f0(btc);
-   root.querySelector('#btcW').textContent=Math.round(btc/T*100)+'%';
+   root.querySelector('#btcW').textContent=Math.round(T?btc/T*100:0)+'%';
 
    var classes={};H.forEach(function(h){classes[h.cls]=(classes[h.cls]||0)+val(h);});
    var dv=root.querySelector('#divv');dv.innerHTML='';
    Object.keys(classes).sort(function(a,b){return classes[b]-classes[a];}).forEach(function(k){
-    dv.innerHTML+='<div class="dr"><div class="dd" style="background:'+(CLS[k]||'#8a9e8a')+'"></div><div class="dl">'+k+'</div><div class="dv">'+Math.round(classes[k]/T*100)+'% · €'+f0(classes[k])+'</div></div>';
+    dv.innerHTML+='<div class="dr"><div class="dd" style="background:'+(CLS[k]||'#8a9e8a')+'"></div><div class="dl">'+k+'</div><div class="dv">'+Math.round(T?classes[k]/T*100:0)+'% · €'+f0(classes[k])+'</div></div>';
    });
    renderRisk(T,classes);renderDividends(T);persist();
   }
@@ -457,21 +457,31 @@
    root.querySelector('#pxLive').innerHTML='<span lang="pt">● a atualizar</span><span lang="en">● updating</span>';
    var jobs=H.filter(function(h){return h.tk;});
    var done=0;
-   if(jobs.length===0){root.querySelector('#pxLive').innerHTML='<span lang="pt">○ sem tickers</span><span lang="en">○ no tickers</span>';return;}
-   jobs.forEach(function(h){
-    fetch('https://finnhub.io/api/v1/quote?symbol='+encodeURIComponent(h.tk)+'&token='+KEY).then(function(r){return r.json();}).then(function(d){
-     if(d&&d.c){var usd=d.c;h.price=usd*(window._fx?(1/window._fx):0.889);h.chg=d.dp||h.chg;}
-     done++;if(done===jobs.length){root.querySelector('#pxLive').innerHTML='<span lang="pt">● ao vivo</span><span lang="en">● live</span>';render();}
-    }).catch(function(){done++;if(done===jobs.length){root.querySelector('#pxLive').innerHTML='<span lang="pt">○ erro</span><span lang="en">○ error</span>';render();}});
-   });
-   var wljobs=WL.filter(function(w){return w.tk;});var wdone=0;
+   if(jobs.length===0){
+     root.querySelector('#pxLive').innerHTML='<span lang="pt">○ sem tickers</span><span lang="en">○ no tickers</span>';
+   } else {
+     jobs.forEach(function(h){
+      fetch('https://finnhub.io/api/v1/quote?symbol='+encodeURIComponent(h.tk)+'&token='+KEY).then(function(r){return r.json();}).then(function(d){
+       if(d&&d.c){var usd=d.c;h.price=usd*(window._fx?(1/window._fx):0.889);h.chg=d.dp||h.chg;}
+       done++;if(done===jobs.length){root.querySelector('#pxLive').innerHTML='<span lang="pt">● ao vivo</span><span lang="en">● live</span>';render();}
+      }).catch(function(){done++;if(done===jobs.length){root.querySelector('#pxLive').innerHTML='<span lang="pt">○ erro</span><span lang="en">○ error</span>';render();}});
+     });
+   }
+
+   var wljobs=WL.filter(function(w){return w.tk;});
+   var wdone=0;
    root.querySelector('#wlLive').innerHTML='<span lang="pt">● a carregar</span><span lang="en">● loading</span>';
-   wljobs.forEach(function(w){
-    fetch('https://finnhub.io/api/v1/quote?symbol='+encodeURIComponent(w.tk)+'&token='+KEY).then(function(r){return r.json();}).then(function(d){
-     if(d&&d.c)w.price=d.c;
-     wdone++;if(wdone===wljobs.length){root.querySelector('#wlLive').innerHTML='<span lang="pt">● ao vivo</span><span lang="en">● live</span>';renderWatch();persist();}
-    }).catch(function(){wdone++;if(wdone===wljobs.length){root.querySelector('#wlLive').innerHTML='<span lang="pt">○ erro</span><span lang="en">○ error</span>';renderWatch();}});
-   });
+   if(wljobs.length===0){
+     root.querySelector('#wlLive').innerHTML='<span lang="pt">○ sem tickers</span><span lang="en">○ no tickers</span>';
+     renderWatch();
+   } else {
+     wljobs.forEach(function(w){
+      fetch('https://finnhub.io/api/v1/quote?symbol='+encodeURIComponent(w.tk)+'&token='+KEY).then(function(r){return r.json();}).then(function(d){
+       if(d&&d.c)w.price=d.c;
+       wdone++;if(wdone===wljobs.length){root.querySelector('#wlLive').innerHTML='<span lang="pt">● ao vivo</span><span lang="en">● live</span>';renderWatch();persist();}
+      }).catch(function(){wdone++;if(wdone===wljobs.length){root.querySelector('#wlLive').innerHTML='<span lang="pt">○ erro</span><span lang="en">○ error</span>';renderWatch();}});
+     });
+   }
   }
 
   function loadNews(){
