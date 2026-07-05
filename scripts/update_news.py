@@ -234,7 +234,8 @@ Rules:
 - source must name one supplied source.
 - Return JSON only, with an object containing an `articles` array.
 - Each article must contain: category, source, url, title_pt, title_en,
-  summary_pt, summary_en.
+  summary_pt, summary_en, body_pt, body_en.
+- Generate a detailed, high-quality, professional article body (at least 2 paragraphs, approximately 100-150 words) for each story. This body will be displayed in the premium modal viewer. It should be highly informative, professional, and explain the context, implications, and details of the news. Do not use generic boilerplate.
 - You must return the exact `url` of the selected article from the source material. Do not invent or modify the URL.
 
 Source material:
@@ -250,7 +251,7 @@ Source material:
 
 
 class VerifierAgent:
-    REQUIRED = ("category", "source", "url", "title_pt", "title_en", "summary_pt", "summary_en")
+    REQUIRED = ("category", "source", "url", "title_pt", "title_en", "summary_pt", "summary_en", "body_pt", "body_en")
 
     def verify(self, payload, known_sources):
         articles = payload.get("articles") if isinstance(payload, dict) else None
@@ -371,7 +372,13 @@ class PublisherAgent:
         
         art_date = article.get("date", "HOJE")
         
-        return f'''<div class="card" onclick="openArticle(this)">
+        body_pt = article.get("body_pt", "")
+        body_en = article.get("body_en", "")
+        
+        esc_body_pt = html.escape(body_pt, quote=True)
+        esc_body_en = html.escape(body_en, quote=True)
+        
+        return f'''<div class="card" onclick="openArticle(this)" data-body-pt="{esc_body_pt}" data-body-en="{esc_body_en}">
   <div>
     <p class="card-cat"><span lang="pt">{category_pt}</span><span lang="en">{category_en}</span></p>
     <h2 class="card-title"><span lang="pt">{esc["title_pt"]}</span><span lang="en">{esc["title_en"]}</span></h2>

@@ -73,6 +73,8 @@ def test_extreme_inputs():
         "title_en": f"EN: {special_chars}",
         "summary_pt": f"PT Sum: {special_chars}",
         "summary_en": f"EN Sum: {special_chars}",
+        "body_pt": f"PT Body: {special_chars}",
+        "body_en": f"EN Body: {special_chars}",
     }
     
     payload_special = {"articles": [dict(article_special, title_pt=f"{article_special['title_pt']} {i}", title_en=f"{article_special['title_en']} {i}") for i in range(10)]}
@@ -95,6 +97,8 @@ def test_extreme_inputs():
         "title_en": f"{long_str}",
         "summary_pt": f"{long_str}",
         "summary_en": f"{long_str}",
+        "body_pt": f"{long_str}",
+        "body_en": f"{long_str}",
     }
     payload_long = {"articles": [dict(article_long, title_pt=f"{article_long['title_pt']} {i}", title_en=f"{article_long['title_en']} {i}") for i in range(10)]}
     verified_long = verifier.verify(payload_long, valid_source)
@@ -111,6 +115,8 @@ def test_extreme_inputs():
         "title_en": "Title EN",
         "summary_pt": "Summary PT",
         "summary_en": "Summary EN",
+        "body_pt": "Body PT",
+        "body_en": "Body EN",
     }
     payload_empty_url = {"articles": [dict(empty_url_article, title_pt=f"T_PT {i}", title_en=f"T_EN {i}") for i in range(10)]}
     try:
@@ -129,6 +135,8 @@ def test_extreme_inputs():
         "title_en": "Title EN",
         "summary_pt": "Summary PT",
         "summary_en": "Summary EN",
+        "body_pt": "Body PT",
+        "body_en": "Body EN",
     }
     payload_js_url = {"articles": [dict(js_url_article, title_pt=f"T_PT {i}", title_en=f"T_EN {i}") for i in range(10)]}
     # Currently, the pipeline accepts javascript: protocol but escapes quotes in href

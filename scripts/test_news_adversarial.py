@@ -25,6 +25,8 @@ class AdversarialNewsTests(unittest.TestCase):
             "title_en": "Title <script>alert('en')</script> & $",
             "summary_pt": "Resumo <iframe src='x'></iframe> 🦁 🇵🇹",
             "summary_en": "Summary <iframe src='x'></iframe> 🦁 🇬🇧",
+            "body_pt": "Corpo com emoji 🦁 e XSS <script>alert('pt')</script>",
+            "body_en": "Body with emoji 🦁 and XSS <script>alert('en')</script>",
         }
         
         rendered = self.publisher.render([xss_payload])
@@ -57,6 +59,8 @@ class AdversarialNewsTests(unittest.TestCase):
             "title_en": long_title,
             "summary_pt": long_summary,
             "summary_en": long_summary,
+            "body_pt": long_summary,
+            "body_en": long_summary,
         }
         
         # Verifier check
@@ -86,6 +90,8 @@ class AdversarialNewsTests(unittest.TestCase):
                 "title_en": "Title EN",
                 "summary_pt": "Summary PT",
                 "summary_en": "Summary EN",
+                "body_pt": "Body PT",
+                "body_en": "Body EN",
             },
             # Path traversal / local file URL
             {
@@ -96,6 +102,8 @@ class AdversarialNewsTests(unittest.TestCase):
                 "title_en": "Title EN",
                 "summary_pt": "Summary PT",
                 "summary_en": "Summary EN",
+                "body_pt": "Body PT",
+                "body_en": "Body EN",
             }
         ]
         

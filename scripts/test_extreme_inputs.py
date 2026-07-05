@@ -17,6 +17,8 @@ class ExtremeInputsTests(unittest.TestCase):
             "title_en": "Test Title",
             "summary_pt": "Resumo de teste.",
             "summary_en": "Test summary.",
+            "body_pt": "Conteúdo de corpo de teste de longa duração.",
+            "body_en": "Test body content of long duration.",
         }
         article.update(overrides)
         return article

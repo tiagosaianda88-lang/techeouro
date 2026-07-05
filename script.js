@@ -99,6 +99,8 @@ function openArticle(cardEl) {
   const descPt = descPtEl ? descPtEl.innerText : (cardEl.querySelector('.card-desc') ? cardEl.querySelector('.card-desc').innerText : '');
   const descEn = descEnEl ? descEnEl.innerText : descPt;
   const url = cardEl.getAttribute('data-url') || '';
+  const bodyPt = cardEl.getAttribute('data-body-pt') || '';
+  const bodyEn = cardEl.getAttribute('data-body-en') || '';
   const dateHtml = dateEl ? dateEl.innerHTML : 'HOJE / TODAY';
 
   let modal = document.getElementById('article-modal');
@@ -182,10 +184,15 @@ function openArticle(cardEl) {
       </div>
 
       <div style="font-size: 1rem; line-height: 1.7; color: #a0b0a0; display: flex; flex-direction: column; gap: 15px;">
-        <p>
-          <span lang="pt">A nossa equipa editorial está a acompanhar de perto o desenvolvimento desta situação. Mais detalhes técnicos, dados de mercado e gráficos comparativos serão adicionados nas próximas atualizações do portal.</span>
-          <span lang="en">Our editorial team is closely monitoring the development of this situation. Additional technical details, market data, and comparative charts will be added in upcoming portal updates.</span>
-        </p>
+        ${(bodyPt || bodyEn) ? `
+          ${bodyPt ? bodyPt.split(/\n+/).map(para => `<p><span lang="pt">${para.trim()}</span></p>`).join('') : ''}
+          ${bodyEn ? bodyEn.split(/\n+/).map(para => `<p><span lang="en">${para.trim()}</span></p>`).join('') : ''}
+        ` : `
+          <p>
+            <span lang="pt">A nossa equipa editorial está a acompanhar de perto o desenvolvimento desta situação. Mais detalhes técnicos, dados de mercado e gráficos comparativos serão adicionados nas próximas atualizações do portal.</span>
+            <span lang="en">Our editorial team is closely monitoring the development of this situation. Additional technical details, market data, and comparative charts will be added in upcoming portal updates.</span>
+          </p>
+        `}
         <p>
           <span lang="pt">Este conteúdo destina-se a fins puramente informativos e de análise de longo prazo. Nenhuma parte deste artigo deve ser interpretada como aconselhamento financeiro ou recomendação profissional.</span>
           <span lang="en">This content is intended purely for informational and long-term analysis purposes. No part of this article should be construed as financial advice or professional recommendation.</span>

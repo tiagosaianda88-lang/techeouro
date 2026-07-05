@@ -20,6 +20,8 @@ def valid_payload():
                 "title_en": f"Title {i}",
                 "summary_pt": f"Resumo verificado {i}.",
                 "summary_en": f"Verified summary {i}.",
+                "body_pt": f"Conteudo detalhado pt {i}.",
+                "body_en": f"Detailed content en {i}.",
             }
             for i in range(10)
         ]
