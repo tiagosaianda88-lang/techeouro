@@ -184,13 +184,13 @@ function openArticle(cardEl) {
       </div>
 
       <div style="font-size: 1rem; line-height: 1.7; color: #a0b0a0; display: flex; flex-direction: column; gap: 15px;">
-        ${bodyPt ? bodyPt.split(/\n+/).map(para => `<p><span lang="pt">${para.trim()}</span></p>`).join('') : ''}
-        ${bodyEn ? bodyEn.split(/\n+/).map(para => `<p><span lang="en">${para.trim()}</span></p>`).join('') : ''}
+        ${bodyPt ? bodyPt.split(/\n+/).map(para => `<p lang="pt">${para.trim()}</p>`).join('') : ''}
+        ${bodyEn ? bodyEn.split(/\n+/).map(para => `<p lang="en">${para.trim()}</p>`).join('') : ''}
       </div>
 
       <div style="margin-top: 25px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(201,162,39,0.2); padding-top: 20px; flex-wrap: wrap; gap: 15px;">
         <div style="display: flex; gap: 15px;">
-          <button id="copy-btn-pt" style="
+          <button id="copy-btn-pt" lang="pt" style="
             background: none;
             border: 1px solid rgba(201,162,39,0.4);
             color: #d4af37;
@@ -204,10 +204,9 @@ function openArticle(cardEl) {
             gap: 6px;
           " onmouseover="this.style.background='rgba(201,162,39,0.1)'" onmouseout="this.style.background='none'">
             <span class="btn-icon">📋</span>
-            <span lang="pt">Copiar Resumo (PT)</span>
-            <span lang="en">Copy Summary (PT)</span>
+            <span class="btn-text">Copiar Resumo</span>
           </button>
-          <button id="copy-btn-en" style="
+          <button id="copy-btn-en" lang="en" style="
             background: none;
             border: 1px solid rgba(201,162,39,0.4);
             color: #d4af37;
@@ -221,8 +220,7 @@ function openArticle(cardEl) {
             gap: 6px;
           " onmouseover="this.style.background='rgba(201,162,39,0.1)'" onmouseout="this.style.background='none'">
             <span class="btn-icon">📋</span>
-            <span lang="pt">Copiar Resumo (EN)</span>
-            <span lang="en">Copy Summary (EN)</span>
+            <span class="btn-text">Copy Summary</span>
           </button>
         </div>
         ${url ? `
@@ -257,17 +255,14 @@ function openArticle(cardEl) {
       const textToCopy = `${titlePt}\n\n${descPt}`;
       navigator.clipboard.writeText(textToCopy).then(() => {
         const icon = copyBtnPt.querySelector('.btn-icon');
-        const textPt = copyBtnPt.querySelector('[lang="pt"]');
-        const textEn = copyBtnPt.querySelector('[lang="en"]');
+        const text = copyBtnPt.querySelector('.btn-text');
         if (icon) icon.innerText = '✓';
-        if (textPt) textPt.innerText = 'Copiado!';
-        if (textEn) textEn.innerText = 'Copied!';
+        if (text) text.innerText = 'Copiado!';
         copyBtnPt.style.borderColor = '#00ff8c';
         copyBtnPt.style.color = '#00ff8c';
         setTimeout(() => {
           if (icon) icon.innerText = '📋';
-          if (textPt) textPt.innerText = 'Copiar Resumo (PT)';
-          if (textEn) textEn.innerText = 'Copy Summary (PT)';
+          if (text) text.innerText = 'Copiar Resumo';
           copyBtnPt.style.borderColor = 'rgba(201,162,39,0.4)';
           copyBtnPt.style.color = '#d4af37';
         }, 2000);
@@ -280,17 +275,14 @@ function openArticle(cardEl) {
       const textToCopy = `${titleEn}\n\n${descEn}`;
       navigator.clipboard.writeText(textToCopy).then(() => {
         const icon = copyBtnEn.querySelector('.btn-icon');
-        const textPt = copyBtnEn.querySelector('[lang="pt"]');
-        const textEn = copyBtnEn.querySelector('[lang="en"]');
+        const text = copyBtnEn.querySelector('.btn-text');
         if (icon) icon.innerText = '✓';
-        if (textPt) textPt.innerText = 'Copiado!';
-        if (textEn) textEn.innerText = 'Copied!';
+        if (text) text.innerText = 'Copied!';
         copyBtnEn.style.borderColor = '#00ff8c';
         copyBtnEn.style.color = '#00ff8c';
         setTimeout(() => {
           if (icon) icon.innerText = '📋';
-          if (textPt) textPt.innerText = 'Copiar Resumo (EN)';
-          if (textEn) textEn.innerText = 'Copy Summary (EN)';
+          if (text) text.innerText = 'Copy Summary';
           copyBtnEn.style.borderColor = 'rgba(201,162,39,0.4)';
           copyBtnEn.style.color = '#d4af37';
         }, 2000);
