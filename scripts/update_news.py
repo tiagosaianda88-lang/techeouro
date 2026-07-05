@@ -25,6 +25,9 @@ RSS_FEEDS = [
     ("Google Wall Street", "https://news.google.com/rss/search?q=when:3d+wall+street&hl=en-US&gl=US&ceid=US:en"),
     ("MarketWatch", "https://news.google.com/rss/search?q=when:3d+source:marketwatch&hl=en-US&gl=US&ceid=US:en"),
     ("Barron's", "https://news.google.com/rss/search?q=when:3d+source:barrons&hl=en-US&gl=US&ceid=US:en"),
+    ("CBC Canada", "https://news.google.com/rss/search?q=when:3d+site:cbc.ca/news&hl=en-CA&gl=CA&ceid=CA:en"),
+    ("RTE Ireland", "https://news.google.com/rss/search?q=when:3d+site:rte.ie/news&hl=en-IE&gl=IE&ceid=IE:en"),
+    ("Swissinfo", "https://news.google.com/rss/search?q=when:3d+site:swissinfo.ch&hl=en-CH&gl=CH&ceid=CH:en"),
 ]
 
 START_MARKER = "<!-- AI_NEWS_START -->"
