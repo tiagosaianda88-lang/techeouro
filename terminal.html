@@ -487,21 +487,135 @@
   function loadNews(){
    var panel=root.querySelector('#newsPanel');
    root.querySelector('#newsLive').innerHTML='<span lang="pt">● a carregar</span><span lang="en">● loading</span>';
-   panel.innerHTML='<div style="font-size:10px;color:#4a5e4a"><span lang="pt">A buscar notícias das tuas posições…</span><span lang="en">Fetching news for your positions...</span></div>';
+   panel.innerHTML='<div style="font-size:10px;color:#4a5e4a"><span lang="pt">A buscar notícias…</span><span lang="en">Fetching news...</span></div>';
+   
+   fetch('conteudos/news-archive.json')
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(Array.isArray(data) && data.length > 0){
+        data.sort(function(a,b){
+          var dA = a.date ? new Date(a.date) : new Date(0);
+          var dB = b.date ? new Date(b.date) : new Date(0);
+          return dB - dA;
+        });
+        showAggregatedNews(data);
+      } else {
+        loadFinnhubNews();
+      }
+    })
+    .catch(function(){
+      loadFinnhubNews();
+    });
+  }
+
+  function esc(str){
+    if(!str) return '';
+    return str.replace(/&/g, '&amp;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;')
+              .replace(/"/g, '&quot;')
+              .replace(/'/g, '&#x27;');
+  }
+
+  function showAggregatedNews(articles){
+   var panel=root.querySelector('#newsPanel');
+   root.querySelector('#newsLive').innerHTML='<span lang="pt">● ao vivo</span><span lang="en">● live</span>';
+   panel.innerHTML='';
+   
+   var cats = {
+     "economy": ["ECONOMIA", "ECONOMY"],
+     "markets": ["MERCADOS", "MARKETS"],
+     "gold": ["OURO", "GOLD"],
+     "crypto": ["CRIPTO", "CRYPTO"],
+     "tech": ["TECNOLOGIA", "TECH"],
+     "geopolitics": ["GEOPOLITICA", "GEOPOLITICS"],
+     "sports": ["DESPORTO", "SPORTS"]
+   };
+
+   var panelArticles = articles.slice(0, 9);
+   panelArticles.forEach(function(n){
+     var cat = cats[n.category] || [n.category ? n.category.toUpperCase() : 'GERAL', n.category ? n.category.toUpperCase() : 'GENERAL'];
+     var src = n.source || '';
+     var dateStr = n.date || 'HOJE';
+     var titlePt = n.title_pt || n.title || '';
+     var titleEn = n.title_en || n.title || '';
+     var summaryPt = n.summary_pt || '';
+     var summaryEn = n.summary_en || '';
+     var bodyPt = n.body_pt || '';
+     var bodyEn = n.body_en || '';
+     var url = n.url || '';
+
+     panel.innerHTML+='<div class="nitem" onclick="openArticle(this)" style="cursor: pointer;" data-url="'+esc(url)+'" data-body-pt="'+esc(bodyPt)+'" data-body-en="'+esc(bodyEn)+'">'+
+       '<div class="nsrc">'+
+         '<span class="card-cat"><span lang="pt">'+cat[0]+'</span><span lang="en">'+cat[1]+'</span> · '+esc(src)+'</span>'+
+         '<span class="card-meta"><span>'+esc(dateStr)+'</span></span>'+
+       '</div>'+
+       '<div class="ntt card-title">'+
+         '<span lang="pt">'+esc(titlePt)+'</span>'+
+         '<span lang="en">'+esc(titleEn)+'</span>'+
+       '</div>'+
+       '<div class="card-desc" style="display: none;">'+
+         '<span lang="pt">'+esc(summaryPt)+'</span>'+
+         '<span lang="en">'+esc(summaryEn)+'</span>'+
+       '</div>'+
+     '</div>';
+   });
+   
+   var tickerTrack = root.querySelector('#ntrack');
+   if(tickerTrack) {
+     var tickerArticles = articles.slice(0, 8);
+     if(tickerArticles.length > 0){
+       var tickerHTML = tickerArticles.map(function(x){
+         var src = x.source || '';
+         var titlePt = x.title_pt || x.title || '';
+         var titleEn = x.title_en || x.title || '';
+         return '<div class="ni">'+
+           '<span class="nisrc">'+esc(src)+'</span>'+
+           '<span class="nitx">'+
+             '<span lang="pt">'+esc(titlePt)+'</span>'+
+             '<span lang="en">'+esc(titleEn)+'</span>'+
+           '</span>'+
+         '</div>';
+       }).join('');
+       tickerTrack.innerHTML = tickerHTML + tickerHTML;
+     }
+   }
+  }
+
+  function loadFinnhubNews(){
    var to=new Date().toISOString().slice(0,10);
    var from=new Date(Date.now()-7*864e5).toISOString().slice(0,10);
-   var targets=['BRK.B','AAPL','MSFT','NVDA'];
+   var targets=H.filter(function(h){return h.tk;}).map(function(h){return h.tk;});
+   if(targets.length===0){
+     targets=['BRK.B','AAPL','MSFT','NVDA'];
+   }
    var all=[];var done=0;
    targets.forEach(function(sym){
-    fetch('https://finnhub.io/api/v1/company-news?symbol='+sym+'&from='+from+'&to='+to+'&token='+KEY).then(function(r){return r.json();}).then(function(d){
-     if(Array.isArray(d)){d.slice(0,3).forEach(function(n){all.push({sym:sym,src:n.source,t:n.headline,dt:n.datetime,url:n.url});});}
-     done++;if(done===targets.length)showNews(all);
-    }).catch(function(){done++;if(done===targets.length)showNews(all);});
+    fetch('https://finnhub.io/api/v1/company-news?symbol='+sym+'&from='+from+'&to='+to+'&token='+KEY)
+     .then(function(r){return r.json();})
+     .then(function(d){
+       if(Array.isArray(d)){
+         d.slice(0,3).forEach(function(n){
+           all.push({sym:sym,src:n.source,t:n.headline,dt:n.datetime,url:n.url});
+         });
+       }
+       done++;
+       if(done===targets.length) showFinnhubNews(all);
+     })
+     .catch(function(){
+       done++;
+       if(done===targets.length) showFinnhubNews(all);
+     });
    });
   }
-  function showNews(all){
+
+  function showFinnhubNews(all){
    var panel=root.querySelector('#newsPanel');
-   if(all.length===0){root.querySelector('#newsLive').innerHTML='<span lang="pt">○ sem resultados</span><span lang="en">○ no results</span>';panel.innerHTML='<div style="font-size:10px;color:#4a5e4a"><span lang="pt">Sem notícias recentes. Mercado pode estar fechado ou chave a validar.</span><span lang="en">No recent news. Market might be closed or key validating.</span></div>';return;}
+   if(all.length===0){
+     root.querySelector('#newsLive').innerHTML='<span lang="pt">○ sem resultados</span><span lang="en">○ no results</span>';
+     panel.innerHTML='<div style="font-size:10px;color:#4a5e4a"><span lang="pt">Sem notícias recentes. Mercado pode estar fechado ou chave a validar.</span><span lang="en">No recent news. Market might be closed or key validating.</span></div>';
+     return;
+   }
    all.sort(function(a,b){return b.dt-a.dt;});
    root.querySelector('#newsLive').innerHTML='<span lang="pt">● ao vivo</span><span lang="en">● live</span>';
    panel.innerHTML='';
@@ -509,7 +623,12 @@
     var ago=Math.round((Date.now()/1000-n.dt)/3600);
     panel.innerHTML+='<div class="nitem"><div class="nsrc"><span>'+n.sym+' · '+(n.src||'')+'</span><span class="ntm"><span lang="pt">há '+ago+'h</span><span lang="en">'+ago+'h ago</span></span></div><div class="ntt" data-url="'+(n.url||'')+'">'+n.t+'</div></div>';
    });
-   panel.querySelectorAll('.ntt').forEach(function(el){el.addEventListener('click',function(){var u=el.getAttribute('data-url');if(u&&window.openLink)openLink(u);else if(u)window.open(u,'_blank');});});
+   panel.querySelectorAll('.ntt').forEach(function(el){
+     el.addEventListener('click',function(){
+       var u=el.getAttribute('data-url');
+       if(u) window.open(u,'_blank');
+     });
+   });
   }
 
   (function newsTicker(){
