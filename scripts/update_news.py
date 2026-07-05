@@ -451,9 +451,9 @@ def run(dry_run=False):
     else:
         archive = []
 
-    # Filter older than 30 days
+    # Filter older than 20 days
     today = datetime.now()
-    thirty_days_ago = today - timedelta(days=30)
+    twenty_days_ago = today - timedelta(days=20)
     filtered_archive = []
     for art in archive:
         art_date_str = art.get("date")
@@ -461,7 +461,7 @@ def run(dry_run=False):
             continue
         try:
             art_date = datetime.strptime(art_date_str, "%Y-%m-%d")
-            if art_date >= thirty_days_ago:
+            if art_date >= twenty_days_ago:
                 filtered_archive.append(art)
         except Exception:
             pass
