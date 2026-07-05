@@ -21,21 +21,21 @@ def valid_payload():
                 "summary_pt": f"Resumo verificado {i}.",
                 "summary_en": f"Verified summary {i}.",
             }
-            for i in range(8)
+            for i in range(10)
         ]
     }
 
 
 class VerifierAgentTests(unittest.TestCase):
-    def test_accepts_eight_articles(self):
+    def test_accepts_ten_articles(self):
         result = VerifierAgent().verify(valid_payload(), {"Reuters"})
-        self.assertEqual(len(result), 8)
+        self.assertEqual(len(result), 10)
 
     def test_allows_repeated_category(self):
         payload = valid_payload()
         payload["articles"][-1]["category"] = "economy"
         result = VerifierAgent().verify(payload, {"Reuters"})
-        self.assertEqual(len(result), 8)
+        self.assertEqual(len(result), 10)
 
     def test_rejects_unknown_source(self):
         payload = valid_payload()

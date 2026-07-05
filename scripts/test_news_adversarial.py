@@ -61,9 +61,9 @@ class AdversarialNewsTests(unittest.TestCase):
         
         # Verifier check
         try:
-            payload = {"articles": [dict(long_payload, title_pt=f"{long_title} {i}", title_en=f"{long_title} {i}") for i in range(8)]}
+            payload = {"articles": [dict(long_payload, title_pt=f"{long_title} {i}", title_en=f"{long_title} {i}") for i in range(10)]}
             verified = self.verifier.verify(payload, {"Reuters"})
-            self.assertEqual(len(verified), 8)
+            self.assertEqual(len(verified), 10)
             print("[Adversarial Test] Long text passed VerifierAgent without size limits.")
         except Exception as e:
             print(f"[Adversarial Test] Long text failed VerifierAgent: {e}")
@@ -104,7 +104,7 @@ class AdversarialNewsTests(unittest.TestCase):
             try:
                 # Verifier checks clean_text(article.get('url'))
                 # For "   ", clean_text returns "" which causes it to raise error
-                self.verifier.verify({"articles": [dict(payload, title_pt=f"{payload['title_pt']} {i}", title_en=f"{payload['title_en']} {i}") for i in range(8)]}, {"Reuters"})
+                self.verifier.verify({"articles": [dict(payload, title_pt=f"{payload['title_pt']} {i}", title_en=f"{payload['title_en']} {i}") for i in range(10)]}, {"Reuters"})
                 print(f"[Adversarial Test] URL validation passed for URL: '{payload['url']}'")
             except ValueError as e:
                 print(f"[Adversarial Test] URL validation expectedly failed for URL: '{payload['url']}' - Error: {e}")

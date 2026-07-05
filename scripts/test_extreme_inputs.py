@@ -37,9 +37,9 @@ class ExtremeInputsTests(unittest.TestCase):
             title_en=f"{special_str} {i}",
             summary_pt=special_str,
             summary_en=special_str
-        ) for i in range(8)]}
+        ) for i in range(10)]}
         verified = self.verifier.verify(payload, self.valid_source)
-        self.assertEqual(len(verified), 8)
+        self.assertEqual(len(verified), 10)
         
         # Verify publisher escapes HTML tags
         rendered = self.publisher.render(verified)
@@ -59,10 +59,10 @@ class ExtremeInputsTests(unittest.TestCase):
             title_en=f"{long_str} {i}",
             summary_pt=long_str,
             summary_en=long_str
-        ) for i in range(8)]}
+        ) for i in range(10)]}
         # The pipeline accepts long texts without raising errors or truncating in the verifier/publisher
         verified = self.verifier.verify(payload, self.valid_source)
-        self.assertEqual(len(verified), 8)
+        self.assertEqual(len(verified), 10)
         self.assertEqual(len(verified[0]["title_pt"]), 10002) # plus space and index
         
         rendered = self.publisher.render(verified)
@@ -70,12 +70,12 @@ class ExtremeInputsTests(unittest.TestCase):
 
     def test_empty_or_whitespace_fields(self):
         # Test empty URL
-        payload = {"articles": [self.create_valid_article(url="   ", title_pt=f"Title {i}", title_en=f"Title {i}") for i in range(8)]}
+        payload = {"articles": [self.create_valid_article(url="   ", title_pt=f"Title {i}", title_en=f"Title {i}") for i in range(10)]}
         with self.assertRaisesRegex(ValueError, "missing url"):
             self.verifier.verify(payload, self.valid_source)
 
         # Test empty title
-        payload = {"articles": [self.create_valid_article(title_pt="", title_en=f"Title {i}") for i in range(8)]}
+        payload = {"articles": [self.create_valid_article(title_pt="", title_en=f"Title {i}") for i in range(10)]}
         with self.assertRaisesRegex(ValueError, "missing title_pt"):
             self.verifier.verify(payload, self.valid_source)
 
@@ -89,7 +89,7 @@ class ExtremeInputsTests(unittest.TestCase):
             "<script>alert(1)</script>"
         ]
         for url in bad_urls:
-            payload = {"articles": [self.create_valid_article(url=url, title_pt=f"Title {i}", title_en=f"Title {i}") for i in range(8)]}
+            payload = {"articles": [self.create_valid_article(url=url, title_pt=f"Title {i}", title_en=f"Title {i}") for i in range(10)]}
             verified = self.verifier.verify(payload, self.valid_source)
             self.assertEqual(verified[0]["url"], url.strip())
             

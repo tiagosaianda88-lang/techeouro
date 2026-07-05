@@ -71,6 +71,24 @@
       "title_en": "Gold maintains record price amid global geopolitical uncertainty",
       "summary_pt": "A cotação do ouro físico permanece próxima dos máximos históricos devido à procura contínua por ativos tangíveis.",
       "summary_en": "Physical gold prices remain near all-time highs due to continuous demand for tangible assets."
+    },
+    {
+      "category": "economy",
+      "source": "Expresso",
+      "url": "https://expresso.pt",
+      "title_pt": "Taxa de desemprego em Portugal desce ligeiramente para 6.4%",
+      "title_en": "Unemployment rate in Portugal drops slightly to 6.4%",
+      "summary_pt": "A criação de emprego no sector de serviços e turismo durante a época de verão suportou a redução do desemprego jovem.",
+      "summary_en": "Job creation in the service and tourism sectors during the summer season supported the decline in youth unemployment."
+    },
+    {
+      "category": "geopolitics",
+      "source": "Expresso",
+      "url": "https://expresso.pt",
+      "title_pt": "Conselho de Segurança da ONU reúne-se de urgência sobre segurança marítima",
+      "title_en": "UN Security Council meets urgently on maritime security",
+      "summary_pt": "Os membros debatem novas diretrizes para proteger as rotas de comércio internacional no Mar Vermelho.",
+      "summary_en": "Members discuss new guidelines to protect international trade routes in the Red Sea."
     }
   ]
 }

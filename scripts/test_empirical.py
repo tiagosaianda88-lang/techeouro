@@ -75,7 +75,7 @@ def test_extreme_inputs():
         "summary_en": f"EN Sum: {special_chars}",
     }
     
-    payload_special = {"articles": [dict(article_special, title_pt=f"{article_special['title_pt']} {i}", title_en=f"{article_special['title_en']} {i}") for i in range(8)]}
+    payload_special = {"articles": [dict(article_special, title_pt=f"{article_special['title_pt']} {i}", title_en=f"{article_special['title_en']} {i}") for i in range(10)]}
     verified_special = verifier.verify(payload_special, valid_source)
     rendered_special = publisher.render(verified_special)
     
@@ -96,7 +96,7 @@ def test_extreme_inputs():
         "summary_pt": f"{long_str}",
         "summary_en": f"{long_str}",
     }
-    payload_long = {"articles": [dict(article_long, title_pt=f"{article_long['title_pt']} {i}", title_en=f"{article_long['title_en']} {i}") for i in range(8)]}
+    payload_long = {"articles": [dict(article_long, title_pt=f"{article_long['title_pt']} {i}", title_en=f"{article_long['title_en']} {i}") for i in range(10)]}
     verified_long = verifier.verify(payload_long, valid_source)
     rendered_long = publisher.render(verified_long)
     assert len(rendered_long) > 90000, "Rendered HTML for long text is unexpectedly small"
@@ -112,7 +112,7 @@ def test_extreme_inputs():
         "summary_pt": "Summary PT",
         "summary_en": "Summary EN",
     }
-    payload_empty_url = {"articles": [dict(empty_url_article, title_pt=f"T_PT {i}", title_en=f"T_EN {i}") for i in range(8)]}
+    payload_empty_url = {"articles": [dict(empty_url_article, title_pt=f"T_PT {i}", title_en=f"T_EN {i}") for i in range(10)]}
     try:
         verifier.verify(payload_empty_url, valid_source)
         raise AssertionError("Empty/whitespace URL was not rejected by verifier")
@@ -130,7 +130,7 @@ def test_extreme_inputs():
         "summary_pt": "Summary PT",
         "summary_en": "Summary EN",
     }
-    payload_js_url = {"articles": [dict(js_url_article, title_pt=f"T_PT {i}", title_en=f"T_EN {i}") for i in range(8)]}
+    payload_js_url = {"articles": [dict(js_url_article, title_pt=f"T_PT {i}", title_en=f"T_EN {i}") for i in range(10)]}
     # Currently, the pipeline accepts javascript: protocol but escapes quotes in href
     verified_js = verifier.verify(payload_js_url, valid_source)
     rendered_js = publisher.render(verified_js)
@@ -158,9 +158,9 @@ def test_layout_validation():
         news_parser.feed(news_block)
         
         if filename == "index.html":
-            assert news_parser.cards_count == 8, f"Expected exactly 8 news cards in {filename}, found {news_parser.cards_count}"
+            assert news_parser.cards_count == 10, f"Expected exactly 10 news cards in {filename}, found {news_parser.cards_count}"
         else:
-            assert news_parser.cards_count >= 8, f"Expected at least 8 news cards in {filename}, found {news_parser.cards_count}"
+            assert news_parser.cards_count >= 10, f"Expected at least 10 news cards in {filename}, found {news_parser.cards_count}"
         assert len(news_parser.mismatches) == 0, f"Structural issues inside AI news block in {filename}: {news_parser.mismatches}"
         assert len(news_parser.tags_stack) == 0, f"Unclosed tags inside AI news block in {filename}: {news_parser.tags_stack}"
         print(f"  - {filename}: PASS ({news_parser.cards_count} structurally valid bilingual cards)")
