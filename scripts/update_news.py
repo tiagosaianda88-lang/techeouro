@@ -229,7 +229,8 @@ Rules:
 - Prioritize manual source files (like those ending in .txt or .pdf, or image contents) over RSS feeds (like WSJ, Bloomberg, Reuters, etc.) if they are present in the source material.
 - Do NOT rewrite, dramatize, or summarize the stories in a sensationalist, tabloid, or clickbait style. Our clients are sophisticated investors and technology professionals who value serious, dry, factual information.
 - For manual source files, copy the original Portuguese and English text exactly as written for the summary and the body. Do not alter, shorten, or paraphrase manual source content.
-- For RSS feed stories, copy the factual details, sentences, and figures directly from the source feed description/summary. Do not invent clickbait titles or sensationalist bodies. If you cannot summarize a story professionally without adding clickbait or tabloid fluff, copy the original description/summary text exactly as the article summary and body.
+- For RSS feed stories, the generated article body (body_pt and body_en) MUST be a detailed, professional, and dry analysis of at least 220 to 300 words (minimum 220 words). It should expand on the facts in the feed to explain the broader context, economic or technological implications, and background details in a serious, high-quality tone, without introducing any sensationalism or tabloid fluff.
+- For RSS feed stories, the summary (summary_pt and summary_en) should be a concise 2-sentence summary.
 - Never invent facts, dates, sources, quotes, prices, or events.
 - Every story must have complete Portuguese and English text.
 - category must be exactly one of: {', '.join(CATEGORY_LABELS)}.
