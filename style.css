@@ -1385,7 +1385,7 @@ footer {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   nav {
     padding: 0 20px;
   }
@@ -1569,7 +1569,7 @@ body.lang-en [lang="pt"] {
   display: none;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .mobile-menu-btn {
     display: flex;
     flex-direction: column;
