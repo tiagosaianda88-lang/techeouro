@@ -177,7 +177,7 @@ class CollectorAgent:
         for source, feed_url in RSS_FEEDS:
             try:
                 feed = feedparser.parse(feed_url)
-                for entry in feed.entries[:8]:
+                for entry in feed.entries[:3]:
                     title = clean_text(entry.get("title", ""))
                     if not title:
                         continue
@@ -198,7 +198,7 @@ class CollectorAgent:
 class SelectorAgent:
     """Removes duplicates before sending material to the model."""
 
-    def select(self, items, limit=40):
+    def select(self, items, limit=15):
         selected = []
         seen = set()
         for item in items:
