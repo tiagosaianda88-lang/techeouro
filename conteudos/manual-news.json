@@ -2,57 +2,57 @@
   "articles": [
     {
       "category": "geopolitics",
-      "source": "diario de noticias.txt",
-      "url": "conteudos/diario de noticias.txt",
-      "title_pt": "EUA celebram 250 anos de independência sob divisão",
-      "title_en": "US celebrates 250 years of independence amid division",
-      "summary_pt": "Sob a presidência de Donald Trump, as comemorações evidenciam um país cindido e uma economia onde os ganhos de Wall Street não chegam ao cidadão comum.",
-      "summary_en": "Under Donald Trump's presidency, the celebrations highlight a divided nation and an economy where Wall Street gains do not reach the common citizen."
-    },
-    {
-      "category": "economy",
-      "source": "economia.txt",
-      "url": "conteudos/economia.txt",
-      "title_pt": "Mercado de trabalho dos EUA abranda em junho",
-      "title_en": "US labor market slows down in June",
-      "summary_pt": "A criação de emprego nos EUA caiu para 57.000 em junho, abaixo dos 113.000 previstos, reforçando as apostas de cortes de juros pela Fed.",
-      "summary_en": "US job growth fell to 57,000 in June, well below the predicted 113,000, boosting bets for Federal Reserve rate cuts."
-    },
-    {
-      "category": "markets",
-      "source": "mercados.txt",
-      "url": "conteudos/mercados.txt",
-      "title_pt": "Setor de materiais surge como refúgio contra volatilidade tecnológica",
-      "title_en": "Materials sector emerges as hedge against tech volatility",
-      "summary_pt": "Analistas sugerem rotação para fundos de materiais como o ETF XLB, que negoceia com desconto de 19% em relação ao S&P 500.",
-      "summary_en": "Analysts suggest rotating into materials funds like the XLB ETF, which trades at a 19% discount compared to the S&P 500."
-    },
-    {
-      "category": "crypto",
-      "source": "ouro.txt",
-      "url": "conteudos/ouro.txt",
-      "title_pt": "Declaração de receitas de Trump gera debate sobre criptoativos",
-      "title_en": "Trump's revenue disclosure sparks crypto asset debate",
-      "summary_pt": "A declaração anual revelou mais de 1,4 mil milhões de dólares em ganhos de cripto, enquanto a memecoin TRUMP perdeu 95% do seu valor.",
-      "summary_en": "The annual disclosure revealed over $1.4 billion in crypto earnings, while the TRUMP memecoin has lost 95% of its value."
+      "source": "Barron's",
+      "url": "https://www.barrons.com",
+      "title_pt": "Irão despede-se de Khamenei em cerimónias fúnebres massivas",
+      "title_en": "Iran bids farewell to Khamenei in massive funeral ceremonies",
+      "summary_pt": "Milhares de pessoas reuniram-se em Teerão para as cerimónias fúnebres do Líder Supremo Ayatollah Ali Khamenei, marcando um período de transição política incerta no Médio Oriente.",
+      "summary_en": "Thousands gathered in Tehran for the funeral ceremonies of Supreme Leader Ayatollah Ali Khamenei, marking a period of uncertain political transition in the Middle East."
     },
     {
       "category": "tech",
-      "source": "tech.txt",
-      "url": "conteudos/tech.txt",
-      "title_pt": "Anthropic restaura modelo Fable 5 globalmente",
-      "title_en": "Anthropic restores Fable 5 model globally",
-      "summary_pt": "O modelo foi restabelecido a 1 de julho com novos filtros de segurança, após suspensão por controlos de exportação dos EUA.",
-      "summary_en": "The model was reinstated on July 1 with new safety filters, following a suspension due to US export controls."
+      "source": "Expresso",
+      "url": "https://expresso.pt",
+      "title_pt": "Fraude académica torna-se indetetável com o avanço da Inteligência Artificial",
+      "title_en": "Academic fraud becomes undetectable with the advance of AI",
+      "summary_pt": "Universidades portuguesas enfrentam sérios desafios para identificar trabalhos gerados por IA, com especialistas a alertar que os métodos de deteção tradicionais são ineficazes.",
+      "summary_en": "Portuguese universities face severe challenges identifying AI-generated work, with experts warning that traditional detection methods are now ineffective."
+    },
+    {
+      "category": "markets",
+      "source": "MarketWatch",
+      "url": "https://www.marketwatch.com",
+      "title_pt": "Pânico com SpaceX arrasta ações da AT&T para a pior semana em anos",
+      "title_en": "SpaceX panic drags AT&T stock to its worst week in years",
+      "summary_pt": "A concorrência acrescida no setor de comunicações por satélite gerou nervosismo nos investidores, penalizando fortemente a cotação da operadora telecom.",
+      "summary_en": "Increased competition in the satellite communications sector sparked investor nervousness, heavily penalizing the telecom operator's stock price."
+    },
+    {
+      "category": "economy",
+      "source": "Diário de Notícias",
+      "url": "https://www.dn.pt",
+      "title_pt": "Aviso vermelho de calor extremo alargado a 13 distritos de Portugal",
+      "title_en": "Extreme heat red warning extended to 13 districts of Portugal",
+      "summary_pt": "O Instituto Português do Mar e da Atmosfera emitiu um alerta máximo devido a temperaturas invulgarmente elevadas, afetando a atividade económica e o turismo local.",
+      "summary_en": "The Portuguese Institute of Sea and Atmosphere issued a maximum alert due to unusually high temperatures, impacting economic activity and local tourism."
+    },
+    {
+      "category": "crypto",
+      "source": "MarketWatch",
+      "url": "https://www.marketwatch.com",
+      "title_pt": "Tesouro dos EUA regulamenta contas de investimento infantis apoiadas por Trump",
+      "title_en": "US Treasury regulates Trump-backed children investment accounts",
+      "summary_pt": "As novas diretrizes clarificam onde os fundos das denominadas 'contas Trump' podem ser alocados em criptoativos e títulos de tesouro.",
+      "summary_en": "New guidelines clarify where funds from the so-called 'Trump accounts' can be allocated in crypto assets and treasury bonds."
     },
     {
       "category": "sports",
-      "source": "desporto.txt",
-      "url": "conteudos/desporto.txt",
-      "title_pt": "Portugal vence jogo histórico e segue em frente no Mundial",
-      "title_en": "Portugal wins historic match and advances in the World Cup",
-      "summary_pt": "A equipa portuguesa garantiu uma vitória heróica de apuramento que contagiou de orgulho todos os adeptos portugueses.",
-      "summary_en": "The Portuguese team secured a heroic qualifying victory that filled all Portuguese fans with pride."
+      "source": "Expresso",
+      "url": "https://expresso.pt",
+      "title_pt": "Portugal avança nos preparativos para a fase final do torneio europeu",
+      "title_en": "Portugal advances in preparations for the European tournament finals",
+      "summary_pt": "A comissão técnica nacional confirmou a convocatória final e o plano de treinos focado na coesão tática para o confronto inaugural.",
+      "summary_en": "The national coaching staff confirmed the final call-up list and training schedule focused on tactical cohesion for the opening match."
     }
   ]
 }
