@@ -235,7 +235,7 @@ function openArticle(cardEl) {
         ">
           <span lang="pt">Ler continuação da notícia →</span>
           <span lang="en">Read full story →</span>
-        </a>
+        </a>` : ''}
       </div>
       <div style="margin-top: 25px; border-top: 1px solid rgba(201,162,39,0.1); padding-top: 15px; font-size: 0.75rem; color: #5a6e5a; line-height: 1.4;">
         <span lang="pt">Aviso: Este conteúdo destina-se a fins puramente informativos. Nenhuma parte deste artigo deve ser interpretada como aconselhamento financeiro ou recomendação.</span>
