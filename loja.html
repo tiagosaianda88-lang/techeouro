@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1827959532"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'AW-1827959532');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech & Ouro · A Gazeta do Ouro</title>
+  <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body>
+
+  <!-- Sticky Glass Header -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="JPN.png" class="nav-logo-img" alt="Tech & Ouro Logo">
+      <div class="nav-brand">
+        Tech &amp; Ouro
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active"><span lang="pt">Início</span><span lang="en">Home</span></a></li>
+      <li><a href="mercados.html"><span lang="pt">Mercados</span><span lang="en">Markets</span></a></li>
+      <li><a href="ouro.html"><span lang="pt">Ouro</span><span lang="en">Gold</span></a></li>
+      <li><a href="economia.html"><span lang="pt">Economia</span><span lang="en">Economy</span></a></li>
+      <li><a href="tech.html"><span lang="pt">Tecnologia</span><span lang="en">Tech</span></a></li>
+      <li><a href="desporto.html"><span lang="pt">Desporto</span><span lang="en">Sports</span></a></li>
+      <li><a href="paises.html"><span lang="pt">Países</span><span lang="en">Countries</span></a></li>
+      <li><a href="noticias.html"><span lang="pt">Notícias ao Vivo</span><span lang="en">Live News</span></a></li>
+      <li><a href="sobre.html"><span lang="pt">Sobre</span><span lang="en">About</span></a></li>
+      <li><a href="terminal.html" style="color: var(--gold); font-weight: bold; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 4px;"><span lang="pt">Terminal ⚡</span><span lang="en">Terminal ⚡</span></a></li>
+    </ul>
+    <div class="lang-toggle-nav">
+      <button id="lang-btn-pt" class="lang-btn active" onclick="setLanguage('pt')">PT</button>
+      <button id="lang-btn-en" class="lang-btn" onclick="setLanguage('en')">EN</button>
+    </div>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <a href="sobre.html#contacto" class="nav-cta"><span lang="pt">Contacto</span><span lang="en">Contact</span></a>
+  </nav>
+
+  <!-- Store Hero -->
+  <header class="page-header" style="position: relative; overflow: hidden; padding-top: 100px;">
+    <div class="hero-glow-bg"></div>
+    <div class="hero-brand-container lion-propulsion-container" style="margin-bottom: 20px;">
+      <img src="JPN.png" alt="Tech & Ouro Golden Lion" style="width: 120px; border-radius: 50%; opacity: 0.9; box-shadow: var(--shadow-gold);">
+    </div>
+    <p style="font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; font-weight: 600;">
+      <span lang="pt">Merchandising</span>
+      <span lang="en">Official Merch</span>
+    </p>
+    <h1 class="page-title">
+      <span lang="pt">Loja <em>Oficial</em></span>
+      <span lang="en">Official <em>Store</em></span>
+    </h1>
+  </header>
+  <div class="gold-line"></div>
+
+  <!-- Store Grid -->
+  <section class="cards-3" style="margin-top: 60px;">
+    
+    <!-- T-Shirts -->
+    <div class="card" style="cursor: default;">
+      <div style="text-align: center; padding: 20px 0;">
+        <div style="font-size: 4rem; margin-bottom: 15px;">👕</div>
+        <p class="card-cat"><span lang="pt">VESTUÁRIO</span><span lang="en">APPAREL</span></p>
+        <h2 class="card-title"><span lang="pt">T-shirts Premium</span><span lang="en">Premium T-shirts</span></h2>
+        <p class="card-desc">
+          <span lang="pt">Qualidade premium com o Leão Dourado impresso a ouro.</span>
+          <span lang="en">Premium quality with the Golden Lion printed in gold.</span>
+        </p>
+      </div>
+      <div class="card-meta" style="justify-content: center;">
+        <span style="color: var(--gold); font-weight: bold;"><span lang="pt">EM BREVE</span><span lang="en">COMING SOON</span></span>
+      </div>
+    </div>
+
+    <!-- Caps -->
+    <div class="card" style="cursor: default;">
+      <div style="text-align: center; padding: 20px 0;">
+        <div style="font-size: 4rem; margin-bottom: 15px;">🧢</div>
+        <p class="card-cat"><span lang="pt">ACESSÓRIOS</span><span lang="en">ACCESSORIES</span></p>
+        <h2 class="card-title"><span lang="pt">Bonés Tech & Ouro</span><span lang="en">Tech & Ouro Caps</span></h2>
+        <p class="card-desc">
+          <span lang="pt">Design discreto e profissional para investidores e criadores.</span>
+          <span lang="en">Discreet and professional design for investors and creators.</span>
+        </p>
+      </div>
+      <div class="card-meta" style="justify-content: center;">
+        <span style="color: var(--gold); font-weight: bold;"><span lang="pt">EM BREVE</span><span lang="en">COMING SOON</span></span>
+      </div>
+    </div>
+
+    <!-- Mugs -->
+    <div class="card" style="cursor: default;">
+      <div style="text-align: center; padding: 20px 0;">
+        <div style="font-size: 4rem; margin-bottom: 15px;">☕</div>
+        <p class="card-cat"><span lang="pt">COLEÇÃO</span><span lang="en">COLLECTION</span></p>
+        <h2 class="card-title"><span lang="pt">Canecas de Mercado</span><span lang="en">Market Mugs</span></h2>
+        <p class="card-desc">
+          <span lang="pt">Comece o dia a analisar gráficos com a nossa caneca oficial.</span>
+          <span lang="en">Start the day analyzing charts with our official mug.</span>
+        </p>
+      </div>
+      <div class="card-meta" style="justify-content: center;">
+        <span style="color: var(--gold); font-weight: bold;"><span lang="pt">EM BREVE</span><span lang="en">COMING SOON</span></span>
+      </div>
+    </div>
+
+  </section>
+
+
+
+  <!-- Live Financial Ticker -->
+  <div class="ticker-container">
+    <div class="ticker-track">
+      <div class="ticker-item">XAU/USD (Ouro) <span class="up">$3 327.40 (+0.62%)</span></div>
+      <div class="ticker-item">BTC/USD <span class="up">$107 280.00 (+1.20%)</span></div>
+      <div class="ticker-item">EUR/USD <span class="dn">1.1342 (-0.30%)</span></div>
+      <div class="ticker-item">PSI 20 <span class="up">6 841.20 (+0.40%)</span></div>
+      <div class="ticker-item">Prata <span class="up">$37.18 (+0.80%)</span></div>
+      <div class="ticker-item">WTI Brent <span class="dn">$77.20 (-0.50%)</span></div>
+      <div class="ticker-item">BRK.B <span class="up">$518.40 (+0.30%)</span></div>
+      <!-- Duplicate for infinite scrolling -->
+      <div class="ticker-item">XAU/USD (Ouro) <span class="up">$3 327.40 (+0.62%)</span></div>
+      <div class="ticker-item">BTC/USD <span class="up">$107 280.00 (+1.20%)</span></div>
+      <div class="ticker-item">EUR/USD <span class="dn">1.1342 (-0.30%)</span></div>
+      <div class="ticker-item">PSI 20 <span class="up">6 841.20 (+0.40%)</span></div>
+      <div class="ticker-item">Prata <span class="up">$37.18 (+0.80%)</span></div>
+      <div class="ticker-item">WTI Brent <span class="dn">$77.20 (-0.50%)</span></div>
+      <div class="ticker-item">BRK.B <span class="up">$518.40 (+0.30%)</span></div>
+    </div>
+  </div>
+
+  
+
+  <div style="text-align: center; margin-top: 30px; margin-bottom: 20px;">
+    <a href="noticias.html" class="btn-outline">
+      <span lang="pt">Ver todas as notícias ao vivo →</span>
+      <span lang="en">See all live news →</span>
+    </a>
+  </div>
+
+
+
+  <!-- Manifesto / Founder Section -->
+  <section class="manifesto-section">
+    <div class="manifesto-inner">
+      <div class="manifesto-quote">
+        <span lang="pt">Um projeto feito para levar a história a todas as partes do mundo.</span>
+        <span lang="en">A project made to bring history to all parts of the world.</span>
+      </div>
+      <div class="manifesto-text">
+        <p>
+          <span lang="pt">O <strong>Tech &amp; Ouro</strong> nasceu de uma simples necessidade: criar um espaço acessível onde qualquer pessoa pudesse encontrar informação clara sobre mercados, economia, tecnologia e desporto.</span>
+          <span lang="en"><strong>Tech &amp; Ouro</strong> was born from a simple need: to create an accessible place where anyone can find clear information about markets, economics, technology, and sports.</span>
+        </p>
+        <p>
+          <span lang="pt">Não sou jornalista certificado nem gestor de fundos. Sou um criador que trabalha com dedicação, que aprendeu a ler as dinâmicas do mundo ao seu redor e decidiu criar este diário de bordo com o auxílio da tecnologia. Seja muito bem-vindo.</span>
+          <span lang="en">I am not a certified journalist or fund manager. I am a creator who works with dedication, who learned to read the dynamics of the world around him and decided to create this logbook with the help of technology. Welcome.</span>
+        </p>
+        <p style="margin-top: 24px;">
+          <a href="sobre.html" class="btn-outline">
+            <span lang="pt">Saber mais sobre o projecto →</span>
+            <span lang="en">Learn more about the project →</span>
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer bar at the bottom -->
+
+
+  
+  <!-- Espaco Promocional -->
+  <div class="promo-box">
+    <div class="promo-box-title">
+      <span lang="pt">Espaço Publicitário</span>
+      <span lang="en">Sponsored Link</span>
+    </div>
+    <div class="promo-box-subtitle">
+      <span lang="pt">Anuncie aqui as suas soluções de investimento e trading. Contacte-nos.</span>
+      <span lang="en">Advertise your investment and trading solutions here. Contact us.</span>
+    </div>
+  </div>
+
+  
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <h2 class="newsletter-title">
+      <span lang="pt">Junte-se à Tech & Ouro</span>
+      <span lang="en">Join Tech & Ouro</span>
+    </h2>
+    <p class="newsletter-desc">
+      <span lang="pt">Subscreva para receber no seu email as atualizações mais importantes sobre mercados, tecnologia e o futuro do ouro. Sem spam.</span>
+      <span lang="en">Subscribe to receive the most important updates on markets, tech, and the future of gold right in your inbox. No spam.</span>
+    </p>
+    <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="newsletter" />
+      <p style="display:none;"><input name="bot-field" /></p>
+      <input type="email" name="email" class="newsletter-input" placeholder="O seu email / Your email" required>
+      <button type="submit" class="newsletter-btn">
+        <span lang="pt">Subscrever</span>
+        <span lang="en">Subscribe</span>
+      </button>
+    </form>
+  </section>
+
+<div class="content-wrap" style="margin-bottom: 20px;">
+    <div class="warning-box">
+      <h2>Aviso Legal (Disclaimer)</h2>
+      <p>Este site tem caráter puramente informativo e reflete opiniões pessoais. Não constitui qualquer tipo de aconselhamento financeiro, fiscal, de investimento ou de trading. Os mercados financeiros acarretam riscos elevados. Invista apenas o capital que pode dar-se ao luxo de perder.</p>
+    </div>
+  </div>
+
+  <!-- Premium Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">Tech &amp; Ouro</div>
+      
+      <div class="footer-desc footer-newsletter">
+        <h3 class="newsletter-title" style="font-size: 1rem;"><span lang="pt">Newsletter</span><span lang="en">Newsletter</span></h3>
+        <form class="newsletter-form" name="newsletter_footer" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="margin-top: 10px;">
+          <input type="hidden" name="form-name" value="newsletter_footer" />
+          <p style="display:none;"><input name="bot-field" /></p>
+          <input type="email" name="email" class="newsletter-input" placeholder="Email" required style="padding: 8px 12px;">
+          <button type="submit" class="newsletter-btn" style="padding: 0 15px;">→</button>
+        </form>
+      </div>
+
+      <div class="footer-links-grid">
+        <a href="index.html"><span lang="pt">Início</span><span lang="en">Home</span></a>
+        <a href="mercados.html"><span lang="pt">Mercados</span><span lang="en">Markets</span></a>
+        <a href="economia.html"><span lang="pt">Economia</span><span lang="en">Economy</span></a>
+        <a href="desporto.html"><span lang="pt">Desporto</span><span lang="en">Sports</span></a>
+        <a href="paises.html"><span lang="pt">Países</span><span lang="en">Countries</span></a>
+        <a href="noticias.html"><span lang="pt">Notícias</span><span lang="en">News</span></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>
+        <span lang="pt">© 2026 techeouro.net · Todos os direitos reservados. Algarve, Portugal.</span>
+        <span lang="en">© 2026 techeouro.net · All rights reserved. Algarve, Portugal.</span>
+      </span>
+      <span>
+        <span lang="pt">Contacto: <a href="mailto:tiagowater@yahoo.com">tiagowater@yahoo.com</a></span>
+        <span lang="en">Contact: <a href="mailto:tiagowater@yahoo.com">tiagowater@yahoo.com</a></span>
+      </span>
+    </div>
+  </footer>
+
+  <!-- Persistent Corner Floating Badge -->
+  <a href="sobre.html" class="footer-fixed-badge" title="Sobre o Criador">
+    <img src="logo-main.png" alt="Tech & Ouro Icon">
+  </a>
+
+  <script src="script.js?v=4"></script>
+</body>
+</html>
