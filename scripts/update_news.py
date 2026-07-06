@@ -411,6 +411,10 @@ class PublisherAgent:
         esc_body_en = html.escape(body_en, quote=True)
         
         return f'''<div class="card card-natgeo" onclick="openArticle(this)" data-body-pt="{esc_body_pt}" data-body-en="{esc_body_en}">
+  <div class="card-header-placeholder">
+    <span class="cat-icon" lang="pt">{category_pt}</span>
+    <span class="cat-icon" lang="en">{category_en}</span>
+  </div>
   <div>
     <p class="card-cat"><span lang="pt">{category_pt}</span><span lang="en">{category_en}</span></p>
     <h2 class="card-title"><span lang="pt">{esc["title_pt"]}</span><span lang="en">{esc["title_en"]}</span></h2>
