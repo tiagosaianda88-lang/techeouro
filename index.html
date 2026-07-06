@@ -274,7 +274,29 @@
     </div>
   </div>
 
-  <div class="content-wrap" style="margin-bottom: 20px;">
+  
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <h2 class="newsletter-title">
+      <span lang="pt">Junte-se à Tech & Ouro</span>
+      <span lang="en">Join Tech & Ouro</span>
+    </h2>
+    <p class="newsletter-desc">
+      <span lang="pt">Subscreva para receber no seu email as atualizações mais importantes sobre mercados, tecnologia e o futuro do ouro. Sem spam.</span>
+      <span lang="en">Subscribe to receive the most important updates on markets, tech, and the future of gold right in your inbox. No spam.</span>
+    </p>
+    <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="newsletter" />
+      <p style="display:none;"><input name="bot-field" /></p>
+      <input type="email" name="email" class="newsletter-input" placeholder="O seu email / Your email" required>
+      <button type="submit" class="newsletter-btn">
+        <span lang="pt">Subscrever</span>
+        <span lang="en">Subscribe</span>
+      </button>
+    </form>
+  </section>
+
+<div class="content-wrap" style="margin-bottom: 20px;">
     <div class="warning-box">
       <h2>Aviso Legal (Disclaimer)</h2>
       <p>Este site tem caráter puramente informativo e reflete opiniões pessoais. Não constitui qualquer tipo de aconselhamento financeiro, fiscal, de investimento ou de trading. Os mercados financeiros acarretam riscos elevados. Invista apenas o capital que pode dar-se ao luxo de perder.</p>
@@ -285,10 +307,17 @@
   <footer>
     <div class="footer-content">
       <div class="footer-brand">Tech &amp; Ouro</div>
-      <div class="footer-desc">
-        <span lang="pt">Análise de mercados globais, economia local e notícias de desporto para investidores. Um projeto feito para levar a história a todas as partes do mundo.</span>
-        <span lang="en">Analysis of global markets, local economy, and sports news for investors. A project made to bring history to all parts of the world.</span>
+      
+      <div class="footer-desc footer-newsletter">
+        <h3 class="newsletter-title" style="font-size: 1rem;"><span lang="pt">Newsletter</span><span lang="en">Newsletter</span></h3>
+        <form class="newsletter-form" name="newsletter_footer" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="margin-top: 10px;">
+          <input type="hidden" name="form-name" value="newsletter_footer" />
+          <p style="display:none;"><input name="bot-field" /></p>
+          <input type="email" name="email" class="newsletter-input" placeholder="Email" required style="padding: 8px 12px;">
+          <button type="submit" class="newsletter-btn" style="padding: 0 15px;">→</button>
+        </form>
       </div>
+
       <div class="footer-links-grid">
         <a href="index.html"><span lang="pt">Início</span><span lang="en">Home</span></a>
         <a href="mercados.html"><span lang="pt">Mercados</span><span lang="en">Markets</span></a>

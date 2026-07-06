@@ -217,10 +217,17 @@
   <footer>
     <div class="footer-content">
       <div class="footer-brand">Tech &amp; Ouro</div>
-      <div class="footer-desc">
-        <span lang="pt">Análise de mercados globais, economia local e notícias de desporto para investidores. Um projeto feito para levar a história a todas as partes do mundo.</span>
-        <span lang="en">Analysis of global markets, local economy, and sports news for investors. A project made to bring history to all parts of the world.</span>
+      
+      <div class="footer-desc footer-newsletter">
+        <h3 class="newsletter-title" style="font-size: 1rem;"><span lang="pt">Newsletter</span><span lang="en">Newsletter</span></h3>
+        <form class="newsletter-form" name="newsletter_footer" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="margin-top: 10px;">
+          <input type="hidden" name="form-name" value="newsletter_footer" />
+          <p style="display:none;"><input name="bot-field" /></p>
+          <input type="email" name="email" class="newsletter-input" placeholder="Email" required style="padding: 8px 12px;">
+          <button type="submit" class="newsletter-btn" style="padding: 0 15px;">→</button>
+        </form>
       </div>
+
       <div class="footer-links-grid">
         <a href="index.html"><span lang="pt">Início</span><span lang="en">Home</span></a>
         <a href="mercados.html" class="active"><span lang="pt">Mercados</span><span lang="en">Markets</span></a>
