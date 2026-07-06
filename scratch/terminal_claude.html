@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1827959532"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'AW-1827959532');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terminal — Tech &amp; Ouro</title>
+  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Sticky Glass Header -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="JPN.png" class="nav-logo-img" alt="Tech & Ouro Logo">
+      <div class="nav-brand">
+        Tech &amp; Ouro
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html"><span lang="pt">Início</span><span lang="en">Home</span></a></li>
+      <li><a href="mercados.html"><span lang="pt">Mercados</span><span lang="en">Markets</span></a></li>
+      <li><a href="ouro.html"><span lang="pt">Ouro</span><span lang="en">Gold</span></a></li>
+      <li><a href="economia.html"><span lang="pt">Economia</span><span lang="en">Economy</span></a></li>
+      <li><a href="tech.html"><span lang="pt">Tecnologia</span><span lang="en">Tech</span></a></li>
+      <li><a href="desporto.html"><span lang="pt">Desporto</span><span lang="en">Sports</span></a></li>
+      <li><a href="paises.html"><span lang="pt">Países</span><span lang="en">Countries</span></a></li>
+      <li><a href="noticias.html"><span lang="pt">Notícias ao Vivo</span><span lang="en">Live News</span></a></li>
+      <li><a href="sobre.html"><span lang="pt">Sobre</span><span lang="en">About</span></a></li>
+      <li><a href="terminal.html" class="active" style="color: var(--gold); font-weight: bold; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 4px;"><span lang="pt">Terminal ⚡</span><span lang="en">Terminal ⚡</span></a></li>
+    </ul>
+    <div class="lang-toggle-nav">
+      <button id="lang-btn-pt" class="lang-btn active" onclick="setLanguage('pt')">PT</button>
+      <button id="lang-btn-en" class="lang-btn" onclick="setLanguage('en')">EN</button>
+    </div>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <a href="sobre.html#contacto" class="nav-cta"><span lang="pt">Contacto</span><span lang="en">Contact</span></a>
+  </nav>
+
+  <main style="max-width: 1200px; margin: 40px auto; padding: 80px 20px 40px 20px;">
+    <div id="term" style="font-family:'IBM Plex Mono',ui-monospace,monospace;color:#e8f0e4;background:#080c10;min-height:100vh;padding:0;margin:0">
+
+<style>
+#term *{box-sizing:border-box;margin:0;padding:0}
+#term .dot{width:7px;height:7px;border-radius:50%;background:#C9A227;animation:pls 2s infinite;display:inline-block}
+@keyframes pls{0%,100%{opacity:1}50%{opacity:0.5}}
+#term .thead{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#0d1117;border-bottom:1px solid rgba(201,162,39,0.15)}
+#term .logo{font-size:12px;font-weight:600;letter-spacing:0.14em;color:#C9A227;display:flex;align-items:center;gap:9px}
+#term .logo a{color:#8a9e8a;text-decoration:none;font-size:10px;letter-spacing:0.1em;margin-left:16px;border:1px solid rgba(201,162,39,0.3);padding:3px 9px;transition:color .2s,border-color .2s}
+#term .logo a:hover{color:#C9A227;border-color:#C9A227}
+#term .clk{font-size:12px;color:#e8f0e4}
+#term .ntick{height:30px;background:#0a0f14;border-bottom:1px solid rgba(201,162,39,0.12);overflow:hidden;display:flex;align-items:center}
+#term .ntrack{display:flex;white-space:nowrap;animation:scr 70s linear infinite}
+#term .ntrack:hover{animation-play-state:paused}
+@keyframes scr{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+#term .ni{display:inline-flex;gap:8px;align-items:center;padding:0 22px;font-size:10px;border-right:1px solid rgba(201,162,39,0.1);height:30px}
+#term .nisrc{font-size:8px;color:#C9A227;letter-spacing:0.1em;text-transform:uppercase}
+#term .nitx{color:#c8d4c4}
+#term .tick{height:32px;background:#0d1117;border-bottom:1px solid rgba(201,162,39,0.12);overflow:hidden;display:flex;align-items:center}
+#term .ttrack{display:flex;white-space:nowrap;animation:scr2 55s linear infinite}
+#term .ttrack:hover{animation-play-state:paused}
+@keyframes scr2{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+#term .ti{display:inline-flex;gap:7px;padding:0 20px;font-size:10px;border-right:1px solid rgba(201,162,39,0.1);height:32px;align-items:center}
+#term .tsy{color:#e8f0e4;font-weight:500}.tpr{color:#8a9e8a}
+#term .body-wrap{display:flex}
+#term .main{flex:1;padding:14px;display:flex;flex-direction:column;gap:12px;overflow-y:auto}
+#term .sidebar{width:200px;background:#0d1117;border-left:1px solid rgba(201,162,39,0.12);padding:12px;display:flex;flex-direction:column;gap:12px}
+#term .card{background:#0d1117;border:1px solid rgba(201,162,39,0.12);border-radius:4px;padding:14px;position:relative}
+#term .card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#C9A227,transparent);opacity:0.4}
+#term .sbcard{background:#0d1117;border:1px solid rgba(201,162,39,0.12);border-radius:4px;padding:14px;position:relative}
+#term .sbcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#C9A227,transparent);opacity:0.6}
+#term .sbtitle{font-size:16px;font-weight:700;letter-spacing:0.12em;color:#C9A227;margin-bottom:14px;text-transform:uppercase;border-bottom:1px solid rgba(201,162,39,0.2);padding-bottom:8px}
+#term .sbrow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(201,162,39,0.08)}
+#term .sbrow:last-child{border:none;margin:0;padding:0}
+#term .sbsym{font-size:13px;font-weight:600;color:#e8f0e4}
+#term .sbprice{font-size:22px;font-weight:300;color:#C9A227;line-height:1;margin-top:3px}
+#term .sbchg{font-size:12px;margin-top:3px}
+#term .pos{color:#00ff8c}.neg{color:#ff4466}.amb{color:#C9A227}
+#term .bigp{font-size:28px;font-weight:300;color:#C9A227;margin-bottom:4px}
+#term .sgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+#term .st{background:#131920;border-radius:3px;padding:8px 10px}
+#term .stl{font-size:8.5px;color:#4a5e4a;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px}
+#term .stv{font-size:13px;font-weight:500}
+#term .ct{font-size:8.5px;letter-spacing:0.18em;text-transform:uppercase;color:#4a5e4a;margin-bottom:12px;font-weight:500}
+#term .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#term .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+#term .lr{display:flex;justify-content:space-between;padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid rgba(201,162,39,0.1)}
+#term .lr:last-child{border:none;margin:0;padding:0}
+#term .ll{font-size:10.5px;color:#8a9e8a}.lv{font-size:11px;font-weight:500}
+#term .news-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#term .news-item{padding:9px 0;border-bottom:1px solid rgba(201,162,39,0.08)}
+#term .nsrc2{font-size:8px;color:#C9A227;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px}
+#term .ntt{font-size:10.5px;color:#d8e2d4;line-height:1.45}
+#term .rr{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+#term .rl{font-size:10px;color:#8a9e8a;width:84px;flex-shrink:0}
+#term .rt{flex:1;height:5px;background:#1a2230;border-radius:3px;overflow:hidden}
+#term .rf{height:100%;border-radius:3px}
+#term .rv{font-size:10px;font-weight:500;width:50px;text-align:right;flex-shrink:0}
+#term .fgbox{display:flex;align-items:center;gap:16px}
+#term .fgcirc{width:130px;height:130px;border-radius:50%;flex-shrink:0;position:relative;display:flex;align-items:center;justify-content:center}
+#term .fgnum{font-size:30px;font-weight:500}
+#term .fgtx{font-size:11px;color:#8a9e8a;line-height:1.6}
+#term .sbar{height:22px;background:#0d1117;border-top:1px solid rgba(201,162,39,0.12);display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:8.5px;color:#4a5e4a}
+#term .sd{width:5px;height:5px;border-radius:50%;background:#C9A227;display:inline-block;margin-right:5px;animation:pls 2s infinite}
+#term .cal{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(201,162,39,0.08)}
+#term .caltime{font-size:9px;color:#4a5e4a;width:48px;flex-shrink:0}
+#term .calimp{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+#term .caltx{font-size:10px;color:#c8d4c4;flex:1}
+#term .calf{font-size:9px;width:18px;text-align:center;flex-shrink:0}
+@media(max-width:900px){
+  #term .body-wrap{flex-direction:column}
+  #term .sidebar{width:100%;border-left:none;border-top:1px solid rgba(201,162,39,0.12)}
+  #term .grid2,#term .grid3{grid-template-columns:1fr}
+  #term .news-grid{grid-template-columns:1fr}
+}
+</style>
+
+<div class="thead">
+  <div class="logo">
+    <span class="dot"></span>TECH &amp; OURO
+  </div>
+  <span class="clk" id="clk">--:--:--</span>
+</div>
+
+<div class="ntick"><div class="ntrack" id="ntrack"></div></div>
+<div class="tick"><div class="ttrack" id="ttrack"></div></div>
+
+<div class="body-wrap">
+<div class="main">
+
+  <div class="card">
+    <div class="ct">📰 Notícias Globais</div>
+    <div class="news-grid" id="newsPanel"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="ct">🌡 Fear &amp; Greed Index</div>
+      <div class="fgbox">
+        <div class="fgcirc" id="fgCirc">
+          <div style="position:absolute;inset:8px;border-radius:50%;background:#0d1117;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center">
+            <span class="fgnum" id="fgNum">62</span>
+            <span style="font-size:8px;color:#4a5e4a;margin-top:2px">GANÂNCIA</span>
+          </div>
+        </div>
+        <div class="fgtx">
+          <span id="fgLabel" style="font-weight:500;font-size:13px">Ganância Moderada</span><br><br>
+          Sentimento 0–100
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ct">₿ Bitcoin</div>
+      <div class="bigp" id="btcP">—</div>
+      <div style="font-size:10.5px;color:#8a9e8a;margin-bottom:14px" id="btcS">—</div>
+      <div class="sgrid">
+        <div class="st"><div class="stl">24h</div><div class="stv pos" id="btc24h">—</div></div>
+        <div class="st"><div class="stl">Dominância</div><div class="stv">~57%</div></div>
+        <div class="st"><div class="stl">Halving #5</div><div class="stv" id="halv">—</div></div>
+        <div class="st"><div class="stl">Vol 24h</div><div class="stv">$28B</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="ct">⊕ Macro &amp; Forex</div>
+      <div id="macro"></div>
+    </div>
+    <div class="card">
+      <div class="ct">💱 Commodities</div>
+      <div id="commod"></div>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="ct">🌍 Wall Street</div>
+      <div id="ws"></div>
+    </div>
+    <div class="card">
+      <div class="ct">🇪🇺 Europa</div>
+      <div id="eu"></div>
+    </div>
+    <div class="card">
+      <div class="ct">🌏 Ásia</div>
+      <div id="asia"></div>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="ct">🇬🇧 UK &amp; Ireland</div>
+      <div id="uk"></div>
+    </div>
+    <div class="card">
+      <div class="ct">🇨🇦 Canada</div>
+      <div id="canada"></div>
+    </div>
+    <div class="card">
+      <div class="ct">📈 Yields 10A</div>
+      <div id="yields"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ct">⚠ Risco Sistémico</div>
+    <div id="risk"></div>
+  </div>
+
+</div>
+
+<div class="sidebar">
+  <div class="sbcard">
+    <div class="sbtitle">Tech</div>
+    <div class="sbrow">
+      <div>
+        <div class="sbsym">XLK</div>
+        <div class="sbprice">$192.50</div>
+        <div class="sbchg neg">−10.9%</div>
+      </div>
+    </div>
+    <div class="sbrow">
+      <div>
+        <div class="sbsym">SOX</div>
+        <div class="sbprice">$5,420</div>
+        <div class="sbchg neg">−12.3%</div>
+      </div>
+    </div>
+    <div class="sbrow">
+      <div>
+        <div class="sbsym">NVDA</div>
+        <div class="sbprice">$138.40</div>
+        <div class="sbchg pos">+1.8%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sbcard">
+    <div class="sbtitle">Ouro</div>
+    <div class="sbrow">
+      <div>
+        <div class="sbsym">SPOT</div>
+        <div class="sbprice">$3,227</div>
+        <div class="sbchg pos">+0.9%</div>
+      </div>
+    </div>
+    <div class="sbrow">
+      <div>
+        <div class="sbsym">YTD</div>
+        <div class="sbprice" style="font-size:18px">+18.4%</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="sbar">
+  <div><span class="sd"></span>LIVE · TERMINAL</div>
+  <span id="sbTime">—</span>
+</div>
+
+</div>
+
+<script>
+(function(){
+
+function clock(){
+  var d=new Date();
+  document.getElementById('clk').textContent=d.toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  document.getElementById('sbTime').textContent=d.toLocaleDateString('pt-PT',{weekday:'short',day:'2-digit',month:'short'})+'  '+d.toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'});
+}
+setInterval(clock,1000);clock();
+
+// FEAR & GREED
+(function(){
+  var score=62;
+  var col=score<25?'#ff4466':score<45?'#ffb830':score<55?'#8a9e8a':score<75?'#00ff8c':'#00cc70';
+  var label=score<25?'Medo Extremo':score<45?'Medo':score<55?'Neutro':score<75?'Ganância Moderada':'Ganância Extrema';
+  var circ=document.getElementById('fgCirc');
+  circ.style.background='conic-gradient('+col+' '+(score*3.6)+'deg,#1a2230 0deg)';
+  document.getElementById('fgNum').style.color=col;
+  document.getElementById('fgLabel').style.color=col;
+  document.getElementById('fgLabel').textContent=label;
+})();
+
+// BTC
+document.getElementById('btcP').textContent='$103,840';
+document.getElementById('btcS').innerHTML='7d <span style="color:#00ff8c">+11.2%</span> · ATH $109,588';
+document.getElementById('btc24h').textContent='+2.84%';
+document.getElementById('halv').textContent=Math.floor((new Date('2028-04-20')-new Date())/864e5).toLocaleString('pt-PT')+'d';
+
+// NEWS TICKER
+(function(){
+  var n=[
+    ['Reuters','Fed mantém taxas; Powell sinaliza cautela'],
+    ['Bloomberg','BTC ultrapassa $103K com ETFs BlackRock'],
+    ['FT','Berkshire reduz Apple; liquidez máxima'],
+    ['WSJ','Cobre máximos de 3 meses'],
+    ['CNBC','Nvidia lidera Nasdaq com IA'],
+    ['ECO','PSI-20 pressionado pela EDP; Galp consolida']
+  ];
+  function b(){return n.map(function(x){return '<div class="ni"><span class="nisrc">'+x[0]+'</span><span class="nitx">'+x[1]+'</span></div>';}).join('');}
+  document.getElementById('ntrack').innerHTML=b()+b();
+})();
+
+// PRICE TICKER
+(function(){
+  var d=[
+    ['BTC','$103,840','+2.8%','pos'],
+    ['S&P 500','5,308','+0.5%','pos'],
+    ['NASDAQ','18,741','+0.71%','pos'],
+    ['GOLD','$3,227','+0.9%','pos'],
+    ['EUR/USD','1.1248','+0.3%','pos'],
+    ['FTSE','8,344','+0.27%','pos'],
+    ['TSX','22,180','+0.4%','pos'],
+    ['DAX','23,486','+0.35%','pos']
+  ];
+  function b(){return d.map(function(t){return '<div class="ti"><span class="tsy">'+t[0]+'</span><span class="tpr">'+t[1]+'</span><span class="'+t[3]+'" style="font-size:10px">'+t[2]+'</span></div>';}).join('');}
+  document.getElementById('ttrack').innerHTML=b()+b();
+})();
+
+// NOTÍCIAS
+(function(){
+  var n=[
+    ['Reuters','Fed mantém taxas; Powell sinaliza cautela sobre inflação'],
+    ['Bloomberg','BTC ultrapassa $103K com entradas recorde nos ETFs BlackRock'],
+    ['FT','Berkshire reduz Apple para $135B; liquidez em máximo histórico'],
+    ['WSJ','Cobre em máximos de 3 meses com transição energética'],
+    ['Bloomberg','BCE prepara corte adicional de 25bp em Junho'],
+    ['CNBC','Nvidia lidera Nasdaq; entusiasmo com IA mantém Wall St em alta'],
+    ['Reuters','Nikkei sobe 1,1% com iene fraco a impulsionar exportadoras'],
+    ['FT','Ouro consolida acima de $3,200 com compras de bancos centrais'],
+    ['Bloomberg','China: estímulos somam $140B para travar abrandamento imobiliário'],
+    ['Reuters','Petróleo recua com receios de procura apesar de tensão no Médio Oriente'],
+    ['ECO','PSI-20 pressionado pela EDP; Galp consolida posições'],
+    ['Bloomberg','Dollar index recua; mercados emergentes ganham fôlego']
+  ];
+  var html=n.map(function(x){return '<div class="news-item"><div class="nsrc2">'+x[0]+'</div><div class="ntt">'+x[1]+'</div></div>';}).join('');
+  document.getElementById('newsPanel').innerHTML=html;
+})();
+
+// MACRO & FOREX
+(function(){
+  var rows=[
+    ['EUR/USD','1.1248','<span class="pos">+0.3%</span>'],
+    ['GBP/USD','1.2934','<span class="pos">+0.2%</span>'],
+    ['USD/JPY','143.20','<span class="neg">−0.4%</span>'],
+    ['USD/CAD','1.3580','<span class="neg">−0.1%</span>'],
+    ['Fed Rate','4.25–4.50%','<span class="amb">—</span>'],
+    ['BCE Rate','2.40%','<span class="neg">−25bp</span>']
+  ];
+  document.getElementById('macro').innerHTML=rows.map(function(r){return '<div class="lr"><span class="ll">'+r[0]+'</span><span class="lv">'+r[1]+' '+r[2]+'</span></div>';}).join('');
+})();
+
+// COMMODITIES
+(function(){
+  var rows=[
+    ['Ouro (XAU)','$3,227','<span class="pos">+0.9%</span>'],
+    ['Prata (XAG)','$32.40','<span class="pos">+1.2%</span>'],
+    ['Petróleo WTI','$78.60','<span class="neg">−0.8%</span>'],
+    ['Brent','$82.10','<span class="neg">−0.6%</span>'],
+    ['Cobre','$4.82','<span class="pos">+1.5%</span>'],
+    ['Gás Nat.','$2.18','<span class="neg">−1.1%</span>']
+  ];
+  document.getElementById('commod').innerHTML=rows.map(function(r){return '<div class="lr"><span class="ll">'+r[0]+'</span><span class="lv">'+r[1]+' '+r[2]+'</span></div>';}).join('');
+})();
+
+// WALL STREET
+(function(){
+  var rows=[
+    ['S&P 500','5,308','<span class="pos">+0.5%</span>'],
+    ['Nasdaq','18,741','<span class="pos">+0.7%</span>'],
+    ['Dow Jones','42,180','<span class="pos">+0.3%</span>'],
+    ['Russell 2K','2,080','<span class="pos">+0.4%</span>'],
+    ['VIX','14.2','<span class="neg">−5.1%</span>']
+  ];
+  document.getElementById('ws').innerHTML=rows.map(function(r){return '<div class="lr"><span class="ll">'+r[0]+'</span><span class="lv">'+r[1]+' '+r[2]+'</span></div>';}).join('');
+})();
+
+// EUROPA
+(function(){
+  var rows=[
+    ['DAX','23,486','<span class="pos">+0.35%</span>'],
+    ['CAC 40','7,842','<span class="pos">+0.28%</span>'],
+    ['IBEX 35','11,240','<span class="pos">+0.42%</span>'],
+    ['PSI-20','6,980','<span class="neg">−0.3%</span>'],
+    ['Euro Stoxx','5,124','<span class="pos">+0.31%</span>']
+  ];
+  document.getElementById('eu').innerHTML=rows.map(function(r){return '<div class="lr"><span class="ll">'+r[0]+'</span><span class="lv">'+r[1]+' '+r[2]+'</span></div>';}).join('');
+})();
+
+// ÁSIA
+(function(){
+  var rows=[
+    ['Nikkei 225','37,840','<span class="pos">+1.1%</span>'],
+    ['Hang Seng','22,480','<span class="pos">+0.6%</span>'],
+    ['Shanghai','3,342','<span class="neg">−0.2%</span>'],
+    ['Kospi','2,680','<span class="pos">+0.5%</span>'],
+    ['ASX 200','8,120','<span class="pos">+0.4%</span>']
+  ];
+  document.getElementById('asia').innerHTML=rows.map(function(r){return '<div class="lr"><span class="ll">'+r[0]+'</span><span class="lv">'+r[1]+' '+r[2]+'</span></div>';}).join('');
+})();
+
+// UK & IRELAND
+(function(){
+  var rows=[
+    ['FTSE 100','8,344','<span class="pos">+0.27%</span>'],
+    ['FTSE 250','20,180','<span class="pos">+0.3%</span>'],
+    ['GBP/EUR','1.1820','<span class="pos">+0.1%</span>'],
+    ['ISEQ','9,840','<span class="pos">+0.5%</span>'],
+    ['BoE Rate','4.25%','<span class="amb">—</span>']
+  ];
+  document.getElementById('uk').innerHTML=rows.map(function(r){return '<div class="lr"><span class="ll">'+r[0]+'</span><span class="lv">'+r[1]+' '+r[2]+'</span></div>';}).join('');
+})();
+
+// CANADA
+(function(){
+  var rows=[
+    ['TSX','22,180','<span class="pos">+0.4%</span>'],
+    ['USD/CAD','1.3580','<span class="neg">−0.1%</span>'],
+    ['BoC Rate','2.75%','<span class="neg">−25bp</span>'],
+    ['Oil Sands','$74.20','<span class="neg">−0.5%</span>']
+  ];
+  document.getElementById('canada').innerHTML=rows.map(function(r){return '<div class="lr"><span class="ll">'+r[0]+'</span><span class="lv">'+r[1]+' '+r[2]+'</span></div>';}).join('');
+})();
+
+// YIELDS
+(function(){
+  var rows=[
+    ['EUA 10A','4.42%','<span class="neg">−2bp</span>'],
+    ['Alemanha 10A','2.58%','<span class="neg">−1bp</span>'],
+    ['UK 10A','4.68%','<span class="pos">+1bp</span>'],
+    ['Japão 10A','1.48%','<span class="pos">+3bp</span>'],
+    ['Portugal 10A','3.12%','<span class="neg">−1bp</span>'],
+    ['Itália 10A','3.88%','<span class="neg">−2bp</span>']
+  ];
+  document.getElementById('yields').innerHTML=rows.map(function(r){return '<div class="lr"><span class="ll">'+r[0]+'</span><span class="lv">'+r[1]+' '+r[2]+'</span></div>';}).join('');
+})();
+
+// RISCO SISTÉMICO
+(function(){
+  var items=[
+    ['Volatilidade (VIX)',14,'#00ff8c'],
+    ['Spread HY EUA',320,'#ffb830'],
+    ['Stress Bancário EU',22,'#00ff8c'],
+    ['Risco Geopolítico',58,'#ff4466'],
+    ['Liquidez Mercado',78,'#00ff8c']
+  ];
+  document.getElementById('risk').innerHTML=items.map(function(x){
+    return '<div class="rr"><span class="rl">'+x[0]+'</span><div class="rt"><div class="rf" style="width:'+x[1]+'%;background:'+x[2]+'"></div></div><span class="rv" style="color:'+x[2]+'">'+x[1]+'</span></div>';
+  }).join('');
+})();
+
+})();
+</script>
+  </main>
+
+  <footer style="background: #040608; border-top: 1px solid rgba(201,162,39,0.15); padding: 40px 20px; text-align: center; font-family: sans-serif; font-size: 0.85rem; color: #8a9e8a;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; align-items: center;">
+      <p>
+        <span lang="pt">© 2026 Tech &amp; Ouro. Um projeto feito para levar a história a todas as partes do mundo.</span>
+        <span lang="en">© 2026 Tech &amp; Ouro. A project made to bring history to all parts of the world.</span>
+      </p>
+      <div style="display: flex; gap: 20px;">
+        <a href="disclaimer.html" style="color: inherit; text-decoration: none;"><span lang="pt">Aviso Legal</span><span lang="en">Disclaimer</span></a>
+        <a href="sobre.html" style="color: inherit; text-decoration: none;"><span lang="pt">Sobre</span><span lang="en">About</span></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js?v=4"></script>
+</body>
+</html>
