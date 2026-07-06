@@ -63,7 +63,8 @@ def enhance_file(filename):
     header_block_match = re.search(r'(<header class="page-header"[^>]*>.*?</header>)', content, re.DOTALL | re.IGNORECASE)
     if header_block_match:
         header_block = header_block_match.group(1)
-        if "gold-line" not in content[content.find(header_block):content.find(header_block)+300]:
+        end_idx = content.find(header_block) + len(header_block)
+        if "gold-line" not in content[end_idx:end_idx+200]:
             content = content.replace(header_block, header_block + "\n  <div class=\"gold-line\"></div>", 1)
             print(f"[{filename}] Added gold-line separator.")
 
