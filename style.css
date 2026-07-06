@@ -1542,7 +1542,7 @@ body.lang-en [lang="pt"] {
 }
 
 /* Ad Banner Styles */
-.ad-banner {
+.promo-box {
   background: var(--surface);
   border: 1px dashed var(--gold-alpha-heavy);
   border-radius: var(--radius);
@@ -1559,7 +1559,7 @@ body.lang-en [lang="pt"] {
   overflow: hidden;
 }
 
-.ad-banner::before {
+.promo-box::before {
   content: 'AD';
   position: absolute;
   top: 5px;
@@ -1570,7 +1570,7 @@ body.lang-en [lang="pt"] {
   font-weight: bold;
 }
 
-.ad-banner-title {
+.promo-box-title {
   font-size: 0.75rem;
   color: var(--text-secondary);
   text-transform: uppercase;
@@ -1578,7 +1578,7 @@ body.lang-en [lang="pt"] {
   margin-bottom: 4px;
 }
 
-.ad-banner-subtitle {
+.promo-box-subtitle {
   font-size: 0.65rem;
   color: var(--muted);
 }
