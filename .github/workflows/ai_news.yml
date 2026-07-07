@@ -33,7 +33,7 @@ jobs:
           python scripts/update_countries.py
       - name: Commit and Push Changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action AI"
-          git add noticias.html paises.html economia.html desporto.html mercados.html tech.html geopolitica.html ouro.html conteudos/news-archive.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "update news" && git pull --rebase origin main && git push origin HEAD:main)
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add *.html conteudos/news-archive.json
+          git diff --staged --quiet || (git commit -m "update news" && git pull --rebase origin main && git push origin HEAD:main)
