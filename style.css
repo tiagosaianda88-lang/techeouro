@@ -422,8 +422,9 @@ nav {
   justify-content: space-between;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
-  max-width: 450px;
+  max-width: 100%;
   width: 100%;
+  height: 100%;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -1454,11 +1455,9 @@ footer {
     padding: 60px 20px 40px;
   }
   .cards-2 {
-    grid-template-columns: 1fr;
     padding: 0 20px;
   }
   .cards-3 {
-    grid-template-columns: 1fr;
     padding: 0 20px;
   }
   .section-label {
@@ -1488,6 +1487,9 @@ footer {
     grid-template-columns: 1fr;
   }
   .cat-grid {
+    grid-template-columns: 1fr;
+  }
+  .cards-2, .cards-3 {
     grid-template-columns: 1fr;
   }
   .stats-dashboard {
