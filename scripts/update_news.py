@@ -260,7 +260,7 @@ Source material:
 class VerifierAgent:
     REQUIRED = ("category", "source", "url", "title_pt", "title_en", "summary_pt", "summary_en", "body_pt", "body_en")
 
-    def verify(self, payload, known_sources):
+    def verify(self, payload, known_sources, strict=True):
         articles = payload.get("articles") if isinstance(payload, dict) else None
         if not isinstance(articles, list):
             raise ValueError("Verifier: expected a list of articles")
@@ -285,28 +285,38 @@ class VerifierAgent:
                     normalized_sources.add(normalize(path.stem))
 
         for position, article in enumerate(articles, 1):
-            if not isinstance(article, dict):
-                raise ValueError(f"Verifier: article {position} is not an object")
-            missing = [field for field in self.REQUIRED if not clean_text(article.get(field, ""))]
-            if missing:
-                raise ValueError(f"Verifier: article {position} missing {', '.join(missing)}")
-            if article["category"] not in CATEGORY_LABELS:
-                raise ValueError(f"Verifier: invalid category in article {position}")
-            if normalize(article["source"]) not in normalized_sources:
-                raise ValueError(f"Verifier: unknown source in article {position}")
+            try:
+                if not isinstance(article, dict):
+                    raise ValueError(f"article {position} is not an object")
+                missing = [field for field in self.REQUIRED if not clean_text(article.get(field, ""))]
+                if missing:
+                    raise ValueError(f"article {position} missing {', '.join(missing)}")
+                if article["category"] not in CATEGORY_LABELS:
+                    raise ValueError(f"article {position} has invalid category {article['category']!r}")
+                if normalize(article["source"]) not in normalized_sources:
+                    raise ValueError(f"article {position} has unknown source {article['source']!r}")
 
-            for text_field in ("title_pt", "title_en", "summary_pt", "summary_en"):
-                val = article[text_field]
-                if not self._has_balanced_brackets(val):
-                    raise ValueError(f"Verifier: article {position} has unbalanced parentheses/brackets in '{text_field}'")
+                for text_field in ("title_pt", "title_en", "summary_pt", "summary_en"):
+                    val = article[text_field]
+                    if not self._has_balanced_brackets(val):
+                        raise ValueError(f"article {position} has unbalanced parentheses/brackets in '{text_field}'")
 
-            key = normalize(article["title_pt"])
-            if key in titles:
-                raise ValueError(f"Verifier: duplicate title in article {position}")
+                key = normalize(article["title_pt"])
+                if key in titles:
+                    raise ValueError(f"article {position} has a duplicate title")
+            except ValueError as exc:
+                if strict:
+                    raise ValueError(f"Verifier: {exc}")
+                print(f"Verifier: skipping {exc}")
+                continue
+
             titles.add(key)
             verified.append({field: clean_text(article[field]) for field in self.REQUIRED})
 
-        print(f"Verifier: {len(verified)} articles approved.")
+        if not verified:
+            raise ValueError("Verifier: no valid articles found")
+
+        print(f"Verifier: {len(verified)} articles approved ({len(articles) - len(verified)} skipped).")
         return verified
 
     @staticmethod
@@ -562,7 +572,7 @@ def run(action="generate", dry_run=False):
             if "source" in art:
                 known_sources.add(art["source"])
 
-    new_articles = VerifierAgent().verify(payload, known_sources)
+    new_articles = VerifierAgent().verify(payload, known_sources, strict=not is_fallback)
     
     # Save to draft
     draft_path.write_text(json.dumps(new_articles, indent=2, ensure_ascii=False), encoding="utf-8")

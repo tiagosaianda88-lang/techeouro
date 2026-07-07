@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terminal — Tech &amp; Ouro</title>
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
@@ -61,8 +61,8 @@
     <a href="sobre.html#contacto" class="nav-cta"><span lang="pt">Contacto</span><span lang="en">Contact</span></a>
   </nav>
 
-  <main style="max-width: 1200px; margin: 40px auto; padding: 80px 20px 40px 20px;">
-    <div id="terminal-page" style="font-family:'IBM Plex Mono',ui-monospace,monospace;color:#e8f0e4;background:#080c10;min-height:100vh;padding:0;margin:0">
+  <main style="max-width: 100%; margin: 0; padding: 0;">
+    <div id="terminal-page" style="font-family:'IBM Plex Mono',ui-monospace,monospace;color:#e8f0e4;background:#080c10;min-height:calc(100vh - 70px);padding:0;margin:0">
 
 <style>
 #terminal-page *{box-sizing:border-box;margin:0;padding:0}
@@ -89,8 +89,9 @@
 #terminal-page .body-wrap{display:flex}
 #terminal-page .main{flex:1;padding:14px;display:flex;flex-direction:column;gap:12px;overflow-y:auto}
 #terminal-page .sidebar{width:200px;background:#0d1117;border-left:1px solid rgba(201,162,39,0.12);padding:12px;display:flex;flex-direction:column;gap:12px}
-#terminal-page .card{background:#0d1117;border:1px solid rgba(201,162,39,0.12);border-radius:4px;padding:14px;position:relative}
-#terminal-page .card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#C9A227,transparent);opacity:0.4}
+#terminal-page .card{background:#0d1117;border:1px solid rgba(201,162,39,0.12);border-radius:4px;padding:14px;position:relative;max-width:none;margin:0;}
+#terminal-page .card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#C9A227,transparent);opacity:0.4;transform:none;transition:none}
+#terminal-page .card:hover{transform:none;box-shadow:none;border-color:rgba(201,162,39,0.12);background:#0d1117}
 #terminal-page .sbcard{background:#0d1117;border:1px solid rgba(201,162,39,0.12);border-radius:4px;padding:14px;position:relative}
 #terminal-page .sbcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#C9A227,transparent);opacity:0.6}
 #terminal-page .sbtitle{font-size:16px;font-weight:700;letter-spacing:0.12em;color:#C9A227;margin-bottom:14px;text-transform:uppercase;border-bottom:1px solid rgba(201,162,39,0.2);padding-bottom:8px}
@@ -118,7 +119,7 @@
 #terminal-page .rr{display:flex;align-items:center;gap:9px;margin-bottom:10px}
 #terminal-page .rl{font-size:10px;color:#8a9e8a;width:84px;flex-shrink:0}
 #terminal-page .rt{flex:1;height:5px;background:#1a2230;border-radius:3px;overflow:hidden}
-#terminal-page .rf{height:100%;border-radius:3px}
+#terminal-page .rf{;border-radius:3px}
 #terminal-page .rv{font-size:10px;font-weight:500;width:50px;text-align:right;flex-shrink:0}
 #terminal-page .fgbox{display:flex;align-items:center;gap:16px}
 #terminal-page .fgcirc{width:130px;height:130px;border-radius:50%;flex-shrink:0;position:relative;display:flex;align-items:center;justify-content:center}
