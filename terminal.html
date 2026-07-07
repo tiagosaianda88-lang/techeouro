@@ -89,8 +89,9 @@
 #terminal-page .body-wrap{display:flex}
 #terminal-page .main{flex:1;padding:14px;display:flex;flex-direction:column;gap:12px;overflow-y:auto}
 #terminal-page .sidebar{width:200px;background:#0d1117;border-left:1px solid rgba(201,162,39,0.12);padding:12px;display:flex;flex-direction:column;gap:12px}
-#terminal-page .card{background:#0d1117;border:1px solid rgba(201,162,39,0.12);border-radius:4px;padding:14px;position:relative}
-#terminal-page .card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#C9A227,transparent);opacity:0.4}
+#terminal-page .card{background:#0d1117;border:1px solid rgba(201,162,39,0.12);border-radius:4px;padding:14px;position:relative;max-width:none;margin:0;height:100%}
+#terminal-page .card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#C9A227,transparent);opacity:0.4;transform:none;transition:none}
+#terminal-page .card:hover{transform:none;box-shadow:none;border-color:rgba(201,162,39,0.12);background:#0d1117}
 #terminal-page .sbcard{background:#0d1117;border:1px solid rgba(201,162,39,0.12);border-radius:4px;padding:14px;position:relative}
 #terminal-page .sbcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#C9A227,transparent);opacity:0.6}
 #terminal-page .sbtitle{font-size:16px;font-weight:700;letter-spacing:0.12em;color:#C9A227;margin-bottom:14px;text-transform:uppercase;border-bottom:1px solid rgba(201,162,39,0.2);padding-bottom:8px}
