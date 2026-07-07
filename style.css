@@ -401,7 +401,7 @@ nav {
 
 .cards-3 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 380px));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 450px));
   gap: 16px;
   max-width: 1200px;
   margin: 0 auto 40px;
@@ -422,7 +422,7 @@ nav {
   justify-content: space-between;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
-  max-width: 380px;
+  max-width: 450px;
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
@@ -496,7 +496,7 @@ nav {
 }
 
 .card-title {
-  font-size: 1.35rem;
+  font-size: 1.75rem;
   line-height: 1.3;
   margin-bottom: 12px;
   color: var(--text);
@@ -508,7 +508,7 @@ nav {
 }
 
 .card-desc {
-  font-size: 0.88rem;
+  font-size: 1.15rem;
   color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 20px;
@@ -534,7 +534,7 @@ nav {
 }
 
 .card-sm-cat {
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   color: var(--gold);
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -658,7 +658,7 @@ nav {
 }
 
 .stat-label {
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-secondary);
@@ -732,7 +732,7 @@ nav {
 }
 
 .cat-item-title {
-  font-size: 0.85rem;
+  font-size: 1.10rem;
   line-height: 1.4;
   color: var(--text);
   cursor: pointer;
@@ -744,7 +744,7 @@ nav {
 }
 
 .cat-item-date {
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   color: var(--muted);
   margin-top: 4px;
 }
@@ -866,7 +866,7 @@ nav {
 }
 
 .stat-item .l {
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   color: var(--muted);
   margin-top: 4px;
   text-transform: uppercase;
@@ -1217,7 +1217,7 @@ footer {
 .gold-focus-link strong {
   margin: 8px 0;
   color: var(--text-primary);
-  font-size: 1.35rem;
+  font-size: 1.75rem;
   letter-spacing: 0;
 }
 
@@ -1265,7 +1265,7 @@ footer {
 }
 
 .chart-title-sub {
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--gold);
@@ -1283,7 +1283,7 @@ footer {
 
 .chart-price span {
   font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-size: 1.10rem;
   font-weight: 600;
   color: var(--up-color);
 }
@@ -1316,7 +1316,7 @@ footer {
   left: -45px;
   transform: translateY(-50%);
   font-family: var(--font-sans);
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   color: var(--muted);
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -1362,7 +1362,7 @@ footer {
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   color: var(--muted);
 }
 
@@ -1415,7 +1415,7 @@ footer {
 }
 
 .geo-summary {
-  font-size: 0.85rem;
+  font-size: 1.10rem;
   color: var(--text-secondary);
   line-height: 1.6;
 }
@@ -1534,7 +1534,7 @@ body.lang-en [lang="pt"] {
   border: none;
   color: var(--text-secondary);
   font-family: var(--font-sans);
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   font-weight: 600;
   padding: 3px 6px;
   border-radius: 3px;
@@ -1614,7 +1614,7 @@ body.lang-en [lang="pt"] {
 }
 
 .promo-box-subtitle {
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   color: var(--muted);
 }
 
