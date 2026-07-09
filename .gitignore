@@ -4,6 +4,10 @@ anty-codex/
 node_modules/
 dist/
 build/
+scratch/
+cards-atualizados/
+news-preview.html
+goggle addsense*.txt
 conteudos/fila-*
 conteudos/news-draft-sources.json
 conteudos/news-queue-manifest.json
