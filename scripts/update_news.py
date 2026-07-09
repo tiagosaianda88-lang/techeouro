@@ -335,6 +335,8 @@ class VerifierAgent:
                 val = article[text_field]
                 if not self._has_balanced_brackets(val):
                     raise ValueError(f"Verifier: article {position} has unbalanced parentheses/brackets in '{text_field}'")
+                if text_field.startswith("title") and self._looks_sensationalist(val):
+                    raise ValueError(f"Verifier: article {position} has sensationalist title in '{text_field}'")
 
             key = normalize(article["title_pt"])
             if key in titles:
@@ -368,6 +370,32 @@ class VerifierAgent:
                     return False
                 stack.pop()
         return len(stack) == 0
+
+    @staticmethod
+    def _looks_sensationalist(text):
+        cleaned = clean_text(text)
+        letters = [char for char in cleaned if char.isalpha()]
+        uppercase_ratio = (
+            sum(1 for char in letters if char.isupper()) / len(letters)
+            if letters
+            else 0
+        )
+        blocked_terms = {
+            "abala",
+            "bomba",
+            "bombshell",
+            "caos",
+            "choque",
+            "chocante",
+            "explosive",
+            "panic",
+            "panico",
+            "pânico",
+            "shocker",
+        }
+        normalized_terms = set(normalize(cleaned).split())
+        return uppercase_ratio > 0.55 or bool(blocked_terms & normalized_terms)
+
 
 
 class PublisherAgent:

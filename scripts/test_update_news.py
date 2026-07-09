@@ -1,4 +1,5 @@
 import unittest
+from pathlib import Path
 
 from update_news import (
     CATEGORY_LABELS,
@@ -61,6 +62,20 @@ class PublisherAgentTests(unittest.TestCase):
         rendered = PublisherAgent().render([article])
         self.assertNotIn("<script>", rendered)
         self.assertIn("&lt;script&gt;", rendered)
+
+
+class ProviderSafetyTests(unittest.TestCase):
+    def test_removed_provider_does_not_reappear(self):
+        source = Path("scripts/update_news.py").read_text(encoding="utf-8")
+        blocked = [
+            "GEMINI_API_KEY",
+            "google import genai",
+            "gemini-",
+            "Gemini API",
+        ]
+        for term in blocked:
+            with self.subTest(term=term):
+                self.assertNotIn(term, source)
 
 
 if __name__ == "__main__":
