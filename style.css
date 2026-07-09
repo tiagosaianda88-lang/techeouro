@@ -198,6 +198,10 @@ nav {
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 
+.index-gold-line {
+  margin-top: 64px;
+}
+
 /* Scrolling Live Ticker */
 .ticker-container {
   background: #000;
@@ -430,8 +434,8 @@ nav {
   justify-content: space-between;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
-  flex: 0 1 340px;
-  max-width: 340px;
+  flex: 0 1 320px;
+  max-width: 320px;
   width: 100%;
   min-height: 0;
   margin: 0 auto;
