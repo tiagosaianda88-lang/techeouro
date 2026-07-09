@@ -8,7 +8,7 @@ from urllib.parse import urljoin
 BASE_URL = "https://techeouro.net"
 EXPECTED_ADSENSE = "ca-pub-2757348402596933"
 EXPECTED_ADS_TXT = "pub-2757348402596933"
-EXPECTED_GOOGLE_ADS = "AW-1827959532"
+EXPECTED_GOOGLE_ADS = "AW-18279595532"
 EXPECTED_ROUTES = [
     "/",
     "/mercados",
