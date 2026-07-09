@@ -145,6 +145,19 @@ function initAdSenseSlots() {
       slot.dataset.adsenseRequested = 'error';
     }
   });
+
+  setTimeout(() => {
+    slots.forEach(slot => {
+      const holder = slot.closest('.in-feed-ad, .promo-box');
+      if (!holder) return;
+
+      const status = slot.getAttribute('data-ad-status');
+      const hasRenderedAd = !!slot.querySelector('iframe');
+
+      holder.classList.toggle('ad-slot-empty', status === 'unfilled' || (!status && !hasRenderedAd));
+      holder.classList.toggle('ad-slot-filled', status === 'filled' || hasRenderedAd);
+    });
+  }, 2600);
 }
 
 // Interactive Premium Article Modal Viewer

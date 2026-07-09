@@ -615,6 +615,12 @@ nav {
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tabs-wrap::-webkit-scrollbar {
+  display: none;
 }
 
 .tabs {
@@ -1653,8 +1659,8 @@ body.lang-en [lang="pt"] {
 
 /* Ad Banner Styles */
 .promo-box {
-  background: var(--surface);
-  border: 1px dashed var(--gold-alpha-heavy);
+  background: transparent;
+  border: 0;
   border-radius: var(--radius);
   padding: 10px;
   text-align: center;
@@ -2121,16 +2127,14 @@ body {
   min-height: 120px !important;
   height: auto !important;
   padding: 14px !important;
-  background:
-    linear-gradient(180deg, rgba(15, 15, 15, 0.96), rgba(6, 6, 6, 0.96)) !important;
-  border: 1px solid rgba(212, 175, 55, 0.22) !important;
-  box-shadow: var(--shadow-sm) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
   justify-content: center;
 }
 
 .in-feed-ad::before {
-  transform: scaleX(1);
-  opacity: 0.55;
+  display: none;
 }
 
 .in-feed-ad .adsbygoogle {
@@ -2275,8 +2279,13 @@ body {
     max-width: 100%;
     overflow-x: auto;
     overscroll-behavior-x: contain;
-    padding-bottom: 8px;
     justify-content: flex-start;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
   }
 
   .tab {
@@ -2317,6 +2326,14 @@ body {
     min-height: 58px !important;
     max-height: 92px;
   }
+}
+
+.ad-slot-empty {
+  display: none !important;
+}
+
+.ad-slot-filled {
+  background: transparent !important;
 }
 
 @media (max-width: 420px) {
