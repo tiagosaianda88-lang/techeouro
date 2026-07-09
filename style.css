@@ -457,9 +457,9 @@ body.home .cards-2 {
   justify-content: center;
   gap: 14px;
   max-width: 674px;
-  margin: 0 auto 96px;
+  margin: 0 auto 264px;
   padding: 0 20px;
-  align-items: start;
+  align-items: stretch;
   box-sizing: border-box;
 }
 
@@ -2174,7 +2174,7 @@ body {
 @media (max-width: 1024px) {
   body.home .cards-2 {
     display: flex;
-    margin: 0 auto 72px;
+    margin: 0 auto 180px;
   }
 
   .cards-2,
