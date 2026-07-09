@@ -4,3 +4,6 @@ anty-codex/
 node_modules/
 dist/
 build/
+conteudos/fila-*
+conteudos/news-draft-sources.json
+conteudos/news-queue-manifest.json

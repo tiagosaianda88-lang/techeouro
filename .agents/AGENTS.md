@@ -35,6 +35,9 @@ The project now runs with these working agents. Any future assistant should use 
 ### 2. Agente de Noticias AI
 * Owns `scripts/update_news.py`, `conteudos/`, GitHub Actions, RSS/manual sources, and the 60% index rotation rule.
 * Must keep summaries tight, factual, and bilingual. Never invent facts, dates, sources, prices, quotes, or URLs.
+* Desktop news queue lives at `/Users/tmss1988/Desktop/tech e ouro`. Use `python3 scripts/news_queue_agent.py` to stage files from bottom to top (oldest first when Finder shows newest first).
+* Queue files are moved into `conteudos/fila-*`, used by `scripts/update_news.py`, then cleaned after successful publish via `conteudos/news-queue-manifest.json`. Do not commit queue files or queue manifests.
+* Ignore ad/support files such as `add*.jpg`, AdSense/Goggle files, `.DS_Store`, and video helper files.
 
 ### 3. Agente de Publicidade & Contas
 * Owns Google Ads, Google AdSense, Netlify billing, GitHub usage, domain/DNS renewal, and monthly invoice review.

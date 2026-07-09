@@ -43,6 +43,8 @@ START_MARKER = "<!-- AI_NEWS_START -->"
 END_MARKER = "<!-- AI_NEWS_END -->"
 INDEX_NEWS_LIMIT = 10
 INDEX_NEW_ARTICLES_LIMIT = 6
+QUEUE_MANIFEST_PATH = Path("conteudos/news-queue-manifest.json")
+QUEUE_DRAFT_SOURCES_PATH = Path("conteudos/news-draft-sources.json")
 ALLOWED_LINKS = {
     "economy": "economia.html",
     "markets": "mercados.html",
@@ -487,6 +489,64 @@ def atomic_write(path, content):
     os.replace(temp_path, path)
 
 
+def normalize_source_name(value):
+    value = re.sub(r"\s+\(part\s+\d+\)$", "", str(value or ""), flags=re.IGNORECASE)
+    return normalize(value)
+
+
+def write_queue_draft_sources(selected):
+    queue_sources = sorted({normalize_source_name(item.source) for item in selected})
+    QUEUE_DRAFT_SOURCES_PATH.write_text(
+        json.dumps(queue_sources, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+
+def cleanup_published_queue_sources():
+    if not QUEUE_MANIFEST_PATH.exists() or not QUEUE_DRAFT_SOURCES_PATH.exists():
+        return
+
+    try:
+        manifest = json.loads(QUEUE_MANIFEST_PATH.read_text(encoding="utf-8"))
+        selected_sources = set(json.loads(QUEUE_DRAFT_SOURCES_PATH.read_text(encoding="utf-8")))
+    except Exception as exc:
+        print(f"Queue cleanup: could not read queue metadata: {exc}")
+        return
+
+    if not isinstance(manifest, list) or not selected_sources:
+        return
+
+    remaining = []
+    cleaned = 0
+    for entry in manifest:
+        if not isinstance(entry, dict):
+            continue
+        staged_name = entry.get("staged_name") or Path(entry.get("staged_path", "")).name
+        entry_key = normalize_source_name(staged_name)
+        if entry.get("status") == "staged" and entry_key in selected_sources:
+            staged_path = Path(entry.get("staged_path", ""))
+            try:
+                if staged_path.exists() and staged_path.is_file():
+                    staged_path.unlink()
+                    cleaned += 1
+                entry["status"] = "published-cleaned"
+                entry["cleaned_at"] = datetime.now().isoformat(timespec="seconds")
+            except Exception as exc:
+                entry["status"] = "cleanup-failed"
+                entry["cleanup_error"] = str(exc)
+                remaining.append(entry)
+                continue
+        remaining.append(entry)
+
+    QUEUE_MANIFEST_PATH.write_text(
+        json.dumps(remaining, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    QUEUE_DRAFT_SOURCES_PATH.unlink(missing_ok=True)
+    if cleaned:
+        print(f"Queue cleanup: removed {cleaned} staged source file(s) after publish.")
+
+
 def run(action="generate", dry_run=False):
     draft_path = Path("conteudos/news-draft.json")
     archive_path = Path("conteudos/news-archive.json")
@@ -546,6 +606,7 @@ def run(action="generate", dry_run=False):
         if not dry_run:
             # Delete draft after successful publish
             draft_path.unlink(missing_ok=True)
+            cleanup_published_queue_sources()
             print("Publisher: Draft published and removed.")
         return
 
@@ -556,6 +617,7 @@ def run(action="generate", dry_run=False):
         raise ValueError("Collector: no source material found")
 
     selected = SelectorAgent().select(items)
+    write_queue_draft_sources(selected)
     
     is_fallback = False
     api_key = os.environ.get("GEMINI_API_KEY")
