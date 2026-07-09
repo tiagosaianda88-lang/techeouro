@@ -403,22 +403,24 @@ nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
-  max-width: 1200px;
+  gap: 14px;
+  max-width: 674px;
   margin: 0 auto 30px;
-  padding: 0 40px;
+  padding: 0 20px;
   align-items: start;
+  box-sizing: border-box;
 }
 
 .cards-3 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
-  max-width: 1200px;
+  gap: 14px;
+  max-width: 674px;
   margin: 0 auto 40px;
-  padding: 0 40px;
+  padding: 0 20px;
   align-items: start;
+  box-sizing: border-box;
 }
 
 .card, .card-sm {
@@ -434,8 +436,8 @@ nav {
   justify-content: space-between;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
-  flex: 0 1 320px;
-  max-width: 320px;
+  flex: 0 1 300px;
+  max-width: 300px;
   width: 100%;
   min-height: 0;
   margin: 0 auto;
@@ -447,6 +449,15 @@ nav {
 .cards-3 > .card,
 .cards-3 > .card-sm {
   margin: 0;
+}
+
+body.home .index-final-row {
+  margin-top: 72px !important;
+  margin-bottom: 76px !important;
+}
+
+body.home .index-extra-hidden {
+  display: none !important;
 }
 
 .card::before {
@@ -2136,7 +2147,7 @@ body {
   .cards-3 {
     justify-content: center;
     width: 100%;
-    max-width: min(100%, 1200px);
+    max-width: min(100%, 674px);
   }
 
   .card,

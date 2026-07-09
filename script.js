@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setLanguage(savedLang);
   updateHeroDate();
   updateDynamicDates();
+  applyHomeCardLayout();
   initArticleInteractions();
   initAdSenseSlots();
   updateHeaderPrices();
@@ -84,6 +85,26 @@ function toggleMobileMenu() {
   const menuBtn = document.querySelector('.mobile-menu-btn');
   if (navLinks) navLinks.classList.toggle('active');
   if (menuBtn) menuBtn.classList.toggle('active');
+}
+
+function applyHomeCardLayout() {
+  if (!document.body.classList.contains('home')) return;
+
+  const grid = document.querySelector('.cards-2');
+  if (!grid) return;
+
+  const cards = [...grid.querySelectorAll('.card:not(.in-feed-ad)')];
+  cards.forEach(card => {
+    card.classList.remove('index-final-row', 'index-extra-hidden');
+  });
+
+  const visibleCards = cards.filter(card => !card.hidden);
+  if (visibleCards.length % 2 === 1) {
+    visibleCards[visibleCards.length - 1].classList.add('index-extra-hidden');
+  }
+
+  const pairedCards = visibleCards.filter(card => !card.classList.contains('index-extra-hidden'));
+  pairedCards.slice(-2).forEach(card => card.classList.add('index-final-row'));
 }
 
 function escapeModalHtml(value) {
