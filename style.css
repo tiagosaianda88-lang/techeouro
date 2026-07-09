@@ -407,7 +407,7 @@ nav {
   max-width: 674px;
   margin: 0 auto 30px;
   padding: 0 20px;
-  align-items: start;
+  align-items: stretch;
   box-sizing: border-box;
 }
 
@@ -467,6 +467,7 @@ body.home .cards-2 > .card,
 body.home .cards-2 > .card-sm {
   width: 300px;
   max-width: 300px;
+  height: 100%;
 }
 
 body.home .cards-2 > .in-feed-ad {
