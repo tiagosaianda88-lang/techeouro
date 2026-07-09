@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "category": "geopolitics",
+      "source": "The Wall Street Journal",
+      "url": "https://www.wsj.com/world/",
+      "title_pt": "Trump apoia ataques ucranianos mais profundos",
+      "title_en": "Trump backs deeper Ukrainian strikes",
+      "summary_pt": "O WSJ destaca uma viragem de Trump ao admitir apoio a ataques ucranianos mais profundos em território russo. A leitura Tech & Ouro: defesa, energia e risco cambial voltam a cruzar-se num conflito que mexe com mercados globais.",
+      "summary_en": "The WSJ highlights a shift by Trump toward backing deeper Ukrainian strikes inside Russia. Tech & Ouro reads it as a renewed link between defense, energy and currency risk in a war that continues to move global markets now.",
+      "body_pt": "O WSJ destaca uma viragem de Trump ao admitir apoio a ataques ucranianos mais profundos em território russo.\nResumo editorial Tech & Ouro: defesa, energia e risco cambial voltam a cruzar-se num conflito que mexe com mercados globais e exige prudência aos investidores.",
+      "body_en": "The WSJ highlights a shift by Trump toward backing deeper Ukrainian strikes inside Russia.\nEditorial summary by Tech & Ouro: defense, energy and currency risk are again linked in a conflict that keeps moving global markets and calls for investor caution."
+    },
+    {
+      "category": "markets",
+      "source": "The Wall Street Journal",
+      "url": "https://www.wsj.com/finance/",
+      "title_pt": "Nova tensão no petróleo pesa nos mercados",
+      "title_en": "Renewed oil tension rattles markets",
+      "summary_pt": "Na secção Business & Finance, o WSJ liga nova tensão geopolítica a quedas nas ações, subida do petróleo e pressão nos juros. Para o Tech & Ouro, o sinal é claro: energia e obrigações continuam a ditar o humor dos mercados.",
+      "summary_en": "In Business & Finance, the WSJ links renewed geopolitical tension to weaker stocks, higher oil and pressure on yields. For Tech & Ouro, the signal is clear: energy and bonds still set the tone for global markets today too.",
+      "body_pt": "Na secção Business & Finance, o WSJ liga nova tensão geopolítica a quedas nas ações, subida do petróleo e pressão nos juros.\nResumo editorial Tech & Ouro: energia e obrigações continuam a ditar o humor dos mercados, sobretudo quando o risco político regressa ao centro da sessão.",
+      "body_en": "In Business & Finance, the WSJ links renewed geopolitical tension to weaker stocks, higher oil and pressure on yields.\nEditorial summary by Tech & Ouro: energy and bonds still set the tone for markets, especially when political risk returns to the center of the session."
+    },
+    {
       "category": "economy",
       "source": "ECO",
       "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNdndSTGdlNVpEaDFncDJXLXp4WlRVeERHb1Q0amo5TjNPQlg0RWVwOW03SURiT0djOTh0UEhFX1EwOVJuNk11aXNpLVNhanJ5R1I2R21fUWVBYzFzMEp5LUszNGRSMWpoNXN0SFJkTTFfX1FxVjhSc3dNNU9PeFhaVzBRTDB5SEtmbEx0LUc0U1ljclZ6V0FjRUhxcHBWelVuTV9XVkN4VzNzNWVYRWQyeU9fU0Z0NXdITjFpSUc5YkpwYlZhNnc?oc=5",
