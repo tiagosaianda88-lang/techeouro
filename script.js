@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setLanguage(savedLang);
   updateHeroDate();
   updateDynamicDates();
+  initArticleInteractions();
   updateHeaderPrices();
   updateCryptoList();
   setInterval(updateHeaderPrices, 90000);
@@ -108,6 +109,23 @@ function renderModalParagraphs(value, lang) {
   return value
     ? value.split(/\n+/).map(para => `<p lang="${lang}">${escapeModalHtml(para.trim())}</p>`).join('')
     : '';
+}
+
+function initArticleInteractions() {
+  if (document.body.dataset.articleInteractionsReady === 'true') return;
+  document.body.dataset.articleInteractionsReady = 'true';
+
+  document.addEventListener('click', event => {
+    const trigger = event.target.closest('.read-full-link, [data-open-article="true"]');
+    if (!trigger) return;
+
+    const card = trigger.closest('.card');
+    if (!card) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    openArticle(card);
+  }, true);
 }
 
 // Interactive Premium Article Modal Viewer
@@ -354,6 +372,9 @@ function closeArticleModal() {
     modal.style.pointerEvents = 'none';
   }
 }
+
+window.openArticle = openArticle;
+window.closeArticleModal = closeArticleModal;
 
 // Dynamic Header Ticker Price Updater (BTC & EUR/USD)
 function updateHeaderPrices() {

@@ -526,7 +526,7 @@ class PublisherAgent:
         <span class="editorial-attribution"><span lang="pt">Resumo editorial Tech &amp; Ouro</span><span lang="en">Editorial summary by Tech &amp; Ouro</span></span>
       </div>
       <div style="display: flex; gap: 8px; margin-left: auto;">
-        <a href="{link}" onclick="event.preventDefault(); event.stopPropagation(); openArticle(this.closest('.card'));" style="background: var(--gold); color: black; padding: 2px 8px; border-radius: 4px; text-decoration: none; font-weight: bold;"><span lang="pt">LER TUDO</span><span lang="en">READ ALL</span></a>
+        <a href="{link}" class="read-full-link" data-open-article="true" style="background: var(--gold); color: black; padding: 2px 8px; border-radius: 4px; text-decoration: none; font-weight: bold;"><span lang="pt">LER TUDO</span><span lang="en">READ ALL</span></a>
       </div>
     </div>
   </div>
