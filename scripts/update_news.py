@@ -45,6 +45,21 @@ INDEX_NEWS_LIMIT = 10
 INDEX_NEW_ARTICLES_LIMIT = 6
 QUEUE_MANIFEST_PATH = Path("conteudos/news-queue-manifest.json")
 QUEUE_DRAFT_SOURCES_PATH = Path("conteudos/news-draft-sources.json")
+QUEUE_SOURCE_URLS = {
+    "a bola": "https://www.abola.pt/",
+    "bbc uk countries": "https://www.bbc.co.uk/news",
+    "barrons": "https://www.barrons.com/",
+    "cbc news canada": "https://www.cbc.ca/news",
+    "diario de noticias": "https://www.dn.pt/",
+    "jornal de negocios": "https://www.jornaldenegocios.pt/",
+    "jornal de noticias": "https://www.jn.pt/",
+    "kictonews golg crypto": "https://www.kitco.com/",
+    "o benfica": "https://www.slbenfica.pt/",
+    "o jogo": "https://www.ojogo.pt/",
+    "record": "https://www.record.pt/",
+    "reuters": "https://www.reuters.com/",
+    "the wall strett journal": "https://www.wsj.com/",
+}
 ALLOWED_LINKS = {
     "economy": "economia.html",
     "markets": "mercados.html",
@@ -126,33 +141,59 @@ class CollectorAgent:
         images = []
         if not self.content_dir.exists():
             return items, images
+        queue_metadata = self._load_queue_metadata()
 
         for path in sorted(self.content_dir.iterdir()):
             if path.name in {"sobre.txt", "disclaimer.txt", "index.txt", "paises.txt", "manual-news.json", "news-archive.json"}:
                 continue
             suffix = path.suffix.lower()
+            source_name, source_url = self._source_for_path(path, queue_metadata)
             if suffix == ".pdf":
                 text = self._extract_pdf(path)
                 if text:
                     cleaned = clean_placeholders(text)
                     blocks = split_into_blocks(cleaned)
                     for i, block in enumerate(blocks):
-                        items.append(NewsItem(f"{path.name} (Part {i+1})", path.name, block[:12000], url=f"conteudos/{path.name}"))
+                        items.append(NewsItem(f"{source_name} (Part {i+1})", path.name, block[:12000], url=source_url))
             elif suffix == ".txt":
                 text = path.read_text(encoding="utf-8")
                 cleaned = clean_placeholders(text)
                 blocks = split_into_blocks(cleaned)
                 for i, block in enumerate(blocks):
-                    items.append(NewsItem(f"{path.name} (Part {i+1})", path.name, block[:12000], url=f"conteudos/{path.name}"))
+                    items.append(NewsItem(f"{source_name} (Part {i+1})", path.name, block[:12000], url=source_url))
             elif suffix in {".png", ".jpg", ".jpeg"}:
                 image = self._load_image(path)
                 if image is not None:
                     images.append(image)
                     items.append(
-                        NewsItem(path.name, path.name, "Attached screenshot for visual extraction", url=f"conteudos/{path.name}")
+                        NewsItem(source_name, path.name, "Attached screenshot for visual extraction", url=source_url)
                     )
 
         return items, images
+
+    def _load_queue_metadata(self):
+        if not QUEUE_MANIFEST_PATH.exists():
+            return {}
+        try:
+            manifest = json.loads(QUEUE_MANIFEST_PATH.read_text(encoding="utf-8"))
+        except Exception:
+            return {}
+        metadata = {}
+        for entry in manifest if isinstance(manifest, list) else []:
+            if not isinstance(entry, dict):
+                continue
+            staged_name = entry.get("staged_name") or Path(entry.get("staged_path", "")).name
+            source_label = clean_text(entry.get("source_label", ""))
+            if staged_name and source_label:
+                metadata[staged_name] = source_label
+        return metadata
+
+    @staticmethod
+    def _source_for_path(path, queue_metadata):
+        source_name = queue_metadata.get(path.name, path.name)
+        source_key = normalize(source_name)
+        source_url = QUEUE_SOURCE_URLS.get(source_key, f"conteudos/{path.name}")
+        return source_name, source_url
 
     @staticmethod
     def _extract_pdf(path, max_pages=5):
