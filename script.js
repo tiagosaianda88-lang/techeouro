@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateHeroDate();
   updateDynamicDates();
   initArticleInteractions();
+  initAdSenseSlots();
   updateHeaderPrices();
   updateCryptoList();
   setInterval(updateHeaderPrices, 90000);
@@ -126,6 +127,24 @@ function initArticleInteractions() {
     event.stopPropagation();
     openArticle(card);
   }, true);
+}
+
+function initAdSenseSlots() {
+  const slots = document.querySelectorAll('ins.adsbygoogle');
+  if (slots.length === 0) return;
+
+  window.adsbygoogle = window.adsbygoogle || [];
+
+  slots.forEach(slot => {
+    if (slot.dataset.adsenseRequested === 'true') return;
+    slot.dataset.adsenseRequested = 'true';
+
+    try {
+      window.adsbygoogle.push({});
+    } catch {
+      slot.dataset.adsenseRequested = 'error';
+    }
+  });
 }
 
 // Interactive Premium Article Modal Viewer
