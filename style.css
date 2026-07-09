@@ -407,7 +407,7 @@ nav {
 
 .cards-3 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 380px));
   gap: 16px;
   max-width: 1200px;
   margin: 0 auto 40px;
@@ -429,7 +429,7 @@ nav {
   justify-content: space-between;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
-  max-width: 100%;
+  max-width: 380px;
   width: 100%;
   min-height: 0;
   margin: 0 auto;
@@ -449,28 +449,7 @@ nav {
 }
 
 .card-natgeo {
-  border: 2px solid #FFCC00 !important; /* Estilo National Geographic */
-}
-
-.card-header-placeholder {
-  min-height: 58px;
-  height: auto;
-  background: linear-gradient(135deg, #0a0a0a 0%, #161616 100%);
-  border-bottom: 1px solid var(--gold);
-  margin: -30px -30px 20px -30px;
-  border-radius: 6px 6px 0 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.card-header-placeholder::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%);
+  border-color: var(--border) !important;
 }
 
 .cat-icon {
@@ -566,6 +545,29 @@ nav {
 .editorial-attribution {
   color: var(--text-secondary);
   text-transform: none;
+}
+
+.read-full-link {
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.34);
+  border-radius: 3px;
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  padding: 5px 9px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.read-full-link:hover {
+  background: rgba(212, 175, 55, 0.08);
+  border-color: rgba(212, 175, 55, 0.55);
 }
 
 /* Small Card styles */
@@ -1476,7 +1478,8 @@ footer {
 
 @media (max-width: 1024px) {
   .cards-3 {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(280px, 380px));
+    justify-content: center;
   }
   .cat-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1537,10 +1540,6 @@ footer {
   }
   .card, .card-sm {
     padding: 18px;
-  }
-  .card-header-placeholder {
-    min-height: 48px;
-    margin: -18px -18px 14px -18px;
   }
   .card-title {
     font-size: 1.12rem;
@@ -2138,8 +2137,8 @@ body {
 @media (max-width: 1024px) {
   .cards-2,
   .cards-3 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-content: stretch;
+    grid-template-columns: repeat(2, minmax(280px, 380px));
+    justify-content: center;
     width: 100%;
     max-width: min(100%, 1200px);
   }
@@ -2212,16 +2211,6 @@ body {
     border-color: rgba(212, 175, 55, 0.34);
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.62);
     overflow-wrap: anywhere;
-  }
-
-  .card-natgeo {
-    border-color: #FFCC00 !important;
-  }
-
-  .card-header-placeholder {
-    min-height: 34px;
-    height: auto;
-    margin: -14px -14px 10px;
   }
 
   .card-cat {

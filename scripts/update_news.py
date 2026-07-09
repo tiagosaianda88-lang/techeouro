@@ -509,10 +509,6 @@ class PublisherAgent:
         esc_body_en = html.escape(body_en, quote=True)
         
         return f'''<div class="card card-natgeo" onclick="openArticle(this)" data-body-pt="{esc_body_pt}" data-body-en="{esc_body_en}">
-  <div class="card-header-placeholder">
-    <span class="cat-icon" lang="pt">{category_pt}</span>
-    <span class="cat-icon" lang="en">{category_en}</span>
-  </div>
   <div>
     <p class="card-cat"><span lang="pt">{category_pt}</span><span lang="en">{category_en}</span></p>
     <h2 class="card-title"><span lang="pt">{esc["title_pt"]}</span><span lang="en">{esc["title_en"]}</span></h2>
@@ -526,7 +522,7 @@ class PublisherAgent:
         <span class="editorial-attribution"><span lang="pt">Resumo editorial Tech &amp; Ouro</span><span lang="en">Editorial summary by Tech &amp; Ouro</span></span>
       </div>
       <div style="display: flex; gap: 8px; margin-left: auto;">
-        <a href="{link}" class="read-full-link" data-open-article="true" style="background: var(--gold); color: black; padding: 2px 8px; border-radius: 4px; text-decoration: none; font-weight: bold;"><span lang="pt">LER TUDO</span><span lang="en">READ ALL</span></a>
+        <a href="{link}" class="read-full-link" data-open-article="true"><span lang="pt">LER TUDO</span><span lang="en">READ ALL</span></a>
       </div>
     </div>
   </div>
