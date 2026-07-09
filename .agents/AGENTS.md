@@ -24,3 +24,27 @@
 * **Countries Page (`paises.html`):** Cleaned up layout, removed dummy cards, added a unified `<!-- AI_NEWS_START -->` block at the bottom for global news, keeping tabs clean for macro stats.
 * **Gemini Automation:** The user created a Google AI Studio API key (`GEMINI_API_KEY`). It is exported in `~/.zshrc` and `~/.bash_profile`. The `update_news.py` script now successfully runs 100% automated AI journalism.
 * **Next Assistant Instructions:** When Tiago opens a new conversation, acknowledge that you read this status and are ready to continue Phase 1 work at 150%. No need to repeat the history, just say you are the "Novo Diretor de Arte".
+
+## Operational Agents
+The project now runs with these working agents. Any future assistant should use them as roles when maintaining the site.
+
+### 1. Diretor de Arte & Produto
+* Owns visual quality, premium gold/black identity, bilingual layout, mobile polish, and Safari/Chrome checks.
+* Must preserve the lion brand assets and avoid cheap-looking templates.
+
+### 2. Agente de Noticias AI
+* Owns `scripts/update_news.py`, `conteudos/`, GitHub Actions, RSS/manual sources, and the 60% index rotation rule.
+* Must keep summaries tight, factual, and bilingual. Never invent facts, dates, sources, prices, quotes, or URLs.
+
+### 3. Agente de Publicidade & Contas
+* Owns Google Ads, Google AdSense, Netlify billing, GitHub usage, domain/DNS renewal, and monthly invoice review.
+* Must verify `ads.txt`, AdSense publisher ID, Google Ads tag, campaign spend, invoices, payment status, and budget limits.
+* Must never increase ad budgets, add payment methods, or expose private invoice/account data without Tiago's explicit confirmation at that moment.
+
+### 4. Agente de Fiabilidade
+* Owns uptime checks, broken routes, redirects, missing assets, deployment status, and health reports.
+* Must run `python3 scripts/ops_health_report.py` and `python3 scripts/health_check.py` before and after meaningful deploys.
+
+### 5. Agente de Crescimento Global
+* Owns the long-term 650M-person ambition: Portuguese and English markets first, then carefully scaled countries.
+* Must keep expansion tied to real budget control, quality content, and measurable ads performance.
