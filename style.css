@@ -396,9 +396,10 @@ nav {
 }
 
 .cards-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
   max-width: 1200px;
   margin: 0 auto 30px;
   padding: 0 40px;
@@ -406,13 +407,13 @@ nav {
 }
 
 .cards-3 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 380px));
-  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
   max-width: 1200px;
   margin: 0 auto 40px;
   padding: 0 40px;
-  justify-content: center;
   align-items: start;
 }
 
@@ -429,11 +430,19 @@ nav {
   justify-content: space-between;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
-  max-width: 380px;
+  flex: 0 1 340px;
+  max-width: 340px;
   width: 100%;
   min-height: 0;
   margin: 0 auto;
   box-sizing: border-box;
+}
+
+.cards-2 > .card,
+.cards-2 > .card-sm,
+.cards-3 > .card,
+.cards-3 > .card-sm {
+  margin: 0;
 }
 
 .card::before {
@@ -1479,7 +1488,6 @@ footer {
 
 @media (max-width: 1024px) {
   .cards-3 {
-    grid-template-columns: repeat(2, minmax(280px, 380px));
     justify-content: center;
   }
   .cat-grid {
@@ -1533,7 +1541,7 @@ footer {
     grid-template-columns: 1fr;
   }
   .cards-2, .cards-3 {
-    grid-template-columns: 1fr;
+    justify-content: center;
   }
   .cards-3 {
     gap: 12px;
@@ -2138,7 +2146,6 @@ body {
 @media (max-width: 1024px) {
   .cards-2,
   .cards-3 {
-    grid-template-columns: repeat(2, minmax(280px, 380px));
     justify-content: center;
     width: 100%;
     max-width: min(100%, 1200px);
@@ -2190,7 +2197,6 @@ body {
 
   .cards-2,
   .cards-3 {
-    grid-template-columns: minmax(0, 1fr);
     gap: 16px;
     padding-left: 16px;
     padding-right: 16px;
@@ -2206,6 +2212,8 @@ body {
 
   .card,
   .card-sm {
+    flex-basis: 100%;
+    max-width: 100%;
     padding: 14px;
     background:
       linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(8, 8, 8, 0.98)) !important;
