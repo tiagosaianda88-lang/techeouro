@@ -2187,9 +2187,106 @@ body.lang-en [lang="pt"] {
   line-height: 1.15;
 }
 
+.market-test-section {
+  max-width: 1200px;
+  margin: 34px auto 34px;
+  padding: 38px 40px;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  background:
+    linear-gradient(135deg, rgba(212, 175, 55, 0.08), transparent 44%),
+    linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(7, 7, 7, 0.98));
+}
+
+.market-test-heading {
+  max-width: 760px;
+  margin-bottom: 24px;
+}
+
+.market-test-heading h2 {
+  font-size: clamp(1.9rem, 3.4vw, 3rem);
+  line-height: 1.08;
+  margin-bottom: 12px;
+}
+
+.market-test-heading p:last-child {
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.market-test-main {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.market-test-card {
+  min-height: 205px;
+  padding: 26px;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(22, 22, 21, 0.98), rgba(8, 8, 8, 0.98));
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+.market-test-card:hover {
+  color: var(--text);
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-gold), var(--shadow-md);
+}
+
+.market-test-card strong {
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+
+.market-test-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(212, 175, 55, 0.18);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.market-test-strip a {
+  padding: 13px 10px;
+  background: rgba(12, 12, 12, 0.96);
+  color: var(--text-secondary);
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.market-test-strip a:hover {
+  color: var(--gold);
+  background: rgba(212, 175, 55, 0.08);
+}
+
+.market-test-about-link {
+  display: inline-flex;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 @media (max-width: 900px) {
   .video-source-band,
-  .campaign-focus-band {
+  .campaign-focus-band,
+  .market-test-section {
     margin: 38px auto 20px;
     padding: 28px 16px;
     grid-template-columns: 1fr;
@@ -2202,7 +2299,9 @@ body.lang-en [lang="pt"] {
 
 @media (max-width: 560px) {
   .video-source-grid,
-  .campaign-focus-grid {
+  .campaign-focus-grid,
+  .market-test-main,
+  .market-test-strip {
     grid-template-columns: 1fr;
   }
 }
