@@ -5,9 +5,11 @@
   <meta name="description" content="Terminal Tech & Ouro. Interface avançada para análise de dados e mercados.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terminal — Tech &amp; Ouro</title>
-  <link rel="stylesheet" href="style.css?v=26">
+  <link rel="canonical" href="https://techeouro.net/terminal">
+  <link rel="stylesheet" href="style.css?v=36">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18279595532"></script>
@@ -73,7 +75,7 @@
   </nav>
 
   <div style="width: 100%; margin: 0; padding: 0; background:#080c10;">
-    <div id="terminal-page" class="is-maintenance" style="font-family:'IBM Plex Mono',ui-monospace,monospace;color:#e8f0e4;background:#080c10;min-height:calc(100vh - 70px);padding:0;margin:0;width:100%;overflow:hidden">
+    <div id="terminal-page" style="font-family:'IBM Plex Mono',ui-monospace,monospace;color:#e8f0e4;background:#080c10;min-height:calc(100vh - 70px);padding:0;margin:0;width:100%;overflow:hidden">
       <section class="terminal-maintenance" aria-label="Terminal em manutenção">
         <span class="terminal-maintenance-kicker">TECH &amp; OURO · TERMINAL</span>
         <h1>Em manutenção</h1>
@@ -85,7 +87,8 @@
 #terminal-page{position:relative}
 #terminal-page *{box-sizing:border-box;margin:0;padding:0}
 #terminal-page.is-maintenance > :not(.terminal-maintenance){display:none!important}
-#terminal-page .terminal-maintenance{min-height:calc(100vh - 70px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;text-align:center;background:radial-gradient(circle at top,rgba(201,162,39,.12),transparent 42%),#080c10}
+#terminal-page .terminal-maintenance{min-height:calc(100vh - 70px);display:none;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;text-align:center;background:radial-gradient(circle at top,rgba(201,162,39,.12),transparent 42%),#080c10}
+#terminal-page.is-maintenance .terminal-maintenance{display:flex}
 #terminal-page .terminal-maintenance-kicker{color:#C9A227;font-size:11px;font-weight:700;letter-spacing:.16em}
 #terminal-page .terminal-maintenance h1{margin-top:16px;color:#e8f0e4;font-size:34px;font-weight:500;letter-spacing:0}
 #terminal-page .terminal-maintenance p{max-width:440px;margin-top:12px;color:#a8b5a3;font-size:14px;line-height:1.65}
@@ -111,13 +114,13 @@
 @keyframes scr2{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 #terminal-page .ti{display:inline-flex;gap:7px;padding:0 20px;font-size:10px;border-right:1px solid rgba(201,162,39,0.1);height:32px;align-items:center}
 #terminal-page .tsy{color:#e8f0e4;font-weight:500}.tpr{color:#8a9e8a}
-#terminal-page .body-wrap{display:flex}
-#terminal-page .main{flex:1;padding:14px;display:flex;flex-direction:column;gap:12px;overflow-y:auto}
+#terminal-page .body-wrap{display:block}
+#terminal-page .main{width:100%;padding:14px;display:flex;flex-direction:column;gap:14px;overflow-y:auto}
 #terminal-page .sidebar{width:200px;background:#0d1117;border-left:1px solid rgba(201,162,39,0.12);padding:12px;display:flex;flex-direction:column;gap:12px}
-#terminal-page .card{background:#0d1117;border:1px solid rgba(201,162,39,0.12);border-radius:4px;padding:14px;position:relative}
+#terminal-page .card{background:linear-gradient(180deg,rgba(17,22,29,0.98),rgba(10,14,19,0.98));border:1px solid rgba(201,162,39,0.12);border-radius:4px;padding:14px;position:relative;display:block;flex:none;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
 #terminal-page .main > .card,
 #terminal-page .grid2 > .card,
-#terminal-page .grid3 > .card{width:auto;max-width:none;margin:0}
+#terminal-page .grid3 > .card{width:auto;max-width:none;margin:0;height:100%}
 #terminal-page .card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#C9A227,transparent);opacity:0.4}
 #terminal-page .sbcard{background:#0d1117;border:1px solid rgba(201,162,39,0.12);border-radius:4px;padding:14px;position:relative}
 #terminal-page .sbcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#C9A227,transparent);opacity:0.6}
@@ -134,9 +137,21 @@
 #terminal-page .stl{font-size:8.5px;color:#4a5e4a;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px}
 #terminal-page .stv{font-size:13px;font-weight:500}
 #terminal-page .ct{font-size:8.5px;letter-spacing:0.18em;text-transform:uppercase;color:#4a5e4a;margin-bottom:12px;font-weight:500}
-#terminal-page .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-#terminal-page .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-#terminal-page .lr{display:flex;justify-content:space-between;padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid rgba(201,162,39,0.1)}
+#terminal-page .market-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:12px}
+#terminal-page .market-card-head .ct{margin-bottom:0}
+#terminal-page .market-data-status{color:#4a5e4a;font-size:8px;letter-spacing:.08em;text-align:right;text-transform:uppercase}
+#terminal-page .market-chart-shell{position:relative;width:100%;height:236px;padding:10px 8px 6px;border:1px solid rgba(201,162,39,.08);border-radius:3px;background:linear-gradient(180deg,rgba(18,24,32,0.92),rgba(10,14,19,0.94))}
+#terminal-page .market-chart-shell canvas{display:block;width:100%!important;height:100%!important}
+#terminal-page .market-overview-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:12px;align-items:stretch}
+#terminal-page .market-overview-item{min-width:0;min-height:92px;padding:14px 13px;background:linear-gradient(180deg,rgba(20,27,35,0.95),rgba(14,20,27,0.96));border:1px solid rgba(201,162,39,0.1);border-radius:3px;text-decoration:none;color:inherit;transition:border-color .2s,background .2s;display:flex;flex-direction:column;justify-content:center}
+#terminal-page .market-overview-item:hover{border-color:rgba(201,162,39,0.55);background:#161e27}
+#terminal-page .market-overview-name{display:block;color:#8a9e8a;font-size:8px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+#terminal-page .market-overview-value{display:block;margin-top:7px;color:#e8f0e4;font-size:19px;font-weight:500;line-height:1.1}
+#terminal-page .market-overview-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:7px;font-size:8.5px}
+#terminal-page .market-overview-source{color:#4a5e4a}
+#terminal-page .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:stretch}
+#terminal-page .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;align-items:stretch}
+#terminal-page .lr{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding-bottom:9px;margin-bottom:9px;border-bottom:1px solid rgba(201,162,39,0.1);min-height:32px}
 #terminal-page .lr:last-child{border:none;margin:0;padding:0}
 #terminal-page .ll{font-size:10.5px;color:#8a9e8a}.lv{font-size:11px;font-weight:500}
 #terminal-page .news-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -158,9 +173,26 @@
 #terminal-page .sd{width:5px;height:5px;border-radius:50%;background:#C9A227;display:inline-block;margin-right:5px;animation:pls 2s infinite}
 @media(max-width:900px){
   #terminal-page .body-wrap{flex-direction:column}
-  #terminal-page .sidebar{width:100%;border-left:none;border-top:1px solid rgba(201,162,39,0.12)}
+  #terminal-page .main{padding:10px}
+  #terminal-page .sidebar{width:100%;border-left:none;border-top:1px solid rgba(201,162,39,0.12);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));padding:10px}
   #terminal-page .grid2,#terminal-page .grid3{grid-template-columns:1fr}
   #terminal-page .news-grid{grid-template-columns:1fr}
+  #terminal-page .market-chart-shell{height:214px}
+  #terminal-page .market-overview-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:520px){
+  #terminal-page .thead{padding:9px 12px}
+  #terminal-page .sidebar{grid-template-columns:1fr}
+  #terminal-page .card,#terminal-page .sbcard{padding:12px}
+  #terminal-page .fgbox{align-items:flex-start}
+  #terminal-page .fgcirc{width:112px;height:112px}
+  #terminal-page .market-card-head{align-items:flex-start;flex-direction:column;gap:7px}
+  #terminal-page .market-data-status{text-align:left}
+  #terminal-page .market-chart-shell{height:188px;padding:8px 6px 4px}
+  #terminal-page .market-overview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #terminal-page .market-overview-item:nth-child(5){grid-column:1 / -1}
+  #terminal-page .market-overview-item{padding:11px}
+  #terminal-page .market-overview-value{font-size:17px}
 }
 </style>
 
@@ -171,15 +203,41 @@
   <span class="clk" id="clk">--:--:--</span>
 </div>
 
-<div class="ntick"><div class="ntrack" id="ntrack"></div></div>
 <div class="tick"><div class="ttrack" id="ttrack"></div></div>
 
 <div class="body-wrap">
 <div class="main">
 
-  <div class="card">
-    <div class="ct">📰 Notícias Globais</div>
-    <div class="news-grid" id="newsPanel"></div>
+  <div class="card market-overview-card">
+    <div class="market-card-head">
+      <div class="ct">▦ <span lang="pt">Índices globais · comparação de 1 mês</span><span lang="en">Global indices · 1 month comparison</span></div>
+      <div class="market-data-status" id="marketDataStatus"><span lang="pt">A ligar à fonte</span><span lang="en">Connecting to source</span></div>
+    </div>
+    <div class="market-chart-shell">
+      <canvas id="marketCompareChart" aria-label="Comparação de índices globais / Global indices comparison"></canvas>
+    </div>
+    <div class="market-overview-grid">
+      <a class="market-overview-item" data-market-symbol="^GSPC" href="https://finance.yahoo.com/quote/%5EGSPC/" target="_blank" rel="noopener noreferrer">
+        <span class="market-overview-name">S&amp;P 500</span><strong class="market-overview-value">—</strong>
+        <span class="market-overview-meta"><span class="amb market-change">—</span><span class="market-overview-source">Yahoo</span></span>
+      </a>
+      <a class="market-overview-item" data-market-symbol="^IXIC" href="https://finance.yahoo.com/quote/%5EIXIC/" target="_blank" rel="noopener noreferrer">
+        <span class="market-overview-name">Nasdaq</span><strong class="market-overview-value">—</strong>
+        <span class="market-overview-meta"><span class="amb market-change">—</span><span class="market-overview-source">Yahoo</span></span>
+      </a>
+      <a class="market-overview-item" data-market-symbol="^DJI" href="https://finance.yahoo.com/quote/%5EDJI/" target="_blank" rel="noopener noreferrer">
+        <span class="market-overview-name">Dow Jones</span><strong class="market-overview-value">—</strong>
+        <span class="market-overview-meta"><span class="amb market-change">—</span><span class="market-overview-source">Yahoo</span></span>
+      </a>
+      <a class="market-overview-item" data-market-symbol="^FTSE" href="https://finance.yahoo.com/quote/%5EFTSE/" target="_blank" rel="noopener noreferrer">
+        <span class="market-overview-name">FTSE 100</span><strong class="market-overview-value">—</strong>
+        <span class="market-overview-meta"><span class="amb market-change">—</span><span class="market-overview-source">Yahoo</span></span>
+      </a>
+      <a class="market-overview-item" data-market-symbol="^N225" href="https://finance.yahoo.com/quote/%5EN225/" target="_blank" rel="noopener noreferrer">
+        <span class="market-overview-name">Nikkei 225</span><strong class="market-overview-value">—</strong>
+        <span class="market-overview-meta"><span class="amb market-change">—</span><span class="market-overview-source">Yahoo</span></span>
+      </a>
+    </div>
   </div>
 
   <div class="grid2">
@@ -189,12 +247,12 @@
         <div class="fgcirc" id="fgCirc">
           <div style="position:absolute;inset:8px;border-radius:50%;background:#0d1117;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center">
             <span class="fgnum" id="fgNum">62</span>
-            <span style="font-size:8px;color:#4a5e4a;margin-top:2px">GANÂNCIA</span>
+            <span style="font-size:8px;color:#4a5e4a;margin-top:2px"><span lang="pt">GANÂNCIA</span><span lang="en">GREED</span></span>
           </div>
         </div>
         <div class="fgtx">
-          <span id="fgLabel" style="font-weight:500;font-size:13px">Ganância Moderada</span><br><br>
-          Sentimento 0–100
+          <span id="fgLabel" style="font-weight:500;font-size:13px"><span lang="pt">Ganância Moderada</span><span lang="en">Moderate Greed</span></span><br><br>
+          <span lang="pt">Sentimento 0–100</span><span lang="en">Sentiment 0–100</span>
         </div>
       </div>
     </div>
@@ -204,7 +262,7 @@
       <div style="font-size:10.5px;color:#8a9e8a;margin-bottom:14px" id="btcS">—</div>
       <div class="sgrid">
         <div class="st"><div class="stl">24h</div><div class="stv pos" id="btc24h">—</div></div>
-        <div class="st"><div class="stl">Dominância</div><div class="stv">~57%</div></div>
+        <div class="st"><div class="stl"><span lang="pt">Dominância</span><span lang="en">Dominance</span></div><div class="stv">~57%</div></div>
         <div class="st"><div class="stl">Halving #5</div><div class="stv" id="halv">—</div></div>
         <div class="st"><div class="stl">Vol 24h</div><div class="stv">$28B</div></div>
       </div>
@@ -232,7 +290,7 @@
       <div id="eu"></div>
     </div>
     <div class="card">
-      <div class="ct">🌏 Ásia</div>
+      <div class="ct">🌏 <span lang="pt">Ásia</span><span lang="en">Asia</span></div>
       <div id="asia"></div>
     </div>
   </div>
@@ -247,32 +305,18 @@
       <div id="canada"></div>
     </div>
     <div class="card">
-      <div class="ct">📈 Yields 10A</div>
+      <div class="ct">📈 <span lang="pt">Yields 10A</span><span lang="en">10Y Yields</span></div>
       <div id="yields"></div>
     </div>
   </div>
 
   <div class="card">
-    <div class="ct">⚠ Risco Sistémico</div>
+    <div class="ct">⚠ <span lang="pt">Risco Sistémico</span><span lang="en">Systemic Risk</span></div>
     <div id="risk"></div>
   </div>
 
 </div>
 
-<div class="sidebar">
-  <div class="sbcard">
-    <div class="sbtitle">Tech</div>
-    <div class="sbrow"><a href="https://www.reuters.com/markets/" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;display:block;width:100%"><div class="sbsym">XLK</div><div class="sbprice" id="xlkPrice">REF</div><div class="sbchg amb">Reuters / ref.</div></a></div>
-    <div class="sbrow"><a href="https://finance.yahoo.com/quote/%5ESOX/" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;display:block;width:100%"><div class="sbsym">SOX</div><div class="sbprice" id="soxPrice">REF</div><div class="sbchg amb">Yahoo / ref.</div></a></div>
-    <div class="sbrow"><a href="https://www.bloomberg.com/quote/NVDA:US" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;display:block;width:100%"><div class="sbsym">NVDA</div><div class="sbprice" id="nvdaPrice">REF</div><div class="sbchg amb">Bloomberg / ref.</div></a></div>
-  </div>
-
-  <div class="sbcard">
-    <div class="sbtitle">Ouro</div>
-    <div class="sbrow"><a href="https://www.reuters.com/markets/commodities/" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;display:block;width:100%"><div class="sbsym">SPOT</div><div class="sbprice" id="goldSpot">REF</div><div class="sbchg amb">Reuters / ref.</div></a></div>
-    <div class="sbrow"><a href="https://finance.yahoo.com/quote/GC%3DF/" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;display:block;width:100%"><div class="sbsym">YTD</div><div class="sbprice" id="goldYtd" style="font-size:18px">REF</div><div class="sbchg amb">Yahoo / ref.</div></a></div>
-  </div>
-</div>
 </div>
 
 <div class="sbar">
@@ -285,10 +329,19 @@
 <script>
 (function(){
 
+function terminalLanguage(){
+  return document.body.classList.contains('lang-en') ? 'en' : 'pt';
+}
+
+function terminalText(pt, en){
+  return terminalLanguage() === 'en' ? en : pt;
+}
+
 function clock(){
   var d=new Date();
-  document.getElementById('clk').textContent=d.toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-  document.getElementById('sbTime').textContent=d.toLocaleDateString('pt-PT',{weekday:'short',day:'2-digit',month:'short'})+'  '+d.toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'});
+  var locale=terminalLanguage()==='en'?'en-GB':'pt-PT';
+  document.getElementById('clk').textContent=d.toLocaleTimeString(locale,{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  document.getElementById('sbTime').textContent=d.toLocaleDateString(locale,{weekday:'short',day:'2-digit',month:'short'})+'  '+d.toLocaleTimeString(locale,{hour:'2-digit',minute:'2-digit'});
 }
 setInterval(clock,1000);clock();
 
@@ -296,12 +349,13 @@ setInterval(clock,1000);clock();
 (function(){
   var score=62;
   var col=score<25?'#ff4466':score<45?'#ffb830':score<55?'#8a9e8a':score<75?'#00ff8c':'#00cc70';
-  var label=score<25?'Medo Extremo':score<45?'Medo':score<55?'Neutro':score<75?'Ganância Moderada':'Ganância Extrema';
+  var labelPt=score<25?'Medo Extremo':score<45?'Medo':score<55?'Neutro':score<75?'Ganância Moderada':'Ganância Extrema';
+  var labelEn=score<25?'Extreme Fear':score<45?'Fear':score<55?'Neutral':score<75?'Moderate Greed':'Extreme Greed';
   var circ=document.getElementById('fgCirc');
   circ.style.background='conic-gradient('+col+' '+(score*3.6)+'deg,#1a2230 0deg)';
   document.getElementById('fgNum').style.color=col;
   document.getElementById('fgLabel').style.color=col;
-  document.getElementById('fgLabel').textContent=label;
+  document.getElementById('fgLabel').innerHTML='<span lang="pt">'+labelPt+'</span><span lang="en">'+labelEn+'</span>';
 })();
 
 // BTC
@@ -323,8 +377,8 @@ function setTerminalStatus() {
   var label = document.getElementById('terminalLiveLabel');
   if (!label) return;
   label.textContent = terminalSources.length
-    ? 'LIGAÇÃO ATIVA · ' + terminalSources.join(' + ')
-    : 'DADOS DE REFERÊNCIA · A LIGAR';
+    ? terminalText('LIGAÇÃO ATIVA · ', 'LIVE CONNECTION · ') + terminalSources.join(' + ')
+    : terminalText('DADOS DE REFERÊNCIA · A LIGAR', 'REFERENCE DATA · CONNECTING');
 }
 
 function markSourceLive(source) {
@@ -352,24 +406,144 @@ function updateLiveRefs() {
         var eurUsd = Number(d.rates.USD).toFixed(4);
         setText('eurUsdPrice', eurUsd);
         setText('eurUsdMacro', eurUsd);
-        markSourceLive('CÂMBIO');
+        markSourceLive('FX');
       }
     }).catch(function(){});
 }
 
-// NEWS TICKER
-(function(){
-  var n=[
-    ['Reuters','Fed mantém taxas; Powell sinaliza cautela', 'https://www.reuters.com/world/us/fed/'],
-    ['Bloomberg','BTC ultrapassa $103K com ETFs BlackRock', 'https://www.bloomberg.com/'],
-    ['Yahoo Finance','Mercados abrem em modo de atenção', 'https://finance.yahoo.com/'],
-    ['WSJ','Cobre máximos de 3 meses', 'https://www.wsj.com/'],
-    ['Reuters','Nvidia lidera Nasdaq com IA', 'https://www.reuters.com/technology/'],
-    ['Bloomberg','PSI-20 pressionado pela EDP; Galp consolida', 'https://www.bloomberg.com/']
-  ];
-  function b(){return n.map(function(x){return '<a class="ni" href="'+x[2]+'" target="_blank" rel="noopener noreferrer"><span class="nisrc">'+x[0]+'</span><span class="nitx">'+x[1]+'</span></a>';}).join('');}
-  document.getElementById('ntrack').innerHTML=b()+b();
-})();
+var marketCompareChart = null;
+var lastMarketData = null;
+
+function formatMarketPrice(value) {
+  return Number(value).toLocaleString('en-US', {
+    minimumFractionDigits: value < 1000 ? 2 : 0,
+    maximumFractionDigits: value < 1000 ? 2 : 0
+  });
+}
+
+function renderMarketComparison(data) {
+  if (!window.Chart || !data || !Array.isArray(data.series)) {
+    throw new Error('Chart library unavailable');
+  }
+
+  var datasets = data.series.map(function(series) {
+    return {
+      label: series.name,
+      data: series.values,
+      borderColor: series.color,
+      backgroundColor: series.color,
+      borderWidth: 2,
+      pointRadius: 0,
+      pointHoverRadius: 3,
+      tension: 0.22,
+      spanGaps: true
+    };
+  });
+
+  var chartData = { labels: data.labels, datasets: datasets };
+  var canvas = document.getElementById('marketCompareChart');
+
+  if (marketCompareChart) {
+    marketCompareChart.data = chartData;
+    marketCompareChart.update();
+  } else {
+    marketCompareChart = new window.Chart(canvas, {
+      type: 'line',
+      data: chartData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        animation: { duration: 350 },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { color: '#a8b5a3', boxWidth: 10, boxHeight: 2, padding: 14, font: { size: 9 } }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.dataset.label + ': ' + Number(context.parsed.y).toFixed(2);
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { color: '#4a5e4a', maxTicksLimit: 6, maxRotation: 0, font: { size: 8 } }
+          },
+          y: {
+            grid: { color: 'rgba(201,162,39,0.08)' },
+            ticks: {
+              color: '#4a5e4a',
+              font: { size: 8 },
+              callback: function(value) { return Number(value).toFixed(0); }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  data.quotes.forEach(function(quote) {
+    var tile = document.querySelector('[data-market-symbol="' + quote.symbol + '"]');
+    if (!tile) return;
+    tile.querySelector('.market-overview-value').textContent = formatMarketPrice(quote.price);
+    var change = tile.querySelector('.market-change');
+    change.textContent = (quote.changePercent >= 0 ? '+' : '') + quote.changePercent.toFixed(2) + '%';
+    change.className = 'market-change ' + (quote.changePercent >= 0 ? 'pos' : 'neg');
+  });
+
+  lastMarketData = data;
+  updateMarketDataStatus(data);
+  markSourceLive('INDICES');
+}
+
+function updateMarketDataStatus(data) {
+  if (!data) return;
+  var locale=terminalLanguage()==='en'?'en-GB':'pt-PT';
+  var marketDate = data.marketDate
+    ? new Date(data.marketDate + 'T12:00:00Z').toLocaleDateString(locale, { day: '2-digit', month: 'short' })
+    : '';
+  document.getElementById('marketDataStatus').textContent = data.source + ' · ' + marketDate + ' · 3H';
+}
+
+function loadMarketComparison() {
+  var status = document.getElementById('marketDataStatus');
+  try {
+    var cached = JSON.parse(localStorage.getItem('techeouro-market-data') || 'null');
+    if (cached && cached.data && Date.now() - cached.savedAt < 24 * 60 * 60 * 1000) {
+      renderMarketComparison(cached.data);
+    }
+  } catch (error) {}
+
+  fetch('/api/market-data')
+    .then(function(response) {
+      if (!response.ok) throw new Error('Market data unavailable');
+      return response.json();
+    })
+    .then(function(data) {
+      renderMarketComparison(data);
+      try {
+        localStorage.setItem('techeouro-market-data', JSON.stringify({ data: data, savedAt: Date.now() }));
+      } catch (error) {}
+    })
+    .catch(function() {
+      status.innerHTML = '<span lang="pt">DADOS TEMPORARIAMENTE INDISPONÍVEIS</span><span lang="en">DATA TEMPORARILY UNAVAILABLE</span>';
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  loadMarketComparison();
+  setInterval(loadMarketComparison, 3 * 60 * 60 * 1000);
+});
+
+document.addEventListener('site-language-change', function() {
+  clock();
+  setTerminalStatus();
+  updateMarketDataStatus(lastMarketData);
+});
 
 // PRICE TICKER
 (function(){
@@ -388,26 +562,6 @@ function updateLiveRefs() {
     return '<div class="ti"><span class="tsy">'+t[0]+'</span><span class="tpr">'+value+'</span><span class="'+t[3]+'" style="font-size:10px">'+t[2]+'</span></div>';
   }).join('');}
   document.getElementById('ttrack').innerHTML=b()+b();
-})();
-
-// NOTÍCIAS
-(function(){
-  var n=[
-    ['Reuters','Fed mantém taxas; Powell sinaliza cautela sobre inflação', 'https://www.reuters.com/world/us/fed/'],
-    ['Bloomberg','BTC ultrapassa $103K com entradas recorde nos ETFs BlackRock', 'https://www.bloomberg.com/'],
-    ['Yahoo Finance','Stock market today: Nasdaq rises, Dow and S&P 500 retreat as oil prices climb', 'https://finance.yahoo.com/'],
-    ['WSJ','Cobre em máximos de 3 meses com transição energética', 'https://www.wsj.com/'],
-    ['Bloomberg','BCE prepara corte adicional de 25bp em Junho', 'https://www.bloomberg.com/'],
-    ['Reuters','Nvidia lidera Nasdaq; entusiasmo com IA mantém Wall St em alta', 'https://www.reuters.com/technology/'],
-    ['Reuters','Nikkei sobe 1,1% com iene fraco a impulsionar exportadoras', 'https://www.reuters.com/markets/asia/'],
-    ['FT','Ouro consolida acima de $3,200 com compras de bancos centrais', 'https://www.ft.com/markets'],
-    ['Bloomberg','China: estímulos somam $140B para travar abrandamento imobiliário', 'https://www.bloomberg.com/'],
-    ['Reuters','Petróleo recua com receios de procura apesar de tensão no Médio Oriente', 'https://www.reuters.com/business/energy/'],
-    ['Yahoo Finance','PSI-20 pressionado pela EDP; Galp consolida posições', 'https://finance.yahoo.com/'],
-    ['Bloomberg','Dollar index recua; mercados emergentes ganham fôlego', 'https://www.bloomberg.com/']
-  ];
-  var html=n.map(function(x){return '<div class="news-item"><a class="news-link" href="'+x[2]+'" target="_blank" rel="noopener noreferrer"><div class="nsrc2">'+x[0]+'</div><div class="ntt">'+x[1]+'</div></a></div>';}).join('');
-  document.getElementById('newsPanel').innerHTML=html;
 })();
 
 // MACRO & FOREX
@@ -429,12 +583,12 @@ updateLiveRefs();
 // COMMODITIES
 (function(){
   var rows=[
-    ['Ouro (XAU)','$3,227','<span class="pos">+0.9%</span>'],
-    ['Prata (XAG)','$32.40','<span class="pos">+1.2%</span>'],
-    ['Petróleo WTI','$78.60','<span class="neg">−0.8%</span>'],
+    ['<span lang="pt">Ouro (XAU)</span><span lang="en">Gold (XAU)</span>','$3,227','<span class="pos">+0.9%</span>'],
+    ['<span lang="pt">Prata (XAG)</span><span lang="en">Silver (XAG)</span>','$32.40','<span class="pos">+1.2%</span>'],
+    ['<span lang="pt">Petróleo WTI</span><span lang="en">WTI Oil</span>','$78.60','<span class="neg">−0.8%</span>'],
     ['Brent','$82.10','<span class="neg">−0.6%</span>'],
-    ['Cobre','$4.82','<span class="pos">+1.5%</span>'],
-    ['Gás Nat.','$2.18','<span class="neg">−1.1%</span>']
+    ['<span lang="pt">Cobre</span><span lang="en">Copper</span>','$4.82','<span class="pos">+1.5%</span>'],
+    ['<span lang="pt">Gás Nat.</span><span lang="en">Natural Gas</span>','$2.18','<span class="neg">−1.1%</span>']
   ];
   document.getElementById('commod').innerHTML=rows.map(function(r){return '<div class="lr"><span class="ll">'+r[0]+'</span><span class="lv">'+r[1]+' '+r[2]+'</span></div>';}).join('');
 })();
@@ -501,12 +655,12 @@ updateLiveRefs();
 // YIELDS
 (function(){
   var rows=[
-    ['EUA 10A','4.42%','<span class="neg">−2bp</span>'],
-    ['Alemanha 10A','2.58%','<span class="neg">−1bp</span>'],
-    ['UK 10A','4.68%','<span class="pos">+1bp</span>'],
-    ['Japão 10A','1.48%','<span class="pos">+3bp</span>'],
-    ['Portugal 10A','3.12%','<span class="neg">−1bp</span>'],
-    ['Itália 10A','3.88%','<span class="neg">−2bp</span>']
+    ['<span lang="pt">EUA 10A</span><span lang="en">US 10Y</span>','4.42%','<span class="neg">−2bp</span>'],
+    ['<span lang="pt">Alemanha 10A</span><span lang="en">Germany 10Y</span>','2.58%','<span class="neg">−1bp</span>'],
+    ['<span lang="pt">UK 10A</span><span lang="en">UK 10Y</span>','4.68%','<span class="pos">+1bp</span>'],
+    ['<span lang="pt">Japão 10A</span><span lang="en">Japan 10Y</span>','1.48%','<span class="pos">+3bp</span>'],
+    ['<span lang="pt">Portugal 10A</span><span lang="en">Portugal 10Y</span>','3.12%','<span class="neg">−1bp</span>'],
+    ['<span lang="pt">Itália 10A</span><span lang="en">Italy 10Y</span>','3.88%','<span class="neg">−2bp</span>']
   ];
   document.getElementById('yields').innerHTML=rows.map(function(r){return '<div class="lr"><span class="ll">'+r[0]+'</span><span class="lv">'+r[1]+' '+r[2]+'</span></div>';}).join('');
 })();
@@ -514,11 +668,11 @@ updateLiveRefs();
 // RISCO SISTÉMICO
 (function(){
   var items=[
-    ['Volatilidade (VIX)',14,'#00ff8c'],
-    ['Spread HY EUA',320,'#ffb830'],
-    ['Stress Bancário EU',22,'#00ff8c'],
-    ['Risco Geopolítico',58,'#ff4466'],
-    ['Liquidez Mercado',78,'#00ff8c']
+    ['<span lang="pt">Volatilidade (VIX)</span><span lang="en">Volatility (VIX)</span>',14,'#00ff8c'],
+    ['<span lang="pt">Spread HY EUA</span><span lang="en">US HY Spread</span>',320,'#ffb830'],
+    ['<span lang="pt">Stress Bancário EU</span><span lang="en">EU Bank Stress</span>',22,'#00ff8c'],
+    ['<span lang="pt">Risco Geopolítico</span><span lang="en">Geopolitical Risk</span>',58,'#ff4466'],
+    ['<span lang="pt">Liquidez Mercado</span><span lang="en">Market Liquidity</span>',78,'#00ff8c']
   ];
   document.getElementById('risk').innerHTML=items.map(function(x){
     return '<div class="rr"><span class="rl">'+x[0]+'</span><div class="rt"><div class="rf" style="width:'+x[1]+'%;background:'+x[2]+'"></div></div><span class="rv" style="color:'+x[2]+'">'+x[1]+'</span></div>';
@@ -542,6 +696,6 @@ updateLiveRefs();
     </div>
   </footer>
 
-  <script src="script.js?v=11"></script>
+  <script src="script.js?v=18"></script>
 </body>
 </html>

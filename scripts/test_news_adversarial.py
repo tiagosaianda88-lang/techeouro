@@ -29,7 +29,8 @@ class AdversarialNewsTests(unittest.TestCase):
             "body_en": "Body with emoji 🦁 and XSS <script>alert('en')</script>",
         }
         
-        rendered = self.publisher.render([xss_payload])
+        safe_payload = dict(xss_payload, url="https://example.com/story")
+        rendered = self.publisher.render([safe_payload])
         
         # Verify HTML tags inside variables are properly escaped
         self.assertNotIn("<script>", rendered)
@@ -37,13 +38,8 @@ class AdversarialNewsTests(unittest.TestCase):
         self.assertIn("&lt;script&gt;", rendered)
         self.assertIn("&lt;iframe", rendered)
         
-        # Verify quotes are escaped in attribute values
-        self.assertIn("javascript:alert(&#x27;XSS&#x27;)", rendered)
-        
-        # But wait! Is "javascript:alert" allowed as a URL scheme?
-        # Check if the href attribute contains the raw javascript: protocol:
-        self.assertIn('href="javascript:alert(&#x27;XSS&#x27;)"', rendered)
-        print("\n[Adversarial Test] XSS payload rendered into link href: ", xss_payload["url"])
+        with self.assertRaisesRegex(ValueError, "absolute https"):
+            self.publisher.render([xss_payload])
 
     def test_very_long_text(self):
         """Test how the pipeline handles very long strings in titles, summaries, and URLs."""
@@ -63,20 +59,9 @@ class AdversarialNewsTests(unittest.TestCase):
             "body_en": long_summary,
         }
         
-        # Verifier check
-        try:
-            payload = {"articles": [dict(long_payload, title_pt=f"{long_title} {i}", title_en=f"{long_title} {i}") for i in range(10)]}
-            verified = self.verifier.verify(payload, {"Reuters"})
-            self.assertEqual(len(verified), 10)
-            print("[Adversarial Test] Long text passed VerifierAgent without size limits.")
-        except Exception as e:
-            print(f"[Adversarial Test] Long text failed VerifierAgent: {e}")
-            raise e
-
-        # Publisher render
-        rendered = self.publisher.render(verified)
-        self.assertTrue(len(rendered) > 360000)
-        print(f"[Adversarial Test] Rendered HTML length for long text: {len(rendered)} characters")
+        payload = {"articles": [dict(long_payload, title_pt=f"{long_title} {i}", title_en=f"{long_title} {i}") for i in range(10)]}
+        with self.assertRaisesRegex(ValueError, "invalid url|longer than|220-300"):
+            self.verifier.verify(payload, {"Reuters"})
 
     def test_invalid_urls(self):
         """Test with empty or invalid/malformed URLs."""
@@ -88,8 +73,8 @@ class AdversarialNewsTests(unittest.TestCase):
                 "url": "   ",
                 "title_pt": "Title PT",
                 "title_en": "Title EN",
-                "summary_pt": "Summary PT",
-                "summary_en": "Summary EN",
+                "summary_pt": "R" * 230,
+                "summary_en": "S" * 230,
                 "body_pt": "Body PT",
                 "body_en": "Body EN",
             },
@@ -100,22 +85,17 @@ class AdversarialNewsTests(unittest.TestCase):
                 "url": "../../../etc/passwd",
                 "title_pt": "Title PT",
                 "title_en": "Title EN",
-                "summary_pt": "Summary PT",
-                "summary_en": "Summary EN",
+                "summary_pt": "R" * 230,
+                "summary_en": "S" * 230,
                 "body_pt": "Body PT",
                 "body_en": "Body EN",
             }
         ]
         
         for payload in invalid_payloads:
-            # Let's see if VerifierAgent rejects empty URLs or trailing whitespace
-            try:
-                # Verifier checks clean_text(article.get('url'))
-                # For "   ", clean_text returns "" which causes it to raise error
-                self.verifier.verify({"articles": [dict(payload, title_pt=f"{payload['title_pt']} {i}", title_en=f"{payload['title_en']} {i}") for i in range(10)]}, {"Reuters"})
-                print(f"[Adversarial Test] URL validation passed for URL: '{payload['url']}'")
-            except ValueError as e:
-                print(f"[Adversarial Test] URL validation expectedly failed for URL: '{payload['url']}' - Error: {e}")
+            with self.subTest(url=payload["url"]):
+                with self.assertRaisesRegex(ValueError, "missing url|invalid url"):
+                    self.verifier.verify({"articles": [dict(payload, title_pt=f"{payload['title_pt']} {i}", title_en=f"{payload['title_en']} {i}") for i in range(10)]}, {"Reuters"})
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,7 @@
+[build]
+  command = "python3 scripts/build_site.py"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  PYTHON_VERSION = "3.10"

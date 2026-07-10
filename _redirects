@@ -1,3 +1,18 @@
+/index.html      /              301!
+/mercados.html   /mercados      301!
+/ouro.html       /ouro          301!
+/economia.html   /economia      301!
+/tech.html       /tech          301!
+/desporto.html   /desporto      301!
+/paises.html     /paises        301!
+/noticias.html   /noticias      301!
+/sobre.html      /sobre         301!
+/terminal.html   /terminal      301!
+/geopolitica.html /geopolitica  301!
+/loja.html       /loja          301!
+/disclaimer.html /disclaimer    301!
+/artigo-2.html   /artigo-2      301!
+
 /              /index.html      200
 /mercados      /mercados.html   200
 /ouro          /ouro.html       200
@@ -11,3 +26,4 @@
 /geopolitica   /geopolitica.html 200
 /loja          /loja.html       200
 /disclaimer    /disclaimer.html 200
+/artigo-2      /artigo-2.html   200

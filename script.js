@@ -1,19 +1,26 @@
 // Tech & Ouro · Global Language Switcher System
 function setLanguage(lang) {
-  if (lang === 'en') {
-    document.body.classList.add('lang-en');
-    const btnEn = document.getElementById('lang-btn-en');
-    const btnPt = document.getElementById('lang-btn-pt');
-    if (btnEn) btnEn.classList.add('active');
-    if (btnPt) btnPt.classList.remove('active');
-  } else {
-    document.body.classList.remove('lang-en');
-    const btnEn = document.getElementById('lang-btn-en');
-    const btnPt = document.getElementById('lang-btn-pt');
-    if (btnPt) btnPt.classList.add('active');
-    if (btnEn) btnEn.classList.remove('active');
+  const activeLang = lang === 'en' ? 'en' : 'pt';
+  const isEnglish = activeLang === 'en';
+  const btnEn = document.getElementById('lang-btn-en');
+  const btnPt = document.getElementById('lang-btn-pt');
+
+  document.documentElement.lang = activeLang;
+  document.body.classList.toggle('lang-en', isEnglish);
+
+  if (btnEn) {
+    btnEn.classList.toggle('active', isEnglish);
+    btnEn.setAttribute('aria-pressed', String(isEnglish));
   }
-  localStorage.setItem('site-lang', lang);
+  if (btnPt) {
+    btnPt.classList.toggle('active', !isEnglish);
+    btnPt.setAttribute('aria-pressed', String(!isEnglish));
+  }
+
+  localStorage.setItem('site-lang', activeLang);
+  document.dispatchEvent(new CustomEvent('site-language-change', {
+    detail: { lang: activeLang }
+  }));
 }
 
 // Automatically update the hero date to today's date in PT/EN
@@ -70,6 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
   setLanguage(savedLang);
   updateHeroDate();
   updateDynamicDates();
+  initMobileMenuAccessibility();
+  normalizeSourceLinks();
   applyBalancedCardGrids();
   initArticleInteractions();
   initAdSenseSlots();
@@ -83,8 +92,20 @@ document.addEventListener('DOMContentLoaded', () => {
 function toggleMobileMenu() {
   const navLinks = document.querySelector('.nav-links');
   const menuBtn = document.querySelector('.mobile-menu-btn');
-  if (navLinks) navLinks.classList.toggle('active');
-  if (menuBtn) menuBtn.classList.toggle('active');
+  if (!navLinks || !menuBtn) return;
+  const isOpen = navLinks.classList.toggle('active');
+  menuBtn.classList.toggle('active', isOpen);
+  menuBtn.setAttribute('aria-expanded', String(isOpen));
+}
+
+function initMobileMenuAccessibility() {
+  const navLinks = document.querySelector('.nav-links');
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  if (!navLinks || !menuBtn) return;
+  if (!navLinks.id) navLinks.id = 'primary-navigation';
+  menuBtn.setAttribute('aria-controls', navLinks.id);
+  menuBtn.setAttribute('aria-expanded', String(navLinks.classList.contains('active')));
+  menuBtn.setAttribute('aria-label', 'Menu');
 }
 
 function applyBalancedCardGrids() {
@@ -92,16 +113,12 @@ function applyBalancedCardGrids() {
   grids.forEach(grid => {
     const cards = [...grid.querySelectorAll(':scope > .card:not(.in-feed-ad)')];
     cards.forEach(card => {
-      card.classList.remove('index-final-row', 'balanced-extra-hidden');
+      card.classList.remove('index-final-row', 'balanced-extra-hidden', 'balanced-last-card');
     });
 
-    if (cards.length % 2 === 1) {
-      cards[cards.length - 1].classList.add('balanced-extra-hidden');
-    }
-
     if (document.body.classList.contains('home')) {
-      const pairedCards = cards.filter(card => !card.classList.contains('balanced-extra-hidden'));
-      pairedCards.slice(-2).forEach(card => card.classList.add('index-final-row'));
+      cards.slice(-2).forEach(card => card.classList.add('index-final-row'));
+      if (cards.length % 2 === 1) cards[cards.length - 1].classList.add('balanced-last-card');
     }
   });
 }
@@ -140,10 +157,49 @@ function safeExternalStoryUrl(value) {
   }
 }
 
-function renderModalParagraphs(value, lang) {
-  return value
-    ? value.split(/\n+/).map(para => `<p lang="${lang}">${escapeModalHtml(para.trim())}</p>`).join('')
-    : '';
+function safeSpecificSourceUrl(value) {
+  const url = safeExternalStoryUrl(value);
+  if (!url) return '';
+
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.toLowerCase().replace(/^www\./, '');
+    const path = parsed.pathname.replace(/\/+$/, '');
+    const parts = path.split('/').filter(Boolean);
+
+    if (host === 'news.google.com') {
+      return /\/(?:rss\/)?articles\//.test(path) ? url : '';
+    }
+    if (host.endsWith('reuters.com') && parts.length <= 2) return '';
+    if ((host.includes('bbc.co.uk') || host.includes('bbc.com')) && (
+      parts.length <= 2 || ['uk', 'science-environment'].includes(parts[parts.length - 1])
+    )) return '';
+    if (host.endsWith('infomoney.com.br') && parts.length <= 1) return '';
+    if (parts.length < 2) return '';
+    return url;
+  } catch {
+    return '';
+  }
+}
+
+function normalizeSourceLinks() {
+  document.querySelectorAll('.source-attribution a').forEach(link => {
+    const wrapper = link.closest('.source-attribution');
+    if (!wrapper) return;
+    wrapper.dataset.sourceName = link.textContent.trim();
+    wrapper.dataset.sourceUrl = link.href;
+
+    if (safeSpecificSourceUrl(link.href)) {
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      return;
+    }
+
+    const sourceName = document.createElement('span');
+    sourceName.className = 'source-name';
+    sourceName.textContent = link.textContent;
+    link.replaceWith(sourceName);
+  });
 }
 
 function initArticleInteractions() {
@@ -169,30 +225,87 @@ function initAdSenseSlots() {
 
   window.adsbygoogle = window.adsbygoogle || [];
 
-  slots.forEach(slot => {
-    if (slot.dataset.adsenseRequested === 'true') return;
-    slot.dataset.adsenseRequested = 'true';
+  const markSlotEmpty = slot => {
+    const holder = slot.closest('.in-feed-ad, .promo-box');
+    if (!holder || holder.classList.contains('ad-slot-filled')) return;
+    holder.classList.add('ad-slot-empty');
+  };
 
+  const syncSlotState = slot => {
+    const holder = slot.closest('.in-feed-ad, .promo-box');
+    if (!holder) return;
+
+    const status = slot.getAttribute('data-ad-status');
+    const isFilled = status === 'filled';
+
+    holder.classList.toggle('ad-slot-filled', isFilled);
+    holder.classList.toggle('ad-slot-empty', status === 'unfilled');
+  };
+
+  const requestSlot = slot => {
+    if (['true', 'error', 'unavailable'].includes(slot.dataset.adsenseRequested)) {
+      return true;
+    }
+
+    const holder = slot.closest('.in-feed-ad, .promo-box');
+    const availableWidth = Math.max(
+      slot.getBoundingClientRect().width,
+      holder ? holder.getBoundingClientRect().width : 0
+    );
+    const availableHeight = Math.max(
+      slot.getBoundingClientRect().height,
+      holder ? holder.getBoundingClientRect().height : 0
+    );
+
+    if (availableWidth < 250 || availableHeight < 50) return false;
+
+    slot.dataset.adsenseRequested = 'true';
     try {
       window.adsbygoogle.push({});
     } catch {
       slot.dataset.adsenseRequested = 'error';
+      markSlotEmpty(slot);
     }
+    return true;
+  };
+
+  slots.forEach(slot => {
+    syncSlotState(slot);
+
+    const observer = new MutationObserver(() => syncSlotState(slot));
+    observer.observe(slot, {
+      attributes: true,
+      attributeFilter: ['data-ad-status'],
+      childList: true,
+      subtree: true
+    });
+
+    if (slot.dataset.adsenseRequested === 'true') return;
+
+    const holder = slot.closest('.in-feed-ad, .promo-box');
+    let sizeObserver = null;
+    const requestWhenReady = () => {
+      if (!requestSlot(slot)) return;
+      if (sizeObserver) sizeObserver.disconnect();
+    };
+
+    if (holder && 'ResizeObserver' in window) {
+      sizeObserver = new ResizeObserver(requestWhenReady);
+      sizeObserver.observe(holder);
+    }
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(requestWhenReady);
+    });
+
+    window.setTimeout(() => {
+      if (slot.dataset.adsenseRequested === 'true') return;
+      if (sizeObserver) sizeObserver.disconnect();
+      slot.dataset.adsenseRequested = 'unavailable';
+      markSlotEmpty(slot);
+    }, 10000);
   });
 
-  setTimeout(() => {
-    slots.forEach(slot => {
-      const holder = slot.closest('.in-feed-ad, .promo-box');
-      if (!holder) return;
-
-      const status = slot.getAttribute('data-ad-status');
-      const hasRenderedAd = !!slot.querySelector('iframe');
-
-      holder.classList.toggle('ad-slot-empty', status === 'unfilled' || (!status && !hasRenderedAd));
-      holder.classList.toggle('ad-slot-filled', status === 'filled' || hasRenderedAd);
-    });
-    applyBalancedCardGrids();
-  }, 2600);
 }
 
 // Interactive Premium Article Modal Viewer
@@ -204,6 +317,7 @@ function openArticle(cardEl) {
   const descPtEl = cardEl.querySelector('.card-desc [lang="pt"]');
   const descEnEl = cardEl.querySelector('.card-desc [lang="en"]');
   const dateEl = cardEl.querySelector('.dynamic-date') || cardEl.querySelector('.card-meta span:first-child');
+  const sourceAttributionEl = cardEl.querySelector('.source-attribution');
   const sourceLinkEl = cardEl.querySelector('.source-attribution a');
   const editorialPtEl = cardEl.querySelector('.editorial-attribution [lang="pt"]');
   const editorialEnEl = cardEl.querySelector('.editorial-attribution [lang="en"]');
@@ -214,21 +328,20 @@ function openArticle(cardEl) {
   const titleEn = titleEnEl ? titleEnEl.innerText : titlePt;
   const descPt = descPtEl ? descPtEl.innerText : (cardEl.querySelector('.card-desc') ? cardEl.querySelector('.card-desc').innerText : '');
   const descEn = descEnEl ? descEnEl.innerText : descPt;
-  const sourceName = sourceLinkEl ? sourceLinkEl.innerText : '';
-  const sourceUrl = sourceLinkEl ? sourceLinkEl.href : '';
+  const sourceName = sourceAttributionEl?.dataset.sourceName || (sourceLinkEl ? sourceLinkEl.innerText : '');
+  const sourceUrl = sourceAttributionEl?.dataset.sourceUrl || (sourceLinkEl ? sourceLinkEl.href : '');
   const editorialPt = editorialPtEl ? editorialPtEl.innerText : 'Resumo editorial Tech & Ouro';
   const editorialEn = editorialEnEl ? editorialEnEl.innerText : 'Editorial summary by Tech & Ouro';
-  const url = cardEl.getAttribute('data-url') || sourceUrl;
-  const bodyPt = cardEl.getAttribute('data-body-pt') || '';
-  const bodyEn = cardEl.getAttribute('data-body-en') || '';
   const dateText = dateEl ? dateEl.innerText : 'HOJE / TODAY';
-  const safeUrl = safeExternalStoryUrl(url);
-  const safeSourceUrl = safeModalUrl(sourceUrl);
+  const specificSourceUrl = safeSpecificSourceUrl(sourceUrl);
 
   let modal = document.getElementById('article-modal');
   if (!modal) {
     modal = document.createElement('div');
     modal.id = 'article-modal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'article-modal-title');
     modal.style.cssText = `
       position: fixed;
       top: 0;
@@ -247,6 +360,9 @@ function openArticle(cardEl) {
       padding: 20px;
     `;
     document.body.appendChild(modal);
+    modal.addEventListener('click', event => {
+      if (event.target === modal) closeArticleModal();
+    });
   }
 
   modal.innerHTML = `
@@ -254,29 +370,29 @@ function openArticle(cardEl) {
       background: #0d1117;
       border: 1px solid rgba(201, 162, 39, 0.3);
       border-radius: 8px;
-      max-width: 800px;
+      max-width: 680px;
       width: 100%;
-      max-height: 90vh;
+      max-height: 82vh;
       overflow-y: auto;
-      padding: 40px;
+      padding: 34px;
       position: relative;
       color: #e8f0e4;
       font-family: sans-serif;
       box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     ">
-      <button onclick="closeArticleModal()" style="
+      <button id="article-modal-close" onclick="closeArticleModal()" aria-label="Fechar / Close" style="
         position: absolute;
-        top: 20px;
-        right: 20px;
+        top: 16px;
+        right: 16px;
         background: none;
         border: 1px solid rgba(201,162,39,0.3);
         color: #d4af37;
         font-size: 1.2rem;
         cursor: pointer;
-        padding: 5px 12px;
+        width: 40px;
+        height: 40px;
         border-radius: 4px;
-        transition: all 0.2s;
-      " onmouseover="this.style.background='rgba(201,162,39,0.1)'" onmouseout="this.style.background='none'">✕</button>
+      ">✕</button>
       
       <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
         <span style="
@@ -295,138 +411,53 @@ function openArticle(cardEl) {
         <span style="font-size: 0.8rem; color: #8a9e8a;">${escapeModalHtml(dateText)}</span>
       </div>
 
-      <h1 style="font-size: 2rem; margin-bottom: 20px; color: #e8f0e4; line-height: 1.2;">
+      <h1 id="article-modal-title" style="font-size: clamp(1.45rem, 4vw, 2rem); margin-bottom: 20px; color: #e8f0e4; line-height: 1.2; padding-right: 34px;">
         <span lang="pt">${escapeModalHtml(titlePt)}</span>
         <span lang="en">${escapeModalHtml(titleEn)}</span>
       </h1>
 
-      <div style="font-size: 1.1rem; line-height: 1.6; color: #c8d4c4; margin-bottom: 30px; border-left: 3px solid #d4af37; padding-left: 15px; font-style: italic;">
+      <div style="font-size: 1.03rem; line-height: 1.65; color: #c8d4c4; margin-bottom: 24px; border-left: 3px solid #d4af37; padding-left: 15px;">
         <span lang="pt">${escapeModalHtml(descPt)}</span>
         <span lang="en">${escapeModalHtml(descEn)}</span>
       </div>
 
       <div style="
-        margin: -10px 0 28px;
+        margin: 0 0 20px;
         padding: 14px 16px;
-        border: 1px solid rgba(212,175,55,0.22);
-        border-radius: 8px;
-        background: rgba(212,175,55,0.06);
+        border-left: 3px solid rgba(212,175,55,0.5);
+        background: rgba(212,175,55,0.04);
         color: #d8cfaa;
         display: grid;
         gap: 6px;
         font-size: 0.82rem;
         line-height: 1.45;
       ">
-        ${sourceName && safeSourceUrl ? `<div><strong style="color:#d4af37;"><span lang="pt">Fonte:</span><span lang="en">Source:</span></strong> <a href="${escapeModalHtml(safeSourceUrl)}" target="_blank" rel="noopener noreferrer" style="color:#f3e5ab; text-decoration: underline;">${escapeModalHtml(sourceName)}</a></div>` : ''}
         <div><span lang="pt">${escapeModalHtml(editorialPt)}</span><span lang="en">${escapeModalHtml(editorialEn)}</span></div>
       </div>
-
-      <div style="font-size: 1rem; line-height: 1.7; color: #a0b0a0; display: flex; flex-direction: column; gap: 15px;">
-        ${renderModalParagraphs(bodyPt, 'pt')}
-        ${renderModalParagraphs(bodyEn, 'en')}
-      </div>
-
-      <div style="margin-top: 25px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(201,162,39,0.2); padding-top: 20px; flex-wrap: wrap; gap: 15px;">
-        <div style="display: flex; gap: 15px;">
-          <button id="copy-btn-pt" lang="pt" style="
-            background: none;
-            border: 1px solid rgba(201,162,39,0.4);
-            color: #d4af37;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-          " onmouseover="this.style.background='rgba(201,162,39,0.1)'" onmouseout="this.style.background='none'">
-            <span class="btn-icon">📋</span>
-            <span class="btn-text">Copiar Resumo</span>
-          </button>
-          <button id="copy-btn-en" lang="en" style="
-            background: none;
-            border: 1px solid rgba(201,162,39,0.4);
-            color: #d4af37;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-          " onmouseover="this.style.background='rgba(201,162,39,0.1)'" onmouseout="this.style.background='none'">
-            <span class="btn-icon">📋</span>
-            <span class="btn-text">Copy Summary</span>
-          </button>
-        </div>
-        ${safeUrl ? `
-        <a href="${escapeModalHtml(safeUrl)}" target="_blank" rel="noopener noreferrer" style="
-          color: #d4af37;
-          text-decoration: underline;
-          font-weight: bold;
-          font-size: 0.95rem;
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-        ">
-          <span lang="pt">Ler continuação da notícia →</span>
-          <span lang="en">Read full story →</span>
-        </a>` : ''}
-      </div>
-      <div style="margin-top: 25px; border-top: 1px solid rgba(201,162,39,0.1); padding-top: 15px; font-size: 0.75rem; color: #5a6e5a; line-height: 1.4;">
-        <span lang="pt">Aviso: Este conteúdo destina-se a fins puramente informativos. Nenhuma parte deste artigo deve ser interpretada como aconselhamento financeiro ou recomendação.</span>
-        <span lang="en">Disclaimer: This content is intended purely for informational purposes. No part of this article should be construed as financial advice or recommendation.</span>
+      ${sourceName ? `
+      <div style="
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(201,162,39,0.12);
+        font-size: 0.78rem;
+        color: #8a9e8a;
+        line-height: 1.45;
+      ">
+        <strong style="color:#d4af37;"><span lang="pt">Fonte:</span><span lang="en">Source:</span></strong>
+        <span style="color:#c8d4c4;"> ${escapeModalHtml(sourceName)}</span>
+        ${specificSourceUrl ? `<div style="margin-top:10px;"><a href="${escapeModalHtml(specificSourceUrl)}" target="_blank" rel="noopener noreferrer" style="color:#d4af37; text-decoration:underline;"><span lang="pt">Consultar artigo original ↗</span><span lang="en">View original article ↗</span></a></div>` : ''}
+      </div>` : ''}
+      <div style="margin-top: 20px; border-top: 1px solid rgba(201,162,39,0.1); padding-top: 14px; font-size: 0.75rem; color: #5a6e5a; line-height: 1.4;">
+        <span lang="pt">Resumo informativo e original. Não constitui aconselhamento financeiro.</span>
+        <span lang="en">Original informational summary. This is not financial advice.</span>
       </div>
     </div>
   `;
 
+  modal._returnFocus = document.activeElement;
   modal.style.opacity = '1';
   modal.style.pointerEvents = 'all';
-  
-  const copyBtnPt = modal.querySelector('#copy-btn-pt');
-  const copyBtnEn = modal.querySelector('#copy-btn-en');
-  
-  if (copyBtnPt) {
-    copyBtnPt.addEventListener('click', () => {
-      const textToCopy = `${titlePt}\n\n${descPt}`;
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        const icon = copyBtnPt.querySelector('.btn-icon');
-        const text = copyBtnPt.querySelector('.btn-text');
-        if (icon) icon.innerText = '✓';
-        if (text) text.innerText = 'Copiado!';
-        copyBtnPt.style.borderColor = '#00ff8c';
-        copyBtnPt.style.color = '#00ff8c';
-        setTimeout(() => {
-          if (icon) icon.innerText = '📋';
-          if (text) text.innerText = 'Copiar Resumo';
-          copyBtnPt.style.borderColor = 'rgba(201,162,39,0.4)';
-          copyBtnPt.style.color = '#d4af37';
-        }, 2000);
-      });
-    });
-  }
-
-  if (copyBtnEn) {
-    copyBtnEn.addEventListener('click', () => {
-      const textToCopy = `${titleEn}\n\n${descEn}`;
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        const icon = copyBtnEn.querySelector('.btn-icon');
-        const text = copyBtnEn.querySelector('.btn-text');
-        if (icon) icon.innerText = '✓';
-        if (text) text.innerText = 'Copied!';
-        copyBtnEn.style.borderColor = '#00ff8c';
-        copyBtnEn.style.color = '#00ff8c';
-        setTimeout(() => {
-          if (icon) icon.innerText = '📋';
-          if (text) text.innerText = 'Copy Summary';
-          copyBtnEn.style.borderColor = 'rgba(201,162,39,0.4)';
-          copyBtnEn.style.color = '#d4af37';
-        }, 2000);
-      });
-    });
-  }
+  window.requestAnimationFrame(() => modal.querySelector('#article-modal-close')?.focus());
   
   const activeLang = localStorage.getItem('site-lang') || 'pt';
   setLanguage(activeLang);
@@ -437,8 +468,15 @@ function closeArticleModal() {
   if (modal) {
     modal.style.opacity = '0';
     modal.style.pointerEvents = 'none';
+    if (modal._returnFocus && typeof modal._returnFocus.focus === 'function') {
+      modal._returnFocus.focus();
+    }
   }
 }
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') closeArticleModal();
+});
 
 window.openArticle = openArticle;
 window.closeArticleModal = closeArticleModal;

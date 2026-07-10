@@ -15,8 +15,8 @@ class ExtremeInputsTests(unittest.TestCase):
             "url": "https://reuters.com/news/123",
             "title_pt": "Título de teste",
             "title_en": "Test Title",
-            "summary_pt": "Resumo de teste.",
-            "summary_en": "Test summary.",
+            "summary_pt": "R" * 230,
+            "summary_en": "S" * 230,
             "body_pt": "Conteúdo de corpo de teste de longa duração.",
             "body_en": "Test body content of long duration.",
         }
@@ -26,19 +26,20 @@ class ExtremeInputsTests(unittest.TestCase):
     def test_special_characters_escaping(self):
         # HTML characters, quotes, backslashes, emojis
         special_str = "<b>Bold</b> & \"Quotes\" 'Single' \\Backslash \\n \\t 🦁 Lion"
+        padded_special = (special_str + " " + ("contexto editorial seguro " * 20))[:240]
         article = self.create_valid_article(
             title_pt=special_str,
             title_en=special_str,
-            summary_pt=special_str,
-            summary_en=special_str
+            summary_pt=padded_special,
+            summary_en=padded_special
         )
         
         # Verify verifier passes it
         payload = {"articles": [self.create_valid_article(
             title_pt=f"{special_str} {i}",
             title_en=f"{special_str} {i}",
-            summary_pt=special_str,
-            summary_en=special_str
+            summary_pt=padded_special,
+            summary_en=padded_special
         ) for i in range(10)]}
         verified = self.verifier.verify(payload, self.valid_source)
         self.assertEqual(len(verified), 10)
@@ -62,13 +63,8 @@ class ExtremeInputsTests(unittest.TestCase):
             summary_pt=long_str,
             summary_en=long_str
         ) for i in range(10)]}
-        # The pipeline accepts long texts without raising errors or truncating in the verifier/publisher
-        verified = self.verifier.verify(payload, self.valid_source)
-        self.assertEqual(len(verified), 10)
-        self.assertEqual(len(verified[0]["title_pt"]), 10002) # plus space and index
-        
-        rendered = self.publisher.render(verified)
-        self.assertIn("A" * 10000, rendered)
+        with self.assertRaisesRegex(ValueError, "longer than|220-300"):
+            self.verifier.verify(payload, self.valid_source)
 
     def test_empty_or_whitespace_fields(self):
         # Test empty URL
@@ -82,7 +78,6 @@ class ExtremeInputsTests(unittest.TestCase):
             self.verifier.verify(payload, self.valid_source)
 
     def test_invalid_urls(self):
-        # The current implementation allows javascript: or malformed URLs as long as they are not blank/empty
         bad_urls = [
             "javascript:alert(1)",
             "http://",
@@ -92,13 +87,9 @@ class ExtremeInputsTests(unittest.TestCase):
         ]
         for url in bad_urls:
             payload = {"articles": [self.create_valid_article(url=url, title_pt=f"Title {i}", title_en=f"Title {i}") for i in range(10)]}
-            verified = self.verifier.verify(payload, self.valid_source)
-            self.assertEqual(verified[0]["url"], url.strip())
-            
-            # Verify if rendered, the URL is escaped but still present in href attribute
-            rendered = self.publisher.render(verified)
-            escaped_url = html.escape(url.strip(), quote=True)
-            self.assertIn(f'href="{escaped_url}"', rendered)
+            with self.subTest(url=url):
+                with self.assertRaisesRegex(ValueError, "invalid url"):
+                    self.verifier.verify(payload, self.valid_source)
 
 if __name__ == "__main__":
     unittest.main()

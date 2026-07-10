@@ -1,5 +1,6 @@
 import argparse
 import html
+import ipaddress
 import json
 import os
 import re
@@ -8,6 +9,7 @@ import unicodedata
 from dataclasses import asdict, dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
+from urllib.parse import urlsplit
 
 import feedparser
 
@@ -43,6 +45,11 @@ START_MARKER = "<!-- AI_NEWS_START -->"
 END_MARKER = "<!-- AI_NEWS_END -->"
 INDEX_NEWS_LIMIT = 10
 INDEX_NEW_ARTICLES_LIMIT = 6
+SUMMARY_MIN_CHARS = 220
+SUMMARY_MAX_CHARS = 300
+TITLE_MAX_CHARS = 180
+BODY_MAX_CHARS = 5000
+URL_MAX_CHARS = 2048
 INDEX_MARKET_FOCUS_SOURCES = ("infomoney", "bbc uk countries")
 INDEX_MARKET_FOCUS_KEYWORDS = (
     "brasil",
@@ -313,38 +320,31 @@ class VerifierAgent:
             normalized_sources.add(normalized)
             source_by_normalized[normalized] = name
 
-        content_dir = Path("conteudos")
-        if content_dir.exists():
-            for path in content_dir.iterdir():
-                if path.is_file():
-                    normalized_name = normalize(path.name)
-                    normalized_stem = normalize(path.stem)
-                    normalized_sources.add(normalized_name)
-                    normalized_sources.add(normalized_stem)
-                    source_by_normalized[normalized_name] = path.name
-                    source_by_normalized[normalized_stem] = path.stem
-
         for position, article in enumerate(articles, 1):
             if not isinstance(article, dict):
                 raise ValueError(f"Verifier: article {position} is not an object")
             missing = [field for field in self.REQUIRED if not clean_text(article.get(field, ""))]
             if missing:
                 raise ValueError(f"Verifier: article {position} missing {', '.join(missing)}")
+            article = {field: clean_text(article[field]) for field in self.REQUIRED}
             if article["category"] not in CATEGORY_LABELS:
                 raise ValueError(f"Verifier: invalid category in article {position}")
             normalized_source = normalize(article["source"])
             if normalized_source not in normalized_sources:
                 alias = SOURCE_ALIASES.get(normalized_source)
                 if alias and normalize(alias) in normalized_sources:
-                    article["source"] = alias
+                    article["source"] = source_by_normalized[normalize(alias)]
                 else:
-                    matched_source = self._match_known_source(normalized_source, source_by_normalized)
-                    if matched_source:
-                        article["source"] = matched_source
-                    else:
-                        raise ValueError(f"Verifier: unknown source in article {position}")
+                    raise ValueError(f"Verifier: unknown source in article {position}")
+            else:
+                article["source"] = source_by_normalized[normalized_source]
             if not article["source"]:
                 raise ValueError(f"Verifier: unknown source in article {position}")
+
+            try:
+                article["url"] = validate_article_url(article["url"])
+            except ValueError as exc:
+                raise ValueError(f"Verifier: article {position} has invalid url: {exc}") from exc
 
             for text_field in ("title_pt", "title_en", "summary_pt", "summary_en"):
                 val = article[text_field]
@@ -353,25 +353,29 @@ class VerifierAgent:
                 if text_field.startswith("title") and self._looks_sensationalist(val):
                     raise ValueError(f"Verifier: article {position} has sensationalist title in '{text_field}'")
 
+            for title_field in ("title_pt", "title_en"):
+                if len(article[title_field]) > TITLE_MAX_CHARS:
+                    raise ValueError(f"Verifier: article {position} has title longer than {TITLE_MAX_CHARS} characters in '{title_field}'")
+
+            for summary_field in ("summary_pt", "summary_en"):
+                summary_length = len(article[summary_field])
+                if not SUMMARY_MIN_CHARS <= summary_length <= SUMMARY_MAX_CHARS:
+                    raise ValueError(
+                        f"Verifier: article {position} summary must have {SUMMARY_MIN_CHARS}-{SUMMARY_MAX_CHARS} characters in '{summary_field}'"
+                    )
+
+            for body_field in ("body_pt", "body_en"):
+                if len(article[body_field]) > BODY_MAX_CHARS:
+                    raise ValueError(f"Verifier: article {position} has body longer than {BODY_MAX_CHARS} characters in '{body_field}'")
+
             key = normalize(article["title_pt"])
             if key in titles:
                 raise ValueError(f"Verifier: duplicate title in article {position}")
             titles.add(key)
-            verified.append({field: clean_text(article[field]) for field in self.REQUIRED})
+            verified.append(article)
 
         print(f"Verifier: {len(verified)} articles approved.")
         return verified
-
-    @staticmethod
-    def _match_known_source(normalized_source, source_by_normalized):
-        if not normalized_source:
-            return ""
-        for known_normalized, known_source in source_by_normalized.items():
-            if not known_normalized:
-                continue
-            if known_normalized in normalized_source or normalized_source in known_normalized:
-                return known_source
-        return ""
 
     @staticmethod
     def _has_balanced_brackets(text):
@@ -433,11 +437,26 @@ class PublisherAgent:
      data-ad-slot="8218810488"></ins>
 </div>'''
 
-    def publish(self, archive_articles, dry_run=False):
+    def publish(self, archive_articles, dry_run=False, extra_updates=None):
+        publishable_articles = []
+        rejected_articles = []
+        for article in archive_articles:
+            try:
+                validate_article_url(article.get("url", ""))
+            except ValueError:
+                rejected_articles.append(article)
+                continue
+            publishable_articles.append(article)
+
+        if rejected_articles:
+            print(
+                f"Publisher: withheld {len(rejected_articles)} archived articles without a safe, verifiable HTTPS source."
+            )
+
         sorted_articles = [
             article
             for _, article in sorted(
-                enumerate(archive_articles),
+                enumerate(publishable_articles),
                 key=lambda indexed: (indexed[1].get("date", ""), indexed[0]),
                 reverse=True,
             )
@@ -456,10 +475,10 @@ class PublisherAgent:
         }
 
         updates = {}
+        originals = {}
         for path, categories in pages_categories.items():
             if not path.exists():
-                print(f"Publisher: warning, {path} does not exist. Skipping.")
-                continue
+                raise FileNotFoundError(f"Publisher: required page {path} does not exist")
 
             if categories is None:
                 filtered = sorted_articles
@@ -470,21 +489,33 @@ class PublisherAgent:
 
             rendered_html = self.render(filtered)
             content = path.read_text(encoding="utf-8")
-            try:
-                updates[path] = replace_news_block(content, rendered_html)
-            except ValueError as e:
-                print(f"Publisher: skipping {path} due to error: {e}")
+            originals[path] = content
+            updates[path] = replace_news_block(content, rendered_html)
+
+        for path, content in (extra_updates or {}).items():
+            path = Path(path)
+            originals[path] = path.read_text(encoding="utf-8") if path.exists() else None
+            updates[path] = content
 
         if dry_run:
-            index_filtered = self._index_rotation(sorted_articles)
-            rendered_html = self.render(index_filtered)
-            Path("news-preview.html").write_text(rendered_html, encoding="utf-8")
-            print("Publisher: dry run written to news-preview.html; site HTML untouched.")
-            return
+            print(f"Publisher: dry run validated {len(updates)} files; no files written.")
+            return updates
 
-        for path, content in updates.items():
-            atomic_write(path, content)
-            print(f"Publisher: updated {path}.")
+        written = []
+        try:
+            for path, content in updates.items():
+                atomic_write(path, content)
+                written.append(path)
+                print(f"Publisher: updated {path}.")
+        except Exception:
+            for path in reversed(written):
+                previous = originals[path]
+                if previous is None:
+                    path.unlink(missing_ok=True)
+                else:
+                    atomic_write(path, previous)
+            raise
+        return updates
 
     @staticmethod
     def _index_rotation(sorted_articles):
@@ -509,7 +540,9 @@ class PublisherAgent:
 
     @staticmethod
     def _render_article(article):
-        esc = {key: html.escape(value, quote=True) for key, value in article.items()}
+        safe_article = dict(article)
+        safe_article["url"] = validate_article_url(article.get("url", ""))
+        esc = {key: html.escape(value, quote=True) for key, value in safe_article.items()}
         link = ALLOWED_LINKS[article["category"]]
         category_pt, category_en = CATEGORY_LABELS[article["category"]]
         
@@ -549,6 +582,43 @@ class PublisherAgent:
 
 def clean_text(value):
     return re.sub(r"\s+", " ", str(value or "")).strip()
+
+
+def validate_article_url(value):
+    raw = clean_text(value)
+    if not raw or len(raw) > URL_MAX_CHARS:
+        raise ValueError("url is empty or too long")
+    if any(char.isspace() for char in raw) or "\\" in raw:
+        raise ValueError("url contains invalid whitespace or separators")
+
+    try:
+        parsed = urlsplit(raw)
+        hostname = parsed.hostname
+        _ = parsed.port
+    except ValueError as exc:
+        raise ValueError("url cannot be parsed") from exc
+
+    if parsed.scheme.lower() != "https" or not parsed.netloc or not hostname:
+        raise ValueError("url must be an absolute https address")
+    if parsed.username or parsed.password:
+        raise ValueError("url must not include credentials")
+
+    normalized_host = hostname.rstrip(".").lower()
+    if normalized_host == "localhost" or normalized_host.endswith((".localhost", ".local")):
+        raise ValueError("local addresses are not allowed")
+
+    try:
+        ip = ipaddress.ip_address(normalized_host)
+    except ValueError:
+        try:
+            normalized_host.encode("idna")
+        except UnicodeError as exc:
+            raise ValueError("url hostname is invalid") from exc
+    else:
+        if not ip.is_global:
+            raise ValueError("private or reserved IP addresses are not allowed")
+
+    return raw
 
 
 def normalize(value):
@@ -747,13 +817,15 @@ def run(action="generate", dry_run=False):
             filtered_archive = [x for x in filtered_archive if normalize(x.get("title_pt", "")) != normalize(art.get("title_pt", "")) and x.get("url") != art.get("url")]
             filtered_archive.append(art)
 
-        # Save archive
-        if not dry_run:
-            archive_path.write_text(json.dumps(filtered_archive, indent=2, ensure_ascii=False), encoding="utf-8")
-            print(f"Archive: updated and saved {len(filtered_archive)} active articles.")
-
         publisher = PublisherAgent()
-        publisher.publish(filtered_archive, dry_run=dry_run)
+        archive_update = json.dumps(filtered_archive, indent=2, ensure_ascii=False)
+        publisher.publish(
+            filtered_archive,
+            dry_run=dry_run,
+            extra_updates=None if dry_run else {archive_path: archive_update},
+        )
+        if not dry_run:
+            print(f"Archive: updated and saved {len(filtered_archive)} active articles.")
         
         if not dry_run:
             # Delete draft after successful publish
@@ -771,7 +843,6 @@ def run(action="generate", dry_run=False):
     selected = SelectorAgent().select(items)
     write_queue_draft_sources(selected)
     
-    is_fallback = True
     manual_path = Path("conteudos/manual-news.json")
     if manual_path.exists():
         print("Generator: using conteudos/manual-news.json.")
@@ -780,11 +851,6 @@ def run(action="generate", dry_run=False):
         raise ValueError("No AI provider is configured and conteudos/manual-news.json was not found")
 
     known_sources = {item.source for item in selected}
-    if is_fallback and isinstance(payload, dict) and isinstance(payload.get("articles"), list):
-        for art in payload["articles"]:
-            if "source" in art:
-                known_sources.add(art["source"])
-
     new_articles = VerifierAgent().verify(payload, known_sources)
     
     # Save to draft

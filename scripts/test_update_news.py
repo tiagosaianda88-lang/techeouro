@@ -19,8 +19,8 @@ def valid_payload():
                 "url": "https://example.com",
                 "title_pt": f"Titulo {i}",
                 "title_en": f"Title {i}",
-                "summary_pt": f"Resumo verificado {i}.",
-                "summary_en": f"Verified summary {i}.",
+                "summary_pt": f"Resumo verificado {i}. " + ("Contexto editorial original e claro para leitores da Tech & Ouro, com fonte atribuída, impacto económico, enquadramento internacional e linguagem prudente. " * 2)[:210],
+                "summary_en": f"Verified summary {i}. " + ("Original and clear editorial context for Tech & Ouro readers, with attributed sourcing, economic impact, international framing and measured language. " * 2)[:210],
                 "body_pt": f"Conteudo detalhado pt {i}.",
                 "body_en": f"Detailed content en {i}.",
             }
@@ -44,6 +44,24 @@ class VerifierAgentTests(unittest.TestCase):
         payload = valid_payload()
         payload["articles"][0]["source"] = "Invented Source"
         with self.assertRaisesRegex(ValueError, "unknown source"):
+            VerifierAgent().verify(payload, {"Reuters"})
+
+    def test_rejects_source_name_that_only_contains_known_source(self):
+        payload = valid_payload()
+        payload["articles"][0]["source"] = "Reuters Fan Club"
+        with self.assertRaisesRegex(ValueError, "unknown source"):
+            VerifierAgent().verify(payload, {"Reuters"})
+
+    def test_rejects_unsafe_url(self):
+        payload = valid_payload()
+        payload["articles"][0]["url"] = "javascript:alert(1)"
+        with self.assertRaisesRegex(ValueError, "invalid url"):
+            VerifierAgent().verify(payload, {"Reuters"})
+
+    def test_rejects_summary_outside_editorial_range(self):
+        payload = valid_payload()
+        payload["articles"][0]["summary_en"] = "Too short."
+        with self.assertRaisesRegex(ValueError, "220-300"):
             VerifierAgent().verify(payload, {"Reuters"})
 
 
