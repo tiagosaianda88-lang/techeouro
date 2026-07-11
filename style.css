@@ -199,7 +199,8 @@ nav {
 }
 
 .index-gold-line {
-  margin-top: 64px;
+  /* Espaço limpo de 7 cm entre a capa e os destaques do index. */
+  margin-top: 7cm;
 }
 
 /* Scrolling Live Ticker */
@@ -279,6 +280,7 @@ nav {
 }
 
 .hero-glow-bg {
+  display: none;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -2972,4 +2974,25 @@ body.home .cards-2 > .in-feed-ad.ad-slot-filled {
   .about-editorial-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Static visual mode: keep the site calm, with no moving decorative effects. */
+html {
+  scroll-behavior: auto !important;
+}
+
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+.ticker-track {
+  transform: none !important;
+  will-change: auto !important;
+}
+
+.hero-glow-bg {
+  display: none !important;
 }
